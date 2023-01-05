@@ -1,4 +1,4 @@
-## <p style="text-align: center;">Lightwave Explorer</p>
+## Lightwave Explorer
 
 <p style="text-align: center;">Nick Karpowicz</p>
 <p style="text-align: center;">Max Planck Institute of Quantum optics</p>
