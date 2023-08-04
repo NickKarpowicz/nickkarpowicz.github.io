@@ -48,10 +48,13 @@ footer {
 
 /* Apply some additional styling to links */
 a {
-    color: #007bff;
+    color: cyan;
     text-decoration: none;
 }
-
+a:visited{
+    color:magenta;
+    text-decoration: none;
+}
 a:hover {
     text-decoration: underline;
 }
