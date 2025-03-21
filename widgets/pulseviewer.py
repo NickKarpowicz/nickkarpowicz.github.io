@@ -1,8 +1,5 @@
 import marimo
-# /// script
-# [tool.marimo.display]
-# theme = "dark"
-# ///
+
 __generated_with = "0.11.24"
 app = marimo.App(width="medium")
 
@@ -39,7 +36,7 @@ def _():
         Helper function to plot as an svg and have it display in marimo in vector form
         """
         svg_buffer = io.StringIO()
-        plt.savefig(svg_buffer, format='svg')
+        plt.savefig(svg_buffer, format='svg', bbox_inches="tight")
         svg_buffer.seek(0)
         svg_data = svg_buffer.getvalue()
         return mo.Html(svg_data)
@@ -135,7 +132,6 @@ def _(
     tau,
     w,
 ):
-
     ws = (w-2*np.pi*f0.value*1e12)
     phi = np.pi*cep.value + (-0.5e-15*grid_length.value + tau.value*1e-15)*w + 0.5*phi2.value*1e-30*ws**2 + (1.0/6)*phi3.value*1e-45*ws**3
     Ew = np.exp(-ws**Ns.value/(2*np.pi*bandwidth.value*1e12)**Ns.value -1.0j * phi)
