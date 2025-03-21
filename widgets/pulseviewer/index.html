@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        var scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          var element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          var hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          var newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((entries) => {
+          setHeight();
+        });
+        resizeObserver.observe(obj.contentWindow.document.body);
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <marimo-mode data-mode='read' hidden></marimo-mode>
+    <marimo-version data-version='0.11.24' hidden></marimo-version>
+    <marimo-user-config data-config='{"completion": {"activate_on_typing": true, "copilot": false}, "display": {"dataframes": "rich", "cell_output": "above", "default_width": "medium", "code_editor_font_size": 14, "theme": "dark"}, "formatting": {"line_length": 79}, "keymap": {"preset": "default", "overrides": {}}, "runtime": {"auto_instantiate": true, "auto_reload": "off", "on_cell_change": "autorun", "watcher_on_save": "lazy", "output_max_bytes": 8000000, "std_stream_max_bytes": 1000000, "pythonpath": []}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "package_management": {"manager": "pip"}, "server": {"browser": "default", "follow_symlink": false}, "language_servers": {"pylsp": {"enabled": true, "enable_mypy": true, "enable_ruff": true, "enable_flake8": false, "enable_pydocstyle": false, "enable_pylint": false, "enable_pyflakes": false}}, "snippets": {"custom_paths": [], "include_default_snippets": true}}' data-overrides='{}' hidden></marimo-user-config>
+    <marimo-app-config data-config='{"width": "medium"}' hidden></marimo-app-config>
+    <marimo-server-token data-token='123' hidden></marimo-server-token>
+    <title>pulseviewer</title>
+    <script type="module" crossorigin src="./assets/index-BNaRKJns.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-P2eXn0z0.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="" data-show-code="false">import%20marimo%0A%0A__generated_with%20%3D%20%220.11.24%22%0Aapp%20%3D%20marimo.App(width%3D%22medium%22)%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%20%20%20%20import%20LightwaveExplorer%20as%20lwe%0A%20%20%20%20import%20io%0A%20%20%20%20import%20numpy%20as%20np%0A%20%20%20%20import%20matplotlib.pyplot%20as%20plt%0A%20%20%20%20from%20matplotlib%20import%20rcParams%2C%20cycler%0A%20%20%20%20rcParams%5B'font.family'%5D%20%3D%20'sans-serif'%0A%20%20%20%20rcParams%5B'font.sans-serif'%5D%20%3D%20%5B'Helvetica'%2C%20'Arial'%2C%20'Verdana'%2C%20'DejaVu%20Sans'%2C%20'Liberation%20Sans'%2C%20'Bitstream%20Vera%20Sans'%2C%20'sans-serif'%5D%0A%20%20%20%20rcParams%5B'axes.prop_cycle'%5D%20%3D%20cycler(color%3D%5B%22cyan%22%2C%20%22magenta%22%2C%20%22orange%22%2C%20%22purple%22%5D)%20%0A%20%20%20%20rcParams%5B'font.family'%5D%20%3D%20'sans-serif'%0A%20%20%20%20rcParams%5B'font.sans-serif'%5D%20%3D%20%5B'Helvetica'%2C%20'Arial'%2C%20'Verdana'%2C%20'DejaVu%20Sans'%2C%20'Liberation%20Sans'%2C%20'Bitstream%20Vera%20Sans'%2C%20'sans-serif'%5D%0A%20%20%20%20rcParams%5B'figure.facecolor'%5D%20%3D%20'black'%0A%20%20%20%20rcParams%5B'figure.edgecolor'%5D%20%3D%20'black'%0A%20%20%20%20rcParams%5B'savefig.facecolor'%5D%20%3D%20'black'%0A%20%20%20%20rcParams%5B'savefig.edgecolor'%5D%20%3D%20'black'%0A%20%20%20%20rcParams%5B'axes.facecolor'%5D%20%3D%20'black'%0A%20%20%20%20rcParams%5B'text.color'%5D%20%3D%20'white'%0A%20%20%20%20rcParams%5B'axes.edgecolor'%5D%20%3D%20'white'%0A%20%20%20%20rcParams%5B'axes.labelcolor'%5D%20%3D%20'white'%0A%20%20%20%20rcParams%5B'xtick.color'%5D%20%3D%20'white'%0A%20%20%20%20rcParams%5B'ytick.color'%5D%20%3D%20'white'%0A%20%20%20%20rcParams%5B'grid.color'%5D%20%3D%20'white'%0A%20%20%20%20rcParams%5B'lines.color'%5D%20%3D%20'white'%0A%0A%0A%20%20%20%20def%20showmo()%3A%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20Helper%20function%20to%20plot%20as%20an%20svg%20and%20have%20it%20display%20in%20marimo%20in%20vector%20form%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20svg_buffer%20%3D%20io.StringIO()%0A%20%20%20%20%20%20%20%20plt.savefig(svg_buffer%2C%20format%3D'svg')%0A%20%20%20%20%20%20%20%20svg_buffer.seek(0)%0A%20%20%20%20%20%20%20%20svg_data%20%3D%20svg_buffer.getvalue()%0A%20%20%20%20%20%20%20%20return%20mo.Html(svg_data)%0A%20%20%20%20return%20cycler%2C%20io%2C%20lwe%2C%20mo%2C%20np%2C%20plt%2C%20rcParams%2C%20showmo%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20f0%20%3D%20mo.ui.slider(start%3D50%2C%20stop%3D1000%2C%20step%3D10%2C%20value%3D400%2C%20label%3D%22Frequency%20(THz)%22%2C%20show_value%3DTrue)%0A%20%20%20%20f0%0A%20%20%20%20return%20(f0%2C)%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20bandwidth%20%3D%20mo.ui.slider(start%3D2%2C%20stop%3D300%2C%20value%3D80%2C%20label%3D%22Bandwidth%20(THz)%22%2C%20show_value%3DTrue)%0A%20%20%20%20bandwidth%0A%20%20%20%20return%20(bandwidth%2C)%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20Ns%20%3D%20mo.ui.slider(start%3D2%2C%20stop%3D16%2C%20step%3D2%2C%20value%3D2%2C%20label%3D%22SG%20order%22%2C%20show_value%3DTrue)%0A%20%20%20%20Ns%0A%20%20%20%20return%20(Ns%2C)%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20cep%20%3D%20mo.ui.slider(start%3D0.0%2C%20stop%3D2.0%2C%20step%3D0.1%2C%20value%3D0%2C%20label%3D%22CEP%2Fpi%22%2C%20show_value%3DTrue)%0A%20%20%20%20cep%0A%20%20%20%20return%20(cep%2C)%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20tau%20%3D%20mo.ui.slider(start%3D-20%2C%20stop%3D20%2C%20step%3D1%2C%20value%3D0%2C%20label%3D%22Delay%20(fs)%22%2C%20show_value%3DTrue)%0A%20%20%20%20tau%0A%20%20%20%20return%20(tau%2C)%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20phi2%20%3D%20mo.ui.slider(start%3D-100%2C%20stop%3D100%2C%20step%3D1%2C%20value%3D0%2C%20label%3D%22GDD%20(fs%5E2)%22%2C%20show_value%3DTrue)%0A%20%20%20%20phi2%0A%20%20%20%20return%20(phi2%2C)%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20phi3%20%3D%20mo.ui.slider(start%3D-300%2C%20stop%3D300%2C%20step%3D1%2C%20value%3D0%2C%20label%3D%22TOD%20(fs%5E3)%22%2C%20show_value%3DTrue)%0A%20%20%20%20phi3%0A%20%20%20%20return%20(phi3%2C)%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20grid_length%20%3D%20mo.ui.slider(start%3D10%2C%20stop%3D1000%2C%20step%3D1%2C%20value%3D160%2C%20label%3D%22Grid%20length%20(fs)%22%2C%20show_value%3DTrue)%0A%20%20%20%20grid_length%0A%20%20%20%20return%20(grid_length%2C)%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20grid_dt%20%3D%20mo.ui.slider(start%3D0.05%2C%20stop%20%3D%201.0%2C%20step%3D0.01%2C%20value%3D0.25%2C%20label%3D%22dt%20(fs)%22%2C%20show_value%3DTrue)%0A%20%20%20%20grid_dt%0A%20%20%20%20return%20(grid_dt%2C)%0A%0A%0A%40app.cell%0Adef%20_(grid_dt%2C%20grid_length%2C%20np)%3A%0A%20%20%20%20dt%20%3D%20grid_dt.value%20*%201e-15%0A%20%20%20%20Nt%20%3D%20int(grid_length.value*1e-15%2Fdt)%0A%20%20%20%20t%20%3D%20np.linspace(-0.5e-15*grid_length.value%2C0.5e-15*grid_length.value%2CNt)%0A%20%20%20%20w%20%3D%202*np.pi*np.fft.fftfreq(Nt%2Cdt)%0A%20%20%20%20return%20Nt%2C%20dt%2C%20t%2C%20w%0A%0A%0A%40app.cell%0Adef%20_(%0A%20%20%20%20Ns%2C%0A%20%20%20%20bandwidth%2C%0A%20%20%20%20cep%2C%0A%20%20%20%20f0%2C%0A%20%20%20%20grid_length%2C%0A%20%20%20%20lwe%2C%0A%20%20%20%20np%2C%0A%20%20%20%20phi2%2C%0A%20%20%20%20phi3%2C%0A%20%20%20%20plt%2C%0A%20%20%20%20showmo%2C%0A%20%20%20%20t%2C%0A%20%20%20%20tau%2C%0A%20%20%20%20w%2C%0A)%3A%0A%20%20%20%20ws%20%3D%20(w-2*np.pi*f0.value*1e12)%0A%20%20%20%20phi%20%3D%20np.pi*cep.value%20%2B%20(-0.5e-15*grid_length.value%20%2B%20tau.value*1e-15)*w%20%2B%200.5*phi2.value*1e-30*ws**2%20%2B%20(1.0%2F6)*phi3.value*1e-45*ws**3%0A%20%20%20%20Ew%20%3D%20np.exp(-ws**Ns.value%2F(2*np.pi*bandwidth.value*1e12)**Ns.value%20-1.0j%20*%20phi)%0A%20%20%20%20Ew%5Bw%3C0%5D%3D0%0A%20%20%20%20Et%20%3D%20lwe.norma(np.fft.ifft(Ew))%0A%20%20%20%20fwhm_value%20%3D%201e15*lwe.fwhm(t%2Cnp.abs(Et)**2)%0A%20%20%20%20plt.plot(1e15*t%2Cnp.real(Et))%0A%20%20%20%20plt.xlabel(%22Time%20(fs)%22)%0A%20%20%20%20plt.title(f%22FWHM%20duration%3A%20%7Bfwhm_value%3A%20.2f%7D%20fs%22)%0A%20%20%20%20showmo()%0A%20%20%20%20return%20Et%2C%20Ew%2C%20fwhm_value%2C%20phi%2C%20ws%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20return%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
