@@ -56,9 +56,10 @@ def _(mo):
 
 @app.cell
 def _(mo):
-    sellmeier_eqn = mo.ui.dropdown(options=["Multielement fit", "Lorentzians", "Gaussians"], value="Lorentzians", label="Target equation")
+    sellmeier_eqn_options = ["Multielement fit", "Lorentzians", "Gaussians"]
+    sellmeier_eqn = mo.ui.dropdown(options=sellmeier_eqn_options, value=sellmeier_eqn_options[1], label="Target equation")
     sellmeier_eqn
-    return (sellmeier_eqn,)
+    return sellmeier_eqn, sellmeier_eqn_options
 
 
 @app.cell
@@ -117,7 +118,6 @@ def _(mo):
 
 @app.cell
 def _(chi3_options, chi3_type, mo):
-    chi3 = 0.0
     if chi3_type.value == chi3_options[1]:
         chi3_entry = mo.ui.text_area(label="chi(3) tensor")
     elif chi3_type.value == chi3_options[2]:
@@ -126,7 +126,7 @@ def _(chi3_options, chi3_type, mo):
         chi3_entry = mo.ui.array([mo.ui.text(label="n2"), mo.ui.text(label="n")],label="n2 and n")
 
     chi3_entry
-    return chi3, chi3_entry
+    return (chi3_entry,)
 
 
 @app.cell
@@ -152,8 +152,9 @@ def _(mo):
 @app.cell
 def _(
     chi2,
-    chi3,
+    chi3_entry,
     chi3_frequencies,
+    chi3_options,
     chi3_ref,
     chi3_type,
     d_tensor_ref,
@@ -162,6 +163,7 @@ def _(
     name,
     nonlinear_frequencies,
     sellmeier_eqn,
+    sellmeier_eqn_options,
     sellmeier_ref,
 ):
     with mo.capture_stdout() as buffer:
@@ -170,24 +172,37 @@ def _(
         print("Type:")
         print(chi3_type.value)
         print("Sellmeier equation:")
-        print(sellmeier_eqn.value)
-    
-    
+        print(sellmeier_eqn_options.index(sellmeier_eqn.value) if sellmeier_eqn.value in sellmeier_eqn_options else 0)
         print("Sellmeier reference:")
         print(sellmeier_ref.value)
         print("chi2 type:")
-        print(has_chi2.value)
+        print(int(has_chi2.value))
         print("d:")
         print('\n'.join(' '.join(map(str, row)) for row in chi2))
         print("d reference:")
         print(d_tensor_ref.value)
         print("chi3 type:")
+
+        #parse the chi3 type
+        chi3_type_ind = chi3_options.index(chi3_type.value) if chi3_type.value in chi3_options else 0
+        print(f"chi3 type index {chi3_type_ind}")
         print(chi3_type.value)
         print("chi3:")
-        if chi3_type.value == 1:
+        if chi3_type_ind == 1:
             print('\n'.join(' '.join(map(str, row)) for row in chi3))
-        else:
+        elif chi3_type_ind == 2:
+            print(float(chi3_entry.value))
+            print(0)
+            print(0)
+        elif chi3_type_ind == 3:
+            n2 = float(chi3_entry[0].value)
+            n0forn2 = float(chi3_entry[1].value)
+            chi3 = n2 * (n0forn2**2) / 283
             print(chi3)
+            print(0)
+            print(0)
+        else:
+            print(0)
             print(0)
             print(0)
         print("chi3 reference:")
@@ -202,7 +217,7 @@ def _(
     output_box
 
 
-    return buffer, output_box
+    return buffer, chi3, chi3_type_ind, n0forn2, n2, output_box
 
 
 @app.cell
