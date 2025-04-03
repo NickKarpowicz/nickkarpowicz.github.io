@@ -20,23 +20,10 @@ def _(mo):
     return
 
 
-@app.cell(hide_code=True)
-def _(mo):
-    mo.md(
-        r"""
-        ### Next, let's write down the info we'll need to make the database entry
-        This is a list of what you need to know about your crystal to describe it to LWE.
-
-        This basic form will assume we can get our refractive index directly from refractiveindex.info; I'll also provide a more advanced example where we can fit to a different set of data.
-        """
-    )
-    return
-
-
 @app.cell
 def _(mo):
     #First, the name of the crystal. I'm putting L afterwards to show that the refractive index is going to be stored in complex valued Lorentzians. A G means that the absorption features are Gaussians.
-    name=mo.ui.text(value="My new crystal", label="Crystal name")
+    name=mo.ui.text(value="My new crystal", label="Crystal name:")
     name
     return (name,)
 
@@ -44,15 +31,27 @@ def _(mo):
 @app.cell
 def _(mo):
     crystal_options = options=["Isotropic","Uniaxial","Biaxial"]
-    crystal_type = mo.ui.dropdown(options=crystal_options,value="Isotropic", label="Crystal type")
+    crystal_type = mo.ui.dropdown(options=crystal_options,value="Isotropic", label="Crystal type:")
     crystal_type
     return crystal_options, crystal_type, options
 
 
 @app.cell
 def _(mo):
+    mo.md(
+        r"""
+        The cell below selects the target equation, either a set of Lorentzian oscillators, or a set of Gaussians.
+
+        Start with Lorentzians, as that is the only type which is supported in the FDTD propagation mode. However, in certain solids, the wide absorption wings of the Lorentzian cause a rather poor fit, especially in the region of band-like absorption features, where you might switch to Gaussians to have a better match, albeit confied to the UPPE mode.
+        """
+    )
+    return
+
+
+@app.cell
+def _(mo):
     sellmeier_eqn_options = ["Lorentzians", "Gaussians"]
-    sellmeier_eqn = mo.ui.dropdown(options=sellmeier_eqn_options, value=sellmeier_eqn_options[0], label="Target equation")
+    sellmeier_eqn = mo.ui.dropdown(options=sellmeier_eqn_options, value=sellmeier_eqn_options[0], label="Target equation:")
     sellmeier_eqn
     return sellmeier_eqn, sellmeier_eqn_options
 
@@ -3784,14 +3783,14 @@ def _():
 def _(mo):
     mo.md(
         r"""
-        ## Enter the refractive index data in the input boxes below
-        in the form wavelength, n, k
+        ### Refractive index input data
+        Enter your refractive index data in the form wavelength (microns) | n | $\kappa$ (optional), with spaces as the separators.
 
-        The first box will correspond to the x-axis of the crystal.
+        The number of boxes depends on the number of independent values (i.e. whether the crystal is set to isotropic, uniaxial, or biaxial above).
 
-        If the crystal is uniaxial, there will be two boxes; the second should be the z-axis
+        The third column is optional: if you don't have absorption data to provide the $\kappa$ to the input, you can enter the data with two columns. Just uncheck the checkbox.
 
-        If the crystal is biaxial, there will be three boxes, in the order x, y, z.
+        The data will be plotted below.
         """
     )
     return
@@ -3799,18 +3798,22 @@ def _(mo):
 
 @app.cell
 def _(crystal_options, crystal_type, default_n_input, mo):
-    n_has_k = mo.ui.checkbox(value=True, label="Data has k (3 columns)")
+    n_has_k = mo.ui.checkbox(value=True, label=r"""Data has $\kappa$ (3 columns)""")
     mo.output.append(n_has_k)
     n_axes = crystal_options.index(crystal_type.value) if crystal_type.value else 0
-    refractive_index_input_x = mo.ui.text_area(value=default_n_input, full_width=True, label="Refractive index data (lambda(micron), n, k)")
+    mo.output.append(mo.md("X-axis refractive index:"))
+    refractive_index_input_x = mo.ui.text_area(value=default_n_input, full_width=True)
     mo.output.append(refractive_index_input_x)
     if n_axes == 1:
+        mo.output.append(mo.md("Z-axis refractive index:"))
         refractive_index_input_z = refractive_index_input_x
         mo.output.append(refractive_index_input_z)
     if n_axes == 2:
         refractive_index_input_y = refractive_index_input_x
         refractive_index_input_z = refractive_index_input_x
+        mo.output.append(mo.md("Y-axis refractive index:"))
         mo.output.append(refractive_index_input_y)
+        mo.output.append(mo.md("Z-axis refractive index:"))
         mo.output.append(refractive_index_input_z)
     return (
         n_axes,
@@ -3824,26 +3827,68 @@ def _(crystal_options, crystal_type, default_n_input, mo):
 @app.cell
 def _(
     n_axes,
+    n_has_k,
     np,
-    plt,
     refractive_index_input_x,
     refractive_index_input_y,
     refractive_index_input_z,
-    showmo,
 ):
-    nx_input = np.fromstring(refractive_index_input_x.value,sep=' ').reshape(-1,3)
+    n_data_shape = 2
+    if n_has_k.value:
+        n_data_shape = 3
+    
+    nx_input = np.fromstring(refractive_index_input_x.value,sep=' ').reshape(-1,n_data_shape)
+    if n_data_shape == 2:
+        nx_input = np.hstack((nx_input, np.zeros((nx_input.shape[0],1),dtype=float)))
+    if n_axes == 2:
+        ny_input = np.fromstring(refractive_index_input_y.value,sep=' ').reshape(-1,n_data_shape)
+        if n_data_shape == 2:
+            ny_input = np.hstack((ny_input, np.zeros((ny_input.shape[0],1),dtype=float)))
+    if n_axes > 0:
+        nz_input = np.fromstring(refractive_index_input_z.value,sep=' ').reshape(-1,n_data_shape)
+        if n_data_shape == 2:
+            nz_input = np.hstack((nz_input, np.zeros((nz_input.shape[0],1),dtype=float)))
+    return n_data_shape, nx_input, ny_input, nz_input
+
+
+@app.cell
+def _(n_axes, nx_input, ny_input, nz_input, plt, showmo):
     plt.plot(nx_input[:,0],nx_input[:,1], label="x")
     if n_axes == 2:
-        ny_input = np.fromstring(refractive_index_input_y.value,sep=' ').reshape(-1,3)
         plt.plot(ny_input[:,0],ny_input[:,1], label="y")
     if n_axes > 0:
-        nz_input = np.fromstring(refractive_index_input_z.value,sep=' ').reshape(-1,3)
         plt.plot(nz_input[:,0],nz_input[:,1], label="z")
     plt.xlabel("Wavelength (micron)")
     plt.ylabel("n")
     plt.legend()
     showmo()
-    return nx_input, ny_input, nz_input
+    return
+
+
+@app.cell
+def _(n_axes, n_data_shape, nx_input, ny_input, nz_input, plt, showmo):
+    if n_data_shape == 3:
+        plt.plot(nx_input[:,0],nx_input[:,2], label="x")
+    if n_axes == 2:
+        plt.plot(ny_input[:,0],ny_input[:,2], label="y")
+    if n_axes > 0:
+        plt.plot(nz_input[:,0],nz_input[:,2], label="z")
+    plt.xlabel("Wavelength (micron)")
+    plt.ylabel("k")
+    plt.legend()
+    showmo()
+    return
+
+
+@app.cell
+def _(mo):
+    mo.md(
+        r"""
+        ### Fitting initial guess
+        In the boxes below, you can configure your initial guess for the fitting procedure and determine its behavior. For each oscillator, set its frequency, strength and linewidth to match the refractive index and absorption spectrum. The first value, n0, applies a constant offset to the entire refractive index.
+        """
+    )
+    return
 
 
 @app.cell
@@ -3856,21 +3901,23 @@ def _(mo):
 
 
 @app.cell
-def _(mo, np, number_of_oscillators):
+def _(mo, np, number_of_oscillators, sellmeier_eqn, sellmeier_eqn_options):
+    default_amplitude = "1e28"
+    if sellmeier_eqn.value == sellmeier_eqn_options[1]:
+        default_amplitude = "10.0"
+
     lorentzian = mo.ui.array([
-        mo.ui.text(value = "2000", label="Frequency (THz)"),
-        mo.ui.text(value = "1e28", label="Strength"),
-        mo.ui.text(value = "1", label="Linewidth (THz)"),
+        mo.ui.text(value = "2400", label="Frequency (THz)"),
+        mo.ui.text(value = default_amplitude, label="Strength"),
+        mo.ui.text(value = "5", label="Linewidth (THz)"),
         mo.ui.checkbox(value=False, label="Fittable")],
                              label="oscillator")
     def read_lorentzian_input(lor):
-        print(lor)
         omega2 = ((2.0 * np.pi) * float(lor[0]) * 1.0e12)**2
         strength = float(lor[1])
         gamma = 1.0e12 * float(lor[2])
         return np.array([strength, omega2, gamma])
     def read_gaussian_input(osc):
-        print(osc)
         omega = (2.0 * np.pi) * float(osc[0]) * 1.0e12
         strength = float(osc[1])
         sigma = np.pi * 2.0e12 * float(osc[2])
@@ -3882,9 +3929,10 @@ def _(mo, np, number_of_oscillators):
         elif eqn == 2:
             return read_gaussian_input(osc)
 
-    lorentzian_array = mo.ui.array([mo.ui.text(value="1.0", label="n_0")] + number_of_oscillators.value * [lorentzian] )
+    lorentzian_array = mo.ui.array([mo.ui.text(value="1.0", label="n0")] + number_of_oscillators.value * [lorentzian] )
     lorentzian_array
     return (
+        default_amplitude,
         lorentzian,
         lorentzian_array,
         read_gaussian_input,
@@ -3910,7 +3958,6 @@ def _(
     input_array_sellmeier_x[0] = float(lorentzian_array[0].value)
     for i in range(1,number_of_oscillators.value+1):
         input_array_sellmeier_x[(1 + 3*(i-1)) : (4+3*(i-1))] = read_oscillator(lorentzian_array[i].value,eqn_type_number)
-    print(input_array_sellmeier_x)
     fig_guess,ax_guess = plt.subplots(2,1)
     nx_guess = lwe.sellmeier(nx_input[:,0],input_array_sellmeier_x, eqn_type_number)
     ax_guess[0].semilogx(nx_input[:,0], nx_input[:,1], label="input")
@@ -3925,13 +3972,33 @@ def _(
 
 @app.cell
 def _(mo):
-    fit_wavelength_start = mo.ui.number(value=0.2,label="Fitting ROI shortest wavelength")
-    fit_wavelength_stop = mo.ui.number(value=3,label="Fitting ROI longest wavelength")
-    fit_wavelength_pts = mo.ui.number(value=128, label="Number of fitting wavelengths")
+    mo.md(
+        """
+        ### Fitting region-of-interest (ROI)
+        Set the wavelength range over which the fitting should take place. The more narrowly-focused the fitting is on a given spectral region, the better it will perform there, but the worse it will be in the exterior wavelengths.
+
+        The number of fitting wavelengths determines the resolution of the fit, with higher values taking longer to fit.
+        """
+    )
+    return
+
+
+@app.cell
+def _(mo):
+    fit_wavelength_start = mo.ui.number(value=0.2,label="Fitting ROI shortest wavelength:")
+    fit_wavelength_stop = mo.ui.number(value=3,label="Fitting ROI longest wavelength:")
+    fit_wavelength_pts = mo.ui.number(value=128, label="Number of fitting wavelengths:")
+    fit_absorption_weight = mo.ui.number(value=0.5, label="Weight of absorption in fitting:")
     mo.output.append(fit_wavelength_start)
     mo.output.append(fit_wavelength_stop)
     mo.output.append(fit_wavelength_pts)
-    return fit_wavelength_pts, fit_wavelength_start, fit_wavelength_stop
+    mo.output.append(fit_absorption_weight)
+    return (
+        fit_absorption_weight,
+        fit_wavelength_pts,
+        fit_wavelength_start,
+        fit_wavelength_stop,
+    )
 
 
 @app.cell
@@ -3984,14 +4051,25 @@ def _(
 
 @app.cell
 def _(mo):
-    mo.md("""###x-axis fitting result:\n""")
+    mo.md(
+        """
+        ###x-axis fitting result:\n
+        When looking at the results, pay attention to the "rms deviation" reported by the fitting routine: ideally, it should be <1e-4. Anything above 1e-3 is a very poor fit, and requires more oscillators or a modified initial guess.
+        """
+    )
     return
 
 
 @app.cell
-def _(fit_coeffs, input_array_sellmeier_x, mo, nx_input):
+def _(
+    fit_absorption_weight,
+    fit_coeffs,
+    input_array_sellmeier_x,
+    mo,
+    nx_input,
+):
     with mo.capture_stdout() as nx_buffer:
-        fit_coefficients_nx = fit_coeffs(nx_input, input_array_sellmeier_x, 0.5)    
+        fit_coefficients_nx = fit_coeffs(nx_input, input_array_sellmeier_x, fit_absorption_weight.value)    
     nx_output_box = mo.ui.text_area(value=nx_buffer.getvalue(),rows=5)
     nx_output_box
     return fit_coefficients_nx, nx_buffer, nx_output_box
@@ -4014,10 +4092,17 @@ def _(mo, n_axes):
 
 
 @app.cell
-def _(fit_coefficients_nx, fit_coeffs, mo, n_axes, ny_input):
+def _(
+    fit_absorption_weight,
+    fit_coefficients_nx,
+    fit_coeffs,
+    mo,
+    n_axes,
+    ny_input,
+):
     if n_axes == 2:
         with mo.capture_stdout() as ny_buffer:
-            fit_coefficients_ny = fit_coeffs(ny_input, fit_coefficients_nx, 0.5)  
+            fit_coefficients_ny = fit_coeffs(ny_input, fit_coefficients_nx, fit_absorption_weight.value)  
         mo.output.append(mo.ui.text_area(value=ny_buffer.getvalue(),rows=5))
     return fit_coefficients_ny, ny_buffer
 
@@ -4040,10 +4125,17 @@ def _(mo, n_axes):
 
 
 @app.cell
-def _(fit_coeffs, input_array_sellmeier_x, mo, n_axes, nx_input):
+def _(
+    fit_absorption_weight,
+    fit_coeffs,
+    input_array_sellmeier_x,
+    mo,
+    n_axes,
+    nx_input,
+):
     if n_axes > 0:
         with mo.capture_stdout() as nz_buffer:
-            fit_coefficients_nz = fit_coeffs(nx_input, input_array_sellmeier_x, 0.5)    
+            fit_coefficients_nz = fit_coeffs(nx_input, input_array_sellmeier_x, fit_absorption_weight.value)    
         mo.output.append(mo.ui.text_area(value=nz_buffer.getvalue(),rows=5))
     return fit_coefficients_nz, nz_buffer
 
