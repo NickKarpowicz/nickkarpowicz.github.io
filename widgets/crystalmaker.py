@@ -5,7 +5,7 @@
 
 import marimo
 
-__generated_with = "0.12.0"
+__generated_with = "0.12.2"
 app = marimo.App()
 
 
@@ -15,50 +15,9 @@ def _(mo):
         r"""
         ### Adding a crystal
         This worksheet guides you through all the things you need to make an entry for the crystal database, then produces a text block you can paste inside.
-
-        To get started, just some imports:
         """
     )
     return
-
-
-@app.cell
-def _():
-    import marimo as mo
-    import LightwaveExplorer as lwe
-    import io
-    import numpy as np
-    import matplotlib.pyplot as plt
-    from matplotlib import rcParams, cycler
-    rcParams['font.family'] = 'sans-serif'
-    rcParams['font.sans-serif'] = ['Helvetica', 'Arial', 'Verdana', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', 'sans-serif']
-    rcParams['axes.prop_cycle'] = cycler(color=["cyan", "magenta", "orange", "purple"]) 
-    rcParams['font.family'] = 'sans-serif'
-    rcParams['font.sans-serif'] = ['Helvetica', 'Arial', 'Verdana', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', 'sans-serif']
-    rcParams['figure.facecolor'] = 'black'
-    rcParams['figure.edgecolor'] = 'black'
-    rcParams['savefig.facecolor'] = 'black'
-    rcParams['savefig.edgecolor'] = 'black'
-    rcParams['axes.facecolor'] = 'black'
-    rcParams['text.color'] = 'white'
-    rcParams['axes.edgecolor'] = 'white'
-    rcParams['axes.labelcolor'] = 'white'
-    rcParams['xtick.color'] = 'white'
-    rcParams['ytick.color'] = 'white'
-    rcParams['grid.color'] = 'white'
-    rcParams['lines.color'] = 'white'
-
-
-    def showmo():
-        """
-        Helper function to plot as an svg and have it display in marimo in vector form
-        """
-        svg_buffer = io.StringIO()
-        plt.savefig(svg_buffer, format='svg', bbox_inches="tight")
-        svg_buffer.seek(0)
-        svg_data = svg_buffer.getvalue()
-        return mo.Html(svg_data)
-    return cycler, io, lwe, mo, np, plt, rcParams, showmo
 
 
 @app.cell(hide_code=True)
@@ -3922,7 +3881,7 @@ def _(mo, np, number_of_oscillators):
             return read_lorentzian_input(osc)
         elif eqn == 2:
             return read_gaussian_input(osc)
-    
+
     lorentzian_array = mo.ui.array([mo.ui.text(value="1.0", label="n_0")] + number_of_oscillators.value * [lorentzian] )
     lorentzian_array
     return (
@@ -4035,7 +3994,6 @@ def _(fit_coeffs, input_array_sellmeier_x, mo, nx_input):
         fit_coefficients_nx = fit_coeffs(nx_input, input_array_sellmeier_x, 0.5)    
     nx_output_box = mo.ui.text_area(value=nx_buffer.getvalue(),rows=5)
     nx_output_box
-
     return fit_coefficients_nx, nx_buffer, nx_output_box
 
 
@@ -4050,9 +4008,26 @@ def _(fit_coefficients_nx, nx_input, plot_results, showmo):
 def _(mo, n_axes):
     s_yaxis_label = ""
     if n_axes == 2:
-        s_yaxis_label = "### y-axis fitting:"
+        s_yaxis_label = "### y-axis fitting result:"
     mo.md(s_yaxis_label)
     return (s_yaxis_label,)
+
+
+@app.cell
+def _(fit_coefficients_nx, fit_coeffs, mo, n_axes, ny_input):
+    if n_axes == 2:
+        with mo.capture_stdout() as ny_buffer:
+            fit_coefficients_ny = fit_coeffs(ny_input, fit_coefficients_nx, 0.5)  
+        mo.output.append(mo.ui.text_area(value=ny_buffer.getvalue(),rows=5))
+    return fit_coefficients_ny, ny_buffer
+
+
+@app.cell
+def _(fit_coefficients_ny, mo, n_axes, ny_input, plot_results, showmo):
+    if n_axes == 2:
+        plot_results(ny_input, fit_coefficients_ny)
+        mo.output.append(showmo())
+    return
 
 
 @app.cell
@@ -4071,6 +4046,14 @@ def _(fit_coeffs, input_array_sellmeier_x, mo, n_axes, nx_input):
             fit_coefficients_nz = fit_coeffs(nx_input, input_array_sellmeier_x, 0.5)    
         mo.output.append(mo.ui.text_area(value=nz_buffer.getvalue(),rows=5))
     return fit_coefficients_nz, nz_buffer
+
+
+@app.cell
+def _(fit_coefficients_nz, mo, n_axes, ny_input, plot_results, showmo):
+    if n_axes > 0:
+        plot_results(ny_input, fit_coefficients_nz)
+        mo.output.append(showmo())
+    return
 
 
 @app.cell
@@ -4163,8 +4146,13 @@ def _(
     chi3_type,
     d_tensor_ref,
     eqn_type_number,
+    fit_coefficients_nx,
+    fit_coefficients_ny,
+    fit_coefficients_nz,
     has_chi2,
+    lwe,
     mo,
+    n_axes,
     name,
     nonlinear_frequencies,
     sellmeier_ref,
@@ -4173,9 +4161,30 @@ def _(
         print("Name:")
         print(name.value)
         print("Type:")
-        print(chi3_type.value)
+        print(n_axes)
         print("Sellmeier equation:")
         print(eqn_type_number)
+        if n_axes == 0:
+            print("1st axis coefficients:")
+            lwe.printSellmeier(fit_coefficients_nx)
+            print("2nd axis coefficients:")
+            lwe.printSellmeier(fit_coefficients_nx)
+            print("3rd axis coefficients:")
+            lwe.printSellmeier(fit_coefficients_nx)
+        if n_axes == 1:
+            print("1st axis coefficients:")
+            lwe.printSellmeier(fit_coefficients_nx)
+            print("2nd axis coefficients:")
+            lwe.printSellmeier(fit_coefficients_nz)
+            print("3rd axis coefficients:")
+            lwe.printSellmeier(fit_coefficients_nz)
+        if n_axes == 2:
+            print("1st axis coefficients:")
+            lwe.printSellmeier(fit_coefficients_nx)
+            print("2nd axis coefficients:")
+            lwe.printSellmeier(fit_coefficients_ny)
+            print("3rd axis coefficients:")
+            lwe.printSellmeier(fit_coefficients_nz)
         print("Sellmeier reference:")
         print(sellmeier_ref.value)
         print("chi2 type:")
@@ -4188,8 +4197,7 @@ def _(
 
         #parse the chi3 type
         chi3_type_ind = chi3_options.index(chi3_type.value) if chi3_type.value in chi3_options else 0
-        print(f"chi3 type index {chi3_type_ind}")
-        print(chi3_type.value)
+        print(chi3_type_ind)
         print("chi3:")
         if chi3_type_ind == 1:
             print('\n'.join(' '.join(map(str, row)) for row in chi3))
@@ -4224,6 +4232,45 @@ def _(
 @app.cell
 def _():
     return
+
+
+@app.cell
+def _():
+    import marimo as mo
+    import LightwaveExplorer as lwe
+    import io
+    import numpy as np
+    import matplotlib.pyplot as plt
+    from matplotlib import rcParams, cycler
+    rcParams['font.family'] = 'sans-serif'
+    rcParams['font.sans-serif'] = ['Helvetica', 'Arial', 'Verdana', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', 'sans-serif']
+    rcParams['axes.prop_cycle'] = cycler(color=["cyan", "magenta", "orange", "purple"]) 
+    rcParams['font.family'] = 'sans-serif'
+    rcParams['font.sans-serif'] = ['Helvetica', 'Arial', 'Verdana', 'DejaVu Sans', 'Liberation Sans', 'Bitstream Vera Sans', 'sans-serif']
+    rcParams['figure.facecolor'] = 'black'
+    rcParams['figure.edgecolor'] = 'black'
+    rcParams['savefig.facecolor'] = 'black'
+    rcParams['savefig.edgecolor'] = 'black'
+    rcParams['axes.facecolor'] = 'black'
+    rcParams['text.color'] = 'white'
+    rcParams['axes.edgecolor'] = 'white'
+    rcParams['axes.labelcolor'] = 'white'
+    rcParams['xtick.color'] = 'white'
+    rcParams['ytick.color'] = 'white'
+    rcParams['grid.color'] = 'white'
+    rcParams['lines.color'] = 'white'
+
+
+    def showmo():
+        """
+        Helper function to plot as an svg and have it display in marimo in vector form
+        """
+        svg_buffer = io.StringIO()
+        plt.savefig(svg_buffer, format='svg', bbox_inches="tight")
+        svg_buffer.seek(0)
+        svg_data = svg_buffer.getvalue()
+        return mo.Html(svg_data)
+    return cycler, io, lwe, mo, np, plt, rcParams, showmo
 
 
 if __name__ == "__main__":
