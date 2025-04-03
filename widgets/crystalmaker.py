@@ -3800,6 +3800,10 @@ def _(mo):
 def _(crystal_options, crystal_type, default_n_input, mo):
     n_has_k = mo.ui.checkbox(value=True, label=r"""Data has $\kappa$ (3 columns)""")
     mo.output.append(n_has_k)
+    separator_options = ["Space", "Comma", "Tab", "Semicolon"]
+    separator_options_values = [' ', ',', '\t', ';']
+    separator_pulldown = mo.ui.dropdown(options=separator_options, label="Separator:", value="Space")
+    mo.output.append(separator_pulldown)
     n_axes = crystal_options.index(crystal_type.value) if crystal_type.value else 0
     mo.output.append(mo.md("X-axis refractive index:"))
     refractive_index_input_x = mo.ui.text_area(value=default_n_input, full_width=True)
@@ -3821,6 +3825,9 @@ def _(crystal_options, crystal_type, default_n_input, mo):
         refractive_index_input_x,
         refractive_index_input_y,
         refractive_index_input_z,
+        separator_options,
+        separator_options_values,
+        separator_pulldown,
     )
 
 
@@ -3832,23 +3839,34 @@ def _(
     refractive_index_input_x,
     refractive_index_input_y,
     refractive_index_input_z,
+    separator_options,
+    separator_options_values,
+    separator_pulldown,
 ):
     n_data_shape = 2
     if n_has_k.value:
         n_data_shape = 3
-    
-    nx_input = np.fromstring(refractive_index_input_x.value,sep=' ').reshape(-1,n_data_shape)
+    separator_index = separator_options.index(separator_pulldown.value) if separator_pulldown.value else 0
+    separator = separator_options_values[separator_index]
+    nx_input = np.fromstring(refractive_index_input_x.value,sep=separator).reshape(-1,n_data_shape)
     if n_data_shape == 2:
         nx_input = np.hstack((nx_input, np.zeros((nx_input.shape[0],1),dtype=float)))
     if n_axes == 2:
-        ny_input = np.fromstring(refractive_index_input_y.value,sep=' ').reshape(-1,n_data_shape)
+        ny_input = np.fromstring(refractive_index_input_y.value,sep=separator).reshape(-1,n_data_shape)
         if n_data_shape == 2:
             ny_input = np.hstack((ny_input, np.zeros((ny_input.shape[0],1),dtype=float)))
     if n_axes > 0:
-        nz_input = np.fromstring(refractive_index_input_z.value,sep=' ').reshape(-1,n_data_shape)
+        nz_input = np.fromstring(refractive_index_input_z.value,sep=separator).reshape(-1,n_data_shape)
         if n_data_shape == 2:
             nz_input = np.hstack((nz_input, np.zeros((nz_input.shape[0],1),dtype=float)))
-    return n_data_shape, nx_input, ny_input, nz_input
+    return (
+        n_data_shape,
+        nx_input,
+        ny_input,
+        nz_input,
+        separator,
+        separator_index,
+    )
 
 
 @app.cell
@@ -3858,7 +3876,7 @@ def _(n_axes, nx_input, ny_input, nz_input, plt, showmo):
         plt.plot(ny_input[:,0],ny_input[:,1], label="y")
     if n_axes > 0:
         plt.plot(nz_input[:,0],nz_input[:,1], label="z")
-    plt.xlabel("Wavelength (micron)")
+    plt.xlabel("Wavelength (\u03bcm)")
     plt.ylabel("n")
     plt.legend()
     showmo()
@@ -3873,7 +3891,7 @@ def _(n_axes, n_data_shape, nx_input, ny_input, nz_input, plt, showmo):
         plt.plot(ny_input[:,0],ny_input[:,2], label="y")
     if n_axes > 0:
         plt.plot(nz_input[:,0],nz_input[:,2], label="z")
-    plt.xlabel("Wavelength (micron)")
+    plt.xlabel("Wavelength (\u03bcm)")
     plt.ylabel("k")
     plt.legend()
     showmo()
@@ -3958,7 +3976,7 @@ def _(
     input_array_sellmeier_x[0] = float(lorentzian_array[0].value)
     for i in range(1,number_of_oscillators.value+1):
         input_array_sellmeier_x[(1 + 3*(i-1)) : (4+3*(i-1))] = read_oscillator(lorentzian_array[i].value,eqn_type_number)
-    fig_guess,ax_guess = plt.subplots(2,1)
+    fig_guess,ax_guess = plt.subplots(2,1,figsize=(6,6.5))
     nx_guess = lwe.sellmeier(nx_input[:,0],input_array_sellmeier_x, eqn_type_number)
     ax_guess[0].semilogx(nx_input[:,0], nx_input[:,1], label="input")
     ax_guess[0].semilogx(nx_input[:,0], np.real(nx_guess), label="initial guess")
@@ -3966,6 +3984,10 @@ def _(
     ax_guess[1].loglog(nx_input[:,0],-np.imag(nx_guess))
     ax_guess[0].legend()
     ax_guess[1].set_ylim(1e-8, 10)
+    ax_guess[0].set_xlabel("Wavelength (\u03bcm)")
+    ax_guess[0].set_ylabel("n")
+    ax_guess[1].set_xlabel("Wavelength (\u03bcm)")
+    ax_guess[1].set_ylabel("\u03ba")
     showmo()
     return ax_guess, fig_guess, i, input_array_sellmeier_x, nx_guess
 
@@ -4038,7 +4060,7 @@ def _(
         return lwe.fitSellmeierWithTabulatedData(nktable,initial_guess, np.array(fitting_values),eqn_type_number,absorptionWeight=absorption_weight)
 
     def plot_results(input_data, fitted_coeffs):
-        fig_fit_plot,ax_fit_plot = plt.subplots(2,1)
+        fig_fit_plot,ax_fit_plot = plt.subplots(2,1,figsize=(6,6.5))
         nx_fit = lwe.sellmeier(input_data[:,0],fitted_coeffs, eqn_type_number)
         ax_fit_plot[0].semilogx(input_data[:,0], input_data[:,1], label="input")
         ax_fit_plot[0].semilogx(input_data[:,0], np.real(nx_fit), label="fit")
@@ -4046,6 +4068,10 @@ def _(
         ax_fit_plot[1].loglog(input_data[:,0],-np.imag(nx_fit))
         ax_fit_plot[0].legend()
         ax_fit_plot[1].set_ylim(1e-8, 10)
+        ax_fit_plot[0].set_xlabel("Wavelength (\u03bcm)")
+        ax_fit_plot[0].set_ylabel("n")
+        ax_fit_plot[1].set_xlabel("Wavelength (\u03bcm)")
+        ax_fit_plot[1].set_ylabel("\u03ba")
     return fit_coeffs, plot_results
 
 
@@ -4319,11 +4345,6 @@ def _(
     output_box = mo.ui.text_area(value=buffer.getvalue(),rows=35)
     output_box
     return buffer, chi3, chi3_type_ind, n0forn2, n2, output_box
-
-
-@app.cell
-def _():
-    return
 
 
 @app.cell
