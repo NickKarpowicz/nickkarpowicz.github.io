@@ -5,7 +5,7 @@
 
 import marimo
 
-__generated_with = "0.11.26"
+__generated_with = "0.12.0"
 app = marimo.App()
 
 
@@ -92,15 +92,21 @@ def _(mo):
 
 @app.cell
 def _(mo):
-    sellmeier_eqn_options = ["Multielement fit", "Lorentzians", "Gaussians"]
-    sellmeier_eqn = mo.ui.dropdown(options=sellmeier_eqn_options, value=sellmeier_eqn_options[1], label="Target equation")
+    sellmeier_eqn_options = ["Lorentzians", "Gaussians"]
+    sellmeier_eqn = mo.ui.dropdown(options=sellmeier_eqn_options, value=sellmeier_eqn_options[0], label="Target equation")
     sellmeier_eqn
     return sellmeier_eqn, sellmeier_eqn_options
 
 
 @app.cell
+def _(sellmeier_eqn, sellmeier_eqn_options):
+    eqn_type_number = 1+sellmeier_eqn_options.index(sellmeier_eqn.value) if sellmeier_eqn.value in sellmeier_eqn_options else 1
+    return (eqn_type_number,)
+
+
+@app.cell
 def _(mo):
-    sellmeier_ref = mo.ui.text(value="Journal of ... 52, 1023 (2028).",label="Refractive index reference", full_width=True)
+    sellmeier_ref = mo.ui.text(value="D. Franta, D. Nečas, I. Ohlídal. A. Giglia. Optical characterization of SiO2 thin films using universal dispersion model over wide spectral range. Proc. SPIE 9890, 989014 (2016), via refractiveindex.info",label="Refractive index reference", full_width=True)
     sellmeier_ref
     return (sellmeier_ref,)
 
@@ -3897,37 +3903,57 @@ def _(mo, np, number_of_oscillators):
         mo.ui.text(value = "1e28", label="Strength"),
         mo.ui.text(value = "1", label="Linewidth (THz)"),
         mo.ui.checkbox(value=False, label="Fittable")],
-                             label="Lorentzian oscillator")
+                             label="oscillator")
     def read_lorentzian_input(lor):
         print(lor)
         omega2 = ((2.0 * np.pi) * float(lor[0]) * 1.0e12)**2
         strength = float(lor[1])
         gamma = 1.0e12 * float(lor[2])
         return np.array([strength, omega2, gamma])
+    def read_gaussian_input(osc):
+        print(osc)
+        omega = (2.0 * np.pi) * float(osc[0]) * 1.0e12
+        strength = float(osc[1])
+        sigma = np.pi * 2.0e12 * float(osc[2])
+        return np.array([omega, sigma, strength])
+
+    def read_oscillator(osc, eqn):
+        if eqn == 1:
+            return read_lorentzian_input(osc)
+        elif eqn == 2:
+            return read_gaussian_input(osc)
+    
     lorentzian_array = mo.ui.array([mo.ui.text(value="1.0", label="n_0")] + number_of_oscillators.value * [lorentzian] )
     lorentzian_array
-    return lorentzian, lorentzian_array, read_lorentzian_input
+    return (
+        lorentzian,
+        lorentzian_array,
+        read_gaussian_input,
+        read_lorentzian_input,
+        read_oscillator,
+    )
 
 
 @app.cell
 def _(
+    eqn_type_number,
     lorentzian_array,
     lwe,
     np,
     number_of_oscillators,
     nx_input,
     plt,
-    read_lorentzian_input,
+    read_oscillator,
     showmo,
 ):
     input_array_sellmeier_x = np.zeros(22,dtype=float)
 
     input_array_sellmeier_x[0] = float(lorentzian_array[0].value)
     for i in range(1,number_of_oscillators.value+1):
-        input_array_sellmeier_x[(1 + 3*(i-1)) : (4+3*(i-1))] = read_lorentzian_input(lorentzian_array[i].value)
+        input_array_sellmeier_x[(1 + 3*(i-1)) : (4+3*(i-1))] = read_oscillator(lorentzian_array[i].value,eqn_type_number)
     print(input_array_sellmeier_x)
     fig_guess,ax_guess = plt.subplots(2,1)
-    nx_guess = lwe.sellmeier(nx_input[:,0],input_array_sellmeier_x, 1)
+    nx_guess = lwe.sellmeier(nx_input[:,0],input_array_sellmeier_x, eqn_type_number)
     ax_guess[0].semilogx(nx_input[:,0], nx_input[:,1], label="input")
     ax_guess[0].semilogx(nx_input[:,0], np.real(nx_guess), label="initial guess")
     ax_guess[1].loglog(nx_input[:,0], nx_input[:,2])
@@ -3950,57 +3976,101 @@ def _(mo):
 
 
 @app.cell
+def _(eqn_type_number, lorentzian_array, number_of_oscillators):
+    fitting_values = [0]
+    if eqn_type_number == 1:
+        for i_fit in range(1,number_of_oscillators.value+1):
+            fitting_values.append(1+3*(i_fit-1))
+            fitting_values.append(2 + 3*(i_fit-1))
+            if lorentzian_array[i_fit].value[3]:
+                fitting_values.append(3+3*(i_fit-1))
+    else:
+        for i_fit in range(1,number_of_oscillators.value+1):
+            fitting_values.append(1+3*(i_fit-1))
+            if lorentzian_array[i_fit].value[3]:
+                fitting_values.append(2+3*(i_fit-1))
+            fitting_values.append(3 + 3*(i_fit-1))
+    return fitting_values, i_fit
+
+
+@app.cell
 def _(
+    eqn_type_number,
     fit_wavelength_pts,
     fit_wavelength_start,
     fit_wavelength_stop,
-    input_array_sellmeier_x,
-    lorentzian_array,
+    fitting_values,
     lwe,
     np,
-    number_of_oscillators,
-    nx_input,
     plt,
-    showmo,
 ):
-    fit_lam = np.linspace(fit_wavelength_start.value,fit_wavelength_stop.value,fit_wavelength_pts.value,dtype=float)
+    def fit_coeffs(input_data, initial_guess, absorption_weight):
+        fit_lam = np.linspace(fit_wavelength_start.value,fit_wavelength_stop.value,fit_wavelength_pts.value,dtype=float)
+        n_interp = np.interp(fit_lam, input_data[:,0], input_data[:,1])
+        k_interp = np.interp(fit_lam, input_data[:,0], input_data[:,2])
+        nktable = np.column_stack((fit_lam, n_interp, k_interp))
+        return lwe.fitSellmeierWithTabulatedData(nktable,initial_guess, np.array(fitting_values),eqn_type_number,absorptionWeight=absorption_weight)
 
-    nx_interp = np.interp(fit_lam, nx_input[:,0], nx_input[:,1])
-    kx_interp = np.interp(fit_lam, nx_input[:,0], nx_input[:,2])
+    def plot_results(input_data, fitted_coeffs):
+        fig_fit_plot,ax_fit_plot = plt.subplots(2,1)
+        nx_fit = lwe.sellmeier(input_data[:,0],fitted_coeffs, eqn_type_number)
+        ax_fit_plot[0].semilogx(input_data[:,0], input_data[:,1], label="input")
+        ax_fit_plot[0].semilogx(input_data[:,0], np.real(nx_fit), label="fit")
+        ax_fit_plot[1].loglog(input_data[:,0], input_data[:,2])
+        ax_fit_plot[1].loglog(input_data[:,0],-np.imag(nx_fit))
+        ax_fit_plot[0].legend()
+        ax_fit_plot[1].set_ylim(1e-8, 10)
+    return fit_coeffs, plot_results
 
-    fitting_values = [0]
-    for i_fit in range(1,number_of_oscillators.value+1):
-        fitting_values.append(1+3*(i_fit-1))
-        fitting_values.append(2 + 3*(i_fit-1))
-        if lorentzian_array[i_fit].value[3]:
-            fitting_values.append(3+3*(i_fit-1))
 
-    print(fitting_values)
-    nktable_x = np.column_stack((fit_lam, nx_interp, kx_interp))
-    fit_coefficients_nx = lwe.fitSellmeierWithTabulatedData(nktable_x,input_array_sellmeier_x, np.array(fitting_values),1,absorptionWeight=2)
+@app.cell
+def _(mo):
+    mo.md("""###x-axis fitting result:\n""")
+    return
 
-    fig_fitx,ax_fitx = plt.subplots(2,1)
-    nx_fit = lwe.sellmeier(nx_input[:,0],fit_coefficients_nx, 1)
-    ax_fitx[0].semilogx(nx_input[:,0], nx_input[:,1], label="input")
-    ax_fitx[0].semilogx(nx_input[:,0], np.real(nx_fit), label="fit")
-    ax_fitx[1].loglog(nx_input[:,0], nx_input[:,2])
-    ax_fitx[1].loglog(nx_input[:,0],-np.imag(nx_fit))
-    ax_fitx[0].legend()
-    ax_fitx[1].set_ylim(1e-8, 10)
+
+@app.cell
+def _(fit_coeffs, input_array_sellmeier_x, mo, nx_input):
+    with mo.capture_stdout() as nx_buffer:
+        fit_coefficients_nx = fit_coeffs(nx_input, input_array_sellmeier_x, 0.5)    
+    nx_output_box = mo.ui.text_area(value=nx_buffer.getvalue(),rows=5)
+    nx_output_box
+
+    return fit_coefficients_nx, nx_buffer, nx_output_box
+
+
+@app.cell
+def _(fit_coefficients_nx, nx_input, plot_results, showmo):
+    plot_results(nx_input, fit_coefficients_nx)
     showmo()
+    return
 
-    return (
-        ax_fitx,
-        fig_fitx,
-        fit_coefficients_nx,
-        fit_lam,
-        fitting_values,
-        i_fit,
-        kx_interp,
-        nktable_x,
-        nx_fit,
-        nx_interp,
-    )
+
+@app.cell
+def _(mo, n_axes):
+    s_yaxis_label = ""
+    if n_axes == 2:
+        s_yaxis_label = "### y-axis fitting:"
+    mo.md(s_yaxis_label)
+    return (s_yaxis_label,)
+
+
+@app.cell
+def _(mo, n_axes):
+    s_zaxis_label = ""
+    if n_axes > 0:
+        s_zaxis_label = "### z-axis fitting result:"
+    mo.md(s_zaxis_label)
+    return (s_zaxis_label,)
+
+
+@app.cell
+def _(fit_coeffs, input_array_sellmeier_x, mo, n_axes, nx_input):
+    if n_axes > 0:
+        with mo.capture_stdout() as nz_buffer:
+            fit_coefficients_nz = fit_coeffs(nx_input, input_array_sellmeier_x, 0.5)    
+        mo.output.append(mo.ui.text_area(value=nz_buffer.getvalue(),rows=5))
+    return fit_coefficients_nz, nz_buffer
 
 
 @app.cell
@@ -4092,12 +4162,11 @@ def _(
     chi3_ref,
     chi3_type,
     d_tensor_ref,
+    eqn_type_number,
     has_chi2,
     mo,
     name,
     nonlinear_frequencies,
-    sellmeier_eqn,
-    sellmeier_eqn_options,
     sellmeier_ref,
 ):
     with mo.capture_stdout() as buffer:
@@ -4106,7 +4175,7 @@ def _(
         print("Type:")
         print(chi3_type.value)
         print("Sellmeier equation:")
-        print(sellmeier_eqn_options.index(sellmeier_eqn.value) if sellmeier_eqn.value in sellmeier_eqn_options else 0)
+        print(eqn_type_number)
         print("Sellmeier reference:")
         print(sellmeier_ref.value)
         print("chi2 type:")
