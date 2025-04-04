@@ -5,7 +5,7 @@
 
 import marimo
 
-__generated_with = "0.12.2"
+__generated_with = "0.12.4"
 app = marimo.App()
 
 
@@ -13,7 +13,7 @@ app = marimo.App()
 def _(mo):
     mo.md(
         r"""
-        ### Adding a crystal
+        ### Lightwave Explorer crystal maker
         This worksheet guides you through all the things you need to make an entry for the crystal database, then produces a text block you can paste inside.
         """
     )
@@ -3947,7 +3947,7 @@ def _(mo, np, number_of_oscillators, sellmeier_eqn, sellmeier_eqn_options):
         elif eqn == 2:
             return read_gaussian_input(osc)
 
-    lorentzian_array = mo.ui.array([mo.ui.text(value="1.0", label="n0")] + number_of_oscillators.value * [lorentzian] )
+    lorentzian_array = mo.ui.array([mo.ui.text(value="1.0", label="$n_0$")] + number_of_oscillators.value * [lorentzian] )
     lorentzian_array
     return (
         default_amplitude,
@@ -4176,6 +4176,17 @@ def _(fit_coefficients_nz, mo, n_axes, ny_input, plot_results, showmo):
 
 @app.cell
 def _(mo):
+    mo.md(
+        r"""
+        ### $\chi^{(2)}$
+        enter the d tensor ($\chi^{(2)}$/2) below, in units of pm/V.
+        """
+    )
+    return
+
+
+@app.cell
+def _(mo):
     has_chi2 = mo.ui.checkbox(value=True,label="Has chi(2)")
     has_chi2
     return (has_chi2,)
@@ -4183,14 +4194,14 @@ def _(mo):
 
 @app.cell
 def _(mo):
-    chi2_tensor_text = mo.ui.text_area(value="0 0 0 0 0 0\n0 0 0 0 0 0\n0 0 0 0 0 0", label="d tensor")
+    chi2_tensor_text = mo.ui.text_area(value="0 0 0 0 0 0\n0 0 0 0 0 0\n0 0 0 0 0 0", label="d tensor:")
     chi2_tensor_text
     return (chi2_tensor_text,)
 
 
 @app.cell
 def _(mo):
-    d_tensor_ref = mo.ui.text(value="Journal of ... 52, 1023 (2028).",label="d tensor reference", full_width=True)
+    d_tensor_ref = mo.ui.text(value="Journal of ... 52, 1023 (2028).",label="d tensor reference:", full_width=True)
     d_tensor_ref
     return (d_tensor_ref,)
 
@@ -4200,8 +4211,13 @@ def _(chi2_tensor_text, np):
     chi2 = np.fromstring(chi2_tensor_text.value, sep=' ')
     if chi2.size == 18:
         chi2 = np.reshape(chi2,(3,6))
-    print(chi2)
     return (chi2,)
+
+
+@app.cell
+def _(mo):
+    mo.md(r"""Next, describe the measurement, in terms of the frequencies in and out: $\omega_2 = \pm \omega_0 \pm \omega_1$. As entered below, it is second harmonic generation of 375 THz (800 nm) light.""")
+    return
 
 
 @app.cell
@@ -4211,6 +4227,22 @@ def _(mo):
     nonlinear_frequencies = mo.ui.array([freq_element_0]*2 + [freq_element_1], label="chi(2) measurement frequencies")
     nonlinear_frequencies
     return freq_element_0, freq_element_1, nonlinear_frequencies
+
+
+@app.cell
+def _(mo):
+    mo.md(
+        r"""
+        ### $\chi^{(3)}$
+
+        Next, we enter $\chi^{(3)}$. There are a few ways to do this, as set by the pull-down menu below. If you only know one value, you can enter that and the program will assume that the third-order nonlinearity is isotropic.
+
+        A sub-case of that is when you know the nonlinear refractive index $n_2$. Selecting that option in the menu will allow you to enter the neccessary information for calculating a single $\chi^{(3)}$ from it.
+
+        Finally, if you have all 81 elements of the tensor, you can enter them.
+        """
+    )
+    return
 
 
 @app.cell
@@ -4242,6 +4274,18 @@ def _(mo):
 
 
 @app.cell
+def _(mo):
+    mo.md(
+        r"""
+        The reference frequencies for $\chi^{(3)}$ work in a similar way to $\chi^{(2)}$, where the process is described as a general four-wave mixing: $\omega_3 = \pm \omega_0 \pm \omega_1 \pm \omega_2$.
+
+        The default values below are for the Kerr effect, so all frequencies are the same (e.g. $\omega_3 = \omega_0 + \omega_1 - \omega_2$).
+        """
+    )
+    return
+
+
+@app.cell
 def _(freq_element_0, mo):
     chi3_frequencies = mo.ui.array([freq_element_0]*4, label="chi(3) measurement frequencies")
     chi3_frequencies
@@ -4250,7 +4294,7 @@ def _(freq_element_0, mo):
 
 @app.cell(hide_code=True)
 def _(mo):
-    mo.md(r"""### Generate a block of text that can be pasted inside the CrystalDatabase.txt file""")
+    mo.md(r"""### Entry for the CrystalDatabase.txt file:""")
     return
 
 
