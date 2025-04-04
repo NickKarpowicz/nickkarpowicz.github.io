@@ -4007,8 +4007,8 @@ def _(mo):
 
 @app.cell
 def _(mo):
-    fit_wavelength_start = mo.ui.number(value=0.2,label="Fitting ROI shortest wavelength:")
-    fit_wavelength_stop = mo.ui.number(value=3,label="Fitting ROI longest wavelength:")
+    fit_wavelength_start = mo.ui.number(value=0.2,label="Fitting ROI shortest wavelength (\u03bcm):")
+    fit_wavelength_stop = mo.ui.number(value=3,label="Fitting ROI longest wavelength (\u03bcm):")
     fit_wavelength_pts = mo.ui.number(value=128, label="Number of fitting wavelengths:")
     fit_absorption_weight = mo.ui.number(value=0.5, label="Weight of absorption in fitting:")
     mo.output.append(fit_wavelength_start)
@@ -4187,14 +4187,14 @@ def _(mo):
 
 @app.cell
 def _(mo):
-    has_chi2 = mo.ui.checkbox(value=True,label="Has chi(2)")
+    has_chi2 = mo.ui.checkbox(value=True,label=r"""Has $\chi^{(2)}$""")
     has_chi2
     return (has_chi2,)
 
 
 @app.cell
 def _(mo):
-    chi2_tensor_text = mo.ui.text_area(value="0 0 0 0 0 0\n0 0 0 0 0 0\n0 0 0 0 0 0", label="d tensor:")
+    chi2_tensor_text = mo.ui.text_area(value="0 0 0 0 0 0\n0 0 0 0 0 0\n0 0 0 0 0 0", label="d tensor (pm/V):")
     chi2_tensor_text
     return (chi2_tensor_text,)
 
@@ -4224,7 +4224,7 @@ def _(mo):
 def _(mo):
     freq_element_0 = mo.ui.text(value="375e12")
     freq_element_1 = mo.ui.text(value="750e12")
-    nonlinear_frequencies = mo.ui.array([freq_element_0]*2 + [freq_element_1], label="chi(2) measurement frequencies")
+    nonlinear_frequencies = mo.ui.array([freq_element_0]*2 + [freq_element_1], label="chi(2) measurement frequencies (Hz):")
     nonlinear_frequencies
     return freq_element_0, freq_element_1, nonlinear_frequencies
 
@@ -4256,11 +4256,11 @@ def _(mo):
 @app.cell
 def _(chi3_options, chi3_type, mo):
     if chi3_type.value == chi3_options[1]:
-        chi3_entry = mo.ui.text_area(label="chi(3) tensor")
+        chi3_entry = mo.ui.text_area(label="chi(3) tensor ($m^2$/$V^2$):")
     elif chi3_type.value == chi3_options[2]:
-        chi3_entry = mo.ui.text(value = "2.5e-22", label="chi(3)")
+        chi3_entry = mo.ui.text(value = "2.5e-22", label=r"""$\chi^{(3)}$ ($m^2$/$V^2$):""")
     elif chi3_type.value == chi3_options[3]:
-        chi3_entry = mo.ui.array([mo.ui.text(label="n2"), mo.ui.text(label="n")],label="n2 and n")
+        chi3_entry = mo.ui.array([mo.ui.text(label="n2 ($m^2/W$):"), mo.ui.text(label="n")],label="n2 and n")
 
     chi3_entry
     return (chi3_entry,)
@@ -4268,7 +4268,7 @@ def _(chi3_options, chi3_type, mo):
 
 @app.cell
 def _(mo):
-    chi3_ref = mo.ui.text(value="Journal of ... 52, 1023 (2028).",label="Chi(3) reference", full_width=True)
+    chi3_ref = mo.ui.text(value="Journal of ... 52, 1023 (2028).",label=r"""$\chi^{(3)}$ reference""", full_width=True)
     chi3_ref
     return (chi3_ref,)
 
