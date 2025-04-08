@@ -5,7 +5,7 @@
 
 import marimo
 
-__generated_with = "0.12.4"
+__generated_with = "0.12.5"
 app = marimo.App()
 
 
@@ -3928,7 +3928,7 @@ def _(mo, np, number_of_oscillators, sellmeier_eqn, sellmeier_eqn_options):
         mo.ui.text(value = "2400", label="Frequency (THz)"),
         mo.ui.text(value = default_amplitude, label="Strength"),
         mo.ui.text(value = "5", label="Linewidth (THz)"),
-        mo.ui.checkbox(value=False, label="Fittable")],
+        mo.ui.checkbox(value=True, label="Fittable")],
                              label="oscillator")
     def read_lorentzian_input(lor):
         omega2 = ((2.0 * np.pi) * float(lor[0]) * 1.0e12)**2
@@ -4024,20 +4024,28 @@ def _(mo):
 
 
 @app.cell
-def _(eqn_type_number, lorentzian_array, number_of_oscillators):
+def _(
+    adjust_linewidths,
+    eqn_type_number,
+    lorentzian_array,
+    number_of_oscillators,
+):
     fitting_values = [0]
     if eqn_type_number == 1:
         for i_fit in range(1,number_of_oscillators.value+1):
-            fitting_values.append(1+3*(i_fit-1))
-            fitting_values.append(2 + 3*(i_fit-1))
             if lorentzian_array[i_fit].value[3]:
-                fitting_values.append(3+3*(i_fit-1))
+                fitting_values.append(1+3*(i_fit-1))
+                fitting_values.append(2 + 3*(i_fit-1))
+                if adjust_linewidths.value:
+                    fitting_values.append(3+3*(i_fit-1))
     else:
         for i_fit in range(1,number_of_oscillators.value+1):
-            fitting_values.append(1+3*(i_fit-1))
             if lorentzian_array[i_fit].value[3]:
-                fitting_values.append(2+3*(i_fit-1))
-            fitting_values.append(3 + 3*(i_fit-1))
+                fitting_values.append(1+3*(i_fit-1))
+                if adjust_linewidths.value:
+                    fitting_values.append(2+3*(i_fit-1))
+                fitting_values.append(3 + 3*(i_fit-1))
+    print(fitting_values)
     return fitting_values, i_fit
 
 
