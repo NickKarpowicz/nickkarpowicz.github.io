@@ -5,7 +5,7 @@
 
 import marimo
 
-__generated_with = "0.12.5"
+__generated_with = "0.12.4"
 app = marimo.App()
 
 
@@ -3810,11 +3810,11 @@ def _(crystal_options, crystal_type, default_n_input, mo):
     mo.output.append(refractive_index_input_x)
     if n_axes == 1:
         mo.output.append(mo.md("Z-axis refractive index:"))
-        refractive_index_input_z = refractive_index_input_x
+        refractive_index_input_z = mo.ui.text_area(value=default_n_input, full_width=True)
         mo.output.append(refractive_index_input_z)
     if n_axes == 2:
-        refractive_index_input_y = refractive_index_input_x
-        refractive_index_input_z = refractive_index_input_x
+        refractive_index_input_y = mo.ui.text_area(value=default_n_input, full_width=True)
+        refractive_index_input_z = mo.ui.text_area(value=default_n_input, full_width=True)
         mo.output.append(mo.md("Y-axis refractive index:"))
         mo.output.append(refractive_index_input_y)
         mo.output.append(mo.md("Z-axis refractive index:"))
