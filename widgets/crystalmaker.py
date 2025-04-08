@@ -3971,11 +3971,14 @@ def _(
     read_oscillator,
     showmo,
 ):
-    input_array_sellmeier_x = np.zeros(22,dtype=float)
+    def input_array_to_guess(input_ui_array):
+        output_array = np.zeros(22,dtype=float)
+        output_array[0] = float(input_ui_array[0].value)
+        for i in range(1,number_of_oscillators.value+1):
+            output_array[(1 + 3*(i-1)) : (4+3*(i-1))] = read_oscillator(input_ui_array[i].value,eqn_type_number)
+        return output_array
 
-    input_array_sellmeier_x[0] = float(lorentzian_array[0].value)
-    for i in range(1,number_of_oscillators.value+1):
-        input_array_sellmeier_x[(1 + 3*(i-1)) : (4+3*(i-1))] = read_oscillator(lorentzian_array[i].value,eqn_type_number)
+    input_array_sellmeier_x = input_array_to_guess(lorentzian_array)
     fig_guess,ax_guess = plt.subplots(2,1,figsize=(6,6.5))
     nx_guess = lwe.sellmeier(nx_input[:,0],input_array_sellmeier_x, eqn_type_number)
     ax_guess[0].semilogx(nx_input[:,0], nx_input[:,1], label="input")
@@ -3989,7 +3992,13 @@ def _(
     ax_guess[1].set_xlabel("Wavelength (\u03bcm)")
     ax_guess[1].set_ylabel("\u03ba")
     showmo()
-    return ax_guess, fig_guess, i, input_array_sellmeier_x, nx_guess
+    return (
+        ax_guess,
+        fig_guess,
+        input_array_sellmeier_x,
+        input_array_to_guess,
+        nx_guess,
+    )
 
 
 @app.cell
@@ -4120,23 +4129,62 @@ def _(fit_coefficients_nx, nx_input, plot_results, showmo):
 def _(mo, n_axes):
     s_yaxis_label = ""
     if n_axes == 2:
-        s_yaxis_label = "### y-axis fitting result:"
+        s_yaxis_label = "### y-axis fitting:"
     mo.md(s_yaxis_label)
     return (s_yaxis_label,)
 
 
 @app.cell
+def _(mo, n_axes):
+    if n_axes == 2:
+        use_last_fitting_for_y_guess = mo.ui.checkbox(value=True, label="Use x-axis fitting as initial guess")
+        mo.output.append(use_last_fitting_for_y_guess)
+    return (use_last_fitting_for_y_guess,)
+
+
+@app.cell
+def _(
+    lorentzian,
+    mo,
+    n_axes,
+    number_of_oscillators,
+    use_last_fitting_for_y_guess,
+):
+    if n_axes == 2:
+        if not use_last_fitting_for_y_guess.value:
+            input_array_y = mo.ui.array([mo.ui.text(value="1.0", label="$n_0$")] + number_of_oscillators.value * [lorentzian] )
+            mo.output.append(input_array_y)
+    return (input_array_y,)
+
+
+@app.cell
+def _(
+    fit_coefficients_nx,
+    input_array_to_guess,
+    input_array_y,
+    n_axes,
+    use_last_fitting_for_y_guess,
+):
+    if n_axes == 2:
+        if use_last_fitting_for_y_guess.value:
+            initial_guess_y = fit_coefficients_nx
+        else:
+            initial_guess_y = input_array_to_guess(input_array_y)
+    return (initial_guess_y,)
+
+
+@app.cell
 def _(
     fit_absorption_weight,
-    fit_coefficients_nx,
     fit_coeffs,
+    initial_guess_y,
     mo,
     n_axes,
     ny_input,
 ):
     if n_axes == 2:
         with mo.capture_stdout() as ny_buffer:
-            fit_coefficients_ny = fit_coeffs(ny_input, fit_coefficients_nx, fit_absorption_weight.value)  
+            fit_coefficients_ny = fit_coeffs(ny_input, initial_guess_y, fit_absorption_weight.value)  
         mo.output.append(mo.ui.text_area(value=ny_buffer.getvalue(),rows=5))
     return fit_coefficients_ny, ny_buffer
 
@@ -4153,31 +4201,74 @@ def _(fit_coefficients_ny, mo, n_axes, ny_input, plot_results, showmo):
 def _(mo, n_axes):
     s_zaxis_label = ""
     if n_axes > 0:
-        s_zaxis_label = "### z-axis fitting result:"
+        s_zaxis_label = "### z-axis fitting:"
     mo.md(s_zaxis_label)
     return (s_zaxis_label,)
+
+
+@app.cell
+def _(mo, n_axes):
+    if n_axes > 0:
+        use_last_fitting_for_z_guess = mo.ui.checkbox(value=True, label="Use previous fitting as initial guess")
+        mo.output.append(use_last_fitting_for_z_guess)
+    return (use_last_fitting_for_z_guess,)
+
+
+@app.cell
+def _(
+    lorentzian,
+    mo,
+    n_axes,
+    number_of_oscillators,
+    use_last_fitting_for_z_guess,
+):
+    if n_axes > 0:
+        if not use_last_fitting_for_z_guess.value:
+            input_array_z = mo.ui.array([mo.ui.text(value="1.0", label="$n_0$")] + number_of_oscillators.value * [lorentzian] )
+            mo.output.append(input_array_z)
+    return (input_array_z,)
+
+
+@app.cell
+def _(
+    fit_coefficients_nx,
+    fit_coefficients_ny,
+    input_array_to_guess,
+    input_array_z,
+    n_axes,
+    use_last_fitting_for_z_guess,
+):
+    if n_axes > 0:
+        if use_last_fitting_for_z_guess.value:
+            if n_axes == 2:
+                initial_guess_z = fit_coefficients_ny
+            else:
+                initial_guess_z = fit_coefficients_nx
+        else:
+            initial_guess_z = input_array_to_guess(input_array_z)
+    return (initial_guess_z,)
 
 
 @app.cell
 def _(
     fit_absorption_weight,
     fit_coeffs,
-    input_array_sellmeier_x,
+    initial_guess_z,
     mo,
     n_axes,
-    nx_input,
+    nz_input,
 ):
     if n_axes > 0:
         with mo.capture_stdout() as nz_buffer:
-            fit_coefficients_nz = fit_coeffs(nx_input, input_array_sellmeier_x, fit_absorption_weight.value)    
+            fit_coefficients_nz = fit_coeffs(nz_input, initial_guess_z, fit_absorption_weight.value)    
         mo.output.append(mo.ui.text_area(value=nz_buffer.getvalue(),rows=5))
     return fit_coefficients_nz, nz_buffer
 
 
 @app.cell
-def _(fit_coefficients_nz, mo, n_axes, ny_input, plot_results, showmo):
+def _(fit_coefficients_nz, mo, n_axes, nz_input, plot_results, showmo):
     if n_axes > 0:
-        plot_results(ny_input, fit_coefficients_nz)
+        plot_results(nz_input, fit_coefficients_nz)
         mo.output.append(showmo())
     return
 
