@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        var scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          var element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          var hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          var newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((entries) => {
+          setHeight();
+        });
+        resizeObserver.observe(obj.contentWindow.document.body);
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <marimo-mode data-mode='read' hidden></marimo-mode>
+    <marimo-version data-version='0.13.6' hidden></marimo-version>
+    <marimo-user-config data-config='{"completion": {"activate_on_typing": true, "copilot": false}, "display": {"code_editor_font_size": 14, "theme": "light", "dataframes": "rich", "default_width": "medium", "cell_output": "above", "default_table_page_size": 10}, "formatting": {"line_length": 79}, "keymap": {"preset": "default", "overrides": {}}, "runtime": {"auto_instantiate": true, "auto_reload": "off", "reactive_tests": true, "on_cell_change": "autorun", "watcher_on_save": "lazy", "output_max_bytes": 8000000, "std_stream_max_bytes": 1000000}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "package_management": {"manager": "pip"}, "server": {"browser": "default", "follow_symlink": false}, "language_servers": {"pylsp": {"enabled": true, "enable_mypy": true, "enable_ruff": true, "enable_flake8": false, "enable_pydocstyle": false, "enable_pylint": false, "enable_pyflakes": false}}, "snippets": {"custom_paths": [], "include_default_snippets": true}}' data-overrides='{}' hidden></marimo-user-config>
+    <marimo-app-config data-config='{"width": "compact", "sql_output": "auto"}' hidden></marimo-app-config>
+    <marimo-server-token data-token='123' hidden></marimo-server-token>
+    <title>Worksheet 01 solution</title>
+    <script type="module" crossorigin src="./assets/index-D3XtisvU.js"></script>
+    <link rel="stylesheet" crossorigin href="./assets/index-33Q7xM_A.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="" data-show-code="false">import%20marimo%0A%0A__generated_with%20%3D%20%220.13.6%22%0Aapp%20%3D%20marimo.App()%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Photonics%20II%2C%20Worksheet%201%20solution%0A%20%20%20%20In%20this%20worksheet%2C%20we%20study%20a%20few%20properties%20of%20the%20Hilbert%20transform%20as%20it%20relates%20to%20the%20analytic%20signal%20and%20analysis%20of%20optical%20fields.%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Symmetry%20of%20sin%20and%20cos%0A%0A%20%20%20%20Sin%20has%20odd%20symmetry%20around%20the%20origin%2C%20while%20cos%20has%20even%20symmetry.%20You%20can%20understand%20this%20by%20breaking%20them%20down%20into%20sums%20of%20phasors%3A%0A%0A%20%20%20%20%5Cbegin%7Bequation%7D%0A%20%20%20%202%5Ccos(t)%20%3D%20e%5E%7Bit%7D%20%2B%20e%5E%7B-it%7D%5Ctag%7B1%7D%0A%20%20%20%20%5Cend%7Bequation%7D%0A%0A%20%20%20%20%5Cbegin%7Bequation%7D%0A%20%20%20%202%5Csin(t)%20%3D%20ie%5E%7B-it%7D%20-%20ie%5E%7Bit%7D%5Ctag%7B2%7D%0A%20%20%20%20%5Cend%7Bequation%7D%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20After%20Fourier%20transformation%0A%0A%20%20%20%20In%20the%20frequency%20domain%2C%20each%20phasor%20turns%20into%20a%20delta%20function%2C%20a%20spike%20at%20a%20specific%20frequency%20(in%20this%20example%2C%20the%20spikes%20are%20at%20%24%5Comega_o%3D%5Cpm1%24)%3A%0A%0A%0A%20%20%20%20%5Cbegin%7Bequation%7D%0A%20%20%20%20FT(%5Ccos(%5Comega_o%20t))%3D%5Cpi%5Cdelta(%5Comega-%5Comega_o)%20%2B%20%5Cpi%5Cdelta(%5Comega%20%2B%20%5Comega_o)%5Ctag%7B3%7D%0A%20%20%20%20%5Cend%7Bequation%7D%0A%0A%0A%0A%20%20%20%20%5Cbegin%7Bequation%7D%0A%20%20%20%20FT(%5Csin(%5Comega_o%20t))%3D-i%5Cpi%5Cdelta(%5Comega-%5Comega_o)%20%2B%20i%5Cpi%5Cdelta(%5Comega%2B%5Comega_o)%5Ctag%7B4%7D%0A%20%20%20%20%5Cend%7Bequation%7D%0A%0A%0A%20%20%20%20We%20can%20look%20at%20this%20numerically%20and%20make%20a%20plot%3A%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20frequency_slider%20%3D%20mo.ui.slider(value%3D64%2C%20start%3D0%2C%20stop%3D511%2C%20step%3D1%2Clabel%3D%22Frequency%20index%22)%0A%20%20%20%20frequency_slider%0A%20%20%20%20return%20(frequency_slider%2C)%0A%0A%0A%40app.cell%0Adef%20_(frequency_slider%2C%20np%2C%20plt%2C%20showmo)%3A%0A%20%20%20%20t%20%3D%20np.linspace(0.0%2C%20256%2C%201024)%0A%20%20%20%20f%20%3D%20np.fft.fftfreq(1024%2C%20t%5B1%5D%20-%20t%5B0%5D)%0A%20%20%20%20w%20%3D%202*np.pi*f%5Bfrequency_slider.value%5D%20%23pick%20a%20frequency%20on%20the%20grid%20so%20the%20boundaries%20match%0A%20%20%20%20f%20%3D%20np.fft.fftshift(f)%0A%20%20%20%20_fig%2C%20_ax%20%3D%20plt.subplots(1%2C%202%2C%20figsize%3D(10%2C%203))%0A%20%20%20%20_ax%5B0%5D.plot(f%2C%20np.fft.fftshift(np.real(np.fft.fft(np.cos(w%20*%20t))))%2C%20label%3D'Real')%0A%20%20%20%20_ax%5B0%5D.plot(f%2C%20np.fft.fftshift(np.imag(np.fft.fft(np.cos(w%20*%20t))))%2C%20label%3D'Imag')%0A%20%20%20%20_ax%5B0%5D.set_xlabel('Frequency%20(Hz)')%0A%20%20%20%20_ax%5B0%5D.set_ylabel('Amplitude%20(Arb.%20unit)')%0A%20%20%20%20_ax%5B0%5D.set_title('cos')%0A%20%20%20%20_ax%5B0%5D.legend()%0A%20%20%20%20_ax%5B1%5D.plot(f%2C%20np.fft.fftshift(np.real(np.fft.fft(np.sin(w%20*%20t))))%2C%20label%3D'Real')%0A%20%20%20%20_ax%5B1%5D.plot(f%2C%20np.fft.fftshift(np.imag(np.fft.fft(np.sin(w%20*%20t))))%2C%20label%3D'Imag')%0A%20%20%20%20_ax%5B1%5D.set_xlabel('Frequency%20(Hz)')%0A%20%20%20%20_ax%5B1%5D.set_ylabel('Amplitude%20(Arb.%20unit)')%0A%20%20%20%20_ax%5B1%5D.set_title('sin')%0A%20%20%20%20_ax%5B1%5D.legend()%0A%20%20%20%20showmo()%0A%20%20%20%20return%20t%2C%20w%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Analytic%20field%0A%20%20%20%20If%20we%20define%20this%20as%20the%20sum%20of%20the%20real%20field%20and%20its%20Hilbert%20transform%20multiplied%20by%20the%20imaginary%20unit%2C%0A%0A%20%20%20%20%5Cbegin%7Bequation%7D%0A%20%20%20%20%5Ctilde%7BE%7D(t)%20%3D%20E(t)%20%2B%20i%20H(E(t))%5Ctag%7B5%7D%0A%20%20%20%20%5Cend%7Bequation%7D%0A%0A%20%20%20%20we%20can%20see%20that%20if%20we%20take%20the%20simple%20case%20where%0A%0A%20%20%20%20%5Cbegin%7Bequation%7D%0A%20%20%20%20E(t)%20%3D%20%5Ccos(%5Comega_o%20t)%5Ctag%7B6%7D%0A%20%20%20%20%5Cend%7Bequation%7D%0A%0A%20%20%20%20that%20we%20just%20have%20Euler's%20formula%2C%20and%20the%20analytic%20field%20is%0A%0A%20%20%20%20%5Cbegin%7Bequation%7D%0A%20%20%20%20%5Ctilde%7BE%7D(t)%20%3D%20e%5E%7Bi%5Comega_o%20t%7D%5Ctag%7B7%7D%0A%20%20%20%20%5Cend%7Bequation%7D%0A%0A%20%20%20%20We%20can%20already%20guess%20from%20this%20what%20is%20going%20to%20happen%2C%20but%20if%20we%20do%20it%20explicitly%2C%20adding%20together%20the%20known%20Fourier%20transforms%20of%20the%20cos%20and%20sin%20components%2C%20we%20see%20that%20there%20is%20a%20cancellation%20on%20the%20negative%20side%20of%20the%20frequency%20axis%3A%20the%20analytic%20wave%20is%20single-sided%20in%20the%20Fourier%20domain%2C%20with%20one%20side%20cancelling%20and%20the%20other%20adding%20constructively.%0A%0A%20%20%20%20Since%20*any*%20wave%20can%20be%20decomposed%20into%20Fourier%20components%2C%20we%20know%20now%20that%20the%20analytic%20field%20corresponding%20to%20a%20real-valued%20field%20will%20always%20be%20single-sided%20in%20the%20Fourier%20domain.%0A%0A%20%20%20%20%23%23%20Numerical%20recipe%0A%0A%20%20%20%20Knowing%20this%2C%20we%20can%20easily%20get%20the%20analytic%20field%20of%20a%20real-valued%20wave%3A%20set%20negative%20frequencies%20to%20zero%2C%20and%20double%20the%20positive%20ones.%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(np%2C%20plt%2C%20showmo%2C%20sig%2C%20t%2C%20w)%3A%0A%20%20%20%20%23Use%20a%20Gaussian%20pulse%20for%20an%20example%0A%20%20%20%20Efield%20%3D%20np.exp(-(t%20-%20128)%20**%202%20%2F%20400)%20*%20np.cos(w*t)%0A%0A%20%20%20%20def%20simple_hilbert(E_in)%3A%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20Calculate%20the%20analytic%20signal%20by%20taking%20the%20Fast%20Fourier%20Transform%2C%20setting%20negative%20frequency%20components%20to%20zero%2C%20and%20doubling%20positive%20frequency%20components%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20_f%20%3D%20np.fft.fftfreq(E_in.shape%5B0%5D)%0A%20%20%20%20%20%20%20%20E_f%20%3D%20np.fft.fft(E_in)%0A%20%20%20%20%20%20%20%20E_f%5B_f%3E%3D0%5D%20*%3D%202%0A%20%20%20%20%20%20%20%20E_f%5B_f%3C0%5D%20%3D%200%0A%20%20%20%20%20%20%20%20return%20np.fft.ifft(E_f)%0A%0A%20%20%20%20Afield%20%3D%20simple_hilbert(Efield)%0A%20%20%20%20AfieldScipy%20%3D%20sig.hilbert(Efield)%0A%0A%20%20%20%20_fig%2C%20_ax%20%3D%20plt.subplots(1%2C%202%2C%20figsize%3D(10%2C%203))%0A%20%20%20%20_ax%5B0%5D.plot(np.real(Afield)%2C%20label%3D'Our%20analytic%20field')%0A%20%20%20%20_ax%5B0%5D.plot(np.real(AfieldScipy)%2C%20'--r'%2C%20label%3D%22Scipy's%22)%0A%20%20%20%20_ax%5B0%5D.legend()%0A%20%20%20%20_ax%5B0%5D.set_xlabel('Pixel')%0A%20%20%20%20_ax%5B0%5D.set_ylabel('Real')%0A%20%20%20%20_ax%5B1%5D.plot(np.imag(Afield)%2C%20label%3D'Our%20analytic%20field')%0A%20%20%20%20_ax%5B1%5D.plot(np.imag(AfieldScipy)%2C%20'--r'%2C%20label%3D%22Scipy's%22)%0A%20%20%20%20_ax%5B1%5D.legend()%0A%20%20%20%20_ax%5B1%5D.set_xlabel('Pixel')%0A%20%20%20%20_ax%5B1%5D.set_ylabel('Imag')%0A%20%20%20%20showmo()%0A%20%20%20%20return%0A%0A%0A%40app.cell(hide_code%3DTrue)%0Adef%20_(mo)%3A%0A%20%20%20%20mo.md(%0A%20%20%20%20%20%20%20%20r%22%22%22%0A%20%20%20%20%23%23%20Hilbert%20transform%20vs.%20analytic%20field%0A%0A%20%20%20%20From%20what%20you%20can%20see%20above%2C%20we%20have%20a%20simple%20way%20of%20getting%20the%20analytic%20field%20by%20utilizing%20the%20Fast%20Fourier%20Transform%20algorithm.%20The%20imaginary%20part%20of%20the%20analytic%20field%20then%20gives%20us%20the%20Hilbert%20transform.%20You'll%20also%20notice%20that%20the%20function%20in%20scipy%20that%20returns%20the%20analytic%20field%20is%20called%20hibert()%2C%20not%20analytic().%20Technically%2C%20the%20Hilbert%20transform%20is%20still%20a%20real-valued%20quantity%20and%20constitutes%20only%20a%20part%20of%20the%20analytic%20field%20that%20these%20types%20of%20functions%20return.%20%0A%0A%20%20%20%20However%2C%20it%20is%20so%20common%20that%20we%20want%20to%20get%20the%20analytic%20field%20as%20the%20final%20result%20when%20performing%20a%20Hilbert%20transform%2C%20and%20getting%20the%20full%20analytic%20field%20this%20way%20would%20be%20an%20intermediate%20step%20in%20a%20function%20that%20only%20gives%20the%20imaginary%20part%20as%20the%20hilbert%20transform%2C%20that%20many%20numerics%20packages%20will%20just%20give%20the%20analytic%20field%20when%20a%20function%20named%20%22hilbert()%22%20is%20called.%0A%20%20%20%20%22%22%22%0A%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20%23This%20cell%20contains%20imports%20and%20setup%0A%20%20%20%20import%20numpy%20as%20np%0A%20%20%20%20import%20marimo%20as%20mo%0A%20%20%20%20import%20io%0A%20%20%20%20import%20matplotlib.pyplot%20as%20plt%0A%20%20%20%20from%20matplotlib%20import%20rcParams%0A%20%20%20%20import%20scipy.signal%20as%20sig%0A%20%20%20%20rcParams%5B'font.family'%5D%20%3D%20'sans-serif'%0A%20%20%20%20rcParams%5B'font.sans-serif'%5D%20%3D%20%5B'Helvetica'%2C%20'Arial'%2C%20'Verdana'%2C%20'DejaVu%20Sans'%2C%20'Liberation%20Sans'%2C%20'Bitstream%20Vera%20Sans'%2C%20'sans-serif'%5D%0A%0A%20%20%20%20def%20showmo()%3A%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20Helper%20function%20to%20plot%20as%20an%20svg%20to%20have%20vector%20plots%0A%20%20%20%20%20%20%20%20%22%22%22%0A%20%20%20%20%20%20%20%20svg_buffer%20%3D%20io.StringIO()%0A%20%20%20%20%20%20%20%20plt.savefig(svg_buffer%2C%20format%3D'svg')%0A%20%20%20%20%20%20%20%20return%20mo.Html(svg_buffer.getvalue())%0A%0A%20%20%20%20return%20mo%2C%20np%2C%20plt%2C%20showmo%2C%20sig%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+  </body>
+</html>
