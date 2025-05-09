@@ -1,5 +1,8 @@
 /* Reset some default browser styles for better consistency */
-body, h1, h2, p {
+body,
+h1,
+h2,
+p {
     margin: 0;
     padding: 0;
 }
@@ -29,7 +32,7 @@ main {
 
 section {
     margin: auto;
-    max-width: 320px;
+    max-width: 480px;
     background-color: #222;
     color: white;
     border-radius: 10px;
@@ -42,7 +45,7 @@ section {
 footer {
     text-align: center;
     padding: 10px;
-    background-color:black;
+    background-color: black;
     color: white;
 }
 
@@ -51,8 +54,8 @@ a {
     color: cyan;
     text-decoration: none;
 }
-a:visited{
-    color:magenta;
+a:visited {
+    color: magenta;
     text-decoration: none;
 }
 a:hover {
