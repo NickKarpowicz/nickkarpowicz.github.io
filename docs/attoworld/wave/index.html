@@ -72,6 +72,7 @@ el.replaceWith(d);
     Returns:
         np.ndarray: set of aligned waves
     &#34;&#34;&#34;
+    # Contributed by Nick Karpowicz
     waves_f = np.array(waves)
 
     #windowing and offset removal
@@ -155,6 +156,7 @@ el.replaceWith(d);
     Returns:
         np.ndarray: the impuse response
     &#34;&#34;&#34;
+    # Contributed by Nick Karpowicz
     E_signal_f = np.fft.fft(E_signal)
     E_reference_f = np.fft.fft(E_reference)
     f = np.fft.fftfreq(E_signal.shape[0], dt)
@@ -209,6 +211,7 @@ impulse response function of whatever caused the waveform to change</p>
     Returns:
         np.ndarray: the impuse response
     &#34;&#34;&#34;
+    # Contributed by Nick Karpowicz
     analytic_signal = sig.hilbert(np.real(E_signal))
     analytic_reference = sig.hilbert(np.real(E_reference))
 
@@ -257,6 +260,7 @@ impulse response function of whatever caused the waveform to change</p>
     Returns:
         np.ndarray: the modified signal
     &#34;&#34;&#34;
+    # Contributed by Nick Karpowicz
     mean_signal = np.mean(signal,axis=0)
     mean_signal -= np.mean(mean_signal)
     mean_signal *= sig.windows.tukey(mean_signal.shape[0])
@@ -294,6 +298,7 @@ impulse response function of whatever caused the waveform to change</p>
     Returns:
         np.ndarray: The modified reference field
     &#34;&#34;&#34;
+    # Contributed by Nick Karpowicz
     #construct initial guess of the time, phase, and amplitude offsets
     peak_location_response = np.argmax(np.abs(response))
     peak_location_reference = np.argmax(np.abs(reference))

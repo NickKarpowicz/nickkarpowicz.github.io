@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>attoworld.numeric API documentation</title>
+<meta name="description" content="This module will contain numerical tools.">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>attoworld.numeric</code></h1>
+</header>
+<section id="section-intro">
+<p>This module will contain numerical tools.</p>
+</section>
+<section>
+<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+<dl>
+<dt><code class="name"><a title="attoworld.numeric.atomic_units" href="atomic_units.html">attoworld.numeric.atomic_units</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+<dt><code class="name"><a title="attoworld.numeric.numeric" href="numeric.html">attoworld.numeric.numeric</a></code></dt>
+<dd>
+<div class="desc"></div>
+</dd>
+</dl>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="attoworld.numeric.fornberg_stencil"><code class="name flex">
+<span>def <span class="ident">fornberg_stencil</span></span>(<span>order: int, positions: numpy.ndarray, position_out: float = 0.0) ‑> numpy.ndarray</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def fornberg_stencil(order: int, positions: np.ndarray, position_out: float = 0.0) -&gt; np.ndarray:
+    &#34;&#34;&#34;
+    Generate a finite difference stencil using the algorithm described by B. Fornberg
+    in Mathematics of Computation 51, 699-706 (1988).
+
+    Args:
+        order (int): the order of the derivative
+        positions (np.ndarray): the positions at which the functions will be evaluated in the stencil.
+    Returns:
+        np.ndarray: the finite difference stencil with weights corresponding to the positions in the positions input array
+
+    Examples:
+
+        &gt;&gt;&gt; stencil = fornberg_stencil(1, [-1,0,1])
+        &gt;&gt;&gt; print(stencil)
+        [-0.5 0. 0.5]
+    &#34;&#34;&#34;
+    # Contributed by Nick Karpowicz
+    number_of_positions = len(positions)
+    delta = np.zeros((number_of_positions, number_of_positions, order + 1), dtype=float)
+    delta[0, 0, 0] = 1.0
+    c1 = 1.0
+
+    for n in range(1, number_of_positions):
+        c2 = 1.0
+        for v in range(n):  # v from 0 to n-1
+            c3 = positions[n] - positions[v]
+            c2 *= c3
+            if n &lt;= order:
+                delta[n-1, v, n] = 0.0
+            for m in range(min(n, order) + 1):
+                if m == 0:
+                    last_element = 0.0
+                else:
+                    last_element = m * delta[n-1, v, m-1]
+                delta[n, v, m] = ((positions[n] - position_out) * delta[n-1, v, m] - last_element) / c3
+        for m in range(min(n, order) + 1):
+            if m == 0:
+                first_element = 0.0
+            else:
+                first_element = m * delta[n-1, n-1, m-1]
+            delta[n, n, m] = (c1 / c2) * (first_element - (positions[n-1] - position_out) * delta[n-1, n-1, m])
+        c1 = c2
+
+    return delta[-1, :, -1].squeeze()</code></pre>
+</details>
+<div class="desc"><p>Generate a finite difference stencil using the algorithm described by B. Fornberg
+in Mathematics of Computation 51, 699-706 (1988).</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>order</code></strong> :&ensp;<code>int</code></dt>
+<dd>the order of the derivative</dd>
+<dt><strong><code>positions</code></strong> :&ensp;<code>np.ndarray</code></dt>
+<dd>the positions at which the functions will be evaluated in the stencil.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>np.ndarray</code></dt>
+<dd>the finite difference stencil with weights corresponding to the positions in the positions input array</dd>
+</dl>
+<h2 id="examples">Examples</h2>
+<pre><code class="language-python-repl">&gt;&gt;&gt; stencil = fornberg_stencil(1, [-1,0,1])
+&gt;&gt;&gt; print(stencil)
+[-0.5 0. 0.5]
+</code></pre></div>
+</dd>
+<dt id="attoworld.numeric.interpolate"><code class="name flex">
+<span>def <span class="ident">interpolate</span></span>(<span>x_out: numpy.ndarray,<br>x_in: numpy.ndarray,<br>y_in: numpy.ndarray,<br>neighbors: int = 2,<br>extrapolate: bool = False) ‑> numpy.ndarray</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def interpolate(x_out:np.ndarray, x_in: np.ndarray, y_in:np.ndarray, neighbors: int = 2, extrapolate: bool = False) -&gt; np.ndarray:
+    &#34;&#34;&#34;
+    Use a Fornberg stencil containing a specified number of neighboring points to perform interpolation.
+
+    Contributed by Nick Karpowicz
+
+    Args:
+        x_out (np.ndarray): array of output x values, the array onto which y_in will be interpolated
+        x_in (np.ndarray): array of input x values
+        y_in (np.ndarray): array of input y values
+        neighbors (int): number of nearest neighbors to include in the interpolation
+        extrapolate (bool): unless set to true, values outside of the range of x_in will be zero
+
+    Returns:
+        np.ndarray: the interpolated y_out
+    &#34;&#34;&#34;
+    sort_order = np.argsort(x_in)
+    x_in_sorted = x_in[sort_order]
+    y_in_sorted = y_in[sort_order]
+    y_out = np.zeros(x_out.shape)
+    locations = np.searchsorted(x_in_sorted, x_out, side=&#39;left&#39;)
+
+    def interpolate_front_edge(x):
+        stencil = fornberg_stencil(
+            order = 0,
+            positions = x_in_sorted[0:(2*neighbors)],
+            position_out=x)
+        return np.sum(stencil * y_in_sorted[0:(2*neighbors)])
+
+    def interpolate_rear_edge(x):
+        stencil = fornberg_stencil(
+            order = 0,
+            positions = x_in_sorted[(-1 - 2*neighbors)::],
+            position_out=x)
+        return np.sum(stencil * y_in_sorted[(-1 - 2*neighbors)::])
+
+    def interpolate_point(x, location):
+
+        if (((location == 0) and x != x_in_sorted[0]) or (location &gt;= len(x_in_sorted))):
+            #points outside the range of x_in (extrapolation)
+            if extrapolate:
+                if location == 0:
+                    return interpolate_front_edge(x)
+                else:
+                    return interpolate_rear_edge(x)
+            else:
+                return 0.0
+
+        elif x == x_in_sorted[location]:
+            #case if x is exactly in the x_in array
+            #if multiple points match, return average
+            return np.mean(y_in_sorted[location==x_in_sorted])
+
+        elif location &lt; neighbors:
+            #use modified front-edge interp
+            return interpolate_front_edge(x)
+
+        elif location &gt;= (len(x_in_sorted) - neighbors):
+            #use modified rear-edge interp
+            return interpolate_rear_edge(x)
+        else:
+            #normal interior point
+            stencil = fornberg_stencil(
+                order = 0,
+                positions = x_in_sorted[(location-neighbors):(location + neighbors)],
+                position_out=x)
+            return np.sum(stencil * y_in_sorted[(location-neighbors):(location + neighbors)])
+
+    for _i in range(len(x_out)):
+        y_out[_i] = interpolate_point(x_out[_i], locations[_i])
+
+    return y_out</code></pre>
+</details>
+<div class="desc"><p>Use a Fornberg stencil containing a specified number of neighboring points to perform interpolation.</p>
+<p>Contributed by Nick Karpowicz</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>x_out</code></strong> :&ensp;<code>np.ndarray</code></dt>
+<dd>array of output x values, the array onto which y_in will be interpolated</dd>
+<dt><strong><code>x_in</code></strong> :&ensp;<code>np.ndarray</code></dt>
+<dd>array of input x values</dd>
+<dt><strong><code>y_in</code></strong> :&ensp;<code>np.ndarray</code></dt>
+<dd>array of input y values</dd>
+<dt><strong><code>neighbors</code></strong> :&ensp;<code>int</code></dt>
+<dd>number of nearest neighbors to include in the interpolation</dd>
+<dt><strong><code>extrapolate</code></strong> :&ensp;<code>bool</code></dt>
+<dd>unless set to true, values outside of the range of x_in will be zero</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>np.ndarray</code></dt>
+<dd>the interpolated y_out</dd>
+</dl></div>
+</dd>
+<dt id="attoworld.numeric.uniform_derivative"><code class="name flex">
+<span>def <span class="ident">uniform_derivative</span></span>(<span>data: numpy.ndarray,<br>order: int = 1,<br>neighbors: int = 1,<br>boundary: str = 'internal') ‑> numpy.ndarray</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def uniform_derivative(data: np.ndarray, order: int = 1, neighbors: int = 1, boundary: str = &#39;internal&#39;) -&gt; np.ndarray:
+    &#34;&#34;&#34;
+    Use a Fornberg stencil to take a derivative of arbitrary order and accuracy, handling the edge
+    by using modified stencils that only use internal points.
+
+    Args:
+        data (np.ndarray): the data whose derivative should be taken
+        order (int): the order of the derivative
+        neighbors (int): the number of nearest neighbors to consider.
+        boundary (str): How to treat the boundary: &#39;internal&#39; will use only internal points (default). &#39;periodic&#39; will assume periodic boundary. &#39;zero&#39; will assume the data is zero outsize the grid.
+
+    Returns:
+        np.ndarray: the derivative
+    &#34;&#34;&#34;
+
+    positions = np.array(range(-neighbors,neighbors+1))
+    stencil = fornberg_stencil(order, positions)
+    derivative = np.convolve(data, np.flip(stencil), mode=&#39;same&#39;)
+
+    match boundary:
+        case &#39;zero&#39;:
+            return derivative
+        case &#39;periodic&#39;:
+            boundary_array = np.concatenate((data[-2*neighbors::],data[0:(2*neighbors + 1)]))
+            for _i in range(2*neighbors + 1):
+                derivative[-neighbors + _i] = np.sum(boundary_array[_i:(_i + 2*neighbors + 1)] * stencil)
+            return derivative
+        case &#39;internal&#39;:
+            # increase number of included neighbors to improve accuracy
+            neighbors += 1
+            positions = np.array(range(-neighbors,neighbors+1))
+            def corrected_point_top(index: int):
+                boundary_stencil = fornberg_stencil(order, positions + neighbors - index)
+                return np.sum(boundary_stencil*data[0:len(positions)])
+
+            def corrected_point_bottom(index: int):
+                boundary_stencil = fornberg_stencil(order, positions-neighbors+index)
+                return np.sum(boundary_stencil*data[(-len(positions))::])
+
+            for _i in range(neighbors):
+                derivative[_i] = corrected_point_top(_i)
+                derivative[-1 -_i] = corrected_point_bottom(_i)
+
+    return derivative</code></pre>
+</details>
+<div class="desc"><p>Use a Fornberg stencil to take a derivative of arbitrary order and accuracy, handling the edge
+by using modified stencils that only use internal points.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>data</code></strong> :&ensp;<code>np.ndarray</code></dt>
+<dd>the data whose derivative should be taken</dd>
+<dt><strong><code>order</code></strong> :&ensp;<code>int</code></dt>
+<dd>the order of the derivative</dd>
+<dt><strong><code>neighbors</code></strong> :&ensp;<code>int</code></dt>
+<dd>the number of nearest neighbors to consider.</dd>
+<dt><strong><code>boundary</code></strong> :&ensp;<code>str</code></dt>
+<dd>How to treat the boundary: 'internal' will use only internal points (default). 'periodic' will assume periodic boundary. 'zero' will assume the data is zero outsize the grid.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>np.ndarray</code></dt>
+<dd>the derivative</dd>
+</dl></div>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="attoworld.numeric.AtomicUnits"><code class="flex name class">
+<span>class <span class="ident">AtomicUnits</span></span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class AtomicUnits:
+  &#34;&#34;&#34;Defines various physical constants in atomic units.
+
+  Attributes:
+    meter: Atomic unit of length in meters.
+    nm: Atomic unit of length in nanometers.
+    second: Atomic unit of time in seconds.
+    fs: Atomic unit of time in femtoseconds.
+    Joule: Atomic unit of energy in Joules.
+    eV: Atomic unit of energy in electronvolts.
+    Volts_per_meter: Atomic unit of electric field in V/m.
+    Volts_per_Angstrom: Atomic unit of electric field in V/Angström.
+    speed_of_light: Vacuum speed of light in atomic units.
+    Coulomb: Atomic unit of electric charge in Coulombs.
+    PW_per_cm2_au: PW/cm^2 in atomic units.
+  &#34;&#34;&#34;
+  meter: float = 5.2917720859e-11
+  nm: float = 5.2917720859e-2
+  second: float = 2.418884328e-17
+  fs: float = 2.418884328e-2
+  Joule: float = 4.359743935e-18
+  eV: float = 27.21138383
+  Volts_per_meter: float = 5.142206313e+11
+  Volts_per_Angstrom: float = 51.42206313
+  speed_of_light: float = 137.036
+  Coulomb: float = 1.60217646e-19
+  PW_per_cm2_au: float = 0.1553661415</code></pre>
+</details>
+<div class="desc"><p>Defines various physical constants in atomic units.</p>
+<h2 id="attributes">Attributes</h2>
+<dl>
+<dt><strong><code>meter</code></strong></dt>
+<dd>Atomic unit of length in meters.</dd>
+<dt><strong><code>nm</code></strong></dt>
+<dd>Atomic unit of length in nanometers.</dd>
+<dt><strong><code>second</code></strong></dt>
+<dd>Atomic unit of time in seconds.</dd>
+<dt><strong><code>fs</code></strong></dt>
+<dd>Atomic unit of time in femtoseconds.</dd>
+<dt><strong><code>Joule</code></strong></dt>
+<dd>Atomic unit of energy in Joules.</dd>
+<dt><strong><code>eV</code></strong></dt>
+<dd>Atomic unit of energy in electronvolts.</dd>
+<dt><strong><code>Volts_per_meter</code></strong></dt>
+<dd>Atomic unit of electric field in V/m.</dd>
+<dt><strong><code>Volts_per_Angstrom</code></strong></dt>
+<dd>Atomic unit of electric field in V/Angström.</dd>
+<dt><strong><code>speed_of_light</code></strong></dt>
+<dd>Vacuum speed of light in atomic units.</dd>
+<dt><strong><code>Coulomb</code></strong></dt>
+<dd>Atomic unit of electric charge in Coulombs.</dd>
+<dt><strong><code>PW_per_cm2_au</code></strong></dt>
+<dd>PW/cm^2 in atomic units.</dd>
+</dl></div>
+<h3>Class variables</h3>
+<dl>
+<dt id="attoworld.numeric.AtomicUnits.Coulomb"><code class="name">var <span class="ident">Coulomb</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="attoworld.numeric.AtomicUnits.Joule"><code class="name">var <span class="ident">Joule</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="attoworld.numeric.AtomicUnits.PW_per_cm2_au"><code class="name">var <span class="ident">PW_per_cm2_au</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="attoworld.numeric.AtomicUnits.Volts_per_Angstrom"><code class="name">var <span class="ident">Volts_per_Angstrom</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="attoworld.numeric.AtomicUnits.Volts_per_meter"><code class="name">var <span class="ident">Volts_per_meter</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="attoworld.numeric.AtomicUnits.eV"><code class="name">var <span class="ident">eV</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="attoworld.numeric.AtomicUnits.fs"><code class="name">var <span class="ident">fs</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="attoworld.numeric.AtomicUnits.meter"><code class="name">var <span class="ident">meter</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="attoworld.numeric.AtomicUnits.nm"><code class="name">var <span class="ident">nm</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="attoworld.numeric.AtomicUnits.second"><code class="name">var <span class="ident">second</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+<dt id="attoworld.numeric.AtomicUnits.speed_of_light"><code class="name">var <span class="ident">speed_of_light</span> : float</code></dt>
+<dd>
+<div class="desc"><p>The type of the None singleton.</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="attoworld" href="../index.html">attoworld</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-submodules">Sub-modules</a></h3>
+<ul>
+<li><code><a title="attoworld.numeric.atomic_units" href="atomic_units.html">attoworld.numeric.atomic_units</a></code></li>
+<li><code><a title="attoworld.numeric.numeric" href="numeric.html">attoworld.numeric.numeric</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="attoworld.numeric.fornberg_stencil" href="#attoworld.numeric.fornberg_stencil">fornberg_stencil</a></code></li>
+<li><code><a title="attoworld.numeric.interpolate" href="#attoworld.numeric.interpolate">interpolate</a></code></li>
+<li><code><a title="attoworld.numeric.uniform_derivative" href="#attoworld.numeric.uniform_derivative">uniform_derivative</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="attoworld.numeric.AtomicUnits" href="#attoworld.numeric.AtomicUnits">AtomicUnits</a></code></h4>
+<ul class="two-column">
+<li><code><a title="attoworld.numeric.AtomicUnits.Coulomb" href="#attoworld.numeric.AtomicUnits.Coulomb">Coulomb</a></code></li>
+<li><code><a title="attoworld.numeric.AtomicUnits.Joule" href="#attoworld.numeric.AtomicUnits.Joule">Joule</a></code></li>
+<li><code><a title="attoworld.numeric.AtomicUnits.PW_per_cm2_au" href="#attoworld.numeric.AtomicUnits.PW_per_cm2_au">PW_per_cm2_au</a></code></li>
+<li><code><a title="attoworld.numeric.AtomicUnits.Volts_per_Angstrom" href="#attoworld.numeric.AtomicUnits.Volts_per_Angstrom">Volts_per_Angstrom</a></code></li>
+<li><code><a title="attoworld.numeric.AtomicUnits.Volts_per_meter" href="#attoworld.numeric.AtomicUnits.Volts_per_meter">Volts_per_meter</a></code></li>
+<li><code><a title="attoworld.numeric.AtomicUnits.eV" href="#attoworld.numeric.AtomicUnits.eV">eV</a></code></li>
+<li><code><a title="attoworld.numeric.AtomicUnits.fs" href="#attoworld.numeric.AtomicUnits.fs">fs</a></code></li>
+<li><code><a title="attoworld.numeric.AtomicUnits.meter" href="#attoworld.numeric.AtomicUnits.meter">meter</a></code></li>
+<li><code><a title="attoworld.numeric.AtomicUnits.nm" href="#attoworld.numeric.AtomicUnits.nm">nm</a></code></li>
+<li><code><a title="attoworld.numeric.AtomicUnits.second" href="#attoworld.numeric.AtomicUnits.second">second</a></code></li>
+<li><code><a title="attoworld.numeric.AtomicUnits.speed_of_light" href="#attoworld.numeric.AtomicUnits.speed_of_light">speed_of_light</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>

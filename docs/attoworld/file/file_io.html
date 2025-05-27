@@ -62,6 +62,7 @@ el.replaceWith(d);
         time_delay: array of time delay values
         signal: signals corresponding to the time delays
     &#34;&#34;&#34;
+    # Contributed by Nick Karpowicz
     datablob = sio.loadmat(filename)
     stage_position = datablob[&#39;xdata&#39;][0,:]
     time_delay = -2e-3 * stage_position/2.9979e8

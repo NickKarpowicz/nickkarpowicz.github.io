@@ -66,6 +66,7 @@ more easily obtaining a consistent style across plots made by different co-autho
     &#34;&#34;&#34;
     Helper function to plot as an svg to have vector plots in marimo notebooks
     &#34;&#34;&#34;
+    # Contributed by Nick Karpowicz
     svg_buffer = io.StringIO()
     plt.savefig(svg_buffer, format=&#39;svg&#39;)
     return mo.Html(svg_buffer.getvalue())</code></pre>

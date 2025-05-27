@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 <meta name="generator" content="pdoc3 0.11.6">
-<title>attoworld.spectrum API documentation</title>
-<meta name="description" content="This module will contain functions related to the processing of spectra.">
+<title>attoworld.numeric.numeric API documentation</title>
+<meta name="description" content="">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
@@ -33,26 +33,92 @@ el.replaceWith(d);
 <main>
 <article id="content">
 <header>
-<h1 class="title">Module <code>attoworld.spectrum</code></h1>
+<h1 class="title">Module <code>attoworld.numeric.numeric</code></h1>
 </header>
 <section id="section-intro">
-<p>This module will contain functions related to the processing of spectra.</p>
 </section>
 <section>
-<h2 class="section-title" id="header-submodules">Sub-modules</h2>
-<dl>
-<dt><code class="name"><a title="attoworld.spectrum.spectrum" href="spectrum.html">attoworld.spectrum.spectrum</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
-</dl>
 </section>
 <section>
 </section>
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt id="attoworld.spectrum.interpolate"><code class="name flex">
+<dt id="attoworld.numeric.numeric.fornberg_stencil"><code class="name flex">
+<span>def <span class="ident">fornberg_stencil</span></span>(<span>order: int, positions: numpy.ndarray, position_out: float = 0.0) ‑> numpy.ndarray</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def fornberg_stencil(order: int, positions: np.ndarray, position_out: float = 0.0) -&gt; np.ndarray:
+    &#34;&#34;&#34;
+    Generate a finite difference stencil using the algorithm described by B. Fornberg
+    in Mathematics of Computation 51, 699-706 (1988).
+
+    Args:
+        order (int): the order of the derivative
+        positions (np.ndarray): the positions at which the functions will be evaluated in the stencil.
+    Returns:
+        np.ndarray: the finite difference stencil with weights corresponding to the positions in the positions input array
+
+    Examples:
+
+        &gt;&gt;&gt; stencil = fornberg_stencil(1, [-1,0,1])
+        &gt;&gt;&gt; print(stencil)
+        [-0.5 0. 0.5]
+    &#34;&#34;&#34;
+    # Contributed by Nick Karpowicz
+    number_of_positions = len(positions)
+    delta = np.zeros((number_of_positions, number_of_positions, order + 1), dtype=float)
+    delta[0, 0, 0] = 1.0
+    c1 = 1.0
+
+    for n in range(1, number_of_positions):
+        c2 = 1.0
+        for v in range(n):  # v from 0 to n-1
+            c3 = positions[n] - positions[v]
+            c2 *= c3
+            if n &lt;= order:
+                delta[n-1, v, n] = 0.0
+            for m in range(min(n, order) + 1):
+                if m == 0:
+                    last_element = 0.0
+                else:
+                    last_element = m * delta[n-1, v, m-1]
+                delta[n, v, m] = ((positions[n] - position_out) * delta[n-1, v, m] - last_element) / c3
+        for m in range(min(n, order) + 1):
+            if m == 0:
+                first_element = 0.0
+            else:
+                first_element = m * delta[n-1, n-1, m-1]
+            delta[n, n, m] = (c1 / c2) * (first_element - (positions[n-1] - position_out) * delta[n-1, n-1, m])
+        c1 = c2
+
+    return delta[-1, :, -1].squeeze()</code></pre>
+</details>
+<div class="desc"><p>Generate a finite difference stencil using the algorithm described by B. Fornberg
+in Mathematics of Computation 51, 699-706 (1988).</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>order</code></strong> :&ensp;<code>int</code></dt>
+<dd>the order of the derivative</dd>
+<dt><strong><code>positions</code></strong> :&ensp;<code>np.ndarray</code></dt>
+<dd>the positions at which the functions will be evaluated in the stencil.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>np.ndarray</code></dt>
+<dd>the finite difference stencil with weights corresponding to the positions in the positions input array</dd>
+</dl>
+<h2 id="examples">Examples</h2>
+<pre><code class="language-python-repl">&gt;&gt;&gt; stencil = fornberg_stencil(1, [-1,0,1])
+&gt;&gt;&gt; print(stencil)
+[-0.5 0. 0.5]
+</code></pre></div>
+</dd>
+<dt id="attoworld.numeric.numeric.interpolate"><code class="name flex">
 <span>def <span class="ident">interpolate</span></span>(<span>x_out: numpy.ndarray,<br>x_in: numpy.ndarray,<br>y_in: numpy.ndarray,<br>neighbors: int = 2,<br>extrapolate: bool = False) ‑> numpy.ndarray</span>
 </code></dt>
 <dd>
@@ -154,111 +220,76 @@ el.replaceWith(d);
 <dd>the interpolated y_out</dd>
 </dl></div>
 </dd>
-<dt id="attoworld.spectrum.transform_limited_pulse_from_spectrometer"><code class="name flex">
-<span>def <span class="ident">transform_limited_pulse_from_spectrometer</span></span>(<span>wavelengths_nm: numpy.ndarray,<br>spectrum: numpy.ndarray,<br>gate_level: float | None = None)</span>
+<dt id="attoworld.numeric.numeric.uniform_derivative"><code class="name flex">
+<span>def <span class="ident">uniform_derivative</span></span>(<span>data: numpy.ndarray,<br>order: int = 1,<br>neighbors: int = 1,<br>boundary: str = 'internal') ‑> numpy.ndarray</span>
 </code></dt>
 <dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def transform_limited_pulse_from_spectrometer(wavelengths_nm: np.ndarray, spectrum: np.ndarray, gate_level: Optional[float]=None):
-    &#34;&#34;&#34;Calculates the transform-limited pulse corresponding to a spectrum
+<pre><code class="python">def uniform_derivative(data: np.ndarray, order: int = 1, neighbors: int = 1, boundary: str = &#39;internal&#39;) -&gt; np.ndarray:
+    &#34;&#34;&#34;
+    Use a Fornberg stencil to take a derivative of arbitrary order and accuracy, handling the edge
+    by using modified stencils that only use internal points.
 
     Args:
-        wavelength_nm: the wavelengths included in the data, in nanometers
-        spectrum: the spectrum corresponding to the input wavelength scale
-        gate_level: (optional) level, relative to the maximum at which to apply a gate to the spectrum. For example, with gate_level=0.01, values less than 1% of the maximum signal will be set to zero
+        data (np.ndarray): the data whose derivative should be taken
+        order (int): the order of the derivative
+        neighbors (int): the number of nearest neighbors to consider.
+        boundary (str): How to treat the boundary: &#39;internal&#39; will use only internal points (default). &#39;periodic&#39; will assume periodic boundary. &#39;zero&#39; will assume the data is zero outsize the grid.
 
     Returns:
-        t: time vector (s)
-        pulse: the pulse intensity vs. time
+        np.ndarray: the derivative
     &#34;&#34;&#34;
-    f,spec = wavelength_to_frequency(wavelengths_nm, spectrum)
-    df = f[1]-f[0]
-    t = np.fft.fftshift(np.fft.fftfreq(f.shape[0],d=df))
-    gated_spectrum = np.array(spec)
-    if gate_level is not None:
-        gated_spectrum[spec&lt;(gate_level * np.max(spec))] = 0.0
 
-    pulse = np.fft.fftshift(
-        np.abs(
-            np.fft.ifft(
-                np.sqrt(gated_spectrum))))**2
+    positions = np.array(range(-neighbors,neighbors+1))
+    stencil = fornberg_stencil(order, positions)
+    derivative = np.convolve(data, np.flip(stencil), mode=&#39;same&#39;)
 
-    return t,pulse</code></pre>
+    match boundary:
+        case &#39;zero&#39;:
+            return derivative
+        case &#39;periodic&#39;:
+            boundary_array = np.concatenate((data[-2*neighbors::],data[0:(2*neighbors + 1)]))
+            for _i in range(2*neighbors + 1):
+                derivative[-neighbors + _i] = np.sum(boundary_array[_i:(_i + 2*neighbors + 1)] * stencil)
+            return derivative
+        case &#39;internal&#39;:
+            # increase number of included neighbors to improve accuracy
+            neighbors += 1
+            positions = np.array(range(-neighbors,neighbors+1))
+            def corrected_point_top(index: int):
+                boundary_stencil = fornberg_stencil(order, positions + neighbors - index)
+                return np.sum(boundary_stencil*data[0:len(positions)])
+
+            def corrected_point_bottom(index: int):
+                boundary_stencil = fornberg_stencil(order, positions-neighbors+index)
+                return np.sum(boundary_stencil*data[(-len(positions))::])
+
+            for _i in range(neighbors):
+                derivative[_i] = corrected_point_top(_i)
+                derivative[-1 -_i] = corrected_point_bottom(_i)
+
+    return derivative</code></pre>
 </details>
-<div class="desc"><p>Calculates the transform-limited pulse corresponding to a spectrum</p>
+<div class="desc"><p>Use a Fornberg stencil to take a derivative of arbitrary order and accuracy, handling the edge
+by using modified stencils that only use internal points.</p>
 <h2 id="args">Args</h2>
 <dl>
-<dt><strong><code>wavelength_nm</code></strong></dt>
-<dd>the wavelengths included in the data, in nanometers</dd>
-<dt><strong><code>spectrum</code></strong></dt>
-<dd>the spectrum corresponding to the input wavelength scale</dd>
-<dt><strong><code>gate_level</code></strong></dt>
-<dd>(optional) level, relative to the maximum at which to apply a gate to the spectrum. For example, with gate_level=0.01, values less than 1% of the maximum signal will be set to zero</dd>
+<dt><strong><code>data</code></strong> :&ensp;<code>np.ndarray</code></dt>
+<dd>the data whose derivative should be taken</dd>
+<dt><strong><code>order</code></strong> :&ensp;<code>int</code></dt>
+<dd>the order of the derivative</dd>
+<dt><strong><code>neighbors</code></strong> :&ensp;<code>int</code></dt>
+<dd>the number of nearest neighbors to consider.</dd>
+<dt><strong><code>boundary</code></strong> :&ensp;<code>str</code></dt>
+<dd>How to treat the boundary: 'internal' will use only internal points (default). 'periodic' will assume periodic boundary. 'zero' will assume the data is zero outsize the grid.</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <dl>
-<dt><code>t</code></dt>
-<dd>time vector (s)</dd>
-<dt><code>pulse</code></dt>
-<dd>the pulse intensity vs. time</dd>
-</dl></div>
-</dd>
-<dt id="attoworld.spectrum.wavelength_to_frequency"><code class="name flex">
-<span>def <span class="ident">wavelength_to_frequency</span></span>(<span>wavelengths_nm: numpy.ndarray,<br>spectrum: numpy.ndarray,<br>frequencies: numpy.ndarray | None = None)</span>
-</code></dt>
-<dd>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def wavelength_to_frequency(wavelengths_nm: np.ndarray, spectrum: np.ndarray, frequencies: Optional[np.ndarray]=None):
-    &#34;&#34;&#34;Convert a wavelength spectrum in W/nm into a frequency spectrum in W/THz
-
-    Args:
-        wavelength_nm (np.ndarray): the wavelengths included in the data, in nanometers
-        spectrum (np.ndarray): the spectrum corresponding to the input wavelength scale
-        frequencies: (optional) frequency vector for the output. If not specified, a vector will be calculated such that resolution and range are preserved.
-    Returns:
-        f: frequencies (Hz)
-        scaled_spectrum: the frequency-domain spectrum
-    &#34;&#34;&#34;
-    # Contributed by Nick Karpowicz
-    input_frequencies = 1e9 * constants.speed_of_light/wavelengths_nm
-
-    if frequencies is None:
-        frequency_step = np.min(np.abs(np.diff(input_frequencies)))
-        min_frequency = np.min(input_frequencies)
-        max_frequency = np.max(input_frequencies)
-        frequency_count = int(np.ceil(max_frequency-min_frequency)/frequency_step)
-        frequencies = min_frequency + frequency_step * np.array(range(0,frequency_count),dtype=float)
-
-    #apply Jakobian scaling and use W/THz
-    scaled_spectrum = 1e12 * constants.speed_of_light * spectrum / (input_frequencies**2)
-
-    indicies = np.argsort(input_frequencies)
-    scaled_spectrum = interpolate(frequencies, input_frequencies[indicies], scaled_spectrum[indicies])
-
-    return frequencies, scaled_spectrum</code></pre>
-</details>
-<div class="desc"><p>Convert a wavelength spectrum in W/nm into a frequency spectrum in W/THz</p>
-<h2 id="args">Args</h2>
-<dl>
-<dt><strong><code>wavelength_nm</code></strong> :&ensp;<code>np.ndarray</code></dt>
-<dd>the wavelengths included in the data, in nanometers</dd>
-<dt><strong><code>spectrum</code></strong> :&ensp;<code>np.ndarray</code></dt>
-<dd>the spectrum corresponding to the input wavelength scale</dd>
-<dt><strong><code>frequencies</code></strong></dt>
-<dd>(optional) frequency vector for the output. If not specified, a vector will be calculated such that resolution and range are preserved.</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><code>f</code></dt>
-<dd>frequencies (Hz)</dd>
-<dt><code>scaled_spectrum</code></dt>
-<dd>the frequency-domain spectrum</dd>
+<dt><code>np.ndarray</code></dt>
+<dd>the derivative</dd>
 </dl></div>
 </dd>
 </dl>
@@ -273,19 +304,14 @@ el.replaceWith(d);
 <ul id="index">
 <li><h3>Super-module</h3>
 <ul>
-<li><code><a title="attoworld" href="../index.html">attoworld</a></code></li>
-</ul>
-</li>
-<li><h3><a href="#header-submodules">Sub-modules</a></h3>
-<ul>
-<li><code><a title="attoworld.spectrum.spectrum" href="spectrum.html">attoworld.spectrum.spectrum</a></code></li>
+<li><code><a title="attoworld.numeric" href="index.html">attoworld.numeric</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
-<li><code><a title="attoworld.spectrum.interpolate" href="#attoworld.spectrum.interpolate">interpolate</a></code></li>
-<li><code><a title="attoworld.spectrum.transform_limited_pulse_from_spectrometer" href="#attoworld.spectrum.transform_limited_pulse_from_spectrometer">transform_limited_pulse_from_spectrometer</a></code></li>
-<li><code><a title="attoworld.spectrum.wavelength_to_frequency" href="#attoworld.spectrum.wavelength_to_frequency">wavelength_to_frequency</a></code></li>
+<li><code><a title="attoworld.numeric.numeric.fornberg_stencil" href="#attoworld.numeric.numeric.fornberg_stencil">fornberg_stencil</a></code></li>
+<li><code><a title="attoworld.numeric.numeric.interpolate" href="#attoworld.numeric.numeric.interpolate">interpolate</a></code></li>
+<li><code><a title="attoworld.numeric.numeric.uniform_derivative" href="#attoworld.numeric.numeric.uniform_derivative">uniform_derivative</a></code></li>
 </ul>
 </li>
 </ul>
