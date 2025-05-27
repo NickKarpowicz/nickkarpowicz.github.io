@@ -1,0 +1,2776 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
+<meta name="generator" content="pdoc3 0.11.6">
+<title>attoworld.wave.trace_handler API documentation</title>
+<meta name="description" content="">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
+<style>:root{--highlight-color:#fe9}.flex{display:flex !important}body{line-height:1.5em}#content{padding:20px}#sidebar{padding:1.5em;overflow:hidden}#sidebar > *:last-child{margin-bottom:2cm}.http-server-breadcrumbs{font-size:130%;margin:0 0 15px 0}#footer{font-size:.75em;padding:5px 30px;border-top:1px solid #ddd;text-align:right}#footer p{margin:0 0 0 1em;display:inline-block}#footer p:last-child{margin-right:30px}h1,h2,h3,h4,h5{font-weight:300}h1{font-size:2.5em;line-height:1.1em}h2{font-size:1.75em;margin:2em 0 .50em 0}h3{font-size:1.4em;margin:1.6em 0 .7em 0}h4{margin:0;font-size:105%}h1:target,h2:target,h3:target,h4:target,h5:target,h6:target{background:var(--highlight-color);padding:.2em 0}a{color:#058;text-decoration:none;transition:color .2s ease-in-out}a:visited{color:#503}a:hover{color:#b62}.title code{font-weight:bold}h2[id^="header-"]{margin-top:2em}.ident{color:#900;font-weight:bold}pre code{font-size:.8em;line-height:1.4em;padding:1em;display:block}code{background:#f3f3f3;font-family:"DejaVu Sans Mono",monospace;padding:1px 4px;overflow-wrap:break-word}h1 code{background:transparent}pre{border-top:1px solid #ccc;border-bottom:1px solid #ccc;margin:1em 0}#http-server-module-list{display:flex;flex-flow:column}#http-server-module-list div{display:flex}#http-server-module-list dt{min-width:10%}#http-server-module-list p{margin-top:0}.toc ul,#index{list-style-type:none;margin:0;padding:0}#index code{background:transparent}#index h3{border-bottom:1px solid #ddd}#index ul{padding:0}#index h4{margin-top:.6em;font-weight:bold}@media (min-width:200ex){#index .two-column{column-count:2}}@media (min-width:300ex){#index .two-column{column-count:3}}dl{margin-bottom:2em}dl dl:last-child{margin-bottom:4em}dd{margin:0 0 1em 3em}#header-classes + dl > dd{margin-bottom:3em}dd dd{margin-left:2em}dd p{margin:10px 0}.name{background:#eee;font-size:.85em;padding:5px 10px;display:inline-block;min-width:40%}.name:hover{background:#e0e0e0}dt:target .name{background:var(--highlight-color)}.name > span:first-child{white-space:nowrap}.name.class > span:nth-child(2){margin-left:.4em}.inherited{color:#999;border-left:5px solid #eee;padding-left:1em}.inheritance em{font-style:normal;font-weight:bold}.desc h2{font-weight:400;font-size:1.25em}.desc h3{font-size:1em}.desc dt code{background:inherit}.source > summary,.git-link-div{color:#666;text-align:right;font-weight:400;font-size:.8em;text-transform:uppercase}.source summary > *{white-space:nowrap;cursor:pointer}.git-link{color:inherit;margin-left:1em}.source pre{max-height:500px;overflow:auto;margin:0}.source pre code{font-size:12px;overflow:visible;min-width:max-content}.hlist{list-style:none}.hlist li{display:inline}.hlist li:after{content:',\2002'}.hlist li:last-child:after{content:none}.hlist .hlist{display:inline;padding-left:1em}img{max-width:100%}td{padding:0 .5em}.admonition{padding:.1em 1em;margin:1em 0}.admonition-title{font-weight:bold}.admonition.note,.admonition.info,.admonition.important{background:#aef}.admonition.todo,.admonition.versionadded,.admonition.tip,.admonition.hint{background:#dfd}.admonition.warning,.admonition.versionchanged,.admonition.deprecated{background:#fd4}.admonition.error,.admonition.danger,.admonition.caution{background:lightpink}</style>
+<style media="screen and (min-width: 700px)">@media screen and (min-width:700px){#sidebar{width:30%;height:100vh;overflow:auto;position:sticky;top:0}#content{width:70%;max-width:100ch;padding:3em 4em;border-left:1px solid #ddd}pre code{font-size:1em}.name{font-size:1em}main{display:flex;flex-direction:row-reverse;justify-content:flex-end}.toc ul ul,#index ul ul{padding-left:1em}.toc > ul > li{margin-top:.5em}}</style>
+<style media="print">@media print{#sidebar h1{page-break-before:always}.source{display:none}}@media print{*{background:transparent !important;color:#000 !important;box-shadow:none !important;text-shadow:none !important}a[href]:after{content:" (" attr(href) ")";font-size:90%}a[href][title]:after{content:none}abbr[title]:after{content:" (" attr(title) ")"}.ir a:after,a[href^="javascript:"]:after,a[href^="#"]:after{content:""}pre,blockquote{border:1px solid #999;page-break-inside:avoid}thead{display:table-header-group}tr,img{page-break-inside:avoid}img{max-width:100% !important}@page{margin:0.5cm}p,h2,h3{orphans:3;widows:3}h1,h2,h3,h4,h5,h6{page-break-after:avoid}}</style>
+<script defer src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js" integrity="sha512-D9gUyxqja7hBtkWpPWGt9wfbfaMGVt9gnyCvYa+jojwwPHLCzUm5i8rpk7vD7wNee9bA35eYIjobYPaQuKS1MQ==" crossorigin></script>
+<script>window.addEventListener('DOMContentLoaded', () => {
+hljs.configure({languages: ['bash', 'css', 'diff', 'graphql', 'ini', 'javascript', 'json', 'plaintext', 'python', 'python-repl', 'rust', 'shell', 'sql', 'typescript', 'xml', 'yaml']});
+hljs.highlightAll();
+/* Collapse source docstrings */
+setTimeout(() => {
+[...document.querySelectorAll('.hljs.language-python > .hljs-string')]
+.filter(el => el.innerHTML.length > 200 && ['"""', "'''"].includes(el.innerHTML.substring(0, 3)))
+.forEach(el => {
+let d = document.createElement('details');
+d.classList.add('hljs-string');
+d.innerHTML = '<summary>"""</summary>' + el.innerHTML.substring(3);
+el.replaceWith(d);
+});
+}, 100);
+})</script>
+</head>
+<body>
+<main>
+<article id="content">
+<header>
+<h1 class="title">Module <code>attoworld.wave.trace_handler</code></h1>
+</header>
+<section id="section-intro">
+</section>
+<section>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
+<dl>
+<dt id="attoworld.wave.trace_handler.asymmetric_tukey_f"><code class="name flex">
+<span>def <span class="ident">asymmetric_tukey_f</span></span>(<span>x: float, edge1: float, edge2: float, edge1_width: float, edge2_width: float)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def asymmetric_tukey_f(x: float, edge1: float, edge2: float, edge1_width: float, edge2_width: float):
+
+    if edge1_width &lt; 0 or edge2_width &lt; 0:
+        edge1_width = 0
+        edge2_width = 0
+        print(&#39;Warning: negative tukey edge width; rectangular window computed&#39;)
+    if abs(edge1_width) + abs(edge2_width) &gt; 2 * abs(edge2 - edge1):
+        raise Exception(&#39;Error: tukey edge width larger than admissible&#39;)
+    if edge2 &lt;= edge1:
+        e1 = edge2
+        e2 = edge1
+        w1 = edge2_width
+        w2 = edge1_width
+    elif edge1 &lt; edge2:
+        e1 = edge1
+        e2 = edge2
+        w1 = edge1_width
+        w2 = edge2_width
+    xmin = e1 - w1/2
+    xmax = e2 + w2/2
+    if x &lt; xmin or x &gt; xmax:
+        y = 0
+    elif xmin &lt;= x and x &lt; xmin + w1:
+        y = (1-np.cos((x-xmin)*np.pi/w1))/2
+    elif xmin + w1 &lt;= x and x &lt;= xmax - w2:
+        y = 1
+    elif xmax - w2 &lt; x and x &lt;= xmax:
+        y = (1-np.cos((x-xmax)*np.pi/w2))/2
+    else:
+        print (&#39;x, xmax, xmin, w1, w2: &#39;, x, xmax, xmin, w1, w2)
+        raise ValueError(&#39;in tukey_f, x could not be assigned correctly to the sub intervals, might it (or the other parameters) be NaN?&#39;)
+    return y</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.asymmetric_tukey_window"><code class="name flex">
+<span>def <span class="ident">asymmetric_tukey_window</span></span>(<span>x, edge1: float, edge2: float, edge1_width: float, edge2_width: float)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def asymmetric_tukey_window(x, edge1: float, edge2: float, edge1_width: float, edge2_width: float):
+
+    if isinstance(x, np.ndarray):
+        y = []
+        for xi in x:
+            y.append(asymmetric_tukey_f(xi, edge1, edge2, edge1_width, edge2_width))
+        y = np.array(y)
+    elif isinstance(x, list):
+        y = []
+        for xi in x:
+            y.append(asymmetric_tukey_f(xi, edge1, edge2, edge1_width, edge2_width))
+    elif isinstance(x, float):
+        y = asymmetric_tukey_f(x, edge1, edge2, edge1_width, edge2_width)
+    else:
+        raise TypeError(&#39;in function tukey window x is neither np array nor list nor float&#39;)
+    return y</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.check_equal_length"><code class="name flex">
+<span>def <span class="ident">check_equal_length</span></span>(<span>*arg)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def check_equal_length(*arg):
+    n = len(arg[0])
+    for v in arg:
+        if len(v) != n:
+            print(v)
+            print(&#39;Error: vector size mismatch&#39;)
+            raise Exception(&#39;Vector size mismatch&#39;)</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.fourier_transform"><code class="name flex">
+<span>def <span class="ident">fourier_transform</span></span>(<span>TimeV, FieldV)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def fourier_transform(TimeV, FieldV):   # complex!!!
+
+    freq = np.fft.fftfreq(TimeV.size, d=TimeV[1]-TimeV[0])
+    fft = np.fft.fft(FieldV)
+    return freq, fft</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.inverse_fourier_transform"><code class="name flex">
+<span>def <span class="ident">inverse_fourier_transform</span></span>(<span>freq, fullSpectrum)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def inverse_fourier_transform(freq, fullSpectrum):  # complex!!!
+
+    timeV = np.fft.fftfreq(len(freq), freq[1]-freq[0])
+    if len(timeV)%2 == 0:
+        timeV = np.concatenate((timeV[int(len(timeV)/2):], timeV[:int(len(timeV)/2)]))
+    else:
+        timeV = np.concatenate((timeV[int((len(timeV)+1)/2):], timeV[:int((len(timeV)+1)/2)]))
+    fieldV = np.fft.ifft(fullSpectrum)
+
+    return timeV, fieldV</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.zero_padding"><code class="name flex">
+<span>def <span class="ident">zero_padding</span></span>(<span>signalTimeV, signalV, fsExtension=50)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def zero_padding(signalTimeV, signalV, fsExtension=50):
+    timestep = signalTimeV[1] - signalTimeV[0]
+    nPointsExtension = int(fsExtension / timestep)
+    fsExtension = nPointsExtension * timestep
+    newTimeV = np.linspace(signalTimeV[0] - fsExtension, signalTimeV[0] - timestep, nPointsExtension)
+    newTimeV = np.append(newTimeV, signalTimeV[:])
+    newTimeV = np.append(newTimeV,
+                         np.linspace(signalTimeV[-1] + timestep, signalTimeV[-1] + fsExtension, nPointsExtension)[:])
+
+    newSignalV = np.zeros(nPointsExtension)
+    newSignalV = np.append(newSignalV, signalV[:])
+    newSignalV = np.append(newSignalV, np.zeros(nPointsExtension)[:])
+
+    trace_length = signalTimeV[-1] - signalTimeV[0]
+    trace_center = signalTimeV[0] + trace_length / 2
+    newSignalV = newSignalV * np.exp(-(newTimeV - trace_center) ** 10 / (trace_length * 9 / 20) ** 10)
+
+    return newTimeV, newSignalV</code></pre>
+</details>
+<div class="desc"></div>
+</dd>
+</dl>
+</section>
+<section>
+<h2 class="section-title" id="header-classes">Classes</h2>
+<dl>
+<dt id="attoworld.wave.trace_handler.MultiTraceHandler"><code class="flex name class">
+<span>class <span class="ident">MultiTraceHandler</span></span>
+<span>(</span><span>filenameList=None,<br>filenameSpectrumList=None,<br>timeList=None,<br>fieldList=None,<br>stdevList=None,<br>wvlList=None,<br>spectrumList=None,<br>traceHandlerList=None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class MultiTraceHandler:
+    &#34;&#34;&#34;Initializes and stores multiple TraceHandler objects. It is used to plot multiple traces in a single graph, compare them, and perform operations between them
+
+    ALL TIMES IN FS, ALL WAVELENGTHS IN NM, ALL FREQUENCIES IN PHz
+
+    All stored traces are accessible as TraceHandler object in the member:
+    self.traceHandlers: list of traceHandler objects
+    &#34;&#34;&#34;
+    def __init__(self, filenameList=None, filenameSpectrumList=None,
+                 timeList=None, fieldList=None, stdevList=None, wvlList=None, spectrumList=None, traceHandlerList=None):
+        &#34;&#34;&#34;constructor of MultiTraceHandler.
+
+        One of the following arguments must be provided:
+        - filenameList: list of filenames containing the field traces (see TraceHandler constructor)
+        - timeList AND fieldList: list of time arrays and field arrays (see TraceHandler constructor)
+        - traceHandlerList: list of TraceHandler objects
+
+        ARGUMENTS (technically all optional):
+            filenameList : list of filenames containing the field traces (see TraceHandler constructor)
+            filenameSpectrumList : list of filenames containing the spectrum traces (spectrometer data; see TraceHandler constructor)
+            timeList : list of time arrays (see TraceHandler constructor)
+            fieldList : list of field arrays (see TraceHandler constructor)
+            stdevList : list of standard deviation arrays (see TraceHandler constructor)
+            wvlList : list of wavelength arrays (spectrometer data; see TraceHandler constructor)
+            spectrumList : list of spectrum arrays (spectrometer data; see TraceHandler constructor)
+            traceHandlerList : list of TraceHandler objects
+            &#34;&#34;&#34;
+
+        self.fsZeroPadding = 50
+        self.traceHandlers = []
+        if filenameList is not None:
+            for i in range(len(filenameList)):
+                if filenameSpectrumList is not None:
+                    self.traceHandlers.append(TraceHandler(filename=filenameList[i], filename_spectrum=filenameSpectrumList[i]))
+                else:
+                    self.traceHandlers.append(TraceHandler(filename=filenameList[i]))
+        elif timeList is not None and fieldList is not None:
+            if stdevList is None:
+                stdevList = [None]*len(timeList)
+            if wvlList is None:
+                wvlList = [None]*len(timeList)
+            if spectrumList is None:
+                spectrumList = [None]*len(timeList)
+            check_equal_length(timeList, fieldList, stdevList, wvlList, spectrumList)
+            for i in range(len(timeList)):
+                    self.traceHandlers.append(TraceHandler(time=timeList[i], field=fieldList[i], stdev=stdevList[i],
+                                                           wvl=wvlList[i], spectrum=spectrumList[i]))
+        elif traceHandlerList is not None:
+            for i in range(len(traceHandlerList)):
+                if isinstance(traceHandlerList[i], TraceHandler):
+                    self.traceHandlers.append(traceHandlerList[i])
+                else:
+                    raise ValueError(&#39;in function MultiTraceHandler.__init__() traceHandlerList is not a list of TraceHandler objects\n&#39;)
+        else:
+            raise ValueError(&#39;in function MultiTraceHandler.__init__() too many arguments were None\n&#39;
+                             &#39;probably the constructor was erroneously used with no or too few arguments\n&#39;
+                             &#39;use either filenameList and filenameSpectrumList or timeList, fieldList or traceHandlerList\n&#39;)
+
+
+    def append_trace(self, filename=None, filename_spectrum=None, timeV=None, fieldV=None, stdevV=None, wvl=None, spectrum=None, traceHandler=None):
+        &#34;&#34;&#34;append a new trace to the list. Usual rules apply
+
+        ARGUMENTS (Optional, see TraceHandler&#39;s and MultiTraceHandler&#39;s constructors):
+            filename
+            filename_spectrum
+            timeV
+            fieldV
+            stdevV
+            wvl
+            spectrum
+            traceHandler
+        &#34;&#34;&#34;
+        if filename_spectrum is not None and filename is not None:
+            self.traceHandlers.append(TraceHandler(filename, filename_spectrum))
+        elif filename is not None:
+            self.traceHandlers.append(TraceHandler(filename))
+        elif timeV is not None and fieldV is not None:
+            self.traceHandlers.append(TraceHandler(time=timeV, field=fieldV, stdev=stdevV, wvl=wvl, spectrum=spectrum))
+        elif traceHandler is not None:
+            if isinstance(traceHandler, TraceHandler):
+                self.traceHandlers.append(traceHandler)
+            else:
+                raise ValueError(&#39;in function MultiTraceHandler.append_trace() traceHandler is not a TraceHandler object\n&#39;)
+        else:
+            raise ValueError(&#39;in function MultiTraceHandler.append_trace() filename and filename_spectrum cannot be None\n&#39;
+                             &#39;it might be that the function was erroneously used with no arguments\n&#39;)
+
+    def flip_trace(self, index: int):
+        &#34;&#34;&#34;flips the trace number &#39;index&#39;
+
+        ARGUMENTS:
+            index: int
+        &#34;&#34;&#34;
+        if index &gt;= len(self.traceHandlers):
+            raise ValueError(&#39;in function MultiTraceHandler.flip() index is out of range\n&#39;)
+        self.traceHandlers[index].fieldV = -self.traceHandlers[index].fieldV
+        self.traceHandlers[index].fftFieldV = -self.traceHandlers[index].fftFieldV
+        self.traceHandlers[index].complexFieldV= -self.traceHandlers[index].complexFieldV
+
+    def tukey_bandpass(self, lowWavelengthEdge, upWavelengthEdge, lowEdgeWidth, highEdgeWidth):
+        &#34;&#34;&#34;applies a bandpass filter the traces in the frequency domain using a tukey window. See traceHandler&#39;s docs&#34;&#34;&#34;
+        for i in range(len(self.traceHandlers)):
+            self.traceHandlers[i].fft_tukey_bandpass(lowWavelengthEdge, upWavelengthEdge, lowEdgeWidth, highEdgeWidth)
+
+    def apply_spectrum(self, wvl = None , spectrum = None, CEP_shift = 0., stripZeroPadding = True):
+        &#34;&#34;&#34;applies spectrum to the phase of the pulse. See traceHandler&#39;s docs&#34;&#34;&#34;
+        for i in range(len(self.traceHandlers)):
+            self.traceHandlers[i].apply_spectrum(wvl, spectrum, CEP_shift, stripZeroPadding)
+
+    def plot_traces(self, low_lim=None, up_lim=None, labels=None, delay_shift=None, offset: float=2., errorbar: bool=False, normalize: bool=True):
+        &#34;&#34;&#34;plots all traces.
+
+        ARGUMENTS (Optional):
+            low_lim
+            up_lim
+            labels = list of labels for the legend
+            delay_shift = list of delay offsets (one per trace)
+            offset: float (y-axis offset between traces)
+            errorbar: bool = whether to plot errors. Default False
+            normalize: bool. Default True
+        &#34;&#34;&#34;
+        fig, ax = plt.subplots(figsize=[figureSize[0], figureSize[1]*2])
+        if delay_shift is None:
+            delay_shift = [0.]*len(self.traceHandlers)
+        check_equal_length(delay_shift, self.traceHandlers)
+        clr_rgb = matplotlib.colormaps[&#39;plasma&#39;]
+        clr_list = np.linspace(0, 1, len(self.traceHandlers), endpoint=False)
+        for i in range(len(self.traceHandlers)):
+            if normalize:
+                norm_plot = self.traceHandlers[i].normalization_trace
+            else:
+                norm_plot = 1
+            line_color = clr_rgb(clr_list[i])
+            t, field = self.traceHandlers[i].get_trace()
+            stdev_field = self.traceHandlers[i].get_stdev()
+            if errorbar and stdev_field is not None:
+                ax.fill_between(t-delay_shift[i], offset*i + (field-stdev_field)/norm_plot,
+                                offset*i + (field+stdev_field)/norm_plot,
+                                label=&#39;_nolegend_&#39;, color=line_color, alpha=0.2)
+            ax.plot(t-delay_shift[i], offset*i + field/norm_plot, label=&#39;Trace &#39;+str(i),
+                    color=line_color, linewidth=lineWidth)
+        ax.set_xlabel(&#39;Time (fs)&#39;, fontsize=fontSize)
+        ax.set_ylabel(&#39;Field (a.u.)&#39;, fontsize=fontSize)
+        ax.set_title(&#39;Field traces&#39;, fontsize=fontSize)
+        plt.xticks(fontsize=tickSize)
+        plt.yticks(fontsize=tickSize)
+        if labels is not None:
+            handles, labels_dump = ax.get_legend_handles_labels()
+            plt.legend(handles[::-1], labels[::-1], prop={&#39;size&#39;: legendFontSize}, loc=&#39;upper left&#39;)
+        else:
+            pass
+        if low_lim is not None and up_lim is not None:
+            ax.set_xlim(low_lim, up_lim)
+        plt.show()
+
+    def plot_spectra(self, low_lim=50, up_lim=1000, labels=None, offset=0.015):
+        &#34;&#34;&#34;plots all spectra. 
+
+        ARGUMENTS (Optional, See plot_traces() docs):
+            low_lim
+            up_lim
+            labels
+            offset
+        &#34;&#34;&#34;
+        fig, ax = plt.subplots(figsize=[figureSize[0], figureSize[1]*2])
+        clr_rgb = matplotlib.colormaps[&#39;plasma&#39;]
+        clr_list = np.linspace(0, 1, len(self.traceHandlers), endpoint=False)
+        for i in range(len(self.traceHandlers)):
+            line_color = clr_rgb(clr_list[i])
+            self.traceHandlers[i].normalize_fft_spectrum()
+            wvl, spctr = self.traceHandlers[i].get_spectrum_trace()
+            ax.plot(wvl, i*offset + spctr, linewidth=lineWidth, color=line_color)
+        ax.set_xlabel(&#39;wavelength (nm)&#39;, fontsize=fontSize)
+        ax.set_ylabel(&#39;intensity (a.u.)&#39;, fontsize=fontSize)
+        ax.set_title(&#39;FFT of the traces&#39;, fontsize=fontSize)
+        plt.xticks(fontsize=tickSize)
+        plt.yticks(fontsize=tickSize)
+        if labels is not None:
+            handles, labels_dump = ax.get_legend_handles_labels()
+            plt.legend(handles[::-1], labels[::-1], prop={&#39;size&#39;: legendFontSize}, loc=&#39;upper right&#39;)
+        else:
+            pass
+        if low_lim is not None and up_lim is not None:
+            ax.set_xlim(low_lim, up_lim)
+        plt.show()</code></pre>
+</details>
+<div class="desc"><p>Initializes and stores multiple TraceHandler objects. It is used to plot multiple traces in a single graph, compare them, and perform operations between them</p>
+<p>ALL TIMES IN FS, ALL WAVELENGTHS IN NM, ALL FREQUENCIES IN PHz</p>
+<p>All stored traces are accessible as TraceHandler object in the member:
+self.traceHandlers: list of traceHandler objects</p>
+<p>constructor of MultiTraceHandler.</p>
+<p>One of the following arguments must be provided:
+- filenameList: list of filenames containing the field traces (see TraceHandler constructor)
+- timeList AND fieldList: list of time arrays and field arrays (see TraceHandler constructor)
+- traceHandlerList: list of TraceHandler objects</p>
+<p>ARGUMENTS (technically all optional):
+filenameList : list of filenames containing the field traces (see TraceHandler constructor)
+filenameSpectrumList : list of filenames containing the spectrum traces (spectrometer data; see TraceHandler constructor)
+timeList : list of time arrays (see TraceHandler constructor)
+fieldList : list of field arrays (see TraceHandler constructor)
+stdevList : list of standard deviation arrays (see TraceHandler constructor)
+wvlList : list of wavelength arrays (spectrometer data; see TraceHandler constructor)
+spectrumList : list of spectrum arrays (spectrometer data; see TraceHandler constructor)
+traceHandlerList : list of TraceHandler objects</p></div>
+<h3>Methods</h3>
+<dl>
+<dt id="attoworld.wave.trace_handler.MultiTraceHandler.append_trace"><code class="name flex">
+<span>def <span class="ident">append_trace</span></span>(<span>self,<br>filename=None,<br>filename_spectrum=None,<br>timeV=None,<br>fieldV=None,<br>stdevV=None,<br>wvl=None,<br>spectrum=None,<br>traceHandler=None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def append_trace(self, filename=None, filename_spectrum=None, timeV=None, fieldV=None, stdevV=None, wvl=None, spectrum=None, traceHandler=None):
+    &#34;&#34;&#34;append a new trace to the list. Usual rules apply
+
+    ARGUMENTS (Optional, see TraceHandler&#39;s and MultiTraceHandler&#39;s constructors):
+        filename
+        filename_spectrum
+        timeV
+        fieldV
+        stdevV
+        wvl
+        spectrum
+        traceHandler
+    &#34;&#34;&#34;
+    if filename_spectrum is not None and filename is not None:
+        self.traceHandlers.append(TraceHandler(filename, filename_spectrum))
+    elif filename is not None:
+        self.traceHandlers.append(TraceHandler(filename))
+    elif timeV is not None and fieldV is not None:
+        self.traceHandlers.append(TraceHandler(time=timeV, field=fieldV, stdev=stdevV, wvl=wvl, spectrum=spectrum))
+    elif traceHandler is not None:
+        if isinstance(traceHandler, TraceHandler):
+            self.traceHandlers.append(traceHandler)
+        else:
+            raise ValueError(&#39;in function MultiTraceHandler.append_trace() traceHandler is not a TraceHandler object\n&#39;)
+    else:
+        raise ValueError(&#39;in function MultiTraceHandler.append_trace() filename and filename_spectrum cannot be None\n&#39;
+                         &#39;it might be that the function was erroneously used with no arguments\n&#39;)</code></pre>
+</details>
+<div class="desc"><p>append a new trace to the list. Usual rules apply</p>
+<p>ARGUMENTS (Optional, see TraceHandler's and MultiTraceHandler's constructors):
+filename
+filename_spectrum
+timeV
+fieldV
+stdevV
+wvl
+spectrum
+traceHandler</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.MultiTraceHandler.apply_spectrum"><code class="name flex">
+<span>def <span class="ident">apply_spectrum</span></span>(<span>self, wvl=None, spectrum=None, CEP_shift=0.0, stripZeroPadding=True)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def apply_spectrum(self, wvl = None , spectrum = None, CEP_shift = 0., stripZeroPadding = True):
+    &#34;&#34;&#34;applies spectrum to the phase of the pulse. See traceHandler&#39;s docs&#34;&#34;&#34;
+    for i in range(len(self.traceHandlers)):
+        self.traceHandlers[i].apply_spectrum(wvl, spectrum, CEP_shift, stripZeroPadding)</code></pre>
+</details>
+<div class="desc"><p>applies spectrum to the phase of the pulse. See traceHandler's docs</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.MultiTraceHandler.flip_trace"><code class="name flex">
+<span>def <span class="ident">flip_trace</span></span>(<span>self, index: int)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def flip_trace(self, index: int):
+    &#34;&#34;&#34;flips the trace number &#39;index&#39;
+
+    ARGUMENTS:
+        index: int
+    &#34;&#34;&#34;
+    if index &gt;= len(self.traceHandlers):
+        raise ValueError(&#39;in function MultiTraceHandler.flip() index is out of range\n&#39;)
+    self.traceHandlers[index].fieldV = -self.traceHandlers[index].fieldV
+    self.traceHandlers[index].fftFieldV = -self.traceHandlers[index].fftFieldV
+    self.traceHandlers[index].complexFieldV= -self.traceHandlers[index].complexFieldV</code></pre>
+</details>
+<div class="desc"><p>flips the trace number 'index'</p>
+<h2 id="arguments">Arguments</h2>
+<p>index: int</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.MultiTraceHandler.plot_spectra"><code class="name flex">
+<span>def <span class="ident">plot_spectra</span></span>(<span>self, low_lim=50, up_lim=1000, labels=None, offset=0.015)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def plot_spectra(self, low_lim=50, up_lim=1000, labels=None, offset=0.015):
+    &#34;&#34;&#34;plots all spectra. 
+
+    ARGUMENTS (Optional, See plot_traces() docs):
+        low_lim
+        up_lim
+        labels
+        offset
+    &#34;&#34;&#34;
+    fig, ax = plt.subplots(figsize=[figureSize[0], figureSize[1]*2])
+    clr_rgb = matplotlib.colormaps[&#39;plasma&#39;]
+    clr_list = np.linspace(0, 1, len(self.traceHandlers), endpoint=False)
+    for i in range(len(self.traceHandlers)):
+        line_color = clr_rgb(clr_list[i])
+        self.traceHandlers[i].normalize_fft_spectrum()
+        wvl, spctr = self.traceHandlers[i].get_spectrum_trace()
+        ax.plot(wvl, i*offset + spctr, linewidth=lineWidth, color=line_color)
+    ax.set_xlabel(&#39;wavelength (nm)&#39;, fontsize=fontSize)
+    ax.set_ylabel(&#39;intensity (a.u.)&#39;, fontsize=fontSize)
+    ax.set_title(&#39;FFT of the traces&#39;, fontsize=fontSize)
+    plt.xticks(fontsize=tickSize)
+    plt.yticks(fontsize=tickSize)
+    if labels is not None:
+        handles, labels_dump = ax.get_legend_handles_labels()
+        plt.legend(handles[::-1], labels[::-1], prop={&#39;size&#39;: legendFontSize}, loc=&#39;upper right&#39;)
+    else:
+        pass
+    if low_lim is not None and up_lim is not None:
+        ax.set_xlim(low_lim, up_lim)
+    plt.show()</code></pre>
+</details>
+<div class="desc"><p>plots all spectra. </p>
+<p>ARGUMENTS (Optional, See plot_traces() docs):
+low_lim
+up_lim
+labels
+offset</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.MultiTraceHandler.plot_traces"><code class="name flex">
+<span>def <span class="ident">plot_traces</span></span>(<span>self,<br>low_lim=None,<br>up_lim=None,<br>labels=None,<br>delay_shift=None,<br>offset: float = 2.0,<br>errorbar: bool = False,<br>normalize: bool = True)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def plot_traces(self, low_lim=None, up_lim=None, labels=None, delay_shift=None, offset: float=2., errorbar: bool=False, normalize: bool=True):
+    &#34;&#34;&#34;plots all traces.
+
+    ARGUMENTS (Optional):
+        low_lim
+        up_lim
+        labels = list of labels for the legend
+        delay_shift = list of delay offsets (one per trace)
+        offset: float (y-axis offset between traces)
+        errorbar: bool = whether to plot errors. Default False
+        normalize: bool. Default True
+    &#34;&#34;&#34;
+    fig, ax = plt.subplots(figsize=[figureSize[0], figureSize[1]*2])
+    if delay_shift is None:
+        delay_shift = [0.]*len(self.traceHandlers)
+    check_equal_length(delay_shift, self.traceHandlers)
+    clr_rgb = matplotlib.colormaps[&#39;plasma&#39;]
+    clr_list = np.linspace(0, 1, len(self.traceHandlers), endpoint=False)
+    for i in range(len(self.traceHandlers)):
+        if normalize:
+            norm_plot = self.traceHandlers[i].normalization_trace
+        else:
+            norm_plot = 1
+        line_color = clr_rgb(clr_list[i])
+        t, field = self.traceHandlers[i].get_trace()
+        stdev_field = self.traceHandlers[i].get_stdev()
+        if errorbar and stdev_field is not None:
+            ax.fill_between(t-delay_shift[i], offset*i + (field-stdev_field)/norm_plot,
+                            offset*i + (field+stdev_field)/norm_plot,
+                            label=&#39;_nolegend_&#39;, color=line_color, alpha=0.2)
+        ax.plot(t-delay_shift[i], offset*i + field/norm_plot, label=&#39;Trace &#39;+str(i),
+                color=line_color, linewidth=lineWidth)
+    ax.set_xlabel(&#39;Time (fs)&#39;, fontsize=fontSize)
+    ax.set_ylabel(&#39;Field (a.u.)&#39;, fontsize=fontSize)
+    ax.set_title(&#39;Field traces&#39;, fontsize=fontSize)
+    plt.xticks(fontsize=tickSize)
+    plt.yticks(fontsize=tickSize)
+    if labels is not None:
+        handles, labels_dump = ax.get_legend_handles_labels()
+        plt.legend(handles[::-1], labels[::-1], prop={&#39;size&#39;: legendFontSize}, loc=&#39;upper left&#39;)
+    else:
+        pass
+    if low_lim is not None and up_lim is not None:
+        ax.set_xlim(low_lim, up_lim)
+    plt.show()</code></pre>
+</details>
+<div class="desc"><p>plots all traces.</p>
+<p>ARGUMENTS (Optional):
+low_lim
+up_lim
+labels = list of labels for the legend
+delay_shift = list of delay offsets (one per trace)
+offset: float (y-axis offset between traces)
+errorbar: bool = whether to plot errors. Default False
+normalize: bool. Default True</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.MultiTraceHandler.tukey_bandpass"><code class="name flex">
+<span>def <span class="ident">tukey_bandpass</span></span>(<span>self, lowWavelengthEdge, upWavelengthEdge, lowEdgeWidth, highEdgeWidth)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def tukey_bandpass(self, lowWavelengthEdge, upWavelengthEdge, lowEdgeWidth, highEdgeWidth):
+    &#34;&#34;&#34;applies a bandpass filter the traces in the frequency domain using a tukey window. See traceHandler&#39;s docs&#34;&#34;&#34;
+    for i in range(len(self.traceHandlers)):
+        self.traceHandlers[i].fft_tukey_bandpass(lowWavelengthEdge, upWavelengthEdge, lowEdgeWidth, highEdgeWidth)</code></pre>
+</details>
+<div class="desc"><p>applies a bandpass filter the traces in the frequency domain using a tukey window. See traceHandler's docs</p></div>
+</dd>
+</dl>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler"><code class="flex name class">
+<span>class <span class="ident">TraceHandler</span></span>
+<span>(</span><span>filename=None,<br>filename_spectrum=None,<br>time=None,<br>field=None,<br>stdev=None,<br>wvl=None,<br>spectrum=None,<br>wvl_FFT_trace=None,<br>spectrum_FFT_trace=None,<br>phase_FFT_trace=None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">class TraceHandler:
+    &#34;&#34;&#34;Loads and stores the trace (field vs time) saved to file (two columns, tab separated) or given in the form of time and field [or wavelengths, spectrum and phase] arrays.
+    
+    ALL THE TIMES ARE IN fs, FREQUENCIES IN PHz, WAVELENGTHS IN nm
+
+    Most of the class methods modify the object data in place, and don&#39;t return anything.
+
+    MEMBERS:
+
+        TRACE (WAVEFORM) DATA in the time domain
+        self.fieldTimeV                 time array (fs)
+        self.fieldV                     field array
+        self.fieldStdevV                field standard deviation (or sigma) array
+
+        TRACE (WAVEFORM) DATA in the frequency domain
+        self.frequencyAxis              frequency axis of the FFT in PHz (should be np.fft compatible, i.e., equally spaced, in the form [0, df, 2*df, ..., fmax, -fmax[-df], ..., -df])
+        self.fftFieldV                  FFT field (complex)
+        self.complexFieldTimeV          time axis of the complex field (fs)
+        self.complexFieldV              complex field ( = IFFT{FFT(ω)θ(ω)}(t), where θ(ω) = 1 if ω &gt;= 0, θ(ω) = 0 otherwise )
+        self.wvlAxis                    wavelength axis for the FFT spectrum (nm)
+        self.fftSpectrum                wavelength-dependent positive FFT spectrum ( = |FFT{field}|^2 * df/dλ, λ &gt; 0 )
+        self.fftphase                   wavelength-dependent spectral phase
+
+        SPECTROMETER DATA
+        self.wvlSpectrometer            wavelength (nm)
+        self.ISpectrometer              spectral intensity
+
+        MISCELLANEOUS:
+        self.fsZeroPadding (= 150 by default)        time span in fs for zero padding (appending zeroes both before and after the trace, in order to get a smoother fft)
+        self.filename                   filename to load the trace from
+        self.filename_spectrum          filename to load the spectrum from
+        self.normalization_trace        normalization factor for the trace
+        self.zero_delay                 time zero, corresponds to the maximum envelope
+    &#34;&#34;&#34;
+    def __init__(self, filename=None, filename_spectrum=None, time=None, field=None, stdev=None, wvl=None, spectrum=None, wvl_FFT_trace=None, spectrum_FFT_trace=None, phase_FFT_trace=None):
+        &#34;&#34;&#34;constructor; loads the trace from file (or from time-field or wavelegth-spectrum-phase arrays) and stores it in the class.
+        
+        One of the following must be provided:
+        - filename: the name of the file containing the trace (two columns, tab separated)
+        - time and field: the time vector (fs) and electric field vector (a.u.)
+        - wvl_FFT_trace, spectrum_FFT_trace and phase_FFT_trace: the wavelength (nm) spectrum (a.u.) and phase (rad) vectors
+
+        ARGUMENTS (technically all optional):
+            filename (str): the name of the file containing the trace (two columns - time and field, tab separated)
+            filename_spectrum (str): the name of the file containing the spectrum (two columns - wavelength and spectral intensity, tab separated)
+                this does not correspond to the fourier transform of the trace, but to some spectrometer data that you would like to compare to the loaded trace
+            time (array): the time vector (fs)
+            field (array): the electric field vector (a.u.)
+            stdev (array): the standard deviation (or sigma) of the electric field vector (a.u.)
+            wvl (array): the wavelength vector (nm) (spectrometer)
+            spectrum (array): the spectral intensity vector (a.u.) (spectrometer)
+            wvl_FFT_trace (array): the wavelength vector (nm) of the FFT trace (to reconstruct a trace from spectral data)
+            spectrum_FFT_trace (array): the spectral intensity vector (a.u.) of the FFT trace (to reconstruct a trace from spectral data)
+            phase_FFT_trace (array): the spectral phase vector (rad) of the FFT trace (to reconstruct a trace from spectral data)
+            &#34;&#34;&#34;
+
+        self.fsZeroPadding = 150
+        self.filename = filename
+        self.filename_spectrum = filename_spectrum
+
+        self.fieldTimeV = None
+        self.fieldV = None
+        self.fieldStdevV = None
+
+        self.frequencyAxis = None
+        self.fftFieldV = None
+        self.complexFieldTimeV = None
+        self.complexFieldV = None
+        self.wvlAxis = None
+        self.fftSpectrum = None
+        self.fftphase = None
+
+        self.wvlSpectrometer = None
+        self.ISpectrometer = None
+
+        self.normalization_trace = None
+        self.zero_delay = None
+
+        if filename is not None:
+            self.load_trace()
+        elif time is not None and field is not None:
+            self.load_trace_from_arrays(time, field, stdev)
+        elif wvl_FFT_trace is not None and spectrum_FFT_trace is not None and phase_FFT_trace is not None:
+            self.load_trace_from_spectral_data(wvl_FFT_trace, spectrum_FFT_trace, phase_FFT_trace)
+        else:
+            print(&#34;\n\nWARNING: in function TraceHandler.__init__() no data was loaded\n\n&#34;)
+
+        if self.filename_spectrum is not None:
+            self.load_spectrum()
+        elif wvl is not None and spectrum is not None:
+            self.load_spectrum_from_arrays(wvl, spectrum)
+
+    def load_spectrum_from_arrays(self, wvl, spectrum):
+        &#34;&#34;&#34;loads the spectrum from wavelength and spectrum arrays and stores it in the class.
+
+        The spectrum does not correspond to the fourier transform of the trace, but to some spectrometer data that you would like to compare with the loaded trace
+
+        ARGUMENTS:
+            wvl: wavelength array (nm)
+            spectrum: spectral intensity array
+        &#34;&#34;&#34;
+        &#34;&#34;&#34;wavelength is in nm&#34;&#34;&#34;
+        check_equal_length(wvl, spectrum)
+        self.wvlSpectrometer = np.array(wvl)
+        self.ISpectrometer = np.array(spectrum)
+
+    def load_trace_from_arrays(self, fieldTimeV, fieldV, fieldStdevV=None):
+        &#34;&#34;&#34;loads the trace from time and field arrays and stores it in the class.
+
+        ARGUMENTS:
+            fieldTimeV: time array (fs)
+            fieldV: field array
+            fieldStdevV: standard deviation - or sigma - to be associated to the trace (optional, default = None)
+        &#34;&#34;&#34;
+        if fieldTimeV is None or fieldV is None:
+            raise ValueError(&#39;\nin function TraceHandler.load_from_arrays() too many arguments were None\n&#39;
+                             &#39;it might be that the constructor was erroneously used with no or too few arguments\n&#39;)
+        if np.max(np.abs(fieldTimeV)) &lt; 1.:
+            print(&#39;\n\nWARNING: do you remember that the time axis of TraceHandler is in fs?\n\n&#39;)
+        self.fieldTimeV = np.array(fieldTimeV)
+        self.fieldV = np.array(fieldV)
+        if fieldStdevV is not None:
+            self.fieldStdevV = np.array(fieldStdevV)
+        self.normalization_trace = np.max(np.abs(self.fieldV))
+        self.update_fft()
+
+    def load_trace(self, fname=None):
+        &#34;&#34;&#34;loads from file&#34;&#34;&#34;
+        if fname is not None:
+            self.filename = fname
+        data = pandas.read_csv(self.filename, sep=&#39;\t&#39;)
+        self.fieldTimeV = data[&#39;delay (fs)&#39;].to_numpy()
+        self.fieldV = data[&#39;field (a.u.)&#39;].to_numpy()
+        self.fieldStdevV = data[&#39;stdev field&#39;].to_numpy()
+        self.normalization_trace = np.max(np.abs(self.fieldV))
+        self.update_fft()
+
+    def load_trace_from_spectral_data(self, wvl_FFT_trace, spectrum_FFT_trace, phase_FFT_trace):
+        &#34;&#34;&#34;loads the trace from wavelength, spectrum, and spectral phase arrays and stores it in the class.
+
+        This function has a different job than load_spectrum_from_arrays(): in fact, it retrieves the trace from the given spectral data via fourier transform.
+
+        ARGUMENTS:
+            wvl_FFT_trace: wavelength array in nm
+            spectrum_FFT_trace: (wavelength-)spectral intensity array. This is assumed to be |FFT{field}|^2 * df/dλ
+            phase_FFT_trace: spectral phase in rad
+        &#34;&#34;&#34;
+        check_equal_length(wvl_FFT_trace, spectrum_FFT_trace, phase_FFT_trace)
+
+        # check that the wvl_FFT_trace array is monotonically increasing
+        if np.any(np.diff(wvl_FFT_trace) &lt; 0):
+            if np.all(np.diff(wvl_FFT_trace) &lt; 0):
+                wvl_FFT_trace = wvl_FFT_trace[::-1]
+                spectrum_FFT_trace = spectrum_FFT_trace[::-1]
+                phase_FFT_trace = phase_FFT_trace[::-1]
+            else:
+                raise ValueError(&#39;in function TraceHandler.load_from_spectral_data() wavelength array is not monotonous&#39;)
+
+        # frequency spectrum (monotonically increasing)
+        freq = c / wvl_FFT_trace[::-1] * 1e-6
+        spectrum_freq = spectrum_FFT_trace[::-1] / (c/wvl_FFT_trace[::-1]**2 *1e-6)
+        phase_FFT_trace = phase_FFT_trace[::-1]
+
+        # create proper freq axis for the fourier transform
+        df = (freq[1]-freq[0])/4
+        nf = int(np.ceil(3 * freq[-1]/df))
+        self.frequencyAxis = np.arange(-nf, nf) * df
+        # corresponding time window
+        twin = 1./(df)
+
+        # complex fourier transform
+        spectrum_freq = np.sqrt(spectrum_freq)*np.exp(1.j*phase_FFT_trace)
+
+        # fill with zeros
+        initial_zero_freq = np.linspace(freq[1]-freq[0], freq[0], int(np.ceil(4 * freq[0]/(freq[1]-freq[0]))))
+        initial_zeros = np.zeros(len(initial_zero_freq))
+        final_zero_freq = np.linspace(2*freq[-1]-freq[-2], 4 * freq[-1], int(np.ceil(15 * freq[-1]/(freq[-1]-freq[-2]))))
+        final_zeros = np.zeros(len(final_zero_freq))
+        freq = np.concatenate((initial_zero_freq, freq, final_zero_freq))
+        spectrum_freq = np.concatenate((initial_zeros, spectrum_freq, final_zeros))
+        # add negative frequencies
+        freq = np.concatenate((-freq[::-1], freq))
+        spectrum_freq = np.concatenate((np.conjugate(spectrum_freq[::-1]), spectrum_freq))
+
+        # interpolate the spectrum to the frequency axis of the fft
+        self.fftFieldV = np.interp(self.frequencyAxis, freq, spectrum_freq)
+
+        # add linear phase to center the pulse in the time window; this has to be done after interpolation because the spectral phase will be fast oscillating
+        self.fftFieldV = self.fftFieldV*np.exp(1.j*2*np.pi*self.frequencyAxis*twin/2)
+
+        self.update_fft_spectrum()
+        self.update_trace_from_fft()
+
+    def load_spectrum(self, fname=None):
+        &#34;&#34;&#34;loads spectrum from file.
+
+        The spectrum does not correspond to the fourier transform of the trace, but to the spectrometer data that you would like to compare with the loaded trace
+
+        ARGUMENTS:
+            filename
+        &#34;&#34;&#34;
+        if fname is not None:
+            self.filename_spectrum = fname
+        data = pandas.read_csv(self.filename_spectrum, sep=&#39;\t&#39;)
+        self.wvlSpectrometer = data[&#39;wavelength (nm)&#39;].to_numpy()
+        self.ISpectrometer = data[&#39;intensity (a.u.)&#39;].to_numpy()
+        self.normalize_spectrum()
+
+    def update_fft(self, zero_pad_field = True):
+        &#34;&#34;&#34;updates the fft of the trace from the time domain data.
+
+        OPTIONAL ARGUMENTS:
+            zero_pad_field: bool; if true (default) add zeros before and after the trace before computing fft (for a smoother spectrum)
+                The length of appended zeros is defined by self.fsZeroPadding.
+        &#34;&#34;&#34;
+        zp_fieldTimeV, zp_fieldV = deepcopy(self.fieldTimeV), deepcopy(self.fieldV)
+        if zero_pad_field:
+            zp_fieldTimeV, zp_fieldV = zero_padding(self.fieldTimeV, self.fieldV, fsExtension=self.fsZeroPadding)
+        self.frequencyAxis, self.fftFieldV = fourier_transform(zp_fieldTimeV, zp_fieldV)
+        self.update_fft_spectrum()
+
+    def update_fft_spectrum(self):
+        &#34;&#34;&#34;Updates the wavelength-dependent intensity spectrum. Results are stored in self.wvlAxis and self.fftSpectrum.
+
+        This is (derived from but) different from the fourier transform because:
+         - it considers the squared modulus of the field
+         - it multiplies the frequency-dependent spectral density by df/dλ = c/λ²
+         - it considers only positive wavelengths
+
+        The function internally calls update_spectral_phase() as well.
+        &#34;&#34;&#34;
+        self.wvlAxis = c/self.frequencyAxis[self.frequencyAxis &gt; 0]*1.e-6
+        self.fftSpectrum = np.abs(self.fftFieldV[self.frequencyAxis &gt; 0])**2 * c/self.wvlAxis**2
+        self.compute_complex_field()
+        self.update_spectral_phase()
+        self.normalize_fft_spectrum()
+
+    def update_spectral_phase(self):
+        &#34;&#34;&#34;computes the spectral phase of the trace. Result is stored in self.fftphase.
+
+        An attempt of automatic linear phase subtraction is made. Phase is unwrapped.
+        &#34;&#34;&#34;
+        # determine the time distance (delay) of the waveform peak from the beginning of the trace (more precisely, from the beginning of the ifft)
+        tmax = self.get_zero_delay()
+        deltaT1 = tmax - self.complexFieldTimeV[0]
+        deltaT2 = self.complexFieldTimeV[-1] - tmax
+        ifft_twindow = 1/ (self.frequencyAxis[1] - self.frequencyAxis[0])
+        total_delay = ifft_twindow/2 + (deltaT2-deltaT1)/2 # total estimated delay of the peak from the beginning of the ifft trace
+
+        # compute the phase, use the computed &#39;delay&#39; to correct for the non-interesting linear component, and unwrap it
+        self.fftphase = np.angle(self.fftFieldV[self.frequencyAxis &gt; 0])
+        self.fftphase = self.fftphase - total_delay * self.frequencyAxis[self.frequencyAxis &gt; 0] * 2 * np.pi
+        self.fftphase = np.unwrap(self.fftphase)
+
+        # subtract constant phase offset (m * 2*π)
+        n_pi =  np.sum(self.fftSpectrum*self.fftphase)/ np.sum(self.fftSpectrum)
+        n_pi = int( n_pi / ( 2*np.pi ))
+        self.fftphase -= n_pi * 2 * np.pi
+
+
+    def update_trace_from_fft(self):        # remember to use together with strip_from_trace
+                                            # careful: the complex part of the IFFT is discarded
+        &#34;&#34;&#34;updates the field trace from fft
+
+        In most cases, you might want to call strip_from_trace() afterward, to eliminate the zero-padding from the trace.
+        &#34;&#34;&#34;
+        self.fieldTimeV, self.fieldV = inverse_fourier_transform(self.frequencyAxis, self.fftFieldV)
+        self.fieldV = np.real(self.fieldV)
+        self.normalization_trace = np.max(np.abs(self.fieldV))
+        self.get_zero_delay()
+
+    def strip_from_trace(self, timeRange = None):
+        &#34;&#34;&#34;eliminates the zeros appended to the trace (zero-padding) when computing the FFT.
+
+        Useful when retrieving the trace via ifft (method update_trace_from_fft()).
+
+        OPTIONAL ARGUMENTS:
+            timeRange (float): the time range (fs) to strip from the beginning and end of the trace. If None (default), fsZeroPadding is used.
+        &#34;&#34;&#34;
+        if timeRange is None:
+            timeRange = self.fsZeroPadding
+        # strip the first and last fsZeroPadding time points
+        self.fieldV = self.fieldV[(self.fieldTimeV &gt;= np.min(self.fieldTimeV) + timeRange)
+                                          &amp; (self.fieldTimeV &lt;= np.max(self.fieldTimeV) - timeRange)]
+        self.fieldTimeV = self.fieldTimeV[(self.fieldTimeV &gt;= np.min(self.fieldTimeV) + timeRange)
+                                          &amp; (self.fieldTimeV &lt;= np.max(self.fieldTimeV) - timeRange)]
+        if self.fieldStdevV is None:
+            return True
+        if len(self.fieldStdevV) &gt; len(self.fieldV):
+            n_remove = len(self.fieldStdevV)-len(self.fieldV)
+            print(&#39;\n\nWarning: fieldStdevV is longer than fieldV, removing&#39;, n_remove, &#39; elements\n\n&#39;)
+            while n_remove &gt; 0:
+                if n_remove % 2 == 0:
+                    self.fieldStdevV = np.delete(self.fieldStdevV, 0)
+                else:
+                    self.fieldStdevV = np.delete(self.fieldStdevV, -1)
+                n_remove -= 1
+        elif len(self.fieldStdevV) &lt; len(self.fieldV):
+            n_add = len(self.fieldV)-len(self.fieldStdevV)
+            print(&#39;\n\nWarning: fieldStdevV is shorter than fieldV, adding&#39;, n_add, &#39; elements\n\n&#39;)
+            while n_add &gt; 0:
+                if n_add % 2 == 0:
+                    self.fieldStdevV = np.insert(self.fieldStdevV, 0, 0)
+                else:
+                    self.fieldStdevV = np.append(self.fieldStdevV, 0)
+                n_add -= 1
+        return True
+
+    def strip_from_complex_trace(self, timeRange = None):
+        &#34;&#34;&#34;from the complex trace eliminates the zeros appended (zero-padding) when computing the FFT (Analogous to strip_from_trace()).&#34;&#34;&#34;
+        if timeRange is None:
+            timeRange = self.fsZeroPadding
+        # strip the first and last fsZeroPadding time points
+        self.complexFieldV= self.complexFieldV[(self.complexFieldTimeV &gt;= np.min(self.complexFieldTimeV) + timeRange)
+                                          &amp; (self.complexFieldTimeV &lt;= np.max(self.complexFieldTimeV) - timeRange)]
+        self.complexFieldTimeV = self.complexFieldTimeV[(self.complexFieldTimeV &gt;= np.min(self.complexFieldTimeV) + timeRange)
+                                          &amp; (self.complexFieldTimeV &lt;= np.max(self.complexFieldTimeV) - timeRange)]
+
+    def tukey_time_window(self, lowEdge, upEdge, lowEdgeWidth, upEdgeWidth):
+        &#34;&#34;&#34;applies a tukey window to the trace in the time domain.
+
+        ARGUMENTS:
+            lowEdge, upEdge = lower and upper edge of the window upEdge-lowEdge = FWHM of the window
+            lowEdgeWidth, upEdgeWidth = width of the cosine-shaped edges (from 0 to 1 or viceversa)
+        &#34;&#34;&#34;
+        window = asymmetric_tukey_window(np.abs(self.fieldTimeV), lowEdge, upEdge, lowEdgeWidth, upEdgeWidth)
+        self.fieldV = self.fieldV * window
+        self.update_fft()
+
+    def differentiate_trace(self, spectrally=True):
+        &#34;&#34;&#34;computes the time derivative of the trace.
+
+        ARGUMENTS (Optional):
+            spectrally: bool; if True (default) the derivative will be computed in the spectral domain (maybe more stable numerically)
+        &#34;&#34;&#34;
+        if spectrally:
+            self.fftFieldV = 1j * self.frequencyAxis * self.fftFieldV
+            self.update_trace_from_fft()
+            self.update_fft_spectrum()
+        else:
+            self.fieldV = np.gradient(self.fieldV, self.fieldTimeV)
+            self.update_fft()
+
+    def integrate_trace(self, spectrally=True):
+        &#34;&#34;&#34;integrates the trace in time.
+
+            ARGUMENTS (Optional):
+        spectrally: bool; if True (default) the integral will be computed in the spectral domain (maybe more stable numerically)
+        &#34;&#34;&#34;
+        if spectrally:
+            if self.frequencyAxis[1] != 0:
+                print(&#39;WARNING: in function TraceHandler.integrate_trace() the FFT axis\&#39; first element is not zero&#39;)
+            self.fftFieldV[1:] = -1j / self.frequencyAxis[1:] * self.fftFieldV[1:]
+            self.update_trace_from_fft()
+            self.update_fft_spectrum()
+        else:
+            self.fieldV = np.cumsum(self.fieldV) * np.mean(np.diff(self.fieldTimeV))
+            self.update_fft()
+
+    def save_trace_to_file(self, filename, low_lim=None, up_lim=None):
+        &#34;&#34;&#34;saves the trace to file
+
+        ARGUMENTS:
+            filename
+
+        OPTIONAL ARGUMENTS:
+            low_lim, up_lim: only save the trace between low_lim and up_lim (default: None, None)
+        &#34;&#34;&#34;
+        if low_lim is not None and up_lim is not None:
+            fieldTimeV_to_write = self.fieldTimeV[(self.fieldTimeV &gt;= low_lim) &amp; (self.fieldTimeV &lt;= up_lim)]
+            fieldV_to_write = self.fieldV[(self.fieldTimeV &gt;= low_lim) &amp; (self.fieldTimeV &lt;= up_lim)]
+        else:
+            fieldTimeV_to_write = self.fieldTimeV
+            fieldV_to_write = self.fieldV
+        data = pandas.DataFrame({&#39;delay (fs)&#39;: fieldTimeV_to_write, &#39;field (a.u.)&#39;: fieldV_to_write})
+        data.to_csv(filename, sep=&#39;\t&#39;, index=False)
+
+    def normalize_spectrum(self):
+        &#34;&#34;&#34;normalizes the comparison spectrum to its integral.&#34;&#34;&#34;
+        spectrum_range = [60, 930]
+        n_factor = (np.abs(np.diff(self.wvlSpectrometer)[(self.wvlSpectrometer[:-1] &gt; spectrum_range[0]) &amp; (
+                    self.wvlSpectrometer[:-1] &lt; spectrum_range[1])]) *
+                               self.ISpectrometer[:-1][(self.wvlSpectrometer[:-1] &gt; spectrum_range[0]) &amp; (
+                                       self.wvlSpectrometer[:-1] &lt; spectrum_range[1])]).sum()
+        self.ISpectrometer /= n_factor
+
+    def normalize_fft_spectrum(self):
+        &#34;&#34;&#34;normalizes the spectrum of the trace (|FFT{trace}|^2 * df/dλ) to its integral&#34;&#34;&#34;
+        spectrum_range = [60, 930]
+        n_factor = (np.abs(np.diff(self.wvlAxis)[(self.wvlAxis[:-1] &gt; spectrum_range[0]) &amp; (
+                    self.wvlAxis[:-1] &lt; spectrum_range[1])]) *
+                               self.fftSpectrum[:-1][(self.wvlAxis[:-1] &gt; spectrum_range[0]) &amp; (
+                                       self.wvlAxis[:-1] &lt; spectrum_range[1])]).sum()
+        self.fftSpectrum /= n_factor
+
+    def get_trace(self):
+        &#34;&#34;&#34;returns the time (fs) and field arrays. Field is in a.u. unless set_fluence() was called or a calibrated field was given as an input.&#34;&#34;&#34;
+        return self.fieldTimeV, self.fieldV
+
+    def get_spectrum_trace(self):
+        &#34;&#34;&#34;returns the wavelength and spectral intensity corresponding to the fourier transform of the trace.&#34;&#34;&#34;
+        return self.wvlAxis, self.fftSpectrum
+
+    def get_stdev(self):
+        &#34;&#34;&#34;returns only the standard deviation (sigma) array&#34;&#34;&#34;
+        return self.fieldStdevV
+
+    def get_fluence(self):
+        &#34;&#34;&#34;calculate the fluence of the trace.
+
+        convention: field [V/Å], time [fs], fluence [J/cm²]
+        F = c*epsilon_0*integral(E^2)dt
+
+        RETURNS:
+            fluence: float
+        &#34;&#34;&#34;
+        F = c*eps0 * np.trapz(self.fieldV**2, self.fieldTimeV)* 1e1
+        return F
+
+    def set_fluence(self, fluence):
+        &#34;&#34;&#34;set the fluence of the trace.
+
+        convention: field [V/Å], time [fs], fluence [J/cm²]
+        F = c*epsilon_0*integral(E^2)dt&#34;&#34;&#34;
+        F = c*eps0 * np.trapz(self.fieldV**2, self.fieldTimeV)* 1e1
+        self.fieldV *= np.sqrt(fluence/F)
+        self.update_fft()
+        self.update_fft_spectrum()
+
+    def compute_complex_field(self):
+        &#34;&#34;&#34;computes the complex trace by inverting the positive-freq FFT and stores it in self.complexFieldV (for envelope or phase computation, for example)
+
+        Notice that the fourier transform of the trace is not computed, it is assumed to be already stored in the class. This should be true in most cases.&#34;&#34;&#34;
+        complex_spectrum = deepcopy(self.fftFieldV)
+        complex_spectrum[self.frequencyAxis &lt; 0] = 0
+        self.complexFieldTimeV, self.complexFieldV= inverse_fourier_transform(self.frequencyAxis, complex_spectrum)
+        self.complexFieldV = 2* self.complexFieldV
+        self.strip_from_complex_trace()
+
+    def get_envelope(self):
+        &#34;&#34;&#34;get the envelope of the trace.
+
+        RETURNS:
+            time array (fs)
+            envelope array
+            &#34;&#34;&#34;
+        if self.complexFieldV is None:
+            self.compute_complex_field()
+        return self.complexFieldTimeV, np.abs(self.complexFieldV)
+
+    def get_phase(self):
+        &#34;&#34;&#34;get the instantaneous phase of the trace.
+
+        If complexFieldV is already computed and stored, no re-calculation occurs
+
+        RETURNS:
+            time array (fs)
+            instantaneous phase array (fs)
+        &#34;&#34;&#34;
+        if self.complexFieldV is None:
+            self.compute_complex_field()
+        return self.complexFieldTimeV, np.angle(self.complexFieldV)
+
+    def get_zero_delay(self):
+        &#34;&#34;&#34;get the time value corresponding to the envelope peak.
+
+        ATTENTION: the time array of the trace envelope should be fine enough to start with in order to resolve well the FWHM (please check it)
+
+        RETURNS
+            zero_delay: float
+        &#34;&#34;&#34;
+        # careful: the time grid should be fine enough to resolve the maximum of the envelope
+        t, en = self.get_envelope()
+        i_max = np.argmax(en)
+        self.zero_delay = t[i_max]
+        return self.zero_delay
+
+    def get_FWHM(self):
+        &#34;&#34;&#34;get the FWHM of the trace.
+
+        ATTENTION: the time array of the trace envelope should be fine enough to start with in order to resolve well the FWHM (please check it)
+
+        RETURNS
+            FWHM: float
+        &#34;&#34;&#34;
+        t, en = self.get_envelope()
+        i_max = np.argmax(en**2)
+        hm = en[i_max]**2 / 2
+        enSquare = en**2
+        fwhm = (np.max(t[np.argwhere(enSquare &gt;= hm)]) - np.min(t[np.argwhere(enSquare &gt;= hm)]))
+        return fwhm
+
+    def fft_tukey_bandpass(self, lowWavelengthEdge, upWavelengthEdge, lowEdgeWidth, highEdgeWidth):
+        &#34;&#34;&#34;applies a bandpass filter to the trace in the frequency domain using a tukey window.
+
+        The tukey window is 1 between  lowWavelengthEdge+lowEdgeWidth/2  and  upWavelengthEdge-highEdgeWidth/2
+        and it is reaches zero at lowWavelengthEdge-lowEdgeWidth/2  and  upWavelengthEdge+highEdgeWidth/2.
+        Notice that the edges are only cosine-shaped in the frequency domain. In the wavelength domain upWavelengthEdge - lowWavelengthEdge does not coincide with the FWHM of the tukey function
+
+        ARGUMENTS:
+            lowWavelengthEdge: float (nm)
+            upWavelengthEdge: float (nm)
+            lowEdgeWidth: float (nm)
+            highEdgeWidth: float (nm)
+        &#34;&#34;&#34;
+        upFreqEdge = c / (lowWavelengthEdge - lowEdgeWidth / 2) /2 * 1e-6 + c / (
+                    lowWavelengthEdge + lowEdgeWidth / 2) /2 * 1e-6
+        lowFreqEdge = c / (upWavelengthEdge - highEdgeWidth / 2) /2 * 1e-6 + c / (
+                    upWavelengthEdge + highEdgeWidth / 2) /2 * 1e-6
+
+        upFreqEdgeWidth = c / (lowWavelengthEdge - lowEdgeWidth / 2) * 1e-6 - c / (
+                    lowWavelengthEdge + lowEdgeWidth / 2) * 1e-6
+        lowFreqEdgeWidth = c / (upWavelengthEdge - highEdgeWidth / 2) * 1e-6 - c / (
+                    upWavelengthEdge + highEdgeWidth / 2) * 1e-6
+
+        window = asymmetric_tukey_window(np.abs(self.frequencyAxis), lowFreqEdge, upFreqEdge, lowFreqEdgeWidth,
+                                         upFreqEdgeWidth)
+        self.fftFieldV = self.fftFieldV * window
+        self.update_trace_from_fft()
+        self.update_fft_spectrum()
+        self.strip_from_trace()
+
+    def apply_transmission(self, wavelengths, f):
+        &#34;&#34;&#34;applies a spectral transmission function to the trace (e.g. spectral filter).
+
+        ARGUMENTS:
+            wavelengths: ndarray = wavelength array (nm)
+            f: ndarray = transmission function f(λ)
+        &#34;&#34;&#34;
+        if np.any(np.diff(wavelengths)) &lt; 0:
+            if np.all(np.diff(wavelengths)) &lt; 0:
+                wavelengths = wavelengths[::-1]
+                f = f[::-1]
+            else:
+                raise ValueError(&#39;in function TraceHandler.apply_transmission() wavelength array is not monotonous&#39;)
+        freq = c / wavelengths[::-1] * 1e-6
+        spectrum_freq = f[::-1]
+
+        # fill with zeros
+        initial_zero_freq = np.linspace(freq[1]-freq[0], freq[0], int(np.ceil(4 * freq[0]/(freq[1]-freq[0]))))
+        initial_zeros = np.zeros(len(initial_zero_freq))
+        final_zero_freq = np.linspace(2*freq[-1]-freq[-2], 4 * freq[-1], int(np.ceil(15 * freq[-1]/(freq[-1]-freq[-2]))))
+        final_zeros = np.zeros(len(final_zero_freq))
+        freq = np.concatenate((initial_zero_freq, freq, final_zero_freq))
+        spectrum_freq = np.concatenate((initial_zeros, spectrum_freq, final_zeros))
+        # add negative frequencies
+        freq = np.concatenate((-freq[::-1], freq))
+        spectrum_freq = np.concatenate((spectrum_freq[::-1], spectrum_freq))
+
+        #interpolate the spectrum to the frequency axis of the fft
+        spectrum_interp = np.interp(self.frequencyAxis, freq, spectrum_freq)
+
+        self.fftFieldV = self.fftFieldV * spectrum_interp
+        self.update_trace_from_fft()
+        self.update_fft_spectrum()
+        self.strip_from_trace()
+
+    def apply_spectrum(self, wvl = None , spectrum = None, CEP_shift: float = 0., stripZeroPadding: bool = True):
+        &#34;&#34;&#34;applies a spectrum to the phase of the trace. This means that a new trace is computed and stored in the TraceHandler object (replacing the existing one);
+        the new trace has spectral intensity equal to the applied spectrum and spectral phase equal to the phase of the existing trace.
+
+        ARGUMENTS (Optional):
+            wvl = wavelength array (nm). If None (default) the comparison spectrum stored in the class (self.wvlSpectrometer and self.ISpectrometer) is applied.
+            spectrum = spectral intensity array. If None (default) the comparison spectrum stored in the class (self.wvlSpectrometer and self.ISpectrometer) is applied.
+            CEP_shift = a possible artificial phase shift IN UNITS OF PI! (default = 0)
+            stripZeroPadding: bool = whether to eliminate the zero padding (zeros appended to the trace). Default is True&#34;&#34;&#34;
+        if wvl is None or spectrum is None:
+            wvl = self.wvlSpectrometer
+            spectrum = self.ISpectrometer
+        # check that the wvl array is monotonically increasing
+        if np.any(np.diff(wvl) &lt; 0):
+            if np.all(np.diff(wvl) &lt; 0):
+                wvl = wvl[::-1]
+                spectrum = spectrum[::-1]
+            else:
+                raise ValueError(&#39;in function TraceHandler.apply_spectrum() wavelength array is not monotonous&#39;)
+
+        # frequency spectrum (monotonically increasing)
+        freq = c / wvl[::-1] *1e-6
+        spectrum_freq = spectrum[::-1] / (c/wvl[::-1]**2 *1e-6)
+        spectrum_freq = np.maximum(spectrum_freq, np.zeros(len(spectrum_freq)))
+
+        # fill with zeros
+        initial_zero_freq = np.linspace(freq[1]-freq[0], freq[0], int(np.ceil(4 * freq[0]/(freq[1]-freq[0]))))
+        initial_zeros = np.zeros(len(initial_zero_freq))
+        final_zero_freq = np.linspace(2*freq[-1]-freq[-2], 4 * freq[-1], int(np.ceil(15 * freq[-1]/(freq[-1]-freq[-2]))))
+        final_zeros = np.zeros(len(final_zero_freq))
+        freq = np.concatenate((initial_zero_freq, freq, final_zero_freq))
+        spectrum_freq = np.concatenate((initial_zeros, spectrum_freq, final_zeros))
+        # add negative frequencies
+        freq = np.concatenate((-freq[::-1], freq))
+        spectrum_freq = np.concatenate((spectrum_freq[::-1], spectrum_freq))
+        #plt.plot(freq, spectrum_freq)
+        #plt.xlim(-3, 3)
+        #plt.show()
+
+        # interpolate the spectrum to the frequency axis of the fft
+        spectrum_interp = np.interp(self.frequencyAxis, freq, spectrum_freq)
+        self.fftFieldV = np.sqrt(spectrum_interp)*np.exp(1j*np.angle(self.fftFieldV) + 1j*np.pi*CEP_shift*np.sign(self.frequencyAxis))
+
+
+        self.update_trace_from_fft()
+        if stripZeroPadding:
+            self.strip_from_trace()
+        else:
+            self.fieldStdevV = None
+        self.update_fft_spectrum()
+
+    def fresnel_reflection(self, material2, angle_in, material1=None, forward: bool=True, s_polarized: bool=True, path: str = &#34;./RefractiveIndices/&#34;):
+        &#34;&#34;&#34;calculates the fresnel reflection of the pulse at the interface between two materials. The waveform is travelling from material 1 to material 2.
+        The first medium (material1) should be non-absorptive. As usual the resulting waveform is stored in the TraceHandler object, replacing the previous one.
+
+        Refractive index files should contain 3 space-separated columns, respectively with headers: wvl n k, where wvl is the wavelength in um, n and k resp. the real and imaginary part of the refractive index.
+        ARGUMENTS:
+            material2 = the filename (without &#39;.txt&#39;) of the refractive index data for the material after the interface (e.g. Si Al MgF2); wavelength is in um in the refractive index file
+            angle_in = the incidence angle in degrees
+
+        OPTIONAL ARGUMENTS:
+            material1 = the filename (without &#39;.txt&#39;) of the refractive index data for the material before the interface. If None (default), vacuum is assumed
+            forward: bool = if True (default) forward reflection is computed (the result waveform is the reflection of the previously stored waveform.
+                if False backward reflection is computed (the previous waveform is the reflection of the result waveform)
+            s_polarized: bool = True. Reflection calculation only implemented for s-polarized light
+            path: str = path for the refractive index files. Defaults to &#34;./RefractiveIndices/&#34;
+            &#34;&#34;&#34;
+        if not s_polarized:
+            raise ValueError(&#39;in function TraceHandler.fresnel_reflection() p_polarized is not implemented yet\n&#39;)
+
+        # read refractive index
+        refIndexData = pandas.read_table(path + material2 + &#34;.txt&#34;, sep=&#34; &#34;, keep_default_na=False)
+        wvl2 = np.array(refIndexData[&#39;wvl&#39;]) * 1e3
+        n2 = np.array(refIndexData[&#39;n&#39;]) +1j* np.array(refIndexData[&#39;k&#39;])
+        if material1 is None:
+            wvl1 = np.array(wvl2)
+            n1 = n2*0 + 1
+        else:
+            refIndexData = pandas.read_table(path + material1 + &#34;.txt&#34;, sep=&#34; &#34;, keep_default_na=False)
+            wvl1 = np.array(refIndexData[&#39;wvl&#39;]) * 1e3
+            n1 = np.array(refIndexData[&#39;n&#39;]) +1j* np.array(refIndexData[&#39;k&#39;])
+
+        # check that the wvl arrays are monotonically increasing
+        if np.any(np.diff(wvl1) &lt; 0):
+            if np.all(np.diff(wvl1) &lt; 0):
+                wvl1 = wvl1[::-1]
+                n1 = n1[::-1]
+            else:
+                raise ValueError(&#39;in function TraceHandler.fresnel_reflection() wavelength array is not monotonous&#39;)
+        if np.any(np.diff(wvl2) &lt; 0):
+            if np.all(np.diff(wvl2) &lt; 0):
+                wvl2 = wvl2[::-1]
+                n2 = n2[::-1]
+            else:
+                raise ValueError(&#39;in function TraceHandler.fresnel_reflection() wavelength array is not monotonous&#39;)
+
+        # frequency spectrum (monotonically increasing)
+        freq1 = c / wvl1[::-1] * 1e-6
+        freq2 = c / wvl2[::-1] * 1e-6
+        n1 = n1[::-1]
+        n2 = n2[::-1]
+
+        # fill with ones
+        initial_ones_freq = np.linspace(freq1[1] - freq1[0], freq1[0], int(np.ceil(4 * freq1[0] / (freq1[1] - freq1[0]))))
+        initial_ones = np.ones(len(initial_ones_freq)) * n1[0]
+        final_ones_freq = np.linspace(2 * freq1[-1] - freq1[-2], 4 * freq1[-1],
+                                      int(np.ceil(15 * freq1[-1] / (freq1[-1] - freq1[-2]))))
+        final_ones = np.ones(len(final_ones_freq)) * n1[-1]
+        freq1 = np.concatenate((initial_ones_freq, freq1, final_ones_freq))
+        n1 = np.concatenate((initial_ones, n1, final_ones))
+        # same for n2
+        initial_ones_freq = np.linspace(freq2[1] - freq2[0], freq2[0], int(np.ceil(4 * freq2[0] / (freq2[1] - freq2[0]))))
+        initial_ones = np.ones(len(initial_ones_freq))* n2[0]
+        final_ones_freq = np.linspace(2 * freq2[-1] - freq2[-2], 4 * freq2[-1],
+                                        int(np.ceil(15 * freq2[-1] / (freq2[-1] - freq2[-2]))))
+        final_ones = np.ones(len(final_ones_freq)) * n2[-1]
+        freq2 = np.concatenate((initial_ones_freq, freq2, final_ones_freq))
+        n2 = np.concatenate((initial_ones, n2, final_ones))
+
+        # add negative frequencies
+        freq1 = np.concatenate((-freq1[::-1], freq1))
+        n1 = np.concatenate((np.conjugate(n1[::-1]), n1))
+        freq2 = np.concatenate((-freq2[::-1], freq2))
+        n2 = np.concatenate((np.conjugate(n2[::-1]), n2))
+
+        # interpolate the n1 and n2 to the frequency axis of the fft
+        n1Interp = np.interp(self.frequencyAxis, freq1, n1)
+        n2Interp = np.interp(self.frequencyAxis, freq2, n2)
+
+        # calculate the angle of refraction using snell&#39;s law (currently not used)
+        angle_out = np.where(np.sin(angle_in*np.pi/180) * np.real(n1Interp) / np.real(n2Interp) &lt;=1,
+            np.arcsin(np.sin(angle_in*np.pi/180) * np.real(n1Interp) / np.real(n2Interp)) * 180/np.pi,
+            np.nan)
+
+        # calculate the fresnel reflection coefficients using only the angle of incidence (NOT SURE THIS WORKS WHEN THE FIRST MEDIUM IS LOSSY)
+        r = ((n1Interp * np.cos(angle_in*np.pi/180) - n2Interp * np.sqrt(1-(n1Interp/n2Interp*np.sin(angle_in*np.pi/180))**2)) /
+             (n1Interp * np.cos(angle_in*np.pi/180) + n2Interp * np.sqrt(1-(n1Interp/n2Interp*np.sin(angle_in*np.pi/180))**2)))
+        if forward:
+            self.fftFieldV = self.fftFieldV * r
+        else:
+            self.fftFieldV = self.fftFieldV / r
+
+        self.fieldStdevV = None
+
+        self.update_trace_from_fft()
+        self.strip_from_trace()
+        self.update_fft_spectrum()
+
+
+    def apply_zero_phase(self):
+        &#34;&#34;&#34;applies zero-phase to the trace; this allows, for example, to retrieve the fourier limited pulse corresponding to the same FFT spectrum of the loaded trace&#34;&#34;&#34;
+        tau = self.fsZeroPadding + (np.max(self.fieldTimeV)-np.min(self.fieldTimeV))/2
+        self.fftFieldV = np.abs(self.fftFieldV)*np.exp(1.j*(2*np.pi*tau*self.frequencyAxis))
+        self.update_trace_from_fft()
+        self.strip_from_trace()
+        self.update_fft_spectrum()
+
+    def time_frequency_analysis(self, sigma_time, low_lim=None, up_lim=None, low_lim_freq=None, up_lim_freq=None):
+        &#34;&#34;&#34;performs time-frequency analysis by using scipy&#39;s short time fourier transform (fourier transform of the trace convoluted by a &#39;sigma_time&#39; broad gaussian).
+
+        ARGUMENTS:
+            sigma_time = sigma of the gaussian window
+
+        OPTIONAL ARGUMENTS:
+            low_lim, up_lim: float = xaxis limits for plotting. Default None
+            low_lim_freq, up_lim_freq: float = xaxis limits for plotting. Default None
+
+        &#34;&#34;&#34;
+        dt = np.mean(np.diff(self.fieldTimeV))
+        w = scipy.signal.windows.gaussian(int(sigma_time / dt * 6) + 1, sigma_time / dt, sym=True)
+        TFA = scipy.signal.ShortTimeFFT(w, hop=1, fs=1. / dt, mfft=int(sigma_time / dt * 24), scale_to=&#39;magnitude&#39;)
+        TFData = TFA.stft(self.fieldV)
+
+        fig, ax = plt.subplots(figsize=figureSize)
+        t_lo, t_hi, f_lo, f_hi = TFA.extent(self.fieldV.size)  # time and freq range of plot
+        if low_lim is None:
+            low_lim = t_lo+self.fieldTimeV[0]
+        if up_lim is None:
+            up_lim = t_hi+self.fieldTimeV[0]
+        if low_lim_freq is None:
+            low_lim_freq = 0
+        if up_lim_freq is None:
+            up_lim_freq = 3.0
+        ax.set_title(&#39;time-frequency analysis&#39;, fontsize=fontSize)
+        ax.set( xlim=(low_lim, up_lim),
+                ylim=(low_lim_freq, up_lim_freq))
+        ax.set_xlabel(&#39;time (fs)&#39;, fontsize=fontSize)
+        ax.set_ylabel(&#39;Frequency (PHz)&#39;, fontsize=fontSize)
+        im1 = ax.imshow(abs(TFData)/np.max(abs(TFData)), origin=&#39;lower&#39;, aspect=&#39;auto&#39;,
+                         extent=(t_lo+self.fieldTimeV[0], t_hi+self.fieldTimeV[0], f_lo, f_hi), cmap=&#39;viridis&#39;)
+        cbar = fig.colorbar(im1)
+        ticklabs = cbar.ax.get_yticklabels()
+        cbar.ax.set_yticklabels(ticklabs, fontsize=tickSize)
+        cbar.ax.set_ylabel(&#34;Magnitude of the field (a.u.)&#34;, fontsize=fontSize)
+        plt.yticks(fontsize=tickSize)
+        plt.xticks(fontsize=tickSize)
+        fig.tight_layout()
+        plt.show()
+        return TFData
+
+
+    def plot_trace(self, low_lim = None, up_lim = None, normalize: bool = True):
+        &#34;&#34;&#34;plots the field trace.
+
+        OPTIONAL ARGUMENTS:
+            low_lim, up_lim: float = xaxis limits for plotting. Default None
+            normalize: bool = if True (default) normalize the peak of the trace to 1
+        &#34;&#34;&#34;
+        fig, ax = plt.subplots(figsize=figureSize)
+        if normalize:
+            norm_plot = self.normalization_trace
+        else:
+            norm_plot = 1
+        ax.plot(self.fieldTimeV, self.fieldV/norm_plot, label=&#39;Field trace&#39;, color=&#39;b&#39;, linewidth=lineWidth)
+        if self.fieldStdevV is not None:
+            ax.fill_between(self.fieldTimeV, (self.fieldV - self.fieldStdevV)/norm_plot,
+                            (self.fieldV + self.fieldStdevV)/norm_plot, color=&#39;b&#39;, alpha=0.2)
+        ax.set_xlabel(&#39;Time (fs)&#39;, fontsize=fontSize)
+        ax.set_ylabel(&#39;Field (a.u.)&#39;, fontsize=fontSize)
+        ax.set_title(&#39;Field trace&#39;, fontsize=fontSize)
+        plt.xticks(fontsize=tickSize)
+        plt.yticks(fontsize=tickSize)
+        if low_lim is not None and up_lim is not None:
+            ax.set_xlim(low_lim, up_lim)
+        plt.show()
+
+    def plot_spectrum(self, low_lim = 40, up_lim = 1000, no_phase: bool = False):
+        &#34;&#34;&#34;plots the trace spectrum and phase together with the spectrometer measurement [if provided].
+
+        OPTIONAL ARGUMENTS:
+            low_lim, up_lim: float = xaxis limits for plotting. Default: 40, 1000
+            no_phase = if True, don&#39;t plot the phase. Default: False
+        &#34;&#34;&#34;
+        fig, ax = plt.subplots(figsize=figureSize)
+        if not no_phase:
+            ax2 = ax.twinx()
+        ax.plot(self.wvlAxis[(self.wvlAxis&gt;low_lim) &amp; (self.wvlAxis&lt;up_lim)], self.fftSpectrum[(self.wvlAxis&gt;low_lim) &amp; (self.wvlAxis&lt;up_lim)],
+                label=&#39;FFT&#39;, color=&#39;b&#39;, linewidth=lineWidth)
+        if not no_phase:
+            ax2.plot(self.wvlAxis[(self.wvlAxis&gt;low_lim)&amp;(self.wvlAxis&lt;up_lim)], self.fftphase[(self.wvlAxis&gt;low_lim)&amp;(self.wvlAxis&lt;up_lim)],
+                     color=&#39;g&#39;, linewidth=lineWidth, label=&#39;Phase&#39;)
+        if self.wvlSpectrometer is not None:
+            ax.plot(self.wvlSpectrometer[(self.wvlSpectrometer&gt;low_lim)&amp;(self.wvlSpectrometer&lt;up_lim)], self.ISpectrometer[(self.wvlSpectrometer&gt;low_lim)&amp;(self.wvlSpectrometer&lt;up_lim)],
+                    label=&#39;Spectrometer&#39;, color=&#39;r&#39;, linewidth=lineWidth)
+        ax.set_xlabel(&#39;Wavelength (nm)&#39;, fontsize=fontSize)
+        ax.set_ylabel(&#39;Intensity (a.u.)&#39;, fontsize=fontSize)
+        ax.set_title(&#39;Fourier Transform of the field trace&#39;, fontsize=fontSize)
+        ax.tick_params(axis=&#39;both&#39;, labelsize=tickSize)
+        if not no_phase:
+            ax2.set_ylabel(&#39;Phase (rad)&#39;, color=&#39;g&#39;, fontsize=fontSize)
+            ax2.tick_params(axis=&#39;y&#39;, colors=&#39;g&#39;, labelsize=tickSize)
+            ax2.yaxis.label.set_color(&#39;g&#39;)
+        plt.show()</code></pre>
+</details>
+<div class="desc"><p>Loads and stores the trace (field vs time) saved to file (two columns, tab separated) or given in the form of time and field [or wavelengths, spectrum and phase] arrays.</p>
+<p>ALL THE TIMES ARE IN fs, FREQUENCIES IN PHz, WAVELENGTHS IN nm</p>
+<p>Most of the class methods modify the object data in place, and don't return anything.</p>
+<h2 id="members">Members</h2>
+<p>TRACE (WAVEFORM) DATA in the time domain
+self.fieldTimeV
+time array (fs)
+self.fieldV
+field array
+self.fieldStdevV
+field standard deviation (or sigma) array</p>
+<p>TRACE (WAVEFORM) DATA in the frequency domain
+self.frequencyAxis
+frequency axis of the FFT in PHz (should be np.fft compatible, i.e., equally spaced, in the form [0, df, 2*df, &hellip;, fmax, -fmax[-df], &hellip;, -df])
+self.fftFieldV
+FFT field (complex)
+self.complexFieldTimeV
+time axis of the complex field (fs)
+self.complexFieldV
+complex field ( = IFFT{FFT(ω)θ(ω)}(t), where θ(ω) = 1 if ω &gt;= 0, θ(ω) = 0 otherwise )
+self.wvlAxis
+wavelength axis for the FFT spectrum (nm)
+self.fftSpectrum
+wavelength-dependent positive FFT spectrum ( = |FFT{field}|^2 * df/dλ, λ &gt; 0 )
+self.fftphase
+wavelength-dependent spectral phase</p>
+<p>SPECTROMETER DATA
+self.wvlSpectrometer
+wavelength (nm)
+self.ISpectrometer
+spectral intensity</p>
+<p>MISCELLANEOUS:
+self.fsZeroPadding (= 150 by default)
+time span in fs for zero padding (appending zeroes both before and after the trace, in order to get a smoother fft)
+self.filename
+filename to load the trace from
+self.filename_spectrum
+filename to load the spectrum from
+self.normalization_trace
+normalization factor for the trace
+self.zero_delay
+time zero, corresponds to the maximum envelope</p>
+<p>constructor; loads the trace from file (or from time-field or wavelegth-spectrum-phase arrays) and stores it in the class.</p>
+<p>One of the following must be provided:
+- filename: the name of the file containing the trace (two columns, tab separated)
+- time and field: the time vector (fs) and electric field vector (a.u.)
+- wvl_FFT_trace, spectrum_FFT_trace and phase_FFT_trace: the wavelength (nm) spectrum (a.u.) and phase (rad) vectors</p>
+<p>ARGUMENTS (technically all optional):
+filename (str): the name of the file containing the trace (two columns - time and field, tab separated)
+filename_spectrum (str): the name of the file containing the spectrum (two columns - wavelength and spectral intensity, tab separated)
+this does not correspond to the fourier transform of the trace, but to some spectrometer data that you would like to compare to the loaded trace
+time (array): the time vector (fs)
+field (array): the electric field vector (a.u.)
+stdev (array): the standard deviation (or sigma) of the electric field vector (a.u.)
+wvl (array): the wavelength vector (nm) (spectrometer)
+spectrum (array): the spectral intensity vector (a.u.) (spectrometer)
+wvl_FFT_trace (array): the wavelength vector (nm) of the FFT trace (to reconstruct a trace from spectral data)
+spectrum_FFT_trace (array): the spectral intensity vector (a.u.) of the FFT trace (to reconstruct a trace from spectral data)
+phase_FFT_trace (array): the spectral phase vector (rad) of the FFT trace (to reconstruct a trace from spectral data)</p></div>
+<h3>Methods</h3>
+<dl>
+<dt id="attoworld.wave.trace_handler.TraceHandler.apply_spectrum"><code class="name flex">
+<span>def <span class="ident">apply_spectrum</span></span>(<span>self,<br>wvl=None,<br>spectrum=None,<br>CEP_shift: float = 0.0,<br>stripZeroPadding: bool = True)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def apply_spectrum(self, wvl = None , spectrum = None, CEP_shift: float = 0., stripZeroPadding: bool = True):
+    &#34;&#34;&#34;applies a spectrum to the phase of the trace. This means that a new trace is computed and stored in the TraceHandler object (replacing the existing one);
+    the new trace has spectral intensity equal to the applied spectrum and spectral phase equal to the phase of the existing trace.
+
+    ARGUMENTS (Optional):
+        wvl = wavelength array (nm). If None (default) the comparison spectrum stored in the class (self.wvlSpectrometer and self.ISpectrometer) is applied.
+        spectrum = spectral intensity array. If None (default) the comparison spectrum stored in the class (self.wvlSpectrometer and self.ISpectrometer) is applied.
+        CEP_shift = a possible artificial phase shift IN UNITS OF PI! (default = 0)
+        stripZeroPadding: bool = whether to eliminate the zero padding (zeros appended to the trace). Default is True&#34;&#34;&#34;
+    if wvl is None or spectrum is None:
+        wvl = self.wvlSpectrometer
+        spectrum = self.ISpectrometer
+    # check that the wvl array is monotonically increasing
+    if np.any(np.diff(wvl) &lt; 0):
+        if np.all(np.diff(wvl) &lt; 0):
+            wvl = wvl[::-1]
+            spectrum = spectrum[::-1]
+        else:
+            raise ValueError(&#39;in function TraceHandler.apply_spectrum() wavelength array is not monotonous&#39;)
+
+    # frequency spectrum (monotonically increasing)
+    freq = c / wvl[::-1] *1e-6
+    spectrum_freq = spectrum[::-1] / (c/wvl[::-1]**2 *1e-6)
+    spectrum_freq = np.maximum(spectrum_freq, np.zeros(len(spectrum_freq)))
+
+    # fill with zeros
+    initial_zero_freq = np.linspace(freq[1]-freq[0], freq[0], int(np.ceil(4 * freq[0]/(freq[1]-freq[0]))))
+    initial_zeros = np.zeros(len(initial_zero_freq))
+    final_zero_freq = np.linspace(2*freq[-1]-freq[-2], 4 * freq[-1], int(np.ceil(15 * freq[-1]/(freq[-1]-freq[-2]))))
+    final_zeros = np.zeros(len(final_zero_freq))
+    freq = np.concatenate((initial_zero_freq, freq, final_zero_freq))
+    spectrum_freq = np.concatenate((initial_zeros, spectrum_freq, final_zeros))
+    # add negative frequencies
+    freq = np.concatenate((-freq[::-1], freq))
+    spectrum_freq = np.concatenate((spectrum_freq[::-1], spectrum_freq))
+    #plt.plot(freq, spectrum_freq)
+    #plt.xlim(-3, 3)
+    #plt.show()
+
+    # interpolate the spectrum to the frequency axis of the fft
+    spectrum_interp = np.interp(self.frequencyAxis, freq, spectrum_freq)
+    self.fftFieldV = np.sqrt(spectrum_interp)*np.exp(1j*np.angle(self.fftFieldV) + 1j*np.pi*CEP_shift*np.sign(self.frequencyAxis))
+
+
+    self.update_trace_from_fft()
+    if stripZeroPadding:
+        self.strip_from_trace()
+    else:
+        self.fieldStdevV = None
+    self.update_fft_spectrum()</code></pre>
+</details>
+<div class="desc"><p>applies a spectrum to the phase of the trace. This means that a new trace is computed and stored in the TraceHandler object (replacing the existing one);
+the new trace has spectral intensity equal to the applied spectrum and spectral phase equal to the phase of the existing trace.</p>
+<p>ARGUMENTS (Optional):
+wvl = wavelength array (nm). If None (default) the comparison spectrum stored in the class (self.wvlSpectrometer and self.ISpectrometer) is applied.
+spectrum = spectral intensity array. If None (default) the comparison spectrum stored in the class (self.wvlSpectrometer and self.ISpectrometer) is applied.
+CEP_shift = a possible artificial phase shift IN UNITS OF PI! (default = 0)
+stripZeroPadding: bool = whether to eliminate the zero padding (zeros appended to the trace). Default is True</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler.apply_transmission"><code class="name flex">
+<span>def <span class="ident">apply_transmission</span></span>(<span>self, wavelengths, f)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def apply_transmission(self, wavelengths, f):
+    &#34;&#34;&#34;applies a spectral transmission function to the trace (e.g. spectral filter).
+
+    ARGUMENTS:
+        wavelengths: ndarray = wavelength array (nm)
+        f: ndarray = transmission function f(λ)
+    &#34;&#34;&#34;
+    if np.any(np.diff(wavelengths)) &lt; 0:
+        if np.all(np.diff(wavelengths)) &lt; 0:
+            wavelengths = wavelengths[::-1]
+            f = f[::-1]
+        else:
+            raise ValueError(&#39;in function TraceHandler.apply_transmission() wavelength array is not monotonous&#39;)
+    freq = c / wavelengths[::-1] * 1e-6
+    spectrum_freq = f[::-1]
+
+    # fill with zeros
+    initial_zero_freq = np.linspace(freq[1]-freq[0], freq[0], int(np.ceil(4 * freq[0]/(freq[1]-freq[0]))))
+    initial_zeros = np.zeros(len(initial_zero_freq))
+    final_zero_freq = np.linspace(2*freq[-1]-freq[-2], 4 * freq[-1], int(np.ceil(15 * freq[-1]/(freq[-1]-freq[-2]))))
+    final_zeros = np.zeros(len(final_zero_freq))
+    freq = np.concatenate((initial_zero_freq, freq, final_zero_freq))
+    spectrum_freq = np.concatenate((initial_zeros, spectrum_freq, final_zeros))
+    # add negative frequencies
+    freq = np.concatenate((-freq[::-1], freq))
+    spectrum_freq = np.concatenate((spectrum_freq[::-1], spectrum_freq))
+
+    #interpolate the spectrum to the frequency axis of the fft
+    spectrum_interp = np.interp(self.frequencyAxis, freq, spectrum_freq)
+
+    self.fftFieldV = self.fftFieldV * spectrum_interp
+    self.update_trace_from_fft()
+    self.update_fft_spectrum()
+    self.strip_from_trace()</code></pre>
+</details>
+<div class="desc"><p>applies a spectral transmission function to the trace (e.g. spectral filter).</p>
+<h2 id="arguments">Arguments</h2>
+<p>wavelengths: ndarray = wavelength array (nm)
+f: ndarray = transmission function f(λ)</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler.apply_zero_phase"><code class="name flex">
+<span>def <span class="ident">apply_zero_phase</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def apply_zero_phase(self):
+    &#34;&#34;&#34;applies zero-phase to the trace; this allows, for example, to retrieve the fourier limited pulse corresponding to the same FFT spectrum of the loaded trace&#34;&#34;&#34;
+    tau = self.fsZeroPadding + (np.max(self.fieldTimeV)-np.min(self.fieldTimeV))/2
+    self.fftFieldV = np.abs(self.fftFieldV)*np.exp(1.j*(2*np.pi*tau*self.frequencyAxis))
+    self.update_trace_from_fft()
+    self.strip_from_trace()
+    self.update_fft_spectrum()</code></pre>
+</details>
+<div class="desc"><p>applies zero-phase to the trace; this allows, for example, to retrieve the fourier limited pulse corresponding to the same FFT spectrum of the loaded trace</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler.compute_complex_field"><code class="name flex">
+<span>def <span class="ident">compute_complex_field</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def compute_complex_field(self):
+    &#34;&#34;&#34;computes the complex trace by inverting the positive-freq FFT and stores it in self.complexFieldV (for envelope or phase computation, for example)
+
+    Notice that the fourier transform of the trace is not computed, it is assumed to be already stored in the class. This should be true in most cases.&#34;&#34;&#34;
+    complex_spectrum = deepcopy(self.fftFieldV)
+    complex_spectrum[self.frequencyAxis &lt; 0] = 0
+    self.complexFieldTimeV, self.complexFieldV= inverse_fourier_transform(self.frequencyAxis, complex_spectrum)
+    self.complexFieldV = 2* self.complexFieldV
+    self.strip_from_complex_trace()</code></pre>
+</details>
+<div class="desc"><p>computes the complex trace by inverting the positive-freq FFT and stores it in self.complexFieldV (for envelope or phase computation, for example)</p>
+<p>Notice that the fourier transform of the trace is not computed, it is assumed to be already stored in the class. This should be true in most cases.</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler.differentiate_trace"><code class="name flex">
+<span>def <span class="ident">differentiate_trace</span></span>(<span>self, spectrally=True)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def differentiate_trace(self, spectrally=True):
+    &#34;&#34;&#34;computes the time derivative of the trace.
+
+    ARGUMENTS (Optional):
+        spectrally: bool; if True (default) the derivative will be computed in the spectral domain (maybe more stable numerically)
+    &#34;&#34;&#34;
+    if spectrally:
+        self.fftFieldV = 1j * self.frequencyAxis * self.fftFieldV
+        self.update_trace_from_fft()
+        self.update_fft_spectrum()
+    else:
+        self.fieldV = np.gradient(self.fieldV, self.fieldTimeV)
+        self.update_fft()</code></pre>
+</details>
+<div class="desc"><p>computes the time derivative of the trace.</p>
+<p>ARGUMENTS (Optional):
+spectrally: bool; if True (default) the derivative will be computed in the spectral domain (maybe more stable numerically)</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler.fft_tukey_bandpass"><code class="name flex">
+<span>def <span class="ident">fft_tukey_bandpass</span></span>(<span>self, lowWavelengthEdge, upWavelengthEdge, lowEdgeWidth, highEdgeWidth)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def fft_tukey_bandpass(self, lowWavelengthEdge, upWavelengthEdge, lowEdgeWidth, highEdgeWidth):
+    &#34;&#34;&#34;applies a bandpass filter to the trace in the frequency domain using a tukey window.
+
+    The tukey window is 1 between  lowWavelengthEdge+lowEdgeWidth/2  and  upWavelengthEdge-highEdgeWidth/2
+    and it is reaches zero at lowWavelengthEdge-lowEdgeWidth/2  and  upWavelengthEdge+highEdgeWidth/2.
+    Notice that the edges are only cosine-shaped in the frequency domain. In the wavelength domain upWavelengthEdge - lowWavelengthEdge does not coincide with the FWHM of the tukey function
+
+    ARGUMENTS:
+        lowWavelengthEdge: float (nm)
+        upWavelengthEdge: float (nm)
+        lowEdgeWidth: float (nm)
+        highEdgeWidth: float (nm)
+    &#34;&#34;&#34;
+    upFreqEdge = c / (lowWavelengthEdge - lowEdgeWidth / 2) /2 * 1e-6 + c / (
+                lowWavelengthEdge + lowEdgeWidth / 2) /2 * 1e-6
+    lowFreqEdge = c / (upWavelengthEdge - highEdgeWidth / 2) /2 * 1e-6 + c / (
+                upWavelengthEdge + highEdgeWidth / 2) /2 * 1e-6
+
+    upFreqEdgeWidth = c / (lowWavelengthEdge - lowEdgeWidth / 2) * 1e-6 - c / (
+                lowWavelengthEdge + lowEdgeWidth / 2) * 1e-6
+    lowFreqEdgeWidth = c / (upWavelengthEdge - highEdgeWidth / 2) * 1e-6 - c / (
+                upWavelengthEdge + highEdgeWidth / 2) * 1e-6
+
+    window = asymmetric_tukey_window(np.abs(self.frequencyAxis), lowFreqEdge, upFreqEdge, lowFreqEdgeWidth,
+                                     upFreqEdgeWidth)
+    self.fftFieldV = self.fftFieldV * window
+    self.update_trace_from_fft()
+    self.update_fft_spectrum()
+    self.strip_from_trace()</code></pre>
+</details>
+<div class="desc"><p>applies a bandpass filter to the trace in the frequency domain using a tukey window.</p>
+<p>The tukey window is 1 between
+lowWavelengthEdge+lowEdgeWidth/2
+and
+upWavelengthEdge-highEdgeWidth/2
+and it is reaches zero at lowWavelengthEdge-lowEdgeWidth/2
+and
+upWavelengthEdge+highEdgeWidth/2.
+Notice that the edges are only cosine-shaped in the frequency domain. In the wavelength domain upWavelengthEdge - lowWavelengthEdge does not coincide with the FWHM of the tukey function</p>
+<h2 id="arguments">Arguments</h2>
+<p>lowWavelengthEdge: float (nm)
+upWavelengthEdge: float (nm)
+lowEdgeWidth: float (nm)
+highEdgeWidth: float (nm)</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler.fresnel_reflection"><code class="name flex">
+<span>def <span class="ident">fresnel_reflection</span></span>(<span>self,<br>material2,<br>angle_in,<br>material1=None,<br>forward: bool = True,<br>s_polarized: bool = True,<br>path: str = './RefractiveIndices/')</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def fresnel_reflection(self, material2, angle_in, material1=None, forward: bool=True, s_polarized: bool=True, path: str = &#34;./RefractiveIndices/&#34;):
+    &#34;&#34;&#34;calculates the fresnel reflection of the pulse at the interface between two materials. The waveform is travelling from material 1 to material 2.
+    The first medium (material1) should be non-absorptive. As usual the resulting waveform is stored in the TraceHandler object, replacing the previous one.
+
+    Refractive index files should contain 3 space-separated columns, respectively with headers: wvl n k, where wvl is the wavelength in um, n and k resp. the real and imaginary part of the refractive index.
+    ARGUMENTS:
+        material2 = the filename (without &#39;.txt&#39;) of the refractive index data for the material after the interface (e.g. Si Al MgF2); wavelength is in um in the refractive index file
+        angle_in = the incidence angle in degrees
+
+    OPTIONAL ARGUMENTS:
+        material1 = the filename (without &#39;.txt&#39;) of the refractive index data for the material before the interface. If None (default), vacuum is assumed
+        forward: bool = if True (default) forward reflection is computed (the result waveform is the reflection of the previously stored waveform.
+            if False backward reflection is computed (the previous waveform is the reflection of the result waveform)
+        s_polarized: bool = True. Reflection calculation only implemented for s-polarized light
+        path: str = path for the refractive index files. Defaults to &#34;./RefractiveIndices/&#34;
+        &#34;&#34;&#34;
+    if not s_polarized:
+        raise ValueError(&#39;in function TraceHandler.fresnel_reflection() p_polarized is not implemented yet\n&#39;)
+
+    # read refractive index
+    refIndexData = pandas.read_table(path + material2 + &#34;.txt&#34;, sep=&#34; &#34;, keep_default_na=False)
+    wvl2 = np.array(refIndexData[&#39;wvl&#39;]) * 1e3
+    n2 = np.array(refIndexData[&#39;n&#39;]) +1j* np.array(refIndexData[&#39;k&#39;])
+    if material1 is None:
+        wvl1 = np.array(wvl2)
+        n1 = n2*0 + 1
+    else:
+        refIndexData = pandas.read_table(path + material1 + &#34;.txt&#34;, sep=&#34; &#34;, keep_default_na=False)
+        wvl1 = np.array(refIndexData[&#39;wvl&#39;]) * 1e3
+        n1 = np.array(refIndexData[&#39;n&#39;]) +1j* np.array(refIndexData[&#39;k&#39;])
+
+    # check that the wvl arrays are monotonically increasing
+    if np.any(np.diff(wvl1) &lt; 0):
+        if np.all(np.diff(wvl1) &lt; 0):
+            wvl1 = wvl1[::-1]
+            n1 = n1[::-1]
+        else:
+            raise ValueError(&#39;in function TraceHandler.fresnel_reflection() wavelength array is not monotonous&#39;)
+    if np.any(np.diff(wvl2) &lt; 0):
+        if np.all(np.diff(wvl2) &lt; 0):
+            wvl2 = wvl2[::-1]
+            n2 = n2[::-1]
+        else:
+            raise ValueError(&#39;in function TraceHandler.fresnel_reflection() wavelength array is not monotonous&#39;)
+
+    # frequency spectrum (monotonically increasing)
+    freq1 = c / wvl1[::-1] * 1e-6
+    freq2 = c / wvl2[::-1] * 1e-6
+    n1 = n1[::-1]
+    n2 = n2[::-1]
+
+    # fill with ones
+    initial_ones_freq = np.linspace(freq1[1] - freq1[0], freq1[0], int(np.ceil(4 * freq1[0] / (freq1[1] - freq1[0]))))
+    initial_ones = np.ones(len(initial_ones_freq)) * n1[0]
+    final_ones_freq = np.linspace(2 * freq1[-1] - freq1[-2], 4 * freq1[-1],
+                                  int(np.ceil(15 * freq1[-1] / (freq1[-1] - freq1[-2]))))
+    final_ones = np.ones(len(final_ones_freq)) * n1[-1]
+    freq1 = np.concatenate((initial_ones_freq, freq1, final_ones_freq))
+    n1 = np.concatenate((initial_ones, n1, final_ones))
+    # same for n2
+    initial_ones_freq = np.linspace(freq2[1] - freq2[0], freq2[0], int(np.ceil(4 * freq2[0] / (freq2[1] - freq2[0]))))
+    initial_ones = np.ones(len(initial_ones_freq))* n2[0]
+    final_ones_freq = np.linspace(2 * freq2[-1] - freq2[-2], 4 * freq2[-1],
+                                    int(np.ceil(15 * freq2[-1] / (freq2[-1] - freq2[-2]))))
+    final_ones = np.ones(len(final_ones_freq)) * n2[-1]
+    freq2 = np.concatenate((initial_ones_freq, freq2, final_ones_freq))
+    n2 = np.concatenate((initial_ones, n2, final_ones))
+
+    # add negative frequencies
+    freq1 = np.concatenate((-freq1[::-1], freq1))
+    n1 = np.concatenate((np.conjugate(n1[::-1]), n1))
+    freq2 = np.concatenate((-freq2[::-1], freq2))
+    n2 = np.concatenate((np.conjugate(n2[::-1]), n2))
+
+    # interpolate the n1 and n2 to the frequency axis of the fft
+    n1Interp = np.interp(self.frequencyAxis, freq1, n1)
+    n2Interp = np.interp(self.frequencyAxis, freq2, n2)
+
+    # calculate the angle of refraction using snell&#39;s law (currently not used)
+    angle_out = np.where(np.sin(angle_in*np.pi/180) * np.real(n1Interp) / np.real(n2Interp) &lt;=1,
+        np.arcsin(np.sin(angle_in*np.pi/180) * np.real(n1Interp) / np.real(n2Interp)) * 180/np.pi,
+        np.nan)
+
+    # calculate the fresnel reflection coefficients using only the angle of incidence (NOT SURE THIS WORKS WHEN THE FIRST MEDIUM IS LOSSY)
+    r = ((n1Interp * np.cos(angle_in*np.pi/180) - n2Interp * np.sqrt(1-(n1Interp/n2Interp*np.sin(angle_in*np.pi/180))**2)) /
+         (n1Interp * np.cos(angle_in*np.pi/180) + n2Interp * np.sqrt(1-(n1Interp/n2Interp*np.sin(angle_in*np.pi/180))**2)))
+    if forward:
+        self.fftFieldV = self.fftFieldV * r
+    else:
+        self.fftFieldV = self.fftFieldV / r
+
+    self.fieldStdevV = None
+
+    self.update_trace_from_fft()
+    self.strip_from_trace()
+    self.update_fft_spectrum()</code></pre>
+</details>
+<div class="desc"><p>calculates the fresnel reflection of the pulse at the interface between two materials. The waveform is travelling from material 1 to material 2.
+The first medium (material1) should be non-absorptive. As usual the resulting waveform is stored in the TraceHandler object, replacing the previous one.</p>
+<p>Refractive index files should contain 3 space-separated columns, respectively with headers: wvl n k, where wvl is the wavelength in um, n and k resp. the real and imaginary part of the refractive index.</p>
+<h2 id="arguments">Arguments</h2>
+<p>material2 = the filename (without '.txt') of the refractive index data for the material after the interface (e.g. Si Al MgF2); wavelength is in um in the refractive index file
+angle_in = the incidence angle in degrees</p>
+<p>OPTIONAL ARGUMENTS:
+material1 = the filename (without '.txt') of the refractive index data for the material before the interface. If None (default), vacuum is assumed
+forward: bool = if True (default) forward reflection is computed (the result waveform is the reflection of the previously stored waveform.
+if False backward reflection is computed (the previous waveform is the reflection of the result waveform)
+s_polarized: bool = True. Reflection calculation only implemented for s-polarized light
+path: str = path for the refractive index files. Defaults to "./RefractiveIndices/"</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler.get_FWHM"><code class="name flex">
+<span>def <span class="ident">get_FWHM</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_FWHM(self):
+    &#34;&#34;&#34;get the FWHM of the trace.
+
+    ATTENTION: the time array of the trace envelope should be fine enough to start with in order to resolve well the FWHM (please check it)
+
+    RETURNS
+        FWHM: float
+    &#34;&#34;&#34;
+    t, en = self.get_envelope()
+    i_max = np.argmax(en**2)
+    hm = en[i_max]**2 / 2
+    enSquare = en**2
+    fwhm = (np.max(t[np.argwhere(enSquare &gt;= hm)]) - np.min(t[np.argwhere(enSquare &gt;= hm)]))
+    return fwhm</code></pre>
+</details>
+<div class="desc"><p>get the FWHM of the trace.</p>
+<p>ATTENTION: the time array of the trace envelope should be fine enough to start with in order to resolve well the FWHM (please check it)</p>
+<p>RETURNS
+FWHM: float</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler.get_envelope"><code class="name flex">
+<span>def <span class="ident">get_envelope</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_envelope(self):
+    &#34;&#34;&#34;get the envelope of the trace.
+
+    RETURNS:
+        time array (fs)
+        envelope array
+        &#34;&#34;&#34;
+    if self.complexFieldV is None:
+        self.compute_complex_field()
+    return self.complexFieldTimeV, np.abs(self.complexFieldV)</code></pre>
+</details>
+<div class="desc"><p>get the envelope of the trace.</p>
+<h2 id="returns">Returns</h2>
+<p>time array (fs)
+envelope array</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler.get_fluence"><code class="name flex">
+<span>def <span class="ident">get_fluence</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_fluence(self):
+    &#34;&#34;&#34;calculate the fluence of the trace.
+
+    convention: field [V/Å], time [fs], fluence [J/cm²]
+    F = c*epsilon_0*integral(E^2)dt
+
+    RETURNS:
+        fluence: float
+    &#34;&#34;&#34;
+    F = c*eps0 * np.trapz(self.fieldV**2, self.fieldTimeV)* 1e1
+    return F</code></pre>
+</details>
+<div class="desc"><p>calculate the fluence of the trace.</p>
+<p>convention: field [V/Å], time [fs], fluence [J/cm²]
+F = c<em>epsilon_0</em>integral(E^2)dt</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>fluence</code></dt>
+<dd>float</dd>
+</dl></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler.get_phase"><code class="name flex">
+<span>def <span class="ident">get_phase</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_phase(self):
+    &#34;&#34;&#34;get the instantaneous phase of the trace.
+
+    If complexFieldV is already computed and stored, no re-calculation occurs
+
+    RETURNS:
+        time array (fs)
+        instantaneous phase array (fs)
+    &#34;&#34;&#34;
+    if self.complexFieldV is None:
+        self.compute_complex_field()
+    return self.complexFieldTimeV, np.angle(self.complexFieldV)</code></pre>
+</details>
+<div class="desc"><p>get the instantaneous phase of the trace.</p>
+<p>If complexFieldV is already computed and stored, no re-calculation occurs</p>
+<h2 id="returns">Returns</h2>
+<p>time array (fs)
+instantaneous phase array (fs)</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler.get_spectrum_trace"><code class="name flex">
+<span>def <span class="ident">get_spectrum_trace</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_spectrum_trace(self):
+    &#34;&#34;&#34;returns the wavelength and spectral intensity corresponding to the fourier transform of the trace.&#34;&#34;&#34;
+    return self.wvlAxis, self.fftSpectrum</code></pre>
+</details>
+<div class="desc"><p>returns the wavelength and spectral intensity corresponding to the fourier transform of the trace.</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler.get_stdev"><code class="name flex">
+<span>def <span class="ident">get_stdev</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_stdev(self):
+    &#34;&#34;&#34;returns only the standard deviation (sigma) array&#34;&#34;&#34;
+    return self.fieldStdevV</code></pre>
+</details>
+<div class="desc"><p>returns only the standard deviation (sigma) array</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler.get_trace"><code class="name flex">
+<span>def <span class="ident">get_trace</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_trace(self):
+    &#34;&#34;&#34;returns the time (fs) and field arrays. Field is in a.u. unless set_fluence() was called or a calibrated field was given as an input.&#34;&#34;&#34;
+    return self.fieldTimeV, self.fieldV</code></pre>
+</details>
+<div class="desc"><p>returns the time (fs) and field arrays. Field is in a.u. unless set_fluence() was called or a calibrated field was given as an input.</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler.get_zero_delay"><code class="name flex">
+<span>def <span class="ident">get_zero_delay</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def get_zero_delay(self):
+    &#34;&#34;&#34;get the time value corresponding to the envelope peak.
+
+    ATTENTION: the time array of the trace envelope should be fine enough to start with in order to resolve well the FWHM (please check it)
+
+    RETURNS
+        zero_delay: float
+    &#34;&#34;&#34;
+    # careful: the time grid should be fine enough to resolve the maximum of the envelope
+    t, en = self.get_envelope()
+    i_max = np.argmax(en)
+    self.zero_delay = t[i_max]
+    return self.zero_delay</code></pre>
+</details>
+<div class="desc"><p>get the time value corresponding to the envelope peak.</p>
+<p>ATTENTION: the time array of the trace envelope should be fine enough to start with in order to resolve well the FWHM (please check it)</p>
+<p>RETURNS
+zero_delay: float</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler.integrate_trace"><code class="name flex">
+<span>def <span class="ident">integrate_trace</span></span>(<span>self, spectrally=True)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def integrate_trace(self, spectrally=True):
+    &#34;&#34;&#34;integrates the trace in time.
+
+        ARGUMENTS (Optional):
+    spectrally: bool; if True (default) the integral will be computed in the spectral domain (maybe more stable numerically)
+    &#34;&#34;&#34;
+    if spectrally:
+        if self.frequencyAxis[1] != 0:
+            print(&#39;WARNING: in function TraceHandler.integrate_trace() the FFT axis\&#39; first element is not zero&#39;)
+        self.fftFieldV[1:] = -1j / self.frequencyAxis[1:] * self.fftFieldV[1:]
+        self.update_trace_from_fft()
+        self.update_fft_spectrum()
+    else:
+        self.fieldV = np.cumsum(self.fieldV) * np.mean(np.diff(self.fieldTimeV))
+        self.update_fft()</code></pre>
+</details>
+<div class="desc"><p>integrates the trace in time.</p>
+<pre><code>ARGUMENTS (Optional):
+</code></pre>
+<p>spectrally: bool; if True (default) the integral will be computed in the spectral domain (maybe more stable numerically)</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler.load_spectrum"><code class="name flex">
+<span>def <span class="ident">load_spectrum</span></span>(<span>self, fname=None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def load_spectrum(self, fname=None):
+    &#34;&#34;&#34;loads spectrum from file.
+
+    The spectrum does not correspond to the fourier transform of the trace, but to the spectrometer data that you would like to compare with the loaded trace
+
+    ARGUMENTS:
+        filename
+    &#34;&#34;&#34;
+    if fname is not None:
+        self.filename_spectrum = fname
+    data = pandas.read_csv(self.filename_spectrum, sep=&#39;\t&#39;)
+    self.wvlSpectrometer = data[&#39;wavelength (nm)&#39;].to_numpy()
+    self.ISpectrometer = data[&#39;intensity (a.u.)&#39;].to_numpy()
+    self.normalize_spectrum()</code></pre>
+</details>
+<div class="desc"><p>loads spectrum from file.</p>
+<p>The spectrum does not correspond to the fourier transform of the trace, but to the spectrometer data that you would like to compare with the loaded trace</p>
+<h2 id="arguments">Arguments</h2>
+<p>filename</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler.load_spectrum_from_arrays"><code class="name flex">
+<span>def <span class="ident">load_spectrum_from_arrays</span></span>(<span>self, wvl, spectrum)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def load_spectrum_from_arrays(self, wvl, spectrum):
+    &#34;&#34;&#34;loads the spectrum from wavelength and spectrum arrays and stores it in the class.
+
+    The spectrum does not correspond to the fourier transform of the trace, but to some spectrometer data that you would like to compare with the loaded trace
+
+    ARGUMENTS:
+        wvl: wavelength array (nm)
+        spectrum: spectral intensity array
+    &#34;&#34;&#34;
+    &#34;&#34;&#34;wavelength is in nm&#34;&#34;&#34;
+    check_equal_length(wvl, spectrum)
+    self.wvlSpectrometer = np.array(wvl)
+    self.ISpectrometer = np.array(spectrum)</code></pre>
+</details>
+<div class="desc"><p>loads the spectrum from wavelength and spectrum arrays and stores it in the class.</p>
+<p>The spectrum does not correspond to the fourier transform of the trace, but to some spectrometer data that you would like to compare with the loaded trace</p>
+<h2 id="arguments">Arguments</h2>
+<p>wvl: wavelength array (nm)
+spectrum: spectral intensity array</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler.load_trace"><code class="name flex">
+<span>def <span class="ident">load_trace</span></span>(<span>self, fname=None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def load_trace(self, fname=None):
+    &#34;&#34;&#34;loads from file&#34;&#34;&#34;
+    if fname is not None:
+        self.filename = fname
+    data = pandas.read_csv(self.filename, sep=&#39;\t&#39;)
+    self.fieldTimeV = data[&#39;delay (fs)&#39;].to_numpy()
+    self.fieldV = data[&#39;field (a.u.)&#39;].to_numpy()
+    self.fieldStdevV = data[&#39;stdev field&#39;].to_numpy()
+    self.normalization_trace = np.max(np.abs(self.fieldV))
+    self.update_fft()</code></pre>
+</details>
+<div class="desc"><p>loads from file</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler.load_trace_from_arrays"><code class="name flex">
+<span>def <span class="ident">load_trace_from_arrays</span></span>(<span>self, fieldTimeV, fieldV, fieldStdevV=None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def load_trace_from_arrays(self, fieldTimeV, fieldV, fieldStdevV=None):
+    &#34;&#34;&#34;loads the trace from time and field arrays and stores it in the class.
+
+    ARGUMENTS:
+        fieldTimeV: time array (fs)
+        fieldV: field array
+        fieldStdevV: standard deviation - or sigma - to be associated to the trace (optional, default = None)
+    &#34;&#34;&#34;
+    if fieldTimeV is None or fieldV is None:
+        raise ValueError(&#39;\nin function TraceHandler.load_from_arrays() too many arguments were None\n&#39;
+                         &#39;it might be that the constructor was erroneously used with no or too few arguments\n&#39;)
+    if np.max(np.abs(fieldTimeV)) &lt; 1.:
+        print(&#39;\n\nWARNING: do you remember that the time axis of TraceHandler is in fs?\n\n&#39;)
+    self.fieldTimeV = np.array(fieldTimeV)
+    self.fieldV = np.array(fieldV)
+    if fieldStdevV is not None:
+        self.fieldStdevV = np.array(fieldStdevV)
+    self.normalization_trace = np.max(np.abs(self.fieldV))
+    self.update_fft()</code></pre>
+</details>
+<div class="desc"><p>loads the trace from time and field arrays and stores it in the class.</p>
+<h2 id="arguments">Arguments</h2>
+<p>fieldTimeV: time array (fs)
+fieldV: field array
+fieldStdevV: standard deviation - or sigma - to be associated to the trace (optional, default = None)</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler.load_trace_from_spectral_data"><code class="name flex">
+<span>def <span class="ident">load_trace_from_spectral_data</span></span>(<span>self, wvl_FFT_trace, spectrum_FFT_trace, phase_FFT_trace)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def load_trace_from_spectral_data(self, wvl_FFT_trace, spectrum_FFT_trace, phase_FFT_trace):
+    &#34;&#34;&#34;loads the trace from wavelength, spectrum, and spectral phase arrays and stores it in the class.
+
+    This function has a different job than load_spectrum_from_arrays(): in fact, it retrieves the trace from the given spectral data via fourier transform.
+
+    ARGUMENTS:
+        wvl_FFT_trace: wavelength array in nm
+        spectrum_FFT_trace: (wavelength-)spectral intensity array. This is assumed to be |FFT{field}|^2 * df/dλ
+        phase_FFT_trace: spectral phase in rad
+    &#34;&#34;&#34;
+    check_equal_length(wvl_FFT_trace, spectrum_FFT_trace, phase_FFT_trace)
+
+    # check that the wvl_FFT_trace array is monotonically increasing
+    if np.any(np.diff(wvl_FFT_trace) &lt; 0):
+        if np.all(np.diff(wvl_FFT_trace) &lt; 0):
+            wvl_FFT_trace = wvl_FFT_trace[::-1]
+            spectrum_FFT_trace = spectrum_FFT_trace[::-1]
+            phase_FFT_trace = phase_FFT_trace[::-1]
+        else:
+            raise ValueError(&#39;in function TraceHandler.load_from_spectral_data() wavelength array is not monotonous&#39;)
+
+    # frequency spectrum (monotonically increasing)
+    freq = c / wvl_FFT_trace[::-1] * 1e-6
+    spectrum_freq = spectrum_FFT_trace[::-1] / (c/wvl_FFT_trace[::-1]**2 *1e-6)
+    phase_FFT_trace = phase_FFT_trace[::-1]
+
+    # create proper freq axis for the fourier transform
+    df = (freq[1]-freq[0])/4
+    nf = int(np.ceil(3 * freq[-1]/df))
+    self.frequencyAxis = np.arange(-nf, nf) * df
+    # corresponding time window
+    twin = 1./(df)
+
+    # complex fourier transform
+    spectrum_freq = np.sqrt(spectrum_freq)*np.exp(1.j*phase_FFT_trace)
+
+    # fill with zeros
+    initial_zero_freq = np.linspace(freq[1]-freq[0], freq[0], int(np.ceil(4 * freq[0]/(freq[1]-freq[0]))))
+    initial_zeros = np.zeros(len(initial_zero_freq))
+    final_zero_freq = np.linspace(2*freq[-1]-freq[-2], 4 * freq[-1], int(np.ceil(15 * freq[-1]/(freq[-1]-freq[-2]))))
+    final_zeros = np.zeros(len(final_zero_freq))
+    freq = np.concatenate((initial_zero_freq, freq, final_zero_freq))
+    spectrum_freq = np.concatenate((initial_zeros, spectrum_freq, final_zeros))
+    # add negative frequencies
+    freq = np.concatenate((-freq[::-1], freq))
+    spectrum_freq = np.concatenate((np.conjugate(spectrum_freq[::-1]), spectrum_freq))
+
+    # interpolate the spectrum to the frequency axis of the fft
+    self.fftFieldV = np.interp(self.frequencyAxis, freq, spectrum_freq)
+
+    # add linear phase to center the pulse in the time window; this has to be done after interpolation because the spectral phase will be fast oscillating
+    self.fftFieldV = self.fftFieldV*np.exp(1.j*2*np.pi*self.frequencyAxis*twin/2)
+
+    self.update_fft_spectrum()
+    self.update_trace_from_fft()</code></pre>
+</details>
+<div class="desc"><p>loads the trace from wavelength, spectrum, and spectral phase arrays and stores it in the class.</p>
+<p>This function has a different job than load_spectrum_from_arrays(): in fact, it retrieves the trace from the given spectral data via fourier transform.</p>
+<h2 id="arguments">Arguments</h2>
+<p>wvl_FFT_trace: wavelength array in nm
+spectrum_FFT_trace: (wavelength-)spectral intensity array. This is assumed to be |FFT{field}|^2 * df/dλ
+phase_FFT_trace: spectral phase in rad</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler.normalize_fft_spectrum"><code class="name flex">
+<span>def <span class="ident">normalize_fft_spectrum</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def normalize_fft_spectrum(self):
+    &#34;&#34;&#34;normalizes the spectrum of the trace (|FFT{trace}|^2 * df/dλ) to its integral&#34;&#34;&#34;
+    spectrum_range = [60, 930]
+    n_factor = (np.abs(np.diff(self.wvlAxis)[(self.wvlAxis[:-1] &gt; spectrum_range[0]) &amp; (
+                self.wvlAxis[:-1] &lt; spectrum_range[1])]) *
+                           self.fftSpectrum[:-1][(self.wvlAxis[:-1] &gt; spectrum_range[0]) &amp; (
+                                   self.wvlAxis[:-1] &lt; spectrum_range[1])]).sum()
+    self.fftSpectrum /= n_factor</code></pre>
+</details>
+<div class="desc"><p>normalizes the spectrum of the trace (|FFT{trace}|^2 * df/dλ) to its integral</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler.normalize_spectrum"><code class="name flex">
+<span>def <span class="ident">normalize_spectrum</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def normalize_spectrum(self):
+    &#34;&#34;&#34;normalizes the comparison spectrum to its integral.&#34;&#34;&#34;
+    spectrum_range = [60, 930]
+    n_factor = (np.abs(np.diff(self.wvlSpectrometer)[(self.wvlSpectrometer[:-1] &gt; spectrum_range[0]) &amp; (
+                self.wvlSpectrometer[:-1] &lt; spectrum_range[1])]) *
+                           self.ISpectrometer[:-1][(self.wvlSpectrometer[:-1] &gt; spectrum_range[0]) &amp; (
+                                   self.wvlSpectrometer[:-1] &lt; spectrum_range[1])]).sum()
+    self.ISpectrometer /= n_factor</code></pre>
+</details>
+<div class="desc"><p>normalizes the comparison spectrum to its integral.</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler.plot_spectrum"><code class="name flex">
+<span>def <span class="ident">plot_spectrum</span></span>(<span>self, low_lim=40, up_lim=1000, no_phase: bool = False)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def plot_spectrum(self, low_lim = 40, up_lim = 1000, no_phase: bool = False):
+    &#34;&#34;&#34;plots the trace spectrum and phase together with the spectrometer measurement [if provided].
+
+    OPTIONAL ARGUMENTS:
+        low_lim, up_lim: float = xaxis limits for plotting. Default: 40, 1000
+        no_phase = if True, don&#39;t plot the phase. Default: False
+    &#34;&#34;&#34;
+    fig, ax = plt.subplots(figsize=figureSize)
+    if not no_phase:
+        ax2 = ax.twinx()
+    ax.plot(self.wvlAxis[(self.wvlAxis&gt;low_lim) &amp; (self.wvlAxis&lt;up_lim)], self.fftSpectrum[(self.wvlAxis&gt;low_lim) &amp; (self.wvlAxis&lt;up_lim)],
+            label=&#39;FFT&#39;, color=&#39;b&#39;, linewidth=lineWidth)
+    if not no_phase:
+        ax2.plot(self.wvlAxis[(self.wvlAxis&gt;low_lim)&amp;(self.wvlAxis&lt;up_lim)], self.fftphase[(self.wvlAxis&gt;low_lim)&amp;(self.wvlAxis&lt;up_lim)],
+                 color=&#39;g&#39;, linewidth=lineWidth, label=&#39;Phase&#39;)
+    if self.wvlSpectrometer is not None:
+        ax.plot(self.wvlSpectrometer[(self.wvlSpectrometer&gt;low_lim)&amp;(self.wvlSpectrometer&lt;up_lim)], self.ISpectrometer[(self.wvlSpectrometer&gt;low_lim)&amp;(self.wvlSpectrometer&lt;up_lim)],
+                label=&#39;Spectrometer&#39;, color=&#39;r&#39;, linewidth=lineWidth)
+    ax.set_xlabel(&#39;Wavelength (nm)&#39;, fontsize=fontSize)
+    ax.set_ylabel(&#39;Intensity (a.u.)&#39;, fontsize=fontSize)
+    ax.set_title(&#39;Fourier Transform of the field trace&#39;, fontsize=fontSize)
+    ax.tick_params(axis=&#39;both&#39;, labelsize=tickSize)
+    if not no_phase:
+        ax2.set_ylabel(&#39;Phase (rad)&#39;, color=&#39;g&#39;, fontsize=fontSize)
+        ax2.tick_params(axis=&#39;y&#39;, colors=&#39;g&#39;, labelsize=tickSize)
+        ax2.yaxis.label.set_color(&#39;g&#39;)
+    plt.show()</code></pre>
+</details>
+<div class="desc"><p>plots the trace spectrum and phase together with the spectrometer measurement [if provided].</p>
+<p>OPTIONAL ARGUMENTS:
+low_lim, up_lim: float = xaxis limits for plotting. Default: 40, 1000
+no_phase = if True, don't plot the phase. Default: False</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler.plot_trace"><code class="name flex">
+<span>def <span class="ident">plot_trace</span></span>(<span>self, low_lim=None, up_lim=None, normalize: bool = True)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def plot_trace(self, low_lim = None, up_lim = None, normalize: bool = True):
+    &#34;&#34;&#34;plots the field trace.
+
+    OPTIONAL ARGUMENTS:
+        low_lim, up_lim: float = xaxis limits for plotting. Default None
+        normalize: bool = if True (default) normalize the peak of the trace to 1
+    &#34;&#34;&#34;
+    fig, ax = plt.subplots(figsize=figureSize)
+    if normalize:
+        norm_plot = self.normalization_trace
+    else:
+        norm_plot = 1
+    ax.plot(self.fieldTimeV, self.fieldV/norm_plot, label=&#39;Field trace&#39;, color=&#39;b&#39;, linewidth=lineWidth)
+    if self.fieldStdevV is not None:
+        ax.fill_between(self.fieldTimeV, (self.fieldV - self.fieldStdevV)/norm_plot,
+                        (self.fieldV + self.fieldStdevV)/norm_plot, color=&#39;b&#39;, alpha=0.2)
+    ax.set_xlabel(&#39;Time (fs)&#39;, fontsize=fontSize)
+    ax.set_ylabel(&#39;Field (a.u.)&#39;, fontsize=fontSize)
+    ax.set_title(&#39;Field trace&#39;, fontsize=fontSize)
+    plt.xticks(fontsize=tickSize)
+    plt.yticks(fontsize=tickSize)
+    if low_lim is not None and up_lim is not None:
+        ax.set_xlim(low_lim, up_lim)
+    plt.show()</code></pre>
+</details>
+<div class="desc"><p>plots the field trace.</p>
+<p>OPTIONAL ARGUMENTS:
+low_lim, up_lim: float = xaxis limits for plotting. Default None
+normalize: bool = if True (default) normalize the peak of the trace to 1</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler.save_trace_to_file"><code class="name flex">
+<span>def <span class="ident">save_trace_to_file</span></span>(<span>self, filename, low_lim=None, up_lim=None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def save_trace_to_file(self, filename, low_lim=None, up_lim=None):
+    &#34;&#34;&#34;saves the trace to file
+
+    ARGUMENTS:
+        filename
+
+    OPTIONAL ARGUMENTS:
+        low_lim, up_lim: only save the trace between low_lim and up_lim (default: None, None)
+    &#34;&#34;&#34;
+    if low_lim is not None and up_lim is not None:
+        fieldTimeV_to_write = self.fieldTimeV[(self.fieldTimeV &gt;= low_lim) &amp; (self.fieldTimeV &lt;= up_lim)]
+        fieldV_to_write = self.fieldV[(self.fieldTimeV &gt;= low_lim) &amp; (self.fieldTimeV &lt;= up_lim)]
+    else:
+        fieldTimeV_to_write = self.fieldTimeV
+        fieldV_to_write = self.fieldV
+    data = pandas.DataFrame({&#39;delay (fs)&#39;: fieldTimeV_to_write, &#39;field (a.u.)&#39;: fieldV_to_write})
+    data.to_csv(filename, sep=&#39;\t&#39;, index=False)</code></pre>
+</details>
+<div class="desc"><p>saves the trace to file</p>
+<h2 id="arguments">Arguments</h2>
+<p>filename</p>
+<p>OPTIONAL ARGUMENTS:
+low_lim, up_lim: only save the trace between low_lim and up_lim (default: None, None)</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler.set_fluence"><code class="name flex">
+<span>def <span class="ident">set_fluence</span></span>(<span>self, fluence)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def set_fluence(self, fluence):
+    &#34;&#34;&#34;set the fluence of the trace.
+
+    convention: field [V/Å], time [fs], fluence [J/cm²]
+    F = c*epsilon_0*integral(E^2)dt&#34;&#34;&#34;
+    F = c*eps0 * np.trapz(self.fieldV**2, self.fieldTimeV)* 1e1
+    self.fieldV *= np.sqrt(fluence/F)
+    self.update_fft()
+    self.update_fft_spectrum()</code></pre>
+</details>
+<div class="desc"><p>set the fluence of the trace.</p>
+<p>convention: field [V/Å], time [fs], fluence [J/cm²]
+F = c<em>epsilon_0</em>integral(E^2)dt</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler.strip_from_complex_trace"><code class="name flex">
+<span>def <span class="ident">strip_from_complex_trace</span></span>(<span>self, timeRange=None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def strip_from_complex_trace(self, timeRange = None):
+    &#34;&#34;&#34;from the complex trace eliminates the zeros appended (zero-padding) when computing the FFT (Analogous to strip_from_trace()).&#34;&#34;&#34;
+    if timeRange is None:
+        timeRange = self.fsZeroPadding
+    # strip the first and last fsZeroPadding time points
+    self.complexFieldV= self.complexFieldV[(self.complexFieldTimeV &gt;= np.min(self.complexFieldTimeV) + timeRange)
+                                      &amp; (self.complexFieldTimeV &lt;= np.max(self.complexFieldTimeV) - timeRange)]
+    self.complexFieldTimeV = self.complexFieldTimeV[(self.complexFieldTimeV &gt;= np.min(self.complexFieldTimeV) + timeRange)
+                                      &amp; (self.complexFieldTimeV &lt;= np.max(self.complexFieldTimeV) - timeRange)]</code></pre>
+</details>
+<div class="desc"><p>from the complex trace eliminates the zeros appended (zero-padding) when computing the FFT (Analogous to strip_from_trace()).</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler.strip_from_trace"><code class="name flex">
+<span>def <span class="ident">strip_from_trace</span></span>(<span>self, timeRange=None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def strip_from_trace(self, timeRange = None):
+    &#34;&#34;&#34;eliminates the zeros appended to the trace (zero-padding) when computing the FFT.
+
+    Useful when retrieving the trace via ifft (method update_trace_from_fft()).
+
+    OPTIONAL ARGUMENTS:
+        timeRange (float): the time range (fs) to strip from the beginning and end of the trace. If None (default), fsZeroPadding is used.
+    &#34;&#34;&#34;
+    if timeRange is None:
+        timeRange = self.fsZeroPadding
+    # strip the first and last fsZeroPadding time points
+    self.fieldV = self.fieldV[(self.fieldTimeV &gt;= np.min(self.fieldTimeV) + timeRange)
+                                      &amp; (self.fieldTimeV &lt;= np.max(self.fieldTimeV) - timeRange)]
+    self.fieldTimeV = self.fieldTimeV[(self.fieldTimeV &gt;= np.min(self.fieldTimeV) + timeRange)
+                                      &amp; (self.fieldTimeV &lt;= np.max(self.fieldTimeV) - timeRange)]
+    if self.fieldStdevV is None:
+        return True
+    if len(self.fieldStdevV) &gt; len(self.fieldV):
+        n_remove = len(self.fieldStdevV)-len(self.fieldV)
+        print(&#39;\n\nWarning: fieldStdevV is longer than fieldV, removing&#39;, n_remove, &#39; elements\n\n&#39;)
+        while n_remove &gt; 0:
+            if n_remove % 2 == 0:
+                self.fieldStdevV = np.delete(self.fieldStdevV, 0)
+            else:
+                self.fieldStdevV = np.delete(self.fieldStdevV, -1)
+            n_remove -= 1
+    elif len(self.fieldStdevV) &lt; len(self.fieldV):
+        n_add = len(self.fieldV)-len(self.fieldStdevV)
+        print(&#39;\n\nWarning: fieldStdevV is shorter than fieldV, adding&#39;, n_add, &#39; elements\n\n&#39;)
+        while n_add &gt; 0:
+            if n_add % 2 == 0:
+                self.fieldStdevV = np.insert(self.fieldStdevV, 0, 0)
+            else:
+                self.fieldStdevV = np.append(self.fieldStdevV, 0)
+            n_add -= 1
+    return True</code></pre>
+</details>
+<div class="desc"><p>eliminates the zeros appended to the trace (zero-padding) when computing the FFT.</p>
+<p>Useful when retrieving the trace via ifft (method update_trace_from_fft()).</p>
+<p>OPTIONAL ARGUMENTS:
+timeRange (float): the time range (fs) to strip from the beginning and end of the trace. If None (default), fsZeroPadding is used.</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler.time_frequency_analysis"><code class="name flex">
+<span>def <span class="ident">time_frequency_analysis</span></span>(<span>self, sigma_time, low_lim=None, up_lim=None, low_lim_freq=None, up_lim_freq=None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def time_frequency_analysis(self, sigma_time, low_lim=None, up_lim=None, low_lim_freq=None, up_lim_freq=None):
+    &#34;&#34;&#34;performs time-frequency analysis by using scipy&#39;s short time fourier transform (fourier transform of the trace convoluted by a &#39;sigma_time&#39; broad gaussian).
+
+    ARGUMENTS:
+        sigma_time = sigma of the gaussian window
+
+    OPTIONAL ARGUMENTS:
+        low_lim, up_lim: float = xaxis limits for plotting. Default None
+        low_lim_freq, up_lim_freq: float = xaxis limits for plotting. Default None
+
+    &#34;&#34;&#34;
+    dt = np.mean(np.diff(self.fieldTimeV))
+    w = scipy.signal.windows.gaussian(int(sigma_time / dt * 6) + 1, sigma_time / dt, sym=True)
+    TFA = scipy.signal.ShortTimeFFT(w, hop=1, fs=1. / dt, mfft=int(sigma_time / dt * 24), scale_to=&#39;magnitude&#39;)
+    TFData = TFA.stft(self.fieldV)
+
+    fig, ax = plt.subplots(figsize=figureSize)
+    t_lo, t_hi, f_lo, f_hi = TFA.extent(self.fieldV.size)  # time and freq range of plot
+    if low_lim is None:
+        low_lim = t_lo+self.fieldTimeV[0]
+    if up_lim is None:
+        up_lim = t_hi+self.fieldTimeV[0]
+    if low_lim_freq is None:
+        low_lim_freq = 0
+    if up_lim_freq is None:
+        up_lim_freq = 3.0
+    ax.set_title(&#39;time-frequency analysis&#39;, fontsize=fontSize)
+    ax.set( xlim=(low_lim, up_lim),
+            ylim=(low_lim_freq, up_lim_freq))
+    ax.set_xlabel(&#39;time (fs)&#39;, fontsize=fontSize)
+    ax.set_ylabel(&#39;Frequency (PHz)&#39;, fontsize=fontSize)
+    im1 = ax.imshow(abs(TFData)/np.max(abs(TFData)), origin=&#39;lower&#39;, aspect=&#39;auto&#39;,
+                     extent=(t_lo+self.fieldTimeV[0], t_hi+self.fieldTimeV[0], f_lo, f_hi), cmap=&#39;viridis&#39;)
+    cbar = fig.colorbar(im1)
+    ticklabs = cbar.ax.get_yticklabels()
+    cbar.ax.set_yticklabels(ticklabs, fontsize=tickSize)
+    cbar.ax.set_ylabel(&#34;Magnitude of the field (a.u.)&#34;, fontsize=fontSize)
+    plt.yticks(fontsize=tickSize)
+    plt.xticks(fontsize=tickSize)
+    fig.tight_layout()
+    plt.show()
+    return TFData</code></pre>
+</details>
+<div class="desc"><p>performs time-frequency analysis by using scipy's short time fourier transform (fourier transform of the trace convoluted by a 'sigma_time' broad gaussian).</p>
+<h2 id="arguments">Arguments</h2>
+<p>sigma_time = sigma of the gaussian window</p>
+<p>OPTIONAL ARGUMENTS:
+low_lim, up_lim: float = xaxis limits for plotting. Default None
+low_lim_freq, up_lim_freq: float = xaxis limits for plotting. Default None</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler.tukey_time_window"><code class="name flex">
+<span>def <span class="ident">tukey_time_window</span></span>(<span>self, lowEdge, upEdge, lowEdgeWidth, upEdgeWidth)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def tukey_time_window(self, lowEdge, upEdge, lowEdgeWidth, upEdgeWidth):
+    &#34;&#34;&#34;applies a tukey window to the trace in the time domain.
+
+    ARGUMENTS:
+        lowEdge, upEdge = lower and upper edge of the window upEdge-lowEdge = FWHM of the window
+        lowEdgeWidth, upEdgeWidth = width of the cosine-shaped edges (from 0 to 1 or viceversa)
+    &#34;&#34;&#34;
+    window = asymmetric_tukey_window(np.abs(self.fieldTimeV), lowEdge, upEdge, lowEdgeWidth, upEdgeWidth)
+    self.fieldV = self.fieldV * window
+    self.update_fft()</code></pre>
+</details>
+<div class="desc"><p>applies a tukey window to the trace in the time domain.</p>
+<h2 id="arguments">Arguments</h2>
+<p>lowEdge, upEdge = lower and upper edge of the window upEdge-lowEdge = FWHM of the window
+lowEdgeWidth, upEdgeWidth = width of the cosine-shaped edges (from 0 to 1 or viceversa)</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler.update_fft"><code class="name flex">
+<span>def <span class="ident">update_fft</span></span>(<span>self, zero_pad_field=True)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update_fft(self, zero_pad_field = True):
+    &#34;&#34;&#34;updates the fft of the trace from the time domain data.
+
+    OPTIONAL ARGUMENTS:
+        zero_pad_field: bool; if true (default) add zeros before and after the trace before computing fft (for a smoother spectrum)
+            The length of appended zeros is defined by self.fsZeroPadding.
+    &#34;&#34;&#34;
+    zp_fieldTimeV, zp_fieldV = deepcopy(self.fieldTimeV), deepcopy(self.fieldV)
+    if zero_pad_field:
+        zp_fieldTimeV, zp_fieldV = zero_padding(self.fieldTimeV, self.fieldV, fsExtension=self.fsZeroPadding)
+    self.frequencyAxis, self.fftFieldV = fourier_transform(zp_fieldTimeV, zp_fieldV)
+    self.update_fft_spectrum()</code></pre>
+</details>
+<div class="desc"><p>updates the fft of the trace from the time domain data.</p>
+<p>OPTIONAL ARGUMENTS:
+zero_pad_field: bool; if true (default) add zeros before and after the trace before computing fft (for a smoother spectrum)
+The length of appended zeros is defined by self.fsZeroPadding.</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler.update_fft_spectrum"><code class="name flex">
+<span>def <span class="ident">update_fft_spectrum</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update_fft_spectrum(self):
+    &#34;&#34;&#34;Updates the wavelength-dependent intensity spectrum. Results are stored in self.wvlAxis and self.fftSpectrum.
+
+    This is (derived from but) different from the fourier transform because:
+     - it considers the squared modulus of the field
+     - it multiplies the frequency-dependent spectral density by df/dλ = c/λ²
+     - it considers only positive wavelengths
+
+    The function internally calls update_spectral_phase() as well.
+    &#34;&#34;&#34;
+    self.wvlAxis = c/self.frequencyAxis[self.frequencyAxis &gt; 0]*1.e-6
+    self.fftSpectrum = np.abs(self.fftFieldV[self.frequencyAxis &gt; 0])**2 * c/self.wvlAxis**2
+    self.compute_complex_field()
+    self.update_spectral_phase()
+    self.normalize_fft_spectrum()</code></pre>
+</details>
+<div class="desc"><p>Updates the wavelength-dependent intensity spectrum. Results are stored in self.wvlAxis and self.fftSpectrum.</p>
+<p>This is (derived from but) different from the fourier transform because:
+- it considers the squared modulus of the field
+- it multiplies the frequency-dependent spectral density by df/dλ = c/λ²
+- it considers only positive wavelengths</p>
+<p>The function internally calls update_spectral_phase() as well.</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler.update_spectral_phase"><code class="name flex">
+<span>def <span class="ident">update_spectral_phase</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update_spectral_phase(self):
+    &#34;&#34;&#34;computes the spectral phase of the trace. Result is stored in self.fftphase.
+
+    An attempt of automatic linear phase subtraction is made. Phase is unwrapped.
+    &#34;&#34;&#34;
+    # determine the time distance (delay) of the waveform peak from the beginning of the trace (more precisely, from the beginning of the ifft)
+    tmax = self.get_zero_delay()
+    deltaT1 = tmax - self.complexFieldTimeV[0]
+    deltaT2 = self.complexFieldTimeV[-1] - tmax
+    ifft_twindow = 1/ (self.frequencyAxis[1] - self.frequencyAxis[0])
+    total_delay = ifft_twindow/2 + (deltaT2-deltaT1)/2 # total estimated delay of the peak from the beginning of the ifft trace
+
+    # compute the phase, use the computed &#39;delay&#39; to correct for the non-interesting linear component, and unwrap it
+    self.fftphase = np.angle(self.fftFieldV[self.frequencyAxis &gt; 0])
+    self.fftphase = self.fftphase - total_delay * self.frequencyAxis[self.frequencyAxis &gt; 0] * 2 * np.pi
+    self.fftphase = np.unwrap(self.fftphase)
+
+    # subtract constant phase offset (m * 2*π)
+    n_pi =  np.sum(self.fftSpectrum*self.fftphase)/ np.sum(self.fftSpectrum)
+    n_pi = int( n_pi / ( 2*np.pi ))
+    self.fftphase -= n_pi * 2 * np.pi</code></pre>
+</details>
+<div class="desc"><p>computes the spectral phase of the trace. Result is stored in self.fftphase.</p>
+<p>An attempt of automatic linear phase subtraction is made. Phase is unwrapped.</p></div>
+</dd>
+<dt id="attoworld.wave.trace_handler.TraceHandler.update_trace_from_fft"><code class="name flex">
+<span>def <span class="ident">update_trace_from_fft</span></span>(<span>self)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def update_trace_from_fft(self):        # remember to use together with strip_from_trace
+                                        # careful: the complex part of the IFFT is discarded
+    &#34;&#34;&#34;updates the field trace from fft
+
+    In most cases, you might want to call strip_from_trace() afterward, to eliminate the zero-padding from the trace.
+    &#34;&#34;&#34;
+    self.fieldTimeV, self.fieldV = inverse_fourier_transform(self.frequencyAxis, self.fftFieldV)
+    self.fieldV = np.real(self.fieldV)
+    self.normalization_trace = np.max(np.abs(self.fieldV))
+    self.get_zero_delay()</code></pre>
+</details>
+<div class="desc"><p>updates the field trace from fft</p>
+<p>In most cases, you might want to call strip_from_trace() afterward, to eliminate the zero-padding from the trace.</p></div>
+</dd>
+</dl>
+</dd>
+</dl>
+</section>
+</article>
+<nav id="sidebar">
+<div class="toc">
+<ul></ul>
+</div>
+<ul id="index">
+<li><h3>Super-module</h3>
+<ul>
+<li><code><a title="attoworld.wave" href="index.html">attoworld.wave</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="attoworld.wave.trace_handler.asymmetric_tukey_f" href="#attoworld.wave.trace_handler.asymmetric_tukey_f">asymmetric_tukey_f</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.asymmetric_tukey_window" href="#attoworld.wave.trace_handler.asymmetric_tukey_window">asymmetric_tukey_window</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.check_equal_length" href="#attoworld.wave.trace_handler.check_equal_length">check_equal_length</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.fourier_transform" href="#attoworld.wave.trace_handler.fourier_transform">fourier_transform</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.inverse_fourier_transform" href="#attoworld.wave.trace_handler.inverse_fourier_transform">inverse_fourier_transform</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.zero_padding" href="#attoworld.wave.trace_handler.zero_padding">zero_padding</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-classes">Classes</a></h3>
+<ul>
+<li>
+<h4><code><a title="attoworld.wave.trace_handler.MultiTraceHandler" href="#attoworld.wave.trace_handler.MultiTraceHandler">MultiTraceHandler</a></code></h4>
+<ul class="two-column">
+<li><code><a title="attoworld.wave.trace_handler.MultiTraceHandler.append_trace" href="#attoworld.wave.trace_handler.MultiTraceHandler.append_trace">append_trace</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.MultiTraceHandler.apply_spectrum" href="#attoworld.wave.trace_handler.MultiTraceHandler.apply_spectrum">apply_spectrum</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.MultiTraceHandler.flip_trace" href="#attoworld.wave.trace_handler.MultiTraceHandler.flip_trace">flip_trace</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.MultiTraceHandler.plot_spectra" href="#attoworld.wave.trace_handler.MultiTraceHandler.plot_spectra">plot_spectra</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.MultiTraceHandler.plot_traces" href="#attoworld.wave.trace_handler.MultiTraceHandler.plot_traces">plot_traces</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.MultiTraceHandler.tukey_bandpass" href="#attoworld.wave.trace_handler.MultiTraceHandler.tukey_bandpass">tukey_bandpass</a></code></li>
+</ul>
+</li>
+<li>
+<h4><code><a title="attoworld.wave.trace_handler.TraceHandler" href="#attoworld.wave.trace_handler.TraceHandler">TraceHandler</a></code></h4>
+<ul class="">
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.apply_spectrum" href="#attoworld.wave.trace_handler.TraceHandler.apply_spectrum">apply_spectrum</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.apply_transmission" href="#attoworld.wave.trace_handler.TraceHandler.apply_transmission">apply_transmission</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.apply_zero_phase" href="#attoworld.wave.trace_handler.TraceHandler.apply_zero_phase">apply_zero_phase</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.compute_complex_field" href="#attoworld.wave.trace_handler.TraceHandler.compute_complex_field">compute_complex_field</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.differentiate_trace" href="#attoworld.wave.trace_handler.TraceHandler.differentiate_trace">differentiate_trace</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.fft_tukey_bandpass" href="#attoworld.wave.trace_handler.TraceHandler.fft_tukey_bandpass">fft_tukey_bandpass</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.fresnel_reflection" href="#attoworld.wave.trace_handler.TraceHandler.fresnel_reflection">fresnel_reflection</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.get_FWHM" href="#attoworld.wave.trace_handler.TraceHandler.get_FWHM">get_FWHM</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.get_envelope" href="#attoworld.wave.trace_handler.TraceHandler.get_envelope">get_envelope</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.get_fluence" href="#attoworld.wave.trace_handler.TraceHandler.get_fluence">get_fluence</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.get_phase" href="#attoworld.wave.trace_handler.TraceHandler.get_phase">get_phase</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.get_spectrum_trace" href="#attoworld.wave.trace_handler.TraceHandler.get_spectrum_trace">get_spectrum_trace</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.get_stdev" href="#attoworld.wave.trace_handler.TraceHandler.get_stdev">get_stdev</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.get_trace" href="#attoworld.wave.trace_handler.TraceHandler.get_trace">get_trace</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.get_zero_delay" href="#attoworld.wave.trace_handler.TraceHandler.get_zero_delay">get_zero_delay</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.integrate_trace" href="#attoworld.wave.trace_handler.TraceHandler.integrate_trace">integrate_trace</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.load_spectrum" href="#attoworld.wave.trace_handler.TraceHandler.load_spectrum">load_spectrum</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.load_spectrum_from_arrays" href="#attoworld.wave.trace_handler.TraceHandler.load_spectrum_from_arrays">load_spectrum_from_arrays</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.load_trace" href="#attoworld.wave.trace_handler.TraceHandler.load_trace">load_trace</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.load_trace_from_arrays" href="#attoworld.wave.trace_handler.TraceHandler.load_trace_from_arrays">load_trace_from_arrays</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.load_trace_from_spectral_data" href="#attoworld.wave.trace_handler.TraceHandler.load_trace_from_spectral_data">load_trace_from_spectral_data</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.normalize_fft_spectrum" href="#attoworld.wave.trace_handler.TraceHandler.normalize_fft_spectrum">normalize_fft_spectrum</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.normalize_spectrum" href="#attoworld.wave.trace_handler.TraceHandler.normalize_spectrum">normalize_spectrum</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.plot_spectrum" href="#attoworld.wave.trace_handler.TraceHandler.plot_spectrum">plot_spectrum</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.plot_trace" href="#attoworld.wave.trace_handler.TraceHandler.plot_trace">plot_trace</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.save_trace_to_file" href="#attoworld.wave.trace_handler.TraceHandler.save_trace_to_file">save_trace_to_file</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.set_fluence" href="#attoworld.wave.trace_handler.TraceHandler.set_fluence">set_fluence</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.strip_from_complex_trace" href="#attoworld.wave.trace_handler.TraceHandler.strip_from_complex_trace">strip_from_complex_trace</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.strip_from_trace" href="#attoworld.wave.trace_handler.TraceHandler.strip_from_trace">strip_from_trace</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.time_frequency_analysis" href="#attoworld.wave.trace_handler.TraceHandler.time_frequency_analysis">time_frequency_analysis</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.tukey_time_window" href="#attoworld.wave.trace_handler.TraceHandler.tukey_time_window">tukey_time_window</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.update_fft" href="#attoworld.wave.trace_handler.TraceHandler.update_fft">update_fft</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.update_fft_spectrum" href="#attoworld.wave.trace_handler.TraceHandler.update_fft_spectrum">update_fft_spectrum</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.update_spectral_phase" href="#attoworld.wave.trace_handler.TraceHandler.update_spectral_phase">update_spectral_phase</a></code></li>
+<li><code><a title="attoworld.wave.trace_handler.TraceHandler.update_trace_from_fft" href="#attoworld.wave.trace_handler.TraceHandler.update_trace_from_fft">update_trace_from_fft</a></code></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</nav>
+</main>
+<footer id="footer">
+<p>Generated by <a href="https://pdoc3.github.io/pdoc" title="pdoc: Python API documentation generator"><cite>pdoc</cite> 0.11.6</a>.</p>
+</footer>
+</body>
+</html>
