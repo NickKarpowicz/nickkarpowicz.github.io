@@ -78,14 +78,14 @@ def _(
             _markerplot, = plt.plot(1e15*(ns[_i]-ns[0]) * thickness/constants.speed_of_light, spacing*_i + 1,'d',color=_colors[_i])
         n_group = get_group_index(sellmeier_coefficients,0,frequency=np.mean(freqs))
         plt.plot(1e15*_t,2*np.sum(waves,axis=1)/freqs.shape[0] - 2*spacing,color='black')
-        plt.plot(1e15*_t,2*np.abs(sig.hilbert(np.sum(waves,axis=1)))/freqs.shape[0] - 2*spacing,color='gray')  
+        plt.plot(1e15*_t,2*np.abs(sig.hilbert(np.sum(waves,axis=1)))/freqs.shape[0] - 2*spacing,color='gray')
         plt.plot(1e15*(n_group-ns[0]) * thickness/constants.speed_of_light,-2*spacing + 2,'d',color='black')
         plt.xlim(-1e15*t_length/2,1e15*t_length/2)
         plt.xlabel("Time (fs)")
         plt.yticks([])
         return plt.gcf()
 
-    plot_group_velocity(thickness=1e-6*thickness_slider.value).set_figwidth(10)
+    plot_group_velocity(thickness=1e-6*thickness_slider.value)
     showmo()
     return
 
