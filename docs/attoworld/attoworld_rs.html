@@ -4,8 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 <meta name="generator" content="pdoc3 0.11.6">
-<title>attoworld API documentation</title>
-<meta name="description" content="Tools from the Attosecond science group at the Max Planck Institute of Quantum Optics, a.k.a. [Attoworld](https://www.attoworld.de) …">
+<title>attoworld.attoworld_rs API documentation</title>
+<meta name="description" content="A Python module implemented in Rust.">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
@@ -33,105 +33,42 @@ el.replaceWith(d);
 <main>
 <article id="content">
 <header>
-<h1 class="title">Package <code>attoworld</code></h1>
+<h1 class="title">Module <code>attoworld.attoworld_rs</code></h1>
 </header>
 <section id="section-intro">
-<p>Tools from the Attosecond science group at the Max Planck Institute of Quantum Optics, a.k.a. <a href="https://www.attoworld.de">Attoworld</a></p>
-<h2 id="structure">Structure</h2>
-<p>The module has several submodules to keep it organized:</p>
-<ul>
-<li>
-<p><em>file</em>: functions for reading/writing the various data formats used across the labs</p>
-</li>
-<li>
-<p><em>numeric</em>: numerical tools</p>
-</li>
-<li>
-<p><em>personal</em>: a module where we can add our own functions that might not be of general interest, but are still good to have available to we can easily share work</p>
-</li>
-<li>
-<p><em>plot</em>: functions for plotting with a consistent style</p>
-</li>
-<li>
-<p><em>wave</em>: functions for processing waveforms</p>
-</li>
-<li>
-<p><em>spectrum</em>: functions for processing spectra</p>
-</li>
-</ul>
-<h2 id="guidelines">Guidelines</h2>
-<p>The goal of this module is to gather the python programming work that we do, which maybe others in the group or the community at large could benefit from, into a module that we can easily add to our projects. This is easier if we follow some guidelines for best practices:</p>
-<ul>
-<li>
-<p>Use <a href="https://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings">docstrings</a> so that people know how to use your functions.</p>
-</li>
-<li>
-<p>Comment code enough that it's understandable. It's possible that you write in a "self documenting" way, which is fine, but if you're doing something fancy and non-obvious, put in a note</p>
-</li>
-<li>
-<p>If there's a function or class that you think others could benefit from, absolutely feel free to add it to the main modules. If you think you are likely the only one who will use something, you can also add a submodule to the attoworld.personal namespace. This makes it easier to share files with others!</p>
-</li>
-</ul>
+<p>A Python module implemented in Rust.</p>
 </section>
 <section>
-<h2 class="section-title" id="header-submodules">Sub-modules</h2>
+</section>
+<section>
+</section>
+<section>
+<h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
-<dt><code class="name"><a title="attoworld.attoworld_rs" href="attoworld_rs.html">attoworld.attoworld_rs</a></code></dt>
+<dt id="attoworld.attoworld_rs.rust_hello"><code class="name flex">
+<span>def <span class="ident">rust_hello</span></span>(<span>)</span>
+</code></dt>
 <dd>
-<div class="desc"><p>A Python module implemented in Rust.</p></div>
-</dd>
-<dt><code class="name"><a title="attoworld.file" href="file/index.html">attoworld.file</a></code></dt>
-<dd>
-<div class="desc"><p>This module will contain functions for loading the various data formats used across the labs.</p></div>
-</dd>
-<dt><code class="name"><a title="attoworld.numeric" href="numeric/index.html">attoworld.numeric</a></code></dt>
-<dd>
-<div class="desc"><p>This module will contain numerical tools.</p></div>
-</dd>
-<dt><code class="name"><a title="attoworld.personal" href="personal/index.html">attoworld.personal</a></code></dt>
-<dd>
-<div class="desc"><p>This module will contain personal modules from our coworkers, allowing for easier sharing
-of data processing files that utilize functions that might …</p></div>
-</dd>
-<dt><code class="name"><a title="attoworld.plot" href="plot/index.html">attoworld.plot</a></code></dt>
-<dd>
-<div class="desc"><p>This module will contain functions for plotting, and for formatting plots, with the goal of
-more easily obtaining a consistent style across plots made …</p></div>
-</dd>
-<dt><code class="name"><a title="attoworld.spectrum" href="spectrum/index.html">attoworld.spectrum</a></code></dt>
-<dd>
-<div class="desc"><p>This module will contain functions related to the processing of spectra.</p></div>
-</dd>
-<dt><code class="name"><a title="attoworld.wave" href="wave/index.html">attoworld.wave</a></code></dt>
-<dd>
-<div class="desc"><p>This module will contain data processing routines that operate on measured or simulated waveforms.</p></div>
+<div class="desc"></div>
 </dd>
 </dl>
-</section>
-<section>
-</section>
-<section>
 </section>
 <section>
 </section>
 </article>
 <nav id="sidebar">
 <div class="toc">
-<ul>
-<li><a href="#structure">Structure</a></li>
-<li><a href="#guidelines">Guidelines</a></li>
-</ul>
+<ul></ul>
 </div>
 <ul id="index">
-<li><h3><a href="#header-submodules">Sub-modules</a></h3>
+<li><h3>Super-module</h3>
 <ul>
-<li><code><a title="attoworld.attoworld_rs" href="attoworld_rs.html">attoworld.attoworld_rs</a></code></li>
-<li><code><a title="attoworld.file" href="file/index.html">attoworld.file</a></code></li>
-<li><code><a title="attoworld.numeric" href="numeric/index.html">attoworld.numeric</a></code></li>
-<li><code><a title="attoworld.personal" href="personal/index.html">attoworld.personal</a></code></li>
-<li><code><a title="attoworld.plot" href="plot/index.html">attoworld.plot</a></code></li>
-<li><code><a title="attoworld.spectrum" href="spectrum/index.html">attoworld.spectrum</a></code></li>
-<li><code><a title="attoworld.wave" href="wave/index.html">attoworld.wave</a></code></li>
+<li><code><a title="attoworld" href="index.html">attoworld</a></code></li>
+</ul>
+</li>
+<li><h3><a href="#header-functions">Functions</a></h3>
+<ul class="">
+<li><code><a title="attoworld.attoworld_rs.rust_hello" href="#attoworld.attoworld_rs.rust_hello">rust_hello</a></code></li>
 </ul>
 </li>
 </ul>

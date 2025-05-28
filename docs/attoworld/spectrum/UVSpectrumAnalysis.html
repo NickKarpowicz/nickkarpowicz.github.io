@@ -56,27 +56,27 @@ el.replaceWith(d);
     &#34;&#34;&#34;For the UV spectrometer. Calibrate the spectrum number &#39;column&#39; in the the &#39;data&#39; array. Intensity calibration factor is loaded in the first lines of UVSpectrumAnalysis.py.
         Notice: each saved spectrum has 7 columns in the excel file; however, the argument column refers to the index of the spectrum, not the actual column in the file.
 
-    ARGUMENTS:
-        data = data [numpy] array (see read_spectrometer_excel)
-        column = index of the spectrum to be calibrated
+    Args:
+        data: data [numpy] array (see read_spectrometer_excel)
+        column: index of the spectrum to be calibrated
         calibration_file_path: path of the calibration file
-        dark = dark spectrum (optional)
-        dark_c = column of the dark spectrum (optional)
-        stitch = Boolean, if True, the spectra are stitched together (optional, default False)
+        dark: dark spectrum (optional)
+        dark_c: column of the dark spectrum (optional)
+        stitch: Boolean, if True, the spectra are stitched together (optional, default False)
                 if True, the spectrum will be calculated by stitching the 5 partial spectra in the previous columns.
                 the stitching only works if the spectrum number &#39;column&#39; is a FULL-SPECTRUM in the xls file.
                 Stitching was implemented because the internal software of the spectrometer is not good enough at it (the saved full spectrum typically has discontinuities).
-        smooth_points = number of points for smoothing (optional, default 10). if 0, no smoothing is applied
-        null_calibration = Boolean, if True, the intensity calibration is not applied (optional, default False)
-        wavelength_calibration_intercept = intercept of the wavelength calibration (optional, default 3.538). If None no wavelength calibration is applied
-        wavelength_calibration_slope = slope of the wavelength calibration (optional, default 1.003427). If None no wavelength calibration is applied
+        smooth_points: number of points for smoothing (optional, default 10). if 0, no smoothing is applied
+        null_calibration: Boolean, if True, the intensity calibration is not applied (optional, default False)
+        wavelength_calibration_intercept: intercept of the wavelength calibration (optional, default 3.538). If None no wavelength calibration is applied
+        wavelength_calibration_slope: slope of the wavelength calibration (optional, default 1.003427). If None no wavelength calibration is applied
                 Wavelength calibration is in the form λ_true = λ_measured * slope + intercept
                 Notice: wavelength calibration has an error of +/- 1  to 2 nm due to the stitching process.
                     for a better calibration compute and apply the correction to each of the 5 partial spectra
 
-    RETURNS:
-        wavelength = wavelength array
-        spectrum = calibrated spectrum
+    Returns:
+        wavelength: wavelength array
+        spectrum: calibrated spectrum
     &#34;&#34;&#34;
     wavelength_calibration, lamp_spec, lamp_measbyReso, calibration_smoothed = load_calibration_data(calibration_file_path)
 
@@ -162,27 +162,43 @@ el.replaceWith(d);
 </details>
 <div class="desc"><p>For the UV spectrometer. Calibrate the spectrum number 'column' in the the 'data' array. Intensity calibration factor is loaded in the first lines of UVSpectrumAnalysis.py.
 Notice: each saved spectrum has 7 columns in the excel file; however, the argument column refers to the index of the spectrum, not the actual column in the file.</p>
-<h2 id="arguments">Arguments</h2>
-<p>data = data [numpy] array (see read_spectrometer_excel)
-column = index of the spectrum to be calibrated
-calibration_file_path: path of the calibration file
-dark = dark spectrum (optional)
-dark_c = column of the dark spectrum (optional)
-stitch = Boolean, if True, the spectra are stitched together (optional, default False)
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>data</code></strong></dt>
+<dd>data [numpy] array (see read_spectrometer_excel)</dd>
+<dt><strong><code>column</code></strong></dt>
+<dd>index of the spectrum to be calibrated</dd>
+<dt><strong><code>calibration_file_path</code></strong></dt>
+<dd>path of the calibration file</dd>
+<dt><strong><code>dark</code></strong></dt>
+<dd>dark spectrum (optional)</dd>
+<dt><strong><code>dark_c</code></strong></dt>
+<dd>column of the dark spectrum (optional)</dd>
+<dt><strong><code>stitch</code></strong></dt>
+<dd>Boolean, if True, the spectra are stitched together (optional, default False)
 if True, the spectrum will be calculated by stitching the 5 partial spectra in the previous columns.
 the stitching only works if the spectrum number 'column' is a FULL-SPECTRUM in the xls file.
-Stitching was implemented because the internal software of the spectrometer is not good enough at it (the saved full spectrum typically has discontinuities).
-smooth_points = number of points for smoothing (optional, default 10). if 0, no smoothing is applied
-null_calibration = Boolean, if True, the intensity calibration is not applied (optional, default False)
-wavelength_calibration_intercept = intercept of the wavelength calibration (optional, default 3.538). If None no wavelength calibration is applied
-wavelength_calibration_slope = slope of the wavelength calibration (optional, default 1.003427). If None no wavelength calibration is applied
+Stitching was implemented because the internal software of the spectrometer is not good enough at it (the saved full spectrum typically has discontinuities).</dd>
+<dt><strong><code>smooth_points</code></strong></dt>
+<dd>number of points for smoothing (optional, default 10). if 0, no smoothing is applied</dd>
+<dt><strong><code>null_calibration</code></strong></dt>
+<dd>Boolean, if True, the intensity calibration is not applied (optional, default False)</dd>
+<dt><strong><code>wavelength_calibration_intercept</code></strong></dt>
+<dd>intercept of the wavelength calibration (optional, default 3.538). If None no wavelength calibration is applied</dd>
+<dt><strong><code>wavelength_calibration_slope</code></strong></dt>
+<dd>slope of the wavelength calibration (optional, default 1.003427). If None no wavelength calibration is applied
 Wavelength calibration is in the form λ_true = λ_measured * slope + intercept
 Notice: wavelength calibration has an error of +/- 1
 to 2 nm due to the stitching process.
-for a better calibration compute and apply the correction to each of the 5 partial spectra</p>
+for a better calibration compute and apply the correction to each of the 5 partial spectra</dd>
+</dl>
 <h2 id="returns">Returns</h2>
-<p>wavelength = wavelength array
-spectrum = calibrated spectrum</p></div>
+<dl>
+<dt><code>wavelength</code></dt>
+<dd>wavelength array</dd>
+<dt><code>spectrum</code></dt>
+<dd>calibrated spectrum</dd>
+</dl></div>
 </dd>
 <dt id="attoworld.spectrum.UVSpectrumAnalysis.list_error"><code class="name flex">
 <span>def <span class="ident">list_error</span></span>(<span>)</span>
@@ -297,28 +313,26 @@ spectrum = calibrated spectrum</p></div>
         Notice: The excel file usually contains several spectra.
         Notice: each saved spectrum has 7 columns in the excel file; please consider that the argument &#39;column&#39; refers to the index of the spectrum, not the actual column in the file.
 
-        MANDATORY ARGUMENTS:
-            filenameList = input file list (without extension)
-            columnList = list of the positions in the file of the spectra to be plotted (e.g. [1, 0, 5] -&gt; plot 1st sp. for 1st file, 5th spectrum for 3rd file, ...)
-            pdfFilename = output filename
-
-        OPTIONAL ARGUMENTS:
-            darkTupleList = [(&#34;darkFilename1stspectrum&#34;, spectrum_number_in_1stDark_filename), ( ..,.. ), ...]
-            legendItem List = list of entries for the legend (optional, keyword)
-            normalizationList = list of (multiplicative) normalization factors for the spectra (optional, keyword)
-            color_gradient = Boolean, whether plot should be displayed with color gradient instead of in matplotlib default color cycle
-            additive_constant_log_intensity = additive constant to the spectral intensity, so that the logarithmic plot does not have values too close to 0
-            wavelength_range = [min lambda, max lambda] for plotting
-            title = title of the figure
-            plotList = list of booleans: this function will plot the entry filenameList[i] if plotList[i] = True, otherwise the i-th data will not be shown in the plot
-            invert_order = Boolean, if True, the order of the spectra will be inverted (i.e. the last spectrum in the list will be plotted first)
-            do_calibrate = Boolean, if True, the spectra will be calibrated (default True, see calibrate() function)
-            stitch = Boolean, if True, the spectra will be stitched together (optional, default False)
+        Args:
+            filenameList: input file list (without extension)
+            columnList: list of the positions in the file of the spectra to be plotted (e.g. [1, 0, 5] -&gt; plot 1st sp. for 1st file, 5th spectrum for 3rd file, ...)
+            pdfFilename: output filename
+            darkTupleList: [(&#34;darkFilename1stspectrum&#34;, spectrum_number_in_1stDark_filename), ( ..,.. ), ...]
+            legendItem List: list of entries for the legend (optional, keyword)
+            normalizationList: list of (multiplicative) normalization factors for the spectra (optional, keyword)
+            color_gradient: Boolean, whether plot should be displayed with color gradient instead of in matplotlib default color cycle
+            additive_constant_log_intensity: additive constant to the spectral intensity, so that the logarithmic plot does not have values too close to 0
+            wavelength_range: [min lambda, max lambda] for plotting
+            title: title of the figure
+            plotList: list of booleans: this function will plot the entry filenameList[i] if plotList[i] = True, otherwise the i-th data will not be shown in the plot
+            invert_order: Boolean, if True, the order of the spectra will be inverted (i.e. the last spectrum in the list will be plotted first)
+            do_calibrate: Boolean, if True, the spectra will be calibrated (default True, see calibrate() function)
+            stitch: Boolean, if True, the spectra will be stitched together (optional, default False)
                 if True, the spectrum will be calculated by stitching the 5 partial spectra in the previous columns.
                 the stitching only works if the spectrum number &#39;column&#39; is a FULL-SPECTRUM in the xls file.
                 Stitching was implemented because the internal software of the spectrometer does not do it properly (the saved full spectrum tipically has discontinuities).
                 Stitching here works only if do_calibrate = True
-            smooth_points = number of points for smoothing (optional, default 10)
+            smooth_points: number of points for smoothing (optional, default 10)
 
         DEPENDS ON read_spectrometer_excel()
         DEPENDS ON calibrate() [optional]
@@ -456,27 +470,42 @@ spectrum = calibrated spectrum</p></div>
 <div class="desc"><p>Plotting function for the UV spectrometer.</p>
 <p>Notice: The excel file usually contains several spectra.
 Notice: each saved spectrum has 7 columns in the excel file; please consider that the argument 'column' refers to the index of the spectrum, not the actual column in the file.</p>
-<p>MANDATORY ARGUMENTS:
-filenameList = input file list (without extension)
-columnList = list of the positions in the file of the spectra to be plotted (e.g. [1, 0, 5] -&gt; plot 1st sp. for 1st file, 5th spectrum for 3rd file, &hellip;)
-pdfFilename = output filename</p>
-<p>OPTIONAL ARGUMENTS:
-darkTupleList = [("darkFilename1stspectrum", spectrum_number_in_1stDark_filename), ( ..,.. ), &hellip;]
-legendItem List = list of entries for the legend (optional, keyword)
-normalizationList = list of (multiplicative) normalization factors for the spectra (optional, keyword)
-color_gradient = Boolean, whether plot should be displayed with color gradient instead of in matplotlib default color cycle
-additive_constant_log_intensity = additive constant to the spectral intensity, so that the logarithmic plot does not have values too close to 0
-wavelength_range = [min lambda, max lambda] for plotting
-title = title of the figure
-plotList = list of booleans: this function will plot the entry filenameList[i] if plotList[i] = True, otherwise the i-th data will not be shown in the plot
-invert_order = Boolean, if True, the order of the spectra will be inverted (i.e. the last spectrum in the list will be plotted first)
-do_calibrate = Boolean, if True, the spectra will be calibrated (default True, see calibrate() function)
-stitch = Boolean, if True, the spectra will be stitched together (optional, default False)
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>filenameList</code></strong></dt>
+<dd>input file list (without extension)</dd>
+<dt><strong><code>columnList</code></strong></dt>
+<dd>list of the positions in the file of the spectra to be plotted (e.g. [1, 0, 5] -&gt; plot 1st sp. for 1st file, 5th spectrum for 3rd file, &hellip;)</dd>
+<dt><strong><code>pdfFilename</code></strong></dt>
+<dd>output filename</dd>
+<dt><strong><code>darkTupleList</code></strong></dt>
+<dd>[("darkFilename1stspectrum", spectrum_number_in_1stDark_filename), ( ..,.. ), &hellip;]</dd>
+<dt>legendItem List: list of entries for the legend (optional, keyword)</dt>
+<dt><strong><code>normalizationList</code></strong></dt>
+<dd>list of (multiplicative) normalization factors for the spectra (optional, keyword)</dd>
+<dt><strong><code>color_gradient</code></strong></dt>
+<dd>Boolean, whether plot should be displayed with color gradient instead of in matplotlib default color cycle</dd>
+<dt><strong><code>additive_constant_log_intensity</code></strong></dt>
+<dd>additive constant to the spectral intensity, so that the logarithmic plot does not have values too close to 0</dd>
+<dt><strong><code>wavelength_range</code></strong></dt>
+<dd>[min lambda, max lambda] for plotting</dd>
+<dt><strong><code>title</code></strong></dt>
+<dd>title of the figure</dd>
+<dt><strong><code>plotList</code></strong></dt>
+<dd>list of booleans: this function will plot the entry filenameList[i] if plotList[i] = True, otherwise the i-th data will not be shown in the plot</dd>
+<dt><strong><code>invert_order</code></strong></dt>
+<dd>Boolean, if True, the order of the spectra will be inverted (i.e. the last spectrum in the list will be plotted first)</dd>
+<dt><strong><code>do_calibrate</code></strong></dt>
+<dd>Boolean, if True, the spectra will be calibrated (default True, see calibrate() function)</dd>
+<dt><strong><code>stitch</code></strong></dt>
+<dd>Boolean, if True, the spectra will be stitched together (optional, default False)
 if True, the spectrum will be calculated by stitching the 5 partial spectra in the previous columns.
 the stitching only works if the spectrum number 'column' is a FULL-SPECTRUM in the xls file.
 Stitching was implemented because the internal software of the spectrometer does not do it properly (the saved full spectrum tipically has discontinuities).
-Stitching here works only if do_calibrate = True
-smooth_points = number of points for smoothing (optional, default 10)</p>
+Stitching here works only if do_calibrate = True</dd>
+<dt><strong><code>smooth_points</code></strong></dt>
+<dd>number of points for smoothing (optional, default 10)</dd>
+</dl>
 <p>DEPENDS ON read_spectrometer_excel()
 DEPENDS ON calibrate() [optional]</p></div>
 </dd>
@@ -522,10 +551,10 @@ DEPENDS ON calibrate() [optional]</p></div>
 
         44 (skipped) rows at the beginning of the file (all headers)
 
-        ARGUMENTS:
-            filename = name of the file (without extension)
+        Args:
+            filename: name of the file (without extension)
 
-        RETURNS:
+        Returns:
             numpy array with the spectral data (see original excel for more details)&#34;&#34;&#34;
     if &#39;.&#39; in filename and &#39;./&#39; not in filename:
         raise ValueError(&#39;in function read_spectrometer_excel, filename must be passed without extension (filename should not contain a dot)&#39;)
@@ -547,8 +576,11 @@ such copying is necessary because the xls file is not readable by pandas (it's a
 For windows there is a similar command, please replace the line
 os.system("cat " + filename + ".xls &gt; " + filename + ".txt")</p>
 <p>44 (skipped) rows at the beginning of the file (all headers)</p>
-<h2 id="arguments">Arguments</h2>
-<p>filename = name of the file (without extension)</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>filename</code></strong></dt>
+<dd>name of the file (without extension)</dd>
+</dl>
 <h2 id="returns">Returns</h2>
 <p>numpy array with the spectral data (see original excel for more details)</p></div>
 </dd>
@@ -641,13 +673,13 @@ w = width of the edges of the t. function (0 &lt; w &lt; FWHM)</p></div>
 
     The difference with the function tukey_f is that this function can take as input a numpy array or a list, and returns a numpy array or a list.
 
-    ARGUMENTS:
-        x = input array (numpy array or list)
-        center = center of the window
-        FWHM = full width at half maximum
-        w = width of the edges of the window (w &gt; 0)
+    Args:
+        x: input array (numpy array or list)
+        center: center of the window
+        FWHM: full width at half maximum
+        w: width of the edges of the window (w &gt; 0)
 
-    RETURNS:
+    Returns:
         window (numpy array or list)&#34;&#34;&#34;
     if isinstance(x, np.ndarray):
         y = []
@@ -666,11 +698,17 @@ w = width of the edges of the t. function (0 &lt; w &lt; FWHM)</p></div>
 </details>
 <div class="desc"><p>returns a cosine-smoothed, flattop window centered in 'center'; amplitude = 1.</p>
 <p>The difference with the function tukey_f is that this function can take as input a numpy array or a list, and returns a numpy array or a list.</p>
-<h2 id="arguments">Arguments</h2>
-<p>x = input array (numpy array or list)
-center = center of the window
-FWHM = full width at half maximum
-w = width of the edges of the window (w &gt; 0)</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>x</code></strong></dt>
+<dd>input array (numpy array or list)</dd>
+<dt><strong><code>center</code></strong></dt>
+<dd>center of the window</dd>
+<dt><strong><code>FWHM</code></strong></dt>
+<dd>full width at half maximum</dd>
+<dt><strong><code>w</code></strong></dt>
+<dd>width of the edges of the window (w &gt; 0)</dd>
+</dl>
 <h2 id="returns">Returns</h2>
 <p>window (numpy array or list)</p></div>
 </dd>
