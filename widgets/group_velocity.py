@@ -25,7 +25,7 @@ def _(mo):
     frequency_slider = mo.ui.slider(start=101,stop=600,step=1,value=300, label="Frequency (THz)", show_value=True)
     bandwidth_slider = mo.ui.slider(start=10,stop=200, step=5, value=120, label="Bandwidth (THz)", show_value=True)
     time_length_slider = mo.ui.slider(start=10, stop=100, step=5, value=40, label="Time range (fs)", show_value=True)
-    N_frequencies_slider = mo.ui.slider(start=3, stop=20, step=1, value=6, label="Number of frequencies", show_value=True)
+    N_frequencies_slider = mo.ui.slider(start=3, stop=20, step=1, value=12, label="Number of frequencies", show_value=True)
     mo.output.append(thickness_slider)
     mo.output.append(frequency_slider)
     mo.output.append(bandwidth_slider)
@@ -71,15 +71,15 @@ def _(
             return np.exp(-(f0-f)**2/(2*sigma**2))
         for _i in range(freqs.shape[0]):
             _colors.append((
-                color_curve(f=freqs[_i]/1e12,f0=f_low,sigma=0.5*bandwidth_slider.value),
-                color_curve(f=freqs[_i]/1e12,f0=(f_low+f_high)/2,sigma=0.3*bandwidth_slider.value),
-                color_curve(f=freqs[_i]/1e12,f0=f_high,sigma=0.5*bandwidth_slider.value)))
+                color_curve(f=freqs[_i]/1e12,f0=1.05*f_low,sigma=0.4*bandwidth_slider.value),
+                color_curve(f=freqs[_i]/1e12,f0=(f_low+f_high)/2,sigma=0.35*bandwidth_slider.value),
+                color_curve(f=freqs[_i]/1e12,f0=0.95*f_high,sigma=0.4*bandwidth_slider.value)))
             _phase = -thickness * 2*np.pi*freqs[_i] * (ns[_i]-ns[0])/constants.speed_of_light
             waves[:,_i] = np.cos(2*np.pi*freqs[_i]*_t + _phase)
-            _lineplot, = plt.plot(1e15*_t,waves[:,_i]+spacing*_i,color=_colors[_i])
+            _lineplot, = plt.plot(1e15*_t,waves[:,_i]+spacing*_i,color=_colors[_i],linewidth=1.25)
             _markerplot, = plt.plot(1e15*(ns[_i]-ns[0]) * thickness/constants.speed_of_light, spacing*_i + 1,'d',color=_colors[_i])
         n_group = get_group_index(sellmeier_coefficients,0,frequency=np.mean(freqs))
-        plt.plot(1e15*_t,2*np.sum(waves,axis=1)/freqs.shape[0] - 2*spacing,color='black')
+        plt.plot(1e15*_t,2*np.sum(waves,axis=1)/freqs.shape[0] - 2*spacing,color='black', linewidth=2)
         plt.plot(1e15*_t,2*np.abs(sig.hilbert(np.sum(waves,axis=1)))/freqs.shape[0] - 2*spacing,color='gray')
         plt.plot(1e15*(n_group-ns[0]) * thickness/constants.speed_of_light,-2*spacing + 2,'d',color='black')
         plt.xlim(-1e15*t_length/2,1e15*t_length/2)
