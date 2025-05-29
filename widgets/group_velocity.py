@@ -11,6 +11,8 @@ def _(mo):
     ## Pulse propagation toy
     The set of sliders below let you control the propagation of a pulse through fused silica. Try to adjust the parameters to get a feeling for how the pulse stretches and gets delayed, depending on its frequency and bandwidth, and on the thickness of the glass. Some of the relevant material properties, the dispersion curves, are plotted underneath it.
 
+    All of the waves have equal amplitude, and the bandwidth is finite: what function describes the pulse envelope (for thickness 0)?
+
     Bonus question: why does the pulse repeat if the number of frequencies is low, or the length of the time window is too long?
     """
     )
@@ -19,8 +21,8 @@ def _(mo):
 
 @app.cell
 def _(mo):
-    thickness_slider = mo.ui.slider(start=0.0,stop=200,step=5,value=160.0, label="Thickness (\u03bcm)", show_value=True)
-    frequency_slider = mo.ui.slider(start=100,stop=500,step=5,value=300, label="Frequency (THz)", show_value=True)
+    thickness_slider = mo.ui.slider(start=0.0,stop=300,step=5,value=160.0, label="Thickness (\u03bcm)", show_value=True)
+    frequency_slider = mo.ui.slider(start=101,stop=600,step=5,value=300, label="Frequency (THz)", show_value=True)
     bandwidth_slider = mo.ui.slider(start=10,stop=200, step=5, value=120, label="Bandwidth (THz)", show_value=True)
     time_length_slider = mo.ui.slider(start=10, stop=100, step=5, value=40, label="Time range (fs)", show_value=True)
     N_frequencies_slider = mo.ui.slider(start=3, stop=20, step=1, value=6, label="Number of frequencies", show_value=True)
@@ -99,9 +101,18 @@ def _(mo):
     Here are some of the relevant material properties for fused silica, as defined in the lecture notes.
 
     First, we'll plot the refractive index, and the group index, followed by the GVD.
+
+    You can change the material by replacing the Sellmeier coefficients below, in the format used by Lightwave Explorer (i.e. copy-and-paste from CrystalDatabase.txt).
     """
     )
     return
+
+
+@app.cell
+def _(mo):
+    sellmeier_input = mo.ui.text_area(label="Sellmeier coefficients:", value="1 0 0.6961663 -0.00467914825849 0 0.4079426 -0.013512063074 0 0.8974794 -97.9340025379 0 0 1 0 0 0 0 0 0 0 0 0",full_width=True, rows=1)
+    sellmeier_input
+    return (sellmeier_input,)
 
 
 @app.cell
@@ -268,11 +279,14 @@ def _():
 
 
 @app.cell
-def _():
-    #sellmeier_coefficients = lwe.getSellmeierFromRII("https://refractiveindex.info/database/data/main/SiO2/nk/Malitson.yml")
-    #Sellmeier coefficients from refractiveindex.info, put here directly because wasm can't escape browser sandbox
-    sellmeier_coefficients = [1.0, 0.0, 0.6961663, -0.00467914825849, 0.0, 0.4079426, -0.013512063073959999, 0.0, 0.8974794, -97.93400253792099, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0]
+def _(np, sellmeier_input):
+    sellmeier_coefficients = np.fromstring(sellmeier_input.value, sep=" ")
     return (sellmeier_coefficients,)
+
+
+@app.cell
+def _():
+    return
 
 
 if __name__ == "__main__":
