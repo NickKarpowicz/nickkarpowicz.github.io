@@ -22,7 +22,7 @@ def _(mo):
 @app.cell
 def _(mo):
     thickness_slider = mo.ui.slider(start=0.0,stop=300,step=5,value=160.0, label="Thickness (\u03bcm)", show_value=True)
-    frequency_slider = mo.ui.slider(start=101,stop=600,step=5,value=300, label="Frequency (THz)", show_value=True)
+    frequency_slider = mo.ui.slider(start=101,stop=600,step=1,value=300, label="Frequency (THz)", show_value=True)
     bandwidth_slider = mo.ui.slider(start=10,stop=200, step=5, value=120, label="Bandwidth (THz)", show_value=True)
     time_length_slider = mo.ui.slider(start=10, stop=100, step=5, value=40, label="Time range (fs)", show_value=True)
     N_frequencies_slider = mo.ui.slider(start=3, stop=20, step=1, value=6, label="Number of frequencies", show_value=True)
@@ -111,13 +111,16 @@ def _(mo):
 @app.cell
 def _(mo):
     sellmeier_input = mo.ui.text_area(label="Sellmeier coefficients:", value="1 0 0.6961663 -0.00467914825849 0 0.4079426 -0.013512063074 0 0.8974794 -97.9340025379 0 0 1 0 0 0 0 0 0 0 0 0",full_width=True, rows=1)
-    sellmeier_input
-    return (sellmeier_input,)
+    mo.output.append(sellmeier_input)
+    eqn_type_input = mo.ui.number(start=0,stop=2,value=0, label="Equation type:")
+    mo.output.append(eqn_type_input)
+    return eqn_type_input, sellmeier_input
 
 
 @app.cell
 def _(
     constants,
+    eqn_type,
     get_group_index,
     get_gvd,
     lwe,
@@ -131,9 +134,9 @@ def _(
     group_index = np.zeros(freq.shape)
     gvd = np.zeros(freq.shape)
     for _i in range(freq.shape[0]):
-        group_index[_i] = get_group_index(sellmeier_coefficients,0,frequency=freq[_i])
-        gvd[_i] = get_gvd(sellmeier_coefficients,0,frequency=freq[_i])
-    plt.plot(wavelength,np.real(lwe.sellmeier(wavelength, sellmeier_coefficients, 0)), label="Refractive index")
+        group_index[_i] = get_group_index(sellmeier_coefficients,eqn_type,frequency=freq[_i])
+        gvd[_i] = get_gvd(sellmeier_coefficients,eqn_type,frequency=freq[_i])
+    plt.plot(wavelength,np.real(lwe.sellmeier(wavelength, sellmeier_coefficients, eqn_type)), label="Refractive index")
     plt.plot(wavelength, group_index, label="Group index")
     plt.xlabel("Wavelength (\u03bcm)")
     plt.ylabel("Index")
@@ -279,9 +282,10 @@ def _():
 
 
 @app.cell
-def _(np, sellmeier_input):
+def _(eqn_type_input, np, sellmeier_input):
     sellmeier_coefficients = np.fromstring(sellmeier_input.value, sep=" ")
-    return (sellmeier_coefficients,)
+    eqn_type = int(eqn_type_input.value)
+    return eqn_type, sellmeier_coefficients
 
 
 @app.cell
