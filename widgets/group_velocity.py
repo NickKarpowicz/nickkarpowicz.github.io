@@ -157,11 +157,6 @@ def _(gvd, plt, showmo, wavelength):
 
 
 @app.cell
-def _():
-    return
-
-
-@app.cell
 def _(constants, fornberg_stencil, lwe, np):
     def get_gvd(sellmeier_coeffs: np.ndarray, equation_type: int, frequency: float=375e12):
         positions = np.array([-3, -2, -1, 0, 1, 2, 3])
@@ -188,19 +183,6 @@ def _(constants, fornberg_stencil, lwe, np):
     def get_group_index(sellmeier_coeffs: np.ndarray, equation_type: int, frequency: float=375e12):
         return constants.speed_of_light/get_group_velocity(sellmeier_coeffs, equation_type, frequency)
     return get_group_index, get_gvd
-
-
-@app.cell
-def _():
-
-    #plot_group_velocity(thickness=0e-6).savefig("group_velocity_0.pdf",bbox_inches='tight')
-    return
-
-
-@app.cell
-def _():
-    #plot_group_velocity(thickness=160e-6).savefig("group_velocity_1.pdf",bbox_inches='tight')
-    return
 
 
 @app.cell

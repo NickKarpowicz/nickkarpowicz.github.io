@@ -38,40 +38,14 @@ el.replaceWith(d);
 <section id="section-intro">
 <p>Tools from the Attosecond science group at the Max Planck Institute of Quantum Optics, a.k.a. <a href="https://www.attoworld.de">Attoworld</a></p>
 <h2 id="structure">Structure</h2>
-<p>The module has several submodules to keep it organized:</p>
-<ul>
-<li>
-<p><em>file</em>: functions for reading/writing the various data formats used across the labs</p>
-</li>
-<li>
-<p><em>numeric</em>: numerical tools</p>
-</li>
-<li>
-<p><em>personal</em>: a module where we can add our own functions that might not be of general interest, but are still good to have available to we can easily share work</p>
-</li>
-<li>
-<p><em>plot</em>: functions for plotting with a consistent style</p>
-</li>
-<li>
-<p><em>wave</em>: functions for processing waveforms</p>
-</li>
-<li>
-<p><em>spectrum</em>: functions for processing spectra</p>
-</li>
-</ul>
-<h2 id="guidelines">Guidelines</h2>
-<p>The goal of this module is to gather the python programming work that we do, which maybe others in the group or the community at large could benefit from, into a module that we can easily add to our projects. This is easier if we follow some guidelines for best practices:</p>
-<ul>
-<li>
-<p>Use <a href="https://google.github.io/styleguide/pyguide.html#38-comments-and-docstrings">docstrings</a> so that people know how to use your functions.</p>
-</li>
-<li>
-<p>Comment code enough that it's understandable. It's possible that you write in a "self documenting" way, which is fine, but if you're doing something fancy and non-obvious, put in a note</p>
-</li>
-<li>
-<p>If there's a function or class that you think others could benefit from, absolutely feel free to add it to the main modules. If you think you are likely the only one who will use something, you can also add a submodule to the attoworld.personal namespace. This makes it easier to share files with others!</p>
-</li>
-</ul>
+<p>The module has several submodules to keep it organized:
+- <em>file</em>: functions for reading/writing the various data formats used across the labs
+- <em>numeric</em>: numerical tools
+- <em>personal</em>: a module where we can add our own functions that might not be of general interest, but are still good to have available to we can easily share work
+- <em>plot</em>: functions for plotting with a consistent style
+- <em>wave</em>: functions for processing waveforms
+- <em>spectrum</em>: functions for processing spectra
+- <em>attoworld_rs</em>: A place to put Rust code with a Python interface for cases where it's particularly important that the program be fast and correct.</p>
 </section>
 <section>
 <h2 class="section-title" id="header-submodules">Sub-modules</h2>
@@ -119,7 +93,6 @@ more easily obtaining a consistent style across plots made …</p></div>
 <div class="toc">
 <ul>
 <li><a href="#structure">Structure</a></li>
-<li><a href="#guidelines">Guidelines</a></li>
 </ul>
 </div>
 <ul id="index">

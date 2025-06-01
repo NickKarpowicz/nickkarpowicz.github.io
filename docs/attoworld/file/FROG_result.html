@@ -62,15 +62,24 @@ el.replaceWith(d);
     filename.A.dat: measured spectrogram
     filename.Arecon.dat: reconstructed spectrogram
     filename.Ek.dat: field envelope, phase
-    filename.Speck.dat: reconstructed spectrum and phase&#34;&#34;&#34;
+    filename.Speck.dat: reconstructed spectrum and phase
+
+    Warning: the class stores the data as in the files, please use methods &#34;get_*()&#34; to access the data correctly.
+    &#34;&#34;&#34;
     def __init__(self, filename):
-        # reconstructed
+        # reconstructed (spectral domain)
         self.wvl = None
-        self.spectrum = None
-        self.time = None
-        self.envelope = None
+        self.spectrum = None    # !!! PSEUDO-SPECTRUM, NOT multiplied by 1/λ^2
         self.sphase = None
+        self.realFFT = None     # named realFFT but expressed as a function of wavelength
+        self.imagFFT = None
+
+        # reconstructed (temporal domain)
+        self.time = None
+        self.envelope = None    # INTENSITY ENVELOPE (square of the field envelope)
         self.tphase = None
+        self.realField = None
+        self.imagField = None
 
         #spectrograms
         self.meas_taxis = None
@@ -81,6 +90,56 @@ el.replaceWith(d);
         self.reconstruct = None
 
         self.load(filename)
+
+    def test_FROG_result_format_spectrum(self, low_lim=None, up_lim=None):
+        &#34;&#34;&#34;checks (by plotting) that the quantities stored in the file are the expected ones&#34;&#34;&#34;
+
+        fig, ax = plt.subplots(figsize=[6.4, 4.8])
+        if low_lim is not None and up_lim is not None:
+            ax.set_xlim(low_lim,up_lim)
+        ax2 = ax.twinx()
+        ax.set_title(&#39;(should be 2 identic. spectra + 2 identic. phases)&#39;)
+        limited_wvl = self.wvl[(self.wvl&gt;low_lim)&amp;(self.wvl&lt;up_lim)]
+        limited_spectrum = self.spectrum[(self.wvl&gt;low_lim)&amp;(self.wvl&lt;up_lim)]
+        limited_spectrum_r_i = (self.realFFT[(self.wvl&gt;low_lim)&amp;(self.wvl&lt;up_lim)]**2 + self.imagFFT[(self.wvl&gt;low_lim)&amp;(self.wvl&lt;up_lim)]**2)
+        limited_phase = self.sphase[(self.wvl&gt;low_lim)&amp;(self.wvl&lt;up_lim)]
+        limited_phase_r_i = np.arctan2(self.imagFFT[(self.wvl&gt;low_lim)&amp;(self.wvl&lt;up_lim)], self.realFFT[(self.wvl&gt;low_lim)&amp;(self.wvl&lt;up_lim)])
+        limited_phase_r_i = -np.unwrap(limited_phase_r_i)
+        ax.plot(limited_wvl, limited_spectrum/np.max(limited_spectrum), label=&#39;direct spectrum from file&#39;)
+        ax.plot(limited_wvl, limited_spectrum_r_i/np.max(limited_spectrum_r_i), label=&#39;sp. from re/im FFT field&#39;)
+        ax2.plot(limited_wvl, limited_phase, label=&#39;direct phase from file&#39;, color=&#39;r&#39;)
+        ax2.plot(limited_wvl, limited_phase_r_i, label=&#39;phase from re/im FFT field&#39;, color=&#39;g&#39;)
+        ax.set_xlabel(&#39;wavelength (nm)&#39;)
+        ax.set_ylabel(&#39;amplitude (a.u.)&#39;)
+        ax2.set_ylabel(&#39;phase (rad)&#39;, color=&#39;r&#39;)
+        ax2.tick_params(axis=&#39;y&#39;, colors=&#39;r&#39;)
+        ax2.yaxis.label.set_color(&#39;r&#39;)
+        plt.show()
+
+    def test_FROG_result_format_envelope(self, low_lim=None, up_lim=None):
+        &#34;&#34;&#34;checks (by plotting) that the quantities stored in the file are the expected ones&#34;&#34;&#34;
+
+        fig, ax = plt.subplots(figsize=[6.4, 4.8])
+        if low_lim is not None and up_lim is not None:
+            ax.set_xlim(low_lim,up_lim)
+        ax2 = ax.twinx()
+        ax.set_title(&#39;(should be 2 identic. envelopes + 2 ident. phases)&#39;)
+        limited_time = self.time[(self.time&gt;low_lim)&amp;(self.time&lt;up_lim)]
+        limited_envelope = self.envelope[(self.time&gt;low_lim)&amp;(self.time&lt;up_lim)]
+        limited_envelope_r_i = (self.realField[(self.time&gt;low_lim)&amp;(self.time&lt;up_lim)]**2 + self.imagField[(self.time&gt;low_lim)&amp;(self.time&lt;up_lim)]**2)
+        limited_tphase = self.tphase[(self.time&gt;low_lim)&amp;(self.time&lt;up_lim)]
+        limited_tphase_r_i = np.arctan2(self.imagField[(self.time&gt;low_lim)&amp;(self.time&lt;up_lim)], self.realField[(self.time&gt;low_lim)&amp;(self.time&lt;up_lim)])
+        limited_tphase_r_i = -np.unwrap(limited_tphase_r_i)
+        ax.plot(limited_time, limited_envelope/np.max(limited_envelope), label=&#39;direct env. from file&#39;)
+        ax.plot(limited_time, limited_envelope_r_i/np.max(limited_envelope_r_i), label=&#39;sp. from re/im field&#39;)
+        ax2.plot(limited_time, limited_tphase, label=&#39;direct phase from file&#39;, color=&#39;r&#39;)
+        ax2.plot(limited_time, limited_tphase_r_i, label=&#39;phase from re/im field&#39;, color=&#39;g&#39;)
+        ax.set_xlabel(&#39;time (fs)&#39;)
+        ax.set_ylabel(&#39;amplitude (a.u.)&#39;)
+        ax2.set_ylabel(&#39;phase (rad)&#39;, color=&#39;r&#39;)
+        ax2.tick_params(axis=&#39;y&#39;, colors=&#39;r&#39;)
+        ax2.yaxis.label.set_color(&#39;r&#39;)
+        plt.show()
 
     def get_squared_envelope(self):
         &#34;&#34;&#34;returns time (fs), intensity envelope of the reconstructed pulse (square of the field envelope)&#34;&#34;&#34;
@@ -100,7 +159,7 @@ el.replaceWith(d);
 
     def get_spectrum(self):
         &#34;&#34;&#34;returns wavelength in nm, reconstructed intensity spectrum (a.u.)&#34;&#34;&#34;
-        return self.wvl, self.spectrum
+        return self.wvl, self.spectrum * 1/self.wvl**2
 
     def get_temporal_phase(self):
         &#34;&#34;&#34;returns time in fs, reconstructed temporal phase in rad&#34;&#34;&#34;
@@ -110,20 +169,20 @@ el.replaceWith(d);
         &#34;&#34;&#34;content of filename.Ek.dat (columns):
          - time (fs)
          - intensity envelope (square of field envelope)
-         - instantaneous phase (rad)
-         - ? (unknown)
-         - ? (unknown)
+         - instantaneous phase (rad) (net of the carrier phase, and with a minus sign)
+         - real part of the field envelope (net of the carrier frequency oscillations)
+         - imaginary part of the field envelope (net of the carrier frequency oscillations)
 
          content of filename.Speck.dat:
          - wavelengths (nm)
-         - intensity spectrum
-         - spectral phase (rad)
-         - ? (unknown)
-         - ? (unknown)
+         - pseudo-intensity spectrum |FFT|^2  (NOT multiplied by 1/λ^2)
+         - spectral phase (rad) (with a minus sign
+         - real part of FFT field (experessed as a function of wavelength, of course)
+         - imaginary part of FFT field (expressed as a function of wavelength, of course)
 
          content of spectrogram files:
          1st line: nbins x    nbins y
-         2nd line: ? (unkn.)  ? (unkn.)
+         2nd line: ? (unkn.)  ? (unkn.) (probably G error and Z error of the reconstruction)
          single column: concatenation of
             - frequency axis (THz)
             - time axis (fs)
@@ -168,12 +227,19 @@ el.replaceWith(d);
         self.time = np.array(data_field[0])
         self.envelope = np.array(data_field[1])
         self.tphase = np.array(data_field[2])
+        self.realField = np.array(data_field[3])
+        self.imagField = np.array(data_field[4])
 
         self.wvl = np.array(data_spec[0])
         self.spectrum = np.array(data_spec[1])
         self.sphase = np.array(data_spec[2])
+        self.realFFT = np.array(data_spec[3])
+        self.imagFFT = np.array(data_spec[4])
+        # remove negative wavelengths
         self.spectrum = self.spectrum[self.wvl&gt;0]
         self.sphase = self.sphase[self.wvl&gt;0]
+        self.realFFT = self.realFFT[self.wvl&gt;0]
+        self.imagFFT = self.imagFFT[self.wvl&gt;0]
         self.wvl = self.wvl[self.wvl&gt;0]
 
     def plot_temporal_profile(self, low_lim = None, up_lim = None):
@@ -185,7 +251,7 @@ el.replaceWith(d);
         ax.plot(self.time[(self.time&gt;low_lim)&amp;(self.time&lt;up_lim)], self.envelope[(self.time&gt;low_lim)&amp;(self.time&lt;up_lim)])
         ax2.plot(self.time[(self.time&gt;low_lim)&amp;(self.time&lt;up_lim)], self.tphase[(self.time&gt;low_lim)&amp;(self.time&lt;up_lim)], color=&#39;r&#39;)
         ax.set_xlabel(&#39;time (fs)&#39;)
-        ax.set_ylabel(&#39;amplitude (a.u.)&#39;)
+        ax.set_ylabel(&#39;intensity envelope (a.u.)&#39;)
         ax2.set_ylabel(&#39;phase (rad)&#39;, color=&#39;r&#39;)
         ax2.tick_params(axis=&#39;y&#39;, colors=&#39;r&#39;)
         ax2.yaxis.label.set_color(&#39;r&#39;)
@@ -197,7 +263,7 @@ el.replaceWith(d);
             ax.set_xlim(low_lim,up_lim)
         ax2 = ax.twinx()
         ax.set_title(&#39;Reconstruction&#39;)
-        ax.plot(self.wvl[(self.wvl&gt;low_lim)&amp;(self.wvl&lt;up_lim)], self.spectrum[(self.wvl&gt;low_lim)&amp;(self.wvl&lt;up_lim)])
+        ax.plot(self.wvl[(self.wvl&gt;low_lim)&amp;(self.wvl&lt;up_lim)], self.spectrum[(self.wvl&gt;low_lim)&amp;(self.wvl&lt;up_lim)]*(1/self.wvl[(self.wvl&gt;low_lim)&amp;(self.wvl&lt;up_lim)]**2))
         ax2.plot(self.wvl[(self.wvl&gt;low_lim)&amp;(self.wvl&lt;up_lim)], self.sphase[(self.wvl&gt;low_lim)&amp;(self.wvl&lt;up_lim)], color=&#39;r&#39;)
         ax.set_xlabel(&#39;wavelength (nm)&#39;)
         ax.set_ylabel(&#39;amplitude (a.u.)&#39;)
@@ -237,7 +303,8 @@ el.replaceWith(d);
 filename.A.dat: measured spectrogram
 filename.Arecon.dat: reconstructed spectrogram
 filename.Ek.dat: field envelope, phase
-filename.Speck.dat: reconstructed spectrum and phase</p></div>
+filename.Speck.dat: reconstructed spectrum and phase</p>
+<p>Warning: the class stores the data as in the files, please use methods "get_*()" to access the data correctly.</p></div>
 <h3>Methods</h3>
 <dl>
 <dt id="attoworld.file.FROG_result.FrogResult.get_FWHM"><code class="name flex">
@@ -282,7 +349,7 @@ filename.Speck.dat: reconstructed spectrum and phase</p></div>
 </summary>
 <pre><code class="python">def get_spectrum(self):
     &#34;&#34;&#34;returns wavelength in nm, reconstructed intensity spectrum (a.u.)&#34;&#34;&#34;
-    return self.wvl, self.spectrum</code></pre>
+    return self.wvl, self.spectrum * 1/self.wvl**2</code></pre>
 </details>
 <div class="desc"><p>returns wavelength in nm, reconstructed intensity spectrum (a.u.)</p></div>
 </dd>
@@ -326,20 +393,20 @@ filename.Speck.dat: reconstructed spectrum and phase</p></div>
     &#34;&#34;&#34;content of filename.Ek.dat (columns):
      - time (fs)
      - intensity envelope (square of field envelope)
-     - instantaneous phase (rad)
-     - ? (unknown)
-     - ? (unknown)
+     - instantaneous phase (rad) (net of the carrier phase, and with a minus sign)
+     - real part of the field envelope (net of the carrier frequency oscillations)
+     - imaginary part of the field envelope (net of the carrier frequency oscillations)
 
      content of filename.Speck.dat:
      - wavelengths (nm)
-     - intensity spectrum
-     - spectral phase (rad)
-     - ? (unknown)
-     - ? (unknown)
+     - pseudo-intensity spectrum |FFT|^2  (NOT multiplied by 1/λ^2)
+     - spectral phase (rad) (with a minus sign
+     - real part of FFT field (experessed as a function of wavelength, of course)
+     - imaginary part of FFT field (expressed as a function of wavelength, of course)
 
      content of spectrogram files:
      1st line: nbins x    nbins y
-     2nd line: ? (unkn.)  ? (unkn.)
+     2nd line: ? (unkn.)  ? (unkn.) (probably G error and Z error of the reconstruction)
      single column: concatenation of
         - frequency axis (THz)
         - time axis (fs)
@@ -384,31 +451,39 @@ filename.Speck.dat: reconstructed spectrum and phase</p></div>
     self.time = np.array(data_field[0])
     self.envelope = np.array(data_field[1])
     self.tphase = np.array(data_field[2])
+    self.realField = np.array(data_field[3])
+    self.imagField = np.array(data_field[4])
 
     self.wvl = np.array(data_spec[0])
     self.spectrum = np.array(data_spec[1])
     self.sphase = np.array(data_spec[2])
+    self.realFFT = np.array(data_spec[3])
+    self.imagFFT = np.array(data_spec[4])
+    # remove negative wavelengths
     self.spectrum = self.spectrum[self.wvl&gt;0]
     self.sphase = self.sphase[self.wvl&gt;0]
+    self.realFFT = self.realFFT[self.wvl&gt;0]
+    self.imagFFT = self.imagFFT[self.wvl&gt;0]
     self.wvl = self.wvl[self.wvl&gt;0]</code></pre>
 </details>
 <div class="desc"><p>content of filename.Ek.dat (columns):
 - time (fs)
 - intensity envelope (square of field envelope)
-- instantaneous phase (rad)
-- ? (unknown)
-- ? (unknown)</p>
+- instantaneous phase (rad) (net of the carrier phase, and with a minus sign)
+- real part of the field envelope (net of the carrier frequency oscillations)
+- imaginary part of the field envelope (net of the carrier frequency oscillations)</p>
 <p>content of filename.Speck.dat:
 - wavelengths (nm)
-- intensity spectrum
-- spectral phase (rad)
-- ? (unknown)
-- ? (unknown)</p>
+- pseudo-intensity spectrum |FFT|^2
+(NOT multiplied by 1/λ^2)
+- spectral phase (rad) (with a minus sign
+- real part of FFT field (experessed as a function of wavelength, of course)
+- imaginary part of FFT field (expressed as a function of wavelength, of course)</p>
 <p>content of spectrogram files:
 1st line: nbins x
 nbins y
 2nd line: ? (unkn.)
-? (unkn.)
+? (unkn.) (probably G error and Z error of the reconstruction)
 single column: concatenation of
 - frequency axis (THz)
 - time axis (fs)
@@ -464,7 +539,7 @@ single column: concatenation of
         ax.set_xlim(low_lim,up_lim)
     ax2 = ax.twinx()
     ax.set_title(&#39;Reconstruction&#39;)
-    ax.plot(self.wvl[(self.wvl&gt;low_lim)&amp;(self.wvl&lt;up_lim)], self.spectrum[(self.wvl&gt;low_lim)&amp;(self.wvl&lt;up_lim)])
+    ax.plot(self.wvl[(self.wvl&gt;low_lim)&amp;(self.wvl&lt;up_lim)], self.spectrum[(self.wvl&gt;low_lim)&amp;(self.wvl&lt;up_lim)]*(1/self.wvl[(self.wvl&gt;low_lim)&amp;(self.wvl&lt;up_lim)]**2))
     ax2.plot(self.wvl[(self.wvl&gt;low_lim)&amp;(self.wvl&lt;up_lim)], self.sphase[(self.wvl&gt;low_lim)&amp;(self.wvl&lt;up_lim)], color=&#39;r&#39;)
     ax.set_xlabel(&#39;wavelength (nm)&#39;)
     ax.set_ylabel(&#39;amplitude (a.u.)&#39;)
@@ -492,13 +567,83 @@ single column: concatenation of
     ax.plot(self.time[(self.time&gt;low_lim)&amp;(self.time&lt;up_lim)], self.envelope[(self.time&gt;low_lim)&amp;(self.time&lt;up_lim)])
     ax2.plot(self.time[(self.time&gt;low_lim)&amp;(self.time&lt;up_lim)], self.tphase[(self.time&gt;low_lim)&amp;(self.time&lt;up_lim)], color=&#39;r&#39;)
     ax.set_xlabel(&#39;time (fs)&#39;)
-    ax.set_ylabel(&#39;amplitude (a.u.)&#39;)
+    ax.set_ylabel(&#39;intensity envelope (a.u.)&#39;)
     ax2.set_ylabel(&#39;phase (rad)&#39;, color=&#39;r&#39;)
     ax2.tick_params(axis=&#39;y&#39;, colors=&#39;r&#39;)
     ax2.yaxis.label.set_color(&#39;r&#39;)
     plt.show()</code></pre>
 </details>
 <div class="desc"></div>
+</dd>
+<dt id="attoworld.file.FROG_result.FrogResult.test_FROG_result_format_envelope"><code class="name flex">
+<span>def <span class="ident">test_FROG_result_format_envelope</span></span>(<span>self, low_lim=None, up_lim=None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_FROG_result_format_envelope(self, low_lim=None, up_lim=None):
+    &#34;&#34;&#34;checks (by plotting) that the quantities stored in the file are the expected ones&#34;&#34;&#34;
+
+    fig, ax = plt.subplots(figsize=[6.4, 4.8])
+    if low_lim is not None and up_lim is not None:
+        ax.set_xlim(low_lim,up_lim)
+    ax2 = ax.twinx()
+    ax.set_title(&#39;(should be 2 identic. envelopes + 2 ident. phases)&#39;)
+    limited_time = self.time[(self.time&gt;low_lim)&amp;(self.time&lt;up_lim)]
+    limited_envelope = self.envelope[(self.time&gt;low_lim)&amp;(self.time&lt;up_lim)]
+    limited_envelope_r_i = (self.realField[(self.time&gt;low_lim)&amp;(self.time&lt;up_lim)]**2 + self.imagField[(self.time&gt;low_lim)&amp;(self.time&lt;up_lim)]**2)
+    limited_tphase = self.tphase[(self.time&gt;low_lim)&amp;(self.time&lt;up_lim)]
+    limited_tphase_r_i = np.arctan2(self.imagField[(self.time&gt;low_lim)&amp;(self.time&lt;up_lim)], self.realField[(self.time&gt;low_lim)&amp;(self.time&lt;up_lim)])
+    limited_tphase_r_i = -np.unwrap(limited_tphase_r_i)
+    ax.plot(limited_time, limited_envelope/np.max(limited_envelope), label=&#39;direct env. from file&#39;)
+    ax.plot(limited_time, limited_envelope_r_i/np.max(limited_envelope_r_i), label=&#39;sp. from re/im field&#39;)
+    ax2.plot(limited_time, limited_tphase, label=&#39;direct phase from file&#39;, color=&#39;r&#39;)
+    ax2.plot(limited_time, limited_tphase_r_i, label=&#39;phase from re/im field&#39;, color=&#39;g&#39;)
+    ax.set_xlabel(&#39;time (fs)&#39;)
+    ax.set_ylabel(&#39;amplitude (a.u.)&#39;)
+    ax2.set_ylabel(&#39;phase (rad)&#39;, color=&#39;r&#39;)
+    ax2.tick_params(axis=&#39;y&#39;, colors=&#39;r&#39;)
+    ax2.yaxis.label.set_color(&#39;r&#39;)
+    plt.show()</code></pre>
+</details>
+<div class="desc"><p>checks (by plotting) that the quantities stored in the file are the expected ones</p></div>
+</dd>
+<dt id="attoworld.file.FROG_result.FrogResult.test_FROG_result_format_spectrum"><code class="name flex">
+<span>def <span class="ident">test_FROG_result_format_spectrum</span></span>(<span>self, low_lim=None, up_lim=None)</span>
+</code></dt>
+<dd>
+<details class="source">
+<summary>
+<span>Expand source code</span>
+</summary>
+<pre><code class="python">def test_FROG_result_format_spectrum(self, low_lim=None, up_lim=None):
+    &#34;&#34;&#34;checks (by plotting) that the quantities stored in the file are the expected ones&#34;&#34;&#34;
+
+    fig, ax = plt.subplots(figsize=[6.4, 4.8])
+    if low_lim is not None and up_lim is not None:
+        ax.set_xlim(low_lim,up_lim)
+    ax2 = ax.twinx()
+    ax.set_title(&#39;(should be 2 identic. spectra + 2 identic. phases)&#39;)
+    limited_wvl = self.wvl[(self.wvl&gt;low_lim)&amp;(self.wvl&lt;up_lim)]
+    limited_spectrum = self.spectrum[(self.wvl&gt;low_lim)&amp;(self.wvl&lt;up_lim)]
+    limited_spectrum_r_i = (self.realFFT[(self.wvl&gt;low_lim)&amp;(self.wvl&lt;up_lim)]**2 + self.imagFFT[(self.wvl&gt;low_lim)&amp;(self.wvl&lt;up_lim)]**2)
+    limited_phase = self.sphase[(self.wvl&gt;low_lim)&amp;(self.wvl&lt;up_lim)]
+    limited_phase_r_i = np.arctan2(self.imagFFT[(self.wvl&gt;low_lim)&amp;(self.wvl&lt;up_lim)], self.realFFT[(self.wvl&gt;low_lim)&amp;(self.wvl&lt;up_lim)])
+    limited_phase_r_i = -np.unwrap(limited_phase_r_i)
+    ax.plot(limited_wvl, limited_spectrum/np.max(limited_spectrum), label=&#39;direct spectrum from file&#39;)
+    ax.plot(limited_wvl, limited_spectrum_r_i/np.max(limited_spectrum_r_i), label=&#39;sp. from re/im FFT field&#39;)
+    ax2.plot(limited_wvl, limited_phase, label=&#39;direct phase from file&#39;, color=&#39;r&#39;)
+    ax2.plot(limited_wvl, limited_phase_r_i, label=&#39;phase from re/im FFT field&#39;, color=&#39;g&#39;)
+    ax.set_xlabel(&#39;wavelength (nm)&#39;)
+    ax.set_ylabel(&#39;amplitude (a.u.)&#39;)
+    ax2.set_ylabel(&#39;phase (rad)&#39;, color=&#39;r&#39;)
+    ax2.tick_params(axis=&#39;y&#39;, colors=&#39;r&#39;)
+    ax2.yaxis.label.set_color(&#39;r&#39;)
+    plt.show()</code></pre>
+</details>
+<div class="desc"><p>checks (by plotting) that the quantities stored in the file are the expected ones</p></div>
 </dd>
 </dl>
 </dd>
@@ -529,6 +674,8 @@ single column: concatenation of
 <li><code><a title="attoworld.file.FROG_result.FrogResult.plot_spectrograms" href="#attoworld.file.FROG_result.FrogResult.plot_spectrograms">plot_spectrograms</a></code></li>
 <li><code><a title="attoworld.file.FROG_result.FrogResult.plot_spectrum" href="#attoworld.file.FROG_result.FrogResult.plot_spectrum">plot_spectrum</a></code></li>
 <li><code><a title="attoworld.file.FROG_result.FrogResult.plot_temporal_profile" href="#attoworld.file.FROG_result.FrogResult.plot_temporal_profile">plot_temporal_profile</a></code></li>
+<li><code><a title="attoworld.file.FROG_result.FrogResult.test_FROG_result_format_envelope" href="#attoworld.file.FROG_result.FrogResult.test_FROG_result_format_envelope">test_FROG_result_format_envelope</a></code></li>
+<li><code><a title="attoworld.file.FROG_result.FrogResult.test_FROG_result_format_spectrum" href="#attoworld.file.FROG_result.FrogResult.test_FROG_result_format_spectrum">test_FROG_result_format_spectrum</a></code></li>
 </ul>
 </li>
 </ul>
