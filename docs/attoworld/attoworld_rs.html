@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 <meta name="generator" content="pdoc3 0.11.6">
 <title>attoworld.attoworld_rs API documentation</title>
-<meta name="description" content="A Python module implemented in Rust.">
+<meta name="description" content="Functions written in Rust for improved performance and correctness.">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
@@ -36,7 +36,7 @@ el.replaceWith(d);
 <h1 class="title">Module <code>attoworld.attoworld_rs</code></h1>
 </header>
 <section id="section-intro">
-<p>A Python module implemented in Rust.</p>
+<p>Functions written in Rust for improved performance and correctness.</p>
 </section>
 <section>
 </section>
@@ -45,11 +45,52 @@ el.replaceWith(d);
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
+<dt id="attoworld.attoworld_rs.find_maximum_location"><code class="name flex">
+<span>def <span class="ident">find_maximum_location</span></span>(<span>y, neighbors=3, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Find the location and value of the maximum of a smooth, uniformly sampled signal, interpolating to find the sub-pixel location</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>y</code></strong> :&ensp;<code>np.ndarray</code></dt>
+<dd>The signal whose maximum should be located</dd>
+<dt><strong><code>neighbors</code></strong> :&ensp;<code>int</code></dt>
+<dd>the number of neighboring points to consider in the optimization (default 3)</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>(float, float): location, interpolated maximum</p></div>
+</dd>
+<dt id="attoworld.attoworld_rs.fornberg_stencil"><code class="name flex">
+<span>def <span class="ident">fornberg_stencil</span></span>(<span>order, positions, position_out=0.0, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Generate a finite difference stencil using the algorithm described by B. Fornberg
+in Mathematics of Computation 51, 699-706 (1988).</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>order</code></strong> :&ensp;<code>int</code></dt>
+<dd>the order of the derivative</dd>
+<dt><strong><code>positions</code></strong> :&ensp;<code>np.ndarray</code></dt>
+<dd>the positions at which the functions will be evaluated in the stencil. Must be larger than 2 elements in size.</dd>
+<dt><strong><code>position_out</code></strong> :&ensp;<code>float</code></dt>
+<dd>the position at which using the stencil will evaluate the derivative, default 0.0.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>np.ndarray</code></dt>
+<dd>the finite difference stencil with weights corresponding to the positions in the positions input array</dd>
+</dl>
+<h2 id="examples">Examples</h2>
+<pre><code class="language-python-repl">&gt;&gt;&gt; stencil = fornberg_stencil(1, [-1,0,1])
+&gt;&gt;&gt; print(stencil)
+[-0.5 0. 0.5]
+</code></pre></div>
+</dd>
 <dt id="attoworld.attoworld_rs.rust_hello"><code class="name flex">
 <span>def <span class="ident">rust_hello</span></span>(<span>)</span>
 </code></dt>
 <dd>
-<div class="desc"></div>
+<div class="desc"><p>Test function to make sure the Rust module is working</p></div>
 </dd>
 </dl>
 </section>
@@ -68,6 +109,8 @@ el.replaceWith(d);
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
+<li><code><a title="attoworld.attoworld_rs.find_maximum_location" href="#attoworld.attoworld_rs.find_maximum_location">find_maximum_location</a></code></li>
+<li><code><a title="attoworld.attoworld_rs.fornberg_stencil" href="#attoworld.attoworld_rs.fornberg_stencil">fornberg_stencil</a></code></li>
 <li><code><a title="attoworld.attoworld_rs.rust_hello" href="#attoworld.attoworld_rs.rust_hello">rust_hello</a></code></li>
 </ul>
 </li>

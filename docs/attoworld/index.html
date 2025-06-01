@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1">
 <meta name="generator" content="pdoc3 0.11.6">
 <title>attoworld API documentation</title>
-<meta name="description" content="Tools from the Attosecond science group at the Max Planck Institute of Quantum Optics, a.k.a. [Attoworld](https://www.attoworld.de) …">
+<meta name="description" content="Tools from the Attosecond science group at the Max Planck Institute of Quantum Optics, a.k.a. [Attoworld](https://www.attoworld.de)">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/sanitize.min.css" integrity="sha512-y1dtMcuvtTMJc1yPgEqF0ZjQbhnc/bFhyvIyVNb9Zk5mIGtqVaAB1Ttl28su8AvFMOY0EwRbAe+HCLqj6W7/KA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/10up-sanitize.css/13.0.0/typography.min.css" integrity="sha512-Y1DYSb995BAfxobCkKepB1BqJJTPrOp3zPL74AWFugHHmmdcvO+C48WLrUOlhGMc0QG7AE3f7gmvvcrmX2fDoA==" crossorigin>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/default.min.css" crossorigin>
@@ -37,22 +37,13 @@ el.replaceWith(d);
 </header>
 <section id="section-intro">
 <p>Tools from the Attosecond science group at the Max Planck Institute of Quantum Optics, a.k.a. <a href="https://www.attoworld.de">Attoworld</a></p>
-<h2 id="structure">Structure</h2>
-<p>The module has several submodules to keep it organized:
-- <em>file</em>: functions for reading/writing the various data formats used across the labs
-- <em>numeric</em>: numerical tools
-- <em>personal</em>: a module where we can add our own functions that might not be of general interest, but are still good to have available to we can easily share work
-- <em>plot</em>: functions for plotting with a consistent style
-- <em>wave</em>: functions for processing waveforms
-- <em>spectrum</em>: functions for processing spectra
-- <em>attoworld_rs</em>: A place to put Rust code with a Python interface for cases where it's particularly important that the program be fast and correct.</p>
 </section>
 <section>
 <h2 class="section-title" id="header-submodules">Sub-modules</h2>
 <dl>
 <dt><code class="name"><a title="attoworld.attoworld_rs" href="attoworld_rs.html">attoworld.attoworld_rs</a></code></dt>
 <dd>
-<div class="desc"><p>A Python module implemented in Rust.</p></div>
+<div class="desc"><p>Functions written in Rust for improved performance and correctness.</p></div>
 </dd>
 <dt><code class="name"><a title="attoworld.file" href="file/index.html">attoworld.file</a></code></dt>
 <dd>
@@ -91,9 +82,7 @@ more easily obtaining a consistent style across plots made …</p></div>
 </article>
 <nav id="sidebar">
 <div class="toc">
-<ul>
-<li><a href="#structure">Structure</a></li>
-</ul>
+<ul></ul>
 </div>
 <ul id="index">
 <li><h3><a href="#header-submodules">Sub-modules</a></h3>
