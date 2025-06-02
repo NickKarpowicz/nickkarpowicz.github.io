@@ -190,7 +190,7 @@ impulse response function of whatever caused the waveform to change</p>
 </summary>
 <pre><code class="python">def get_effective_response(E_signal, E_reference, dt: float, filter_f0: float, filter_sigma: float, filter_order: int):
     &#34;&#34;&#34;
-    Use the above three functions to calculate the effective impulse response with the reactive response removed
+    Calculate the effective impulse response with the reactive response removed
 
     Args:
         E_signal: the signal waveform array
@@ -212,7 +212,7 @@ impulse response function of whatever caused the waveform to change</p>
     matched_window_response = minimize_response_difference(response, window_response)
     return np.real(response-matched_window_response)</code></pre>
 </details>
-<div class="desc"><p>Use the above three functions to calculate the effective impulse response with the reactive response removed</p>
+<div class="desc"><p>Calculate the effective impulse response with the reactive response removed</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>E_signal</code></strong></dt>

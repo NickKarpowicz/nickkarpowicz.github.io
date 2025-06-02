@@ -45,6 +45,46 @@ el.replaceWith(d);
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
+<dt id="attoworld.attoworld_rs.find_first_intercept"><code class="name flex">
+<span>def <span class="ident">find_first_intercept</span></span>(<span>y, intercept_value, neighbors)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Find the first intercept with a value</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>y</code></strong> :&ensp;<code>np.ndarray</code></dt>
+<dd>the distribution data</dd>
+<dt><strong><code>intercept_value</code></strong> :&ensp;<code>float</code></dt>
+<dd>The value at which to take the intercept</dd>
+<dt><strong><code>neighbors</code></strong> :&ensp;<code>int</code></dt>
+<dd>The number of neighboring points in each direction to use when constructing interpolants. Higher values are more accurate, but only for smooth data.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>float</code></dt>
+<dd>"index" of the intercept, a float with non-integer value, indicating where between the pixels the intercept is</dd>
+</dl></div>
+</dd>
+<dt id="attoworld.attoworld_rs.find_last_intercept"><code class="name flex">
+<span>def <span class="ident">find_last_intercept</span></span>(<span>y, intercept_value, neighbors)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Find the last intercept with a value</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>y</code></strong> :&ensp;<code>np.ndarray</code></dt>
+<dd>the distribution data</dd>
+<dt><strong><code>intercept_value</code></strong> :&ensp;<code>float</code></dt>
+<dd>The value at which to take the intercept</dd>
+<dt><strong><code>neighbors</code></strong> :&ensp;<code>int</code></dt>
+<dd>The number of neighboring points in each direction to use when constructing interpolants. Higher values are more accurate, but only for smooth data.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>float</code></dt>
+<dd>"index" of the intercept, a float with non-integer value, indicating where between the pixels the intercept is</dd>
+</dl></div>
+</dd>
 <dt id="attoworld.attoworld_rs.find_maximum_location"><code class="name flex">
 <span>def <span class="ident">find_maximum_location</span></span>(<span>y, neighbors=3, /)</span>
 </code></dt>
@@ -86,11 +126,27 @@ in Mathematics of Computation 51, 699-706 (1988).</p>
 [-0.5 0. 0.5]
 </code></pre></div>
 </dd>
-<dt id="attoworld.attoworld_rs.rust_hello"><code class="name flex">
-<span>def <span class="ident">rust_hello</span></span>(<span>)</span>
+<dt id="attoworld.attoworld_rs.fwhm"><code class="name flex">
+<span>def <span class="ident">fwhm</span></span>(<span>y, dx=1.0, intercept_value=0.5, neighbors=2)</span>
 </code></dt>
 <dd>
-<div class="desc"><p>Test function to make sure the Rust module is working</p></div>
+<div class="desc"><p>Find the full-width-at-half-maximum value of a continuously-spaced distribution.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>y</code></strong> :&ensp;<code>np.ndarray</code></dt>
+<dd>the distribution data</dd>
+<dt><strong><code>dx</code></strong> :&ensp;<code>float</code></dt>
+<dd>the x step size of the data</dd>
+<dt><strong><code>intercept_value</code></strong> :&ensp;<code>float</code></dt>
+<dd>The value at which to take the intercepts (i.e. only full-width-at-HALF-max for 0.5)</dd>
+<dt><strong><code>neighbors</code></strong> :&ensp;<code>int</code></dt>
+<dd>The number of neighboring points in each direction to use when constructing interpolants. Higher values are more accurate, but only for smooth data.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>float</code></dt>
+<dd>The full width at intercept_value maximum</dd>
+</dl></div>
 </dd>
 </dl>
 </section>
@@ -109,9 +165,11 @@ in Mathematics of Computation 51, 699-706 (1988).</p>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
+<li><code><a title="attoworld.attoworld_rs.find_first_intercept" href="#attoworld.attoworld_rs.find_first_intercept">find_first_intercept</a></code></li>
+<li><code><a title="attoworld.attoworld_rs.find_last_intercept" href="#attoworld.attoworld_rs.find_last_intercept">find_last_intercept</a></code></li>
 <li><code><a title="attoworld.attoworld_rs.find_maximum_location" href="#attoworld.attoworld_rs.find_maximum_location">find_maximum_location</a></code></li>
 <li><code><a title="attoworld.attoworld_rs.fornberg_stencil" href="#attoworld.attoworld_rs.fornberg_stencil">fornberg_stencil</a></code></li>
-<li><code><a title="attoworld.attoworld_rs.rust_hello" href="#attoworld.attoworld_rs.rust_hello">rust_hello</a></code></li>
+<li><code><a title="attoworld.attoworld_rs.fwhm" href="#attoworld.attoworld_rs.fwhm">fwhm</a></code></li>
 </ul>
 </li>
 </ul>
