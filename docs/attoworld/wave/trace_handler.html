@@ -368,7 +368,7 @@ el.replaceWith(d);
         plt.show()
 
     def plot_spectra(self, low_lim=50, up_lim=1000, labels=None, offset=0.015):
-        &#34;&#34;&#34;plots all spectra. 
+        &#34;&#34;&#34;plots all spectra.
 
         ARGUMENTS (Optional, See plot_traces() docs):
             low_lim
@@ -516,7 +516,7 @@ traceHandler</p></div>
 <span>Expand source code</span>
 </summary>
 <pre><code class="python">def plot_spectra(self, low_lim=50, up_lim=1000, labels=None, offset=0.015):
-    &#34;&#34;&#34;plots all spectra. 
+    &#34;&#34;&#34;plots all spectra.
 
     ARGUMENTS (Optional, See plot_traces() docs):
         low_lim
@@ -546,7 +546,7 @@ traceHandler</p></div>
         ax.set_xlim(low_lim, up_lim)
     plt.show()</code></pre>
 </details>
-<div class="desc"><p>plots all spectra. </p>
+<div class="desc"><p>plots all spectra.</p>
 <p>ARGUMENTS (Optional, See plot_traces() docs):
 low_lim
 up_lim
@@ -654,7 +654,7 @@ offset</p></div>
 </summary>
 <pre><code class="python">class TraceHandler:
     &#34;&#34;&#34;Loads and stores the trace (field vs time) saved to file (two columns, tab separated) or given in the form of time and field [or wavelengths, spectrum and phase] arrays.
-    
+
     ALL THE TIMES ARE IN fs, FREQUENCIES IN PHz, WAVELENGTHS IN nm
 
     Most of the class methods modify the object data in place, and don&#39;t return anything.
@@ -688,7 +688,7 @@ offset</p></div>
     &#34;&#34;&#34;
     def __init__(self, filename=None, filename_spectrum=None, time=None, field=None, stdev=None, wvl=None, spectrum=None, wvl_FFT_trace=None, spectrum_FFT_trace=None, phase_FFT_trace=None):
         &#34;&#34;&#34;constructor; loads the trace from file (or from time-field or wavelegth-spectrum-phase arrays) and stores it in the class.
-        
+
         One of the following must be provided:
         - filename: the name of the file containing the trace (two columns, tab separated)
         - time and field: the time vector (fs) and electric field vector (a.u.)
@@ -1183,8 +1183,9 @@ offset</p></div>
         &#34;&#34;&#34;
         # careful: the time grid should be fine enough to resolve the maximum of the envelope
         t, en = self.get_envelope()
-        i_max = np.argmax(en)
-        self.zero_delay = t[i_max]
+        dt = t[1]-t[0]
+        max_index, max_value = find_maximum_location(en)
+        self.zero_delay = t[0] + dt * max_index
         return self.zero_delay
 
     def get_FWHM(self):
@@ -1196,11 +1197,8 @@ offset</p></div>
             FWHM: float
         &#34;&#34;&#34;
         t, en = self.get_envelope()
-        i_max = np.argmax(en**2)
-        hm = en[i_max]**2 / 2
-        enSquare = en**2
-        fwhm = (np.max(t[np.argwhere(enSquare &gt;= hm)]) - np.min(t[np.argwhere(enSquare &gt;= hm)]))
-        return fwhm
+        dt = t[1] - t[0]
+        return fwhm(en**2, dt)
 
     def fft_tukey_bandpass(self, lowWavelengthEdge, upWavelengthEdge, lowEdgeWidth, highEdgeWidth):
         &#34;&#34;&#34;applies a bandpass filter to the trace in the frequency domain using a tukey window.
@@ -1998,11 +1996,8 @@ path: str = path for the refractive index files. Defaults to "./RefractiveIndice
         FWHM: float
     &#34;&#34;&#34;
     t, en = self.get_envelope()
-    i_max = np.argmax(en**2)
-    hm = en[i_max]**2 / 2
-    enSquare = en**2
-    fwhm = (np.max(t[np.argwhere(enSquare &gt;= hm)]) - np.min(t[np.argwhere(enSquare &gt;= hm)]))
-    return fwhm</code></pre>
+    dt = t[1] - t[0]
+    return fwhm(en**2, dt)</code></pre>
 </details>
 <div class="desc"><p>get the FWHM of the trace.</p>
 <p>ATTENTION: the time array of the trace envelope should be fine enough to start with in order to resolve well the FWHM (please check it)</p>
@@ -2191,8 +2186,9 @@ instantaneous phase array (fs)</p></div>
     &#34;&#34;&#34;
     # careful: the time grid should be fine enough to resolve the maximum of the envelope
     t, en = self.get_envelope()
-    i_max = np.argmax(en)
-    self.zero_delay = t[i_max]
+    dt = t[1]-t[0]
+    max_index, max_value = find_maximum_location(en)
+    self.zero_delay = t[0] + dt * max_index
     return self.zero_delay</code></pre>
 </details>
 <div class="desc"><p>get the time value corresponding to the envelope peak.</p>

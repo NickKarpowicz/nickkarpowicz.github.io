@@ -306,7 +306,7 @@ for a better calibration compute and apply the correction to each of the 5 parti
         threshold (float): Threshold in units of sigma for outlier detection. Default is 3.
         window_points (int): Number of points to consider for the mean and sigma calculation. Default is 20.
     &#34;&#34;&#34;
-    if not isinstance(y, ndarray):
+    if not isinstance(y, np.ndarray):
         raise TypeError(&#34;Input of eliminate_outliers must be a numpy array.&#34;)
     n_outliers = 0
     for i in range(len(y)):

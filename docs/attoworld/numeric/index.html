@@ -56,6 +56,48 @@ el.replaceWith(d);
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
+<dt id="attoworld.numeric.derivative"><code class="name flex">
+<span>def <span class="ident">derivative</span></span>(<span>y, order, /, neighbors=3)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Use a Fornberg stencil to take a derivative of arbitrary order and accuracy, handling the edge
+by using modified stencils that only use internal points.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>data</code></strong> :&ensp;<code>np.ndarray</code></dt>
+<dd>the data whose derivative should be taken</dd>
+<dt><strong><code>order</code></strong> :&ensp;<code>int</code></dt>
+<dd>the order of the derivative</dd>
+<dt><strong><code>neighbors</code></strong> :&ensp;<code>int</code></dt>
+<dd>the number of nearest neighbors to consider in each direction.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>np.ndarray</code></dt>
+<dd>the derivative</dd>
+</dl></div>
+</dd>
+<dt id="attoworld.numeric.derivative_periodic"><code class="name flex">
+<span>def <span class="ident">derivative_periodic</span></span>(<span>y, order, /, neighbors=3)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Use a Fornberg stencil to take a derivative of arbitrary order and accuracy, handling the edge
+by treating it as a periodic boundary</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>data</code></strong> :&ensp;<code>np.ndarray</code></dt>
+<dd>the data whose derivative should be taken</dd>
+<dt><strong><code>order</code></strong> :&ensp;<code>int</code></dt>
+<dd>the order of the derivative</dd>
+<dt><strong><code>neighbors</code></strong> :&ensp;<code>int</code></dt>
+<dd>the number of nearest neighbors to consider in each direction.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>np.ndarray</code></dt>
+<dd>the derivative</dd>
+</dl></div>
+</dd>
 <dt id="attoworld.numeric.find_first_intercept"><code class="name flex">
 <span>def <span class="ident">find_first_intercept</span></span>(<span>y, intercept_value, neighbors)</span>
 </code></dt>
@@ -95,6 +137,21 @@ el.replaceWith(d);
 <dt><code>float</code></dt>
 <dd>"index" of the intercept, a float with non-integer value, indicating where between the pixels the intercept is</dd>
 </dl></div>
+</dd>
+<dt id="attoworld.numeric.find_maximum_location"><code class="name flex">
+<span>def <span class="ident">find_maximum_location</span></span>(<span>y, neighbors=3, /)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Find the location and value of the maximum of a smooth, uniformly sampled signal, interpolating to find the sub-pixel location</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>y</code></strong> :&ensp;<code>np.ndarray</code></dt>
+<dd>The signal whose maximum should be located</dd>
+<dt><strong><code>neighbors</code></strong> :&ensp;<code>int</code></dt>
+<dd>the number of neighboring points to consider in the optimization (default 3)</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<p>(float, float): location, interpolated maximum</p></div>
 </dd>
 <dt id="attoworld.numeric.fornberg_stencil"><code class="name flex">
 <span>def <span class="ident">fornberg_stencil</span></span>(<span>order, positions, position_out=0.0, /)</span>
@@ -145,18 +202,16 @@ in Mathematics of Computation 51, 699-706 (1988).</p>
 </dl></div>
 </dd>
 <dt id="attoworld.numeric.interpolate"><code class="name flex">
-<span>def <span class="ident">interpolate</span></span>(<span>x_out: numpy.ndarray,<br>x_in: numpy.ndarray,<br>y_in: numpy.ndarray,<br>neighbors: int = 2,<br>extrapolate: bool = False) ‑> numpy.ndarray</span>
+<span>def <span class="ident">interpolate</span></span>(<span>x_out: numpy.ndarray,<br>x_in: numpy.ndarray,<br>y_in: numpy.ndarray,<br>neighbors: int = 3,<br>extrapolate: bool = False,<br>derivative_order: int = 0,<br>input_is_sorted: bool = True) ‑> numpy.ndarray</span>
 </code></dt>
 <dd>
 <details class="source">
 <summary>
 <span>Expand source code</span>
 </summary>
-<pre><code class="python">def interpolate(x_out:np.ndarray, x_in: np.ndarray, y_in:np.ndarray, neighbors: int = 2, extrapolate: bool = False) -&gt; np.ndarray:
+<pre><code class="python">def interpolate(x_out:np.ndarray, x_in: np.ndarray, y_in:np.ndarray, neighbors: int = 3, extrapolate: bool = False, derivative_order: int = 0, input_is_sorted: bool = True) -&gt; np.ndarray:
     &#34;&#34;&#34;
     Use a Fornberg stencil containing a specified number of neighboring points to perform interpolation.
-
-    Contributed by Nick Karpowicz
 
     Args:
         x_out (np.ndarray): array of output x values, the array onto which y_in will be interpolated
@@ -164,69 +219,33 @@ in Mathematics of Computation 51, 699-706 (1988).</p>
         y_in (np.ndarray): array of input y values
         neighbors (int): number of nearest neighbors to include in the interpolation
         extrapolate (bool): unless set to true, values outside of the range of x_in will be zero
-
+        derivative_order(int): order of derivative to take. 0 (default) is plain interpolation, 1 takes first derivative, and so on.
+        input_is_sorted (bool): if set to false, data will be sorted before extrapolation
     Returns:
         np.ndarray: the interpolated y_out
     &#34;&#34;&#34;
+    if input_is_sorted:
+        return interpolate_sorted_1d(
+            x_out,
+            x_in,
+            y_in,
+            np.searchsorted(x_in, x_out, side=&#39;left&#39;),
+            neighbors,
+            extrapolate,
+            derivative_order)
     sort_order = np.argsort(x_in)
     x_in_sorted = x_in[sort_order]
     y_in_sorted = y_in[sort_order]
-    y_out = np.zeros(x_out.shape)
-    locations = np.searchsorted(x_in_sorted, x_out, side=&#39;left&#39;)
-
-    def interpolate_front_edge(x):
-        stencil = fornberg_stencil(
-            0,
-            x_in_sorted[0:(2*neighbors)],
-            x)
-        return np.sum(stencil * y_in_sorted[0:(2*neighbors)])
-
-    def interpolate_rear_edge(x):
-        stencil = fornberg_stencil(
-            0,
-            x_in_sorted[(-1 - 2*neighbors)::],
-            x)
-        return np.sum(stencil * y_in_sorted[(-1 - 2*neighbors)::])
-
-    def interpolate_point(x, location):
-
-        if (((location == 0) and x != x_in_sorted[0]) or (location &gt;= len(x_in_sorted))):
-            #points outside the range of x_in (extrapolation)
-            if extrapolate:
-                if location == 0:
-                    return interpolate_front_edge(x)
-                else:
-                    return interpolate_rear_edge(x)
-            else:
-                return 0.0
-
-        elif x == x_in_sorted[location]:
-            #case if x is exactly in the x_in array
-            #if multiple points match, return average
-            return np.mean(y_in_sorted[location==x_in_sorted])
-
-        elif location &lt; neighbors:
-            #use modified front-edge interp
-            return interpolate_front_edge(x)
-
-        elif location &gt;= (len(x_in_sorted) - neighbors):
-            #use modified rear-edge interp
-            return interpolate_rear_edge(x)
-        else:
-            #normal interior point
-            stencil = fornberg_stencil(
-                0,
-                x_in_sorted[(location-neighbors):(location + neighbors)],
-                x)
-            return np.sum(stencil * y_in_sorted[(location-neighbors):(location + neighbors)])
-
-    for _i in range(len(x_out)):
-        y_out[_i] = interpolate_point(x_out[_i], locations[_i])
-
-    return y_out</code></pre>
+    return interpolate_sorted_1d(
+        x_out,
+        x_in_sorted,
+        y_in_sorted,
+        np.searchsorted(x_in_sorted, x_out, side=&#39;left&#39;),
+        neighbors,
+        extrapolate,
+        derivative_order)</code></pre>
 </details>
 <div class="desc"><p>Use a Fornberg stencil containing a specified number of neighboring points to perform interpolation.</p>
-<p>Contributed by Nick Karpowicz</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>x_out</code></strong> :&ensp;<code>np.ndarray</code></dt>
@@ -239,83 +258,14 @@ in Mathematics of Computation 51, 699-706 (1988).</p>
 <dd>number of nearest neighbors to include in the interpolation</dd>
 <dt><strong><code>extrapolate</code></strong> :&ensp;<code>bool</code></dt>
 <dd>unless set to true, values outside of the range of x_in will be zero</dd>
+<dt>derivative_order(int): order of derivative to take. 0 (default) is plain interpolation, 1 takes first derivative, and so on.</dt>
+<dt><strong><code>input_is_sorted</code></strong> :&ensp;<code>bool</code></dt>
+<dd>if set to false, data will be sorted before extrapolation</dd>
 </dl>
 <h2 id="returns">Returns</h2>
 <dl>
 <dt><code>np.ndarray</code></dt>
 <dd>the interpolated y_out</dd>
-</dl></div>
-</dd>
-<dt id="attoworld.numeric.uniform_derivative"><code class="name flex">
-<span>def <span class="ident">uniform_derivative</span></span>(<span>data: numpy.ndarray,<br>order: int = 1,<br>neighbors: int = 1,<br>boundary: str = 'internal') ‑> numpy.ndarray</span>
-</code></dt>
-<dd>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def uniform_derivative(data: np.ndarray, order: int = 1, neighbors: int = 1, boundary: str = &#39;internal&#39;) -&gt; np.ndarray:
-    &#34;&#34;&#34;
-    Use a Fornberg stencil to take a derivative of arbitrary order and accuracy, handling the edge
-    by using modified stencils that only use internal points.
-
-    Args:
-        data (np.ndarray): the data whose derivative should be taken
-        order (int): the order of the derivative
-        neighbors (int): the number of nearest neighbors to consider.
-        boundary (str): How to treat the boundary: &#39;internal&#39; will use only internal points (default). &#39;periodic&#39; will assume periodic boundary. &#39;zero&#39; will assume the data is zero outsize the grid.
-
-    Returns:
-        np.ndarray: the derivative
-    &#34;&#34;&#34;
-
-    positions = np.array(range(-neighbors,neighbors+1))
-    stencil = fornberg_stencil(order, positions)
-    derivative = np.convolve(data, np.flip(stencil), mode=&#39;same&#39;)
-
-    match boundary:
-        case &#39;zero&#39;:
-            return derivative
-        case &#39;periodic&#39;:
-            boundary_array = np.concatenate((data[-2*neighbors::],data[0:(2*neighbors + 1)]))
-            for _i in range(2*neighbors + 1):
-                derivative[-neighbors + _i] = np.sum(boundary_array[_i:(_i + 2*neighbors + 1)] * stencil)
-            return derivative
-        case &#39;internal&#39;:
-            # increase number of included neighbors to improve accuracy
-            neighbors += 1
-            positions = np.array(range(-neighbors,neighbors+1))
-            def corrected_point_top(index: int):
-                boundary_stencil = fornberg_stencil(order, positions + neighbors - index)
-                return np.sum(boundary_stencil*data[0:len(positions)])
-
-            def corrected_point_bottom(index: int):
-                boundary_stencil = fornberg_stencil(order, positions-neighbors+index)
-                return np.sum(boundary_stencil*data[(-len(positions))::])
-
-            for _i in range(neighbors):
-                derivative[_i] = corrected_point_top(_i)
-                derivative[-1 -_i] = corrected_point_bottom(_i)
-
-    return derivative</code></pre>
-</details>
-<div class="desc"><p>Use a Fornberg stencil to take a derivative of arbitrary order and accuracy, handling the edge
-by using modified stencils that only use internal points.</p>
-<h2 id="args">Args</h2>
-<dl>
-<dt><strong><code>data</code></strong> :&ensp;<code>np.ndarray</code></dt>
-<dd>the data whose derivative should be taken</dd>
-<dt><strong><code>order</code></strong> :&ensp;<code>int</code></dt>
-<dd>the order of the derivative</dd>
-<dt><strong><code>neighbors</code></strong> :&ensp;<code>int</code></dt>
-<dd>the number of nearest neighbors to consider.</dd>
-<dt><strong><code>boundary</code></strong> :&ensp;<code>str</code></dt>
-<dd>How to treat the boundary: 'internal' will use only internal points (default). 'periodic' will assume periodic boundary. 'zero' will assume the data is zero outsize the grid.</dd>
-</dl>
-<h2 id="returns">Returns</h2>
-<dl>
-<dt><code>np.ndarray</code></dt>
-<dd>the derivative</dd>
 </dl></div>
 </dd>
 </dl>
@@ -454,12 +404,14 @@ by using modified stencils that only use internal points.</p>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
+<li><code><a title="attoworld.numeric.derivative" href="#attoworld.numeric.derivative">derivative</a></code></li>
+<li><code><a title="attoworld.numeric.derivative_periodic" href="#attoworld.numeric.derivative_periodic">derivative_periodic</a></code></li>
 <li><code><a title="attoworld.numeric.find_first_intercept" href="#attoworld.numeric.find_first_intercept">find_first_intercept</a></code></li>
 <li><code><a title="attoworld.numeric.find_last_intercept" href="#attoworld.numeric.find_last_intercept">find_last_intercept</a></code></li>
+<li><code><a title="attoworld.numeric.find_maximum_location" href="#attoworld.numeric.find_maximum_location">find_maximum_location</a></code></li>
 <li><code><a title="attoworld.numeric.fornberg_stencil" href="#attoworld.numeric.fornberg_stencil">fornberg_stencil</a></code></li>
 <li><code><a title="attoworld.numeric.fwhm" href="#attoworld.numeric.fwhm">fwhm</a></code></li>
 <li><code><a title="attoworld.numeric.interpolate" href="#attoworld.numeric.interpolate">interpolate</a></code></li>
-<li><code><a title="attoworld.numeric.uniform_derivative" href="#attoworld.numeric.uniform_derivative">uniform_derivative</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-classes">Classes</a></h3>

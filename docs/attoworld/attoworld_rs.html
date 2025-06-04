@@ -45,6 +45,48 @@ el.replaceWith(d);
 <section>
 <h2 class="section-title" id="header-functions">Functions</h2>
 <dl>
+<dt id="attoworld.attoworld_rs.derivative"><code class="name flex">
+<span>def <span class="ident">derivative</span></span>(<span>y, order, /, neighbors=3)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Use a Fornberg stencil to take a derivative of arbitrary order and accuracy, handling the edge
+by using modified stencils that only use internal points.</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>data</code></strong> :&ensp;<code>np.ndarray</code></dt>
+<dd>the data whose derivative should be taken</dd>
+<dt><strong><code>order</code></strong> :&ensp;<code>int</code></dt>
+<dd>the order of the derivative</dd>
+<dt><strong><code>neighbors</code></strong> :&ensp;<code>int</code></dt>
+<dd>the number of nearest neighbors to consider in each direction.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>np.ndarray</code></dt>
+<dd>the derivative</dd>
+</dl></div>
+</dd>
+<dt id="attoworld.attoworld_rs.derivative_periodic"><code class="name flex">
+<span>def <span class="ident">derivative_periodic</span></span>(<span>y, order, /, neighbors=3)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Use a Fornberg stencil to take a derivative of arbitrary order and accuracy, handling the edge
+by treating it as a periodic boundary</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>data</code></strong> :&ensp;<code>np.ndarray</code></dt>
+<dd>the data whose derivative should be taken</dd>
+<dt><strong><code>order</code></strong> :&ensp;<code>int</code></dt>
+<dd>the order of the derivative</dd>
+<dt><strong><code>neighbors</code></strong> :&ensp;<code>int</code></dt>
+<dd>the number of nearest neighbors to consider in each direction.</dd>
+</dl>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>np.ndarray</code></dt>
+<dd>the derivative</dd>
+</dl></div>
+</dd>
 <dt id="attoworld.attoworld_rs.find_first_intercept"><code class="name flex">
 <span>def <span class="ident">find_first_intercept</span></span>(<span>y, intercept_value, neighbors)</span>
 </code></dt>
@@ -148,6 +190,33 @@ in Mathematics of Computation 51, 699-706 (1988).</p>
 <dd>The full width at intercept_value maximum</dd>
 </dl></div>
 </dd>
+<dt id="attoworld.attoworld_rs.interpolate_sorted_1d"><code class="name flex">
+<span>def <span class="ident">interpolate_sorted_1d</span></span>(<span>x_out, x_in, y_in, locations, /, neighbors=2, extrapolate=False, derivative_order=0)</span>
+</code></dt>
+<dd>
+<div class="desc"><p>Interpolate sorted data, given a list of intersection locations</p>
+<h2 id="args">Args</h2>
+<dl>
+<dt><strong><code>x_out</code></strong> :&ensp;<code>np.ndarray</code></dt>
+<dd>array of output x values, the array onto which y_in will be interpolated</dd>
+<dt><strong><code>x_in</code></strong> :&ensp;<code>np.ndarray</code></dt>
+<dd>array of input x values</dd>
+<dt><strong><code>y_in</code></strong> :&ensp;<code>np.ndarray</code></dt>
+<dd>array of input y values</dd>
+<dt><strong><code>locations</code></strong> :&ensp;<code>np.ndarray</code></dt>
+<dd>array of approximate intersection points, np.searchsorted(x_in, x_out, side='left')</dd>
+<dt><strong><code>neighbors</code></strong> :&ensp;<code>int</code></dt>
+<dd>number of nearest neighbors to include in the interpolation</dd>
+<dt><strong><code>extrapolate</code></strong> :&ensp;<code>bool</code></dt>
+<dd>unless set to true, values outside of the range of x_in will be zero</dd>
+</dl>
+<p>derivative_order(int): order of derivative to take. 0 (default) is plain interpolation, 1 takes first derivative, and so on.</p>
+<h2 id="returns">Returns</h2>
+<dl>
+<dt><code>np.ndarray</code></dt>
+<dd>the interpolated y_out</dd>
+</dl></div>
+</dd>
 </dl>
 </section>
 <section>
@@ -165,11 +234,14 @@ in Mathematics of Computation 51, 699-706 (1988).</p>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>
 <ul class="">
+<li><code><a title="attoworld.attoworld_rs.derivative" href="#attoworld.attoworld_rs.derivative">derivative</a></code></li>
+<li><code><a title="attoworld.attoworld_rs.derivative_periodic" href="#attoworld.attoworld_rs.derivative_periodic">derivative_periodic</a></code></li>
 <li><code><a title="attoworld.attoworld_rs.find_first_intercept" href="#attoworld.attoworld_rs.find_first_intercept">find_first_intercept</a></code></li>
 <li><code><a title="attoworld.attoworld_rs.find_last_intercept" href="#attoworld.attoworld_rs.find_last_intercept">find_last_intercept</a></code></li>
 <li><code><a title="attoworld.attoworld_rs.find_maximum_location" href="#attoworld.attoworld_rs.find_maximum_location">find_maximum_location</a></code></li>
 <li><code><a title="attoworld.attoworld_rs.fornberg_stencil" href="#attoworld.attoworld_rs.fornberg_stencil">fornberg_stencil</a></code></li>
 <li><code><a title="attoworld.attoworld_rs.fwhm" href="#attoworld.attoworld_rs.fwhm">fwhm</a></code></li>
+<li><code><a title="attoworld.attoworld_rs.interpolate_sorted_1d" href="#attoworld.attoworld_rs.interpolate_sorted_1d">interpolate_sorted_1d</a></code></li>
 </ul>
 </li>
 </ul>
