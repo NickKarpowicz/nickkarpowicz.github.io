@@ -45,10 +45,6 @@ el.replaceWith(d);
 <dd>
 <div class="desc"></div>
 </dd>
-<dt><code class="name"><a title="attoworld.numeric.numeric" href="numeric.html">attoworld.numeric.numeric</a></code></dt>
-<dd>
-<div class="desc"></div>
-</dd>
 </dl>
 </section>
 <section>
@@ -202,50 +198,10 @@ in Mathematics of Computation 51, 699-706 (1988).</p>
 </dl></div>
 </dd>
 <dt id="attoworld.numeric.interpolate"><code class="name flex">
-<span>def <span class="ident">interpolate</span></span>(<span>x_out: numpy.ndarray,<br>x_in: numpy.ndarray,<br>y_in: numpy.ndarray,<br>neighbors: int = 3,<br>extrapolate: bool = False,<br>derivative_order: int = 0,<br>input_is_sorted: bool = True) ‑> numpy.ndarray</span>
+<span>def <span class="ident">interpolate</span></span>(<span>x_out,<br>x_in,<br>y_in,<br>/,<br>inputs_are_sorted=True,<br>neighbors=2,<br>extrapolate=False,<br>derivative_order=0)</span>
 </code></dt>
 <dd>
-<details class="source">
-<summary>
-<span>Expand source code</span>
-</summary>
-<pre><code class="python">def interpolate(x_out:np.ndarray, x_in: np.ndarray, y_in:np.ndarray, neighbors: int = 3, extrapolate: bool = False, derivative_order: int = 0, input_is_sorted: bool = True) -&gt; np.ndarray:
-    &#34;&#34;&#34;
-    Use a Fornberg stencil containing a specified number of neighboring points to perform interpolation.
-
-    Args:
-        x_out (np.ndarray): array of output x values, the array onto which y_in will be interpolated
-        x_in (np.ndarray): array of input x values
-        y_in (np.ndarray): array of input y values
-        neighbors (int): number of nearest neighbors to include in the interpolation
-        extrapolate (bool): unless set to true, values outside of the range of x_in will be zero
-        derivative_order(int): order of derivative to take. 0 (default) is plain interpolation, 1 takes first derivative, and so on.
-        input_is_sorted (bool): if set to false, data will be sorted before extrapolation
-    Returns:
-        np.ndarray: the interpolated y_out
-    &#34;&#34;&#34;
-    if input_is_sorted:
-        return interpolate_sorted_1d(
-            x_out,
-            x_in,
-            y_in,
-            np.searchsorted(x_in, x_out, side=&#39;left&#39;),
-            neighbors,
-            extrapolate,
-            derivative_order)
-    sort_order = np.argsort(x_in)
-    x_in_sorted = x_in[sort_order]
-    y_in_sorted = y_in[sort_order]
-    return interpolate_sorted_1d(
-        x_out,
-        x_in_sorted,
-        y_in_sorted,
-        np.searchsorted(x_in_sorted, x_out, side=&#39;left&#39;),
-        neighbors,
-        extrapolate,
-        derivative_order)</code></pre>
-</details>
-<div class="desc"><p>Use a Fornberg stencil containing a specified number of neighboring points to perform interpolation.</p>
+<div class="desc"><p>Interpolate sorted data, given a list of intersection locations</p>
 <h2 id="args">Args</h2>
 <dl>
 <dt><strong><code>x_out</code></strong> :&ensp;<code>np.ndarray</code></dt>
@@ -254,14 +210,14 @@ in Mathematics of Computation 51, 699-706 (1988).</p>
 <dd>array of input x values</dd>
 <dt><strong><code>y_in</code></strong> :&ensp;<code>np.ndarray</code></dt>
 <dd>array of input y values</dd>
+<dt><strong><code>inputs_are_sorted</code></strong> :&ensp;<code>bool</code></dt>
+<dd>true is x_in values are in ascending order (default). Set to false for unsorted data.</dd>
 <dt><strong><code>neighbors</code></strong> :&ensp;<code>int</code></dt>
 <dd>number of nearest neighbors to include in the interpolation</dd>
 <dt><strong><code>extrapolate</code></strong> :&ensp;<code>bool</code></dt>
 <dd>unless set to true, values outside of the range of x_in will be zero</dd>
-<dt>derivative_order(int): order of derivative to take. 0 (default) is plain interpolation, 1 takes first derivative, and so on.</dt>
-<dt><strong><code>input_is_sorted</code></strong> :&ensp;<code>bool</code></dt>
-<dd>if set to false, data will be sorted before extrapolation</dd>
 </dl>
+<p>derivative_order(int): order of derivative to take. 0 (default) is plain interpolation, 1 takes first derivative, and so on.</p>
 <h2 id="returns">Returns</h2>
 <dl>
 <dt><code>np.ndarray</code></dt>
@@ -399,7 +355,6 @@ in Mathematics of Computation 51, 699-706 (1988).</p>
 <li><h3><a href="#header-submodules">Sub-modules</a></h3>
 <ul>
 <li><code><a title="attoworld.numeric.atomic_units" href="atomic_units.html">attoworld.numeric.atomic_units</a></code></li>
-<li><code><a title="attoworld.numeric.numeric" href="numeric.html">attoworld.numeric.numeric</a></code></li>
 </ul>
 </li>
 <li><h3><a href="#header-functions">Functions</a></h3>

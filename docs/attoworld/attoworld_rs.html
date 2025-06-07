@@ -190,8 +190,8 @@ in Mathematics of Computation 51, 699-706 (1988).</p>
 <dd>The full width at intercept_value maximum</dd>
 </dl></div>
 </dd>
-<dt id="attoworld.attoworld_rs.interpolate_sorted_1d"><code class="name flex">
-<span>def <span class="ident">interpolate_sorted_1d</span></span>(<span>x_out, x_in, y_in, locations, /, neighbors=2, extrapolate=False, derivative_order=0)</span>
+<dt id="attoworld.attoworld_rs.interpolate"><code class="name flex">
+<span>def <span class="ident">interpolate</span></span>(<span>x_out,<br>x_in,<br>y_in,<br>/,<br>inputs_are_sorted=True,<br>neighbors=2,<br>extrapolate=False,<br>derivative_order=0)</span>
 </code></dt>
 <dd>
 <div class="desc"><p>Interpolate sorted data, given a list of intersection locations</p>
@@ -203,8 +203,8 @@ in Mathematics of Computation 51, 699-706 (1988).</p>
 <dd>array of input x values</dd>
 <dt><strong><code>y_in</code></strong> :&ensp;<code>np.ndarray</code></dt>
 <dd>array of input y values</dd>
-<dt><strong><code>locations</code></strong> :&ensp;<code>np.ndarray</code></dt>
-<dd>array of approximate intersection points, np.searchsorted(x_in, x_out, side='left')</dd>
+<dt><strong><code>inputs_are_sorted</code></strong> :&ensp;<code>bool</code></dt>
+<dd>true is x_in values are in ascending order (default). Set to false for unsorted data.</dd>
 <dt><strong><code>neighbors</code></strong> :&ensp;<code>int</code></dt>
 <dd>number of nearest neighbors to include in the interpolation</dd>
 <dt><strong><code>extrapolate</code></strong> :&ensp;<code>bool</code></dt>
@@ -241,7 +241,7 @@ in Mathematics of Computation 51, 699-706 (1988).</p>
 <li><code><a title="attoworld.attoworld_rs.find_maximum_location" href="#attoworld.attoworld_rs.find_maximum_location">find_maximum_location</a></code></li>
 <li><code><a title="attoworld.attoworld_rs.fornberg_stencil" href="#attoworld.attoworld_rs.fornberg_stencil">fornberg_stencil</a></code></li>
 <li><code><a title="attoworld.attoworld_rs.fwhm" href="#attoworld.attoworld_rs.fwhm">fwhm</a></code></li>
-<li><code><a title="attoworld.attoworld_rs.interpolate_sorted_1d" href="#attoworld.attoworld_rs.interpolate_sorted_1d">interpolate_sorted_1d</a></code></li>
+<li><code><a title="attoworld.attoworld_rs.interpolate" href="#attoworld.attoworld_rs.interpolate">interpolate</a></code></li>
 </ul>
 </li>
 </ul>
