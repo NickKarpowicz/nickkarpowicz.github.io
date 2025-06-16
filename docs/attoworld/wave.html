@@ -347,22 +347,15 @@
 </span></pre></div>
 
 
-            <div class="docstring"><p>Align a set of waveforms, inside of a 2D numpy array.</p>
+            <div class="docstring"><p>Align a set of waveforms, inside of a 2D numpy array.
+Args:
+    waves: set of waveforms
+    dt (float): time step (assuming constant spacing), (s)
+    frequency_roi_start (float): start frequency of region of interest for alignment (Hz)
+    frequency_roi_stop (float): stop frequency of region of interest for alignment (Hz)</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>waves:</strong>  set of waveforms</li>
-<li><strong>dt (float):</strong>  time step (assuming constant spacing), (s)</li>
-<li><strong>frequency_roi_start (float):</strong>  start frequency of region of interest for alignment (Hz)</li>
-<li><strong>frequency_roi_stop (float):</strong>  stop frequency of region of interest for alignment (Hz)</li>
-</ul>
-
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>np.ndarray: set of aligned waves</p>
-</blockquote>
+<p>Returns:
+    np.ndarray: set of aligned waves</p>
 </div>
 
 
@@ -406,22 +399,16 @@
 
             <div class="docstring"><p>Calculate the effective impulse response with the reactive response removed</p>
 
-<h6 id="arguments">Arguments:</h6>
+<p>Args:
+    E_signal: the signal waveform array
+    E_reference: the reference waveform
+    dt (float): the time step
+    filter_f0 (float): central frequency of the bandpass
+    filter_sigma (float): width of the bandpass
+    filter_order (int): order of the bandpass</p>
 
-<ul>
-<li><strong>E_signal:</strong>  the signal waveform array</li>
-<li><strong>E_reference:</strong>  the reference waveform</li>
-<li><strong>dt (float):</strong>  the time step</li>
-<li><strong>filter_f0 (float):</strong>  central frequency of the bandpass</li>
-<li><strong>filter_sigma (float):</strong>  width of the bandpass</li>
-<li><strong>filter_order (int):</strong>  order of the bandpass</li>
-</ul>
-
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>np.ndarray: the impuse response</p>
-</blockquote>
+<p>Returns:
+    np.ndarray: the impuse response</p>
 </div>
 
 
@@ -1294,27 +1281,28 @@
 
 <p>Most of the class methods modify the object data in place, and don't return anything.</p>
 
-<h6 id="attributes">Attributes:</h6>
+<p>Attributes:
+    fieldTimeV: (WAVEFORM DATA in the time domain) time array (fs)
+    fieldV: (WAVEFORM DATA in the time domain) field array
+    fieldStdevV: (WAVEFORM DATA in the time domain) field standard deviation (or sigma) array</p>
 
-<ul>
-<li><strong>fieldTimeV:</strong>  (WAVEFORM DATA in the time domain) time array (fs)</li>
-<li><strong>fieldV:</strong>  (WAVEFORM DATA in the time domain) field array</li>
-<li><strong>fieldStdevV:</strong>  (WAVEFORM DATA in the time domain) field standard deviation (or sigma) array</li>
-<li><strong>frequencyAxis:</strong>  (WAVEFORM DATA in the frequency domain) frequency axis of the FFT in PHz (should be np.fft compatible, i.e., equally spaced, in the form [0, df, 2*df, ..., fmax, -fmax[-df], ..., -df])</li>
-<li><strong>fftFieldV:</strong>  (WAVEFORM DATA in the frequency domain) FFT field (complex)</li>
-<li><strong>complexFieldTimeV:</strong>  (WAVEFORM DATA in the frequency domain) time axis of the complex field (fs)</li>
-<li><strong>complexFieldV:</strong>  (WAVEFORM DATA in the frequency domain) complex field ( = IFFT{FFT(ω)θ(ω)}(t), where θ(ω) = 1 if ω &gt;= 0, θ(ω) = 0 otherwise )</li>
-<li><strong>wvlAxis:</strong>  (WAVEFORM DATA in the frequency domain) wavelength axis for the FFT spectrum (nm)</li>
-<li><strong>fftSpectrum:</strong>  (WAVEFORM DATA in the frequency domain) wavelength-dependent positive FFT spectrum ( = |FFT{field}|^2 * df/dλ, λ &gt; 0 )</li>
-<li><strong>fftphase:</strong>  (WAVEFORM DATA in the frequency domain) wavelength-dependent spectral phase</li>
-<li><strong>wvlSpectrometer:</strong>  (SPECTROMETER DATA) wavelength (nm)</li>
-<li><strong>ISpectrometer:</strong>  (SPECTROMETER DATA) spectral intensity</li>
-<li><strong>fsZeroPadding:</strong>  (= 150 by default) time span in fs for zero padding (appending zeroes both before and after the trace, in order to get a smoother fft)</li>
-<li><strong>filename:</strong>  filename to load the trace from</li>
-<li><strong>filename_spectrum:</strong>  filename to load the spectrum from</li>
-<li><strong>normalization_trace:</strong>  normalization factor for the trace</li>
-<li><strong>zero_delay:</strong>  time zero, corresponds to the maximum envelope</li>
-</ul>
+<pre><code>frequencyAxis: (WAVEFORM DATA in the frequency domain) frequency axis of the FFT in PHz (should be np.fft compatible, i.e., equally spaced, in the form [0, df, 2*df, ..., fmax, -fmax[-df], ..., -df])
+fftFieldV: (WAVEFORM DATA in the frequency domain) FFT field (complex)
+complexFieldTimeV: (WAVEFORM DATA in the frequency domain) time axis of the complex field (fs)
+complexFieldV: (WAVEFORM DATA in the frequency domain) complex field ( = IFFT{FFT(ω)θ(ω)}(t), where θ(ω) = 1 if ω &gt;= 0, θ(ω) = 0 otherwise )
+wvlAxis: (WAVEFORM DATA in the frequency domain) wavelength axis for the FFT spectrum (nm)
+fftSpectrum: (WAVEFORM DATA in the frequency domain) wavelength-dependent positive FFT spectrum ( = |FFT{field}|^2 * df/dλ, λ &gt; 0 )
+fftphase: (WAVEFORM DATA in the frequency domain) wavelength-dependent spectral phase
+
+wvlSpectrometer: (SPECTROMETER DATA) wavelength (nm)
+ISpectrometer: (SPECTROMETER DATA) spectral intensity
+
+fsZeroPadding: (= 150 by default) time span in fs for zero padding (appending zeroes both before and after the trace, in order to get a smoother fft)
+filename: filename to load the trace from
+filename_spectrum: filename to load the spectrum from
+normalization_trace: normalization factor for the trace
+zero_delay: time zero, corresponds to the maximum envelope
+</code></pre>
 </div>
 
 
@@ -1398,21 +1386,18 @@
 <li>wvl_FFT_trace, spectrum_FFT_trace and phase_FFT_trace: the wavelength (nm) spectrum (a.u.) and phase (rad) vectors</li>
 </ul>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>filename (str):</strong>  the name of the file containing the trace (two columns - time and field, tab separated)</li>
-<li><strong>filename_spectrum (str):</strong>  the name of the file containing the spectrum (two columns - wavelength and spectral intensity, tab separated)
-this does not correspond to the fourier transform of the trace, but to some spectrometer data that you would like to compare to the loaded trace</li>
-<li><strong>time (array):</strong>  the time vector (fs)</li>
-<li><strong>field (array):</strong>  the electric field vector (a.u.)</li>
-<li><strong>stdev (array):</strong>  the standard deviation (or sigma) of the electric field vector (a.u.)</li>
-<li><strong>wvl (array):</strong>  the wavelength vector (nm) (spectrometer)</li>
-<li><strong>spectrum (array):</strong>  the spectral intensity vector (a.u.) (spectrometer)</li>
-<li><strong>wvl_FFT_trace (array):</strong>  the wavelength vector (nm) of the FFT trace (to reconstruct a trace from spectral data)</li>
-<li><strong>spectrum_FFT_trace (array):</strong>  the spectral intensity vector (a.u.) of the FFT trace (to reconstruct a trace from spectral data)</li>
-<li><strong>phase_FFT_trace (array):</strong>  the spectral phase vector (rad) of the FFT trace (to reconstruct a trace from spectral data)</li>
-</ul>
+<p>Args:
+    filename (str): the name of the file containing the trace (two columns - time and field, tab separated)
+    filename_spectrum (str): the name of the file containing the spectrum (two columns - wavelength and spectral intensity, tab separated)
+        this does not correspond to the fourier transform of the trace, but to some spectrometer data that you would like to compare to the loaded trace
+    time (array): the time vector (fs)
+    field (array): the electric field vector (a.u.)
+    stdev (array): the standard deviation (or sigma) of the electric field vector (a.u.)
+    wvl (array): the wavelength vector (nm) (spectrometer)
+    spectrum (array): the spectral intensity vector (a.u.) (spectrometer)
+    wvl_FFT_trace (array): the wavelength vector (nm) of the FFT trace (to reconstruct a trace from spectral data)
+    spectrum_FFT_trace (array): the spectral intensity vector (a.u.) of the FFT trace (to reconstruct a trace from spectral data)
+    phase_FFT_trace (array): the spectral phase vector (rad) of the FFT trace (to reconstruct a trace from spectral data)</p>
 </div>
 
 
@@ -1635,12 +1620,9 @@ this does not correspond to the fourier transform of the trace, but to some spec
 
 <p>The spectrum does not correspond to the fourier transform of the trace, but to some spectrometer data that you would like to compare with the loaded trace</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>wvl:</strong>  wavelength array (nm)</li>
-<li><strong>spectrum:</strong>  spectral intensity array</li>
-</ul>
+<p>Args:
+    wvl: wavelength array (nm)
+    spectrum: spectral intensity array</p>
 </div>
 
 
@@ -1680,13 +1662,10 @@ this does not correspond to the fourier transform of the trace, but to some spec
 
             <div class="docstring"><p>loads the trace from time and field arrays and stores it in the class.</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>fieldTimeV:</strong>  time array (fs)</li>
-<li><strong>fieldV:</strong>  field array</li>
-<li><strong>fieldStdevV:</strong>  standard deviation - or sigma - to be associated to the trace (optional, default = None)</li>
-</ul>
+<p>Args:
+    fieldTimeV: time array (fs)
+    fieldV: field array
+    fieldStdevV: standard deviation - or sigma - to be associated to the trace (optional, default = None)</p>
 </div>
 
 
@@ -1793,13 +1772,10 @@ this does not correspond to the fourier transform of the trace, but to some spec
 
 <p>This function has a different job than load_spectrum_from_arrays(): in fact, it retrieves the trace from the given spectral data via fourier transform.</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>wvl_FFT_trace:</strong>  wavelength array in nm</li>
-<li><strong>spectrum_FFT_trace:</strong>  (wavelength-)spectral intensity array. This is assumed to be |FFT{field}|^2 * df/dλ</li>
-<li><strong>phase_FFT_trace:</strong>  spectral phase in rad</li>
-</ul>
+<p>Args:
+    wvl_FFT_trace: wavelength array in nm
+    spectrum_FFT_trace: (wavelength-)spectral intensity array. This is assumed to be |FFT{field}|^2 * df/dλ
+    phase_FFT_trace: spectral phase in rad</p>
 </div>
 
 
@@ -1836,11 +1812,8 @@ this does not correspond to the fourier transform of the trace, but to some spec
 
 <p>The spectrum does not correspond to the fourier transform of the trace, but to the spectrometer data that you would like to compare with the loaded trace</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>fname:</strong>  filename</li>
-</ul>
+<p>Args:
+    fname: filename</p>
 </div>
 
 
@@ -1873,12 +1846,9 @@ this does not correspond to the fourier transform of the trace, but to some spec
 
             <div class="docstring"><p>updates the fft of the trace from the time domain data.</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>zero_pad_field:</strong>  bool; if true (default) add zeros before and after the trace before computing fft (for a smoother spectrum)
-The length of appended zeros is defined by self.fsZeroPadding.</li>
-</ul>
+<p>Args:
+    zero_pad_field: bool; if true (default) add zeros before and after the trace before computing fft (for a smoother spectrum)
+        The length of appended zeros is defined by self.fsZeroPadding.</p>
 </div>
 
 
@@ -2054,11 +2024,8 @@ The length of appended zeros is defined by self.fsZeroPadding.</li>
 
 <p>Useful when retrieving the trace via ifft (method update_trace_from_fft()).</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>timeRange (float):</strong>  the time range (fs) to strip from the beginning and end of the trace. If None (default), fsZeroPadding is used.</li>
-</ul>
+<p>Args:
+    timeRange (float): the time range (fs) to strip from the beginning and end of the trace. If None (default), fsZeroPadding is used.</p>
 </div>
 
 
@@ -2117,12 +2084,9 @@ The length of appended zeros is defined by self.fsZeroPadding.</li>
 
             <div class="docstring"><p>applies a tukey window to the trace in the time domain.</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>lowEdge, upEdge:</strong>  lower and upper edge of the window upEdge-lowEdge = FWHM of the window</li>
-<li><strong>lowEdgeWidth, upEdgeWidth:</strong>  width of the cosine-shaped edges (from 0 to 1 or viceversa)</li>
-</ul>
+<p>Args:
+    lowEdge, upEdge: lower and upper edge of the window upEdge-lowEdge = FWHM of the window
+    lowEdgeWidth, upEdgeWidth: width of the cosine-shaped edges (from 0 to 1 or viceversa)</p>
 </div>
 
 
@@ -2178,11 +2142,8 @@ The length of appended zeros is defined by self.fsZeroPadding.</li>
 
 <p>This is done by 'zero-padding' the fourier transform of the trace, i.e., by extending the frequency axis by a factor ntimes_finer, and adding corresponding zeros to the FFT field.</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>ntimes_finer (int):</strong>  the factor by which to shrink the time step of the trace in time domain. Must be &gt;= 1.</li>
-</ul>
+<p>Args:
+    ntimes_finer (int): the factor by which to shrink the time step of the trace in time domain. Must be &gt;= 1.</p>
 </div>
 
 
@@ -2216,11 +2177,8 @@ The length of appended zeros is defined by self.fsZeroPadding.</li>
 
             <div class="docstring"><p>computes the time derivative of the trace.</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>spectrally:</strong>  bool; if True (default) the derivative will be computed in the spectral domain (maybe more stable numerically)</li>
-</ul>
+<p>Args:
+    spectrally: bool; if True (default) the derivative will be computed in the spectral domain (maybe more stable numerically)</p>
 </div>
 
 
@@ -2256,11 +2214,8 @@ The length of appended zeros is defined by self.fsZeroPadding.</li>
 
             <div class="docstring"><p>integrates the trace in time.</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>spectrally (bool):</strong>  if True (default) the integral will be computed in the spectral domain (maybe more stable numerically)</li>
-</ul>
+<p>Args:
+    spectrally (bool): if True (default) the integral will be computed in the spectral domain (maybe more stable numerically)</p>
 </div>
 
 
@@ -2296,12 +2251,9 @@ The length of appended zeros is defined by self.fsZeroPadding.</li>
 
             <div class="docstring"><p>Saves the trace to file</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li>filename</li>
-<li><strong>low_lim, up_lim:</strong>  only save the trace between low_lim and up_lim (default: None, None)</li>
-</ul>
+<p>Args:
+    filename
+    low_lim, up_lim: only save the trace between low_lim and up_lim (default: None, None)</p>
 </div>
 
 
@@ -2360,11 +2312,8 @@ The length of appended zeros is defined by self.fsZeroPadding.</li>
 
             <div class="docstring"><p>Normalizes the spectrum of the trace (|FFT{trace}|^2 * df/dλ) to its integral (area)</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>spectrum_range (list):</strong>  the range of wavelengths (nm) to consider for the normalization. Default is [60, 930] nm.</li>
-</ul>
+<p>Args:
+    spectrum_range (list): the range of wavelengths (nm) to consider for the normalization. Default is [60, 930] nm.</p>
 </div>
 
 
@@ -2525,11 +2474,8 @@ The length of appended zeros is defined by self.fsZeroPadding.</li>
 <p>convention: field [V/Å], time [fs], fluence [J/cm²]
 F = c eps_0 integral(E^2)dt</p>
 
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>fluence: float</p>
-</blockquote>
+<p>Returns:
+    fluence: float</p>
 </div>
 
 
@@ -2623,12 +2569,9 @@ F = c eps_0 integral(E^2)dt</p>
 
             <div class="docstring"><p>Get the envelope of the trace.</p>
 
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>time array (fs)
-  envelope array</p>
-</blockquote>
+<p>Returns:
+    time array (fs)
+    envelope array</p>
 </div>
 
 
@@ -2663,12 +2606,9 @@ F = c eps_0 integral(E^2)dt</p>
 
 <p>If complexFieldV is already computed and stored, no re-calculation occurs</p>
 
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>time array (fs)
-  instantaneous phase array (fs)</p>
-</blockquote>
+<p>Returns:
+    time array (fs)
+    instantaneous phase array (fs)</p>
 </div>
 
 
@@ -2702,11 +2642,10 @@ F = c eps_0 integral(E^2)dt</p>
 
             <div class="docstring"><p>Get the time value corresponding to the envelope peak.</p>
 
-<h6 id="returns">Returns:</h6>
+<p>Returns:</p>
 
-<blockquote>
-  <p>zero_delay: float</p>
-</blockquote>
+<pre><code>zero_delay: float
+</code></pre>
 </div>
 
 
@@ -2737,11 +2676,8 @@ F = c eps_0 integral(E^2)dt</p>
 
             <div class="docstring"><p>get the FWHM of the trace.</p>
 
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>FWHM: float</p>
-</blockquote>
+<p>Returns:
+    FWHM: float</p>
 </div>
 
 
@@ -2795,14 +2731,11 @@ F = c eps_0 integral(E^2)dt</p>
 and it is reaches zero at lowWavelengthEdge-lowEdgeWidth/2  and  upWavelengthEdge+highEdgeWidth/2.
 Notice that the edges are only cosine-shaped in the frequency domain. In the wavelength domain upWavelengthEdge - lowWavelengthEdge does not coincide with the FWHM of the tukey function</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>lowWavelengthEdge:</strong>  float (nm)</li>
-<li><strong>upWavelengthEdge:</strong>  float (nm)</li>
-<li><strong>lowEdgeWidth:</strong>  float (nm)</li>
-<li><strong>highEdgeWidth:</strong>  float (nm)</li>
-</ul>
+<p>Args:
+    lowWavelengthEdge: float (nm)
+    upWavelengthEdge: float (nm)
+    lowEdgeWidth: float (nm)
+    highEdgeWidth: float (nm)</p>
 </div>
 
 
@@ -2857,12 +2790,9 @@ Notice that the edges are only cosine-shaped in the frequency domain. In the wav
 
             <div class="docstring"><p>Applies a spectral transmission function to the trace (e.g. spectral filter).</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>wavelengths:</strong>  ndarray = wavelength array (nm)</li>
-<li><strong>f:</strong>  ndarray = transmission function f(λ)</li>
-</ul>
+<p>Args:
+    wavelengths: ndarray = wavelength array (nm)
+    f: ndarray = transmission function f(λ)</p>
 </div>
 
 
@@ -2932,14 +2862,11 @@ Notice that the edges are only cosine-shaped in the frequency domain. In the wav
             <div class="docstring"><p>Applies a spectrum to the phase of the trace. This means that a new trace is computed and stored in the TraceHandler object (replacing the existing one);
 the new trace has spectral intensity equal to the applied spectrum and spectral phase equal to the phase of the existing trace.</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>wvl:</strong>  wavelength array (nm). If None (default) the comparison spectrum stored in the class (self.wvlSpectrometer and self.ISpectrometer) is applied.</li>
-<li><strong>spectrum:</strong>  spectral intensity array. If None (default) the comparison spectrum stored in the class (self.wvlSpectrometer and self.ISpectrometer) is applied.</li>
-<li><strong>CEP_shift:</strong>  a possible artificial phase shift IN UNITS OF PI! (default = 0)</li>
-<li><strong>stripZeroPadding (bool):</strong>  whether to eliminate the zero padding (zeros appended to the trace). Default is True</li>
-</ul>
+<p>Args:
+    wvl: wavelength array (nm). If None (default) the comparison spectrum stored in the class (self.wvlSpectrometer and self.ISpectrometer) is applied.
+    spectrum: spectral intensity array. If None (default) the comparison spectrum stored in the class (self.wvlSpectrometer and self.ISpectrometer) is applied.
+    CEP_shift: a possible artificial phase shift IN UNITS OF PI! (default = 0)
+    stripZeroPadding (bool): whether to eliminate the zero padding (zeros appended to the trace). Default is True</p>
 </div>
 
 
@@ -3051,20 +2978,17 @@ the new trace has spectral intensity equal to the applied spectrum and spectral 
             <div class="docstring"><p>calculates the fresnel reflection of the pulse at the interface between two materials. The waveform is travelling from material 1 to material 2.
 The first medium (material1) should be non-absorptive. As usual the resulting waveform is stored in the TraceHandler object, replacing the previous one.</p>
 
-<p>Refractive index files should contain 3 space-separated columns, respectively with headers: wvl n k, where wvl is the wavelength in um, n and k resp. the real and imaginary part of the refractive index.</p>
+<p>Refractive index files should contain 3 space-separated columns, respectively with headers: wvl n k, where wvl is the wavelength in um, n and k resp. the real and imaginary part of the refractive index.
+Args:
+    material2: the filename (without '.txt') of the refractive index data for the material after the interface (e.g. Si Al MgF2); wavelength is in um in the refractive index file
+    angle_in: the incidence angle in degrees
+    material1: the filename (without '.txt') of the refractive index data for the material before the interface. If None (default), vacuum is assumed
+    forward (bool):  if True (default) forward reflection is computed (the result waveform is the reflection of the previously stored waveform.</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>material2:</strong>  the filename (without '.txt') of the refractive index data for the material after the interface (e.g. Si Al MgF2); wavelength is in um in the refractive index file</li>
-<li><strong>angle_in:</strong>  the incidence angle in degrees</li>
-<li><strong>material1:</strong>  the filename (without '.txt') of the refractive index data for the material before the interface. If None (default), vacuum is assumed</li>
-<li><p><strong>forward (bool):</strong>   if True (default) forward reflection is computed (the result waveform is the reflection of the previously stored waveform.</p>
-
-<p>if False backward reflection is computed (the previous waveform is the reflection of the result waveform)</p></li>
-<li><strong>s_polarized (bool):</strong>  True. Reflection calculation only implemented for s-polarized light</li>
-<li><strong>path (str):</strong>  path for the refractive index files. Defaults to "./RefractiveIndices/"</li>
-</ul>
+<pre><code>    if False backward reflection is computed (the previous waveform is the reflection of the result waveform)
+s_polarized (bool): True. Reflection calculation only implemented for s-polarized light
+path (str): path for the refractive index files. Defaults to "./RefractiveIndices/"
+</code></pre>
 </div>
 
 
@@ -3147,13 +3071,10 @@ The first medium (material1) should be non-absorptive. As usual the resulting wa
 
             <div class="docstring"><p>Performs time-frequency analysis by using scipy's short time fourier transform (fourier transform of the trace convoluted by a 'sigma_time' broad gaussian).</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>sigma_time:</strong>  sigma of the gaussian window</li>
-<li><strong>low_lim, up_lim (float):</strong>  xaxis limits for plotting. Default None</li>
-<li><strong>low_lim_freq, up_lim_freq (float):</strong>  xaxis limits for plotting. Default None</li>
-</ul>
+<p>Args:
+    sigma_time: sigma of the gaussian window
+    low_lim, up_lim (float): xaxis limits for plotting. Default None
+    low_lim_freq, up_lim_freq (float): xaxis limits for plotting. Default None</p>
 </div>
 
 
@@ -3196,12 +3117,9 @@ The first medium (material1) should be non-absorptive. As usual the resulting wa
 
             <div class="docstring"><p>Plots the field trace.</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>low_lim, up_lim:</strong>  float = xaxis limits for plotting. Default None</li>
-<li><strong>normalize:</strong>  bool = if True (default) normalize the peak of the trace to 1</li>
-</ul>
+<p>Args:
+    low_lim, up_lim: float = xaxis limits for plotting. Default None
+    normalize: bool = if True (default) normalize the peak of the trace to 1</p>
 </div>
 
 
@@ -3254,12 +3172,9 @@ The first medium (material1) should be non-absorptive. As usual the resulting wa
 
             <div class="docstring"><p>Plots the trace spectrum and phase together with the spectrometer measurement [if provided].</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>low_lim, up_lim (float):</strong>  xaxis limits for plotting. Default: 40, 1000</li>
-<li><strong>no_phase:</strong>  if True, don't plot the phase. Default: False</li>
-</ul>
+<p>Args:
+    low_lim, up_lim (float): xaxis limits for plotting. Default: 40, 1000
+    no_phase: if True, don't plot the phase. Default: False</p>
 </div>
 
 
@@ -3470,12 +3385,9 @@ The first medium (material1) should be non-absorptive. As usual the resulting wa
 
 <p>All stored traces are accessible as TraceHandler object in the corresponding list.</p>
 
-<h6 id="attributes">Attributes:</h6>
-
-<ul>
-<li><strong>traceHandlers (list):</strong>  list of traceHandler objects</li>
-<li><strong>fsZeroPadding (float):</strong>  zero padding in fs for the traces (default 150 fs)</li>
-</ul>
+<p>Attributes:
+    traceHandlers (list): list of traceHandler objects
+    fsZeroPadding (float): zero padding in fs for the traces (default 150 fs)</p>
 </div>
 
 
@@ -3551,18 +3463,15 @@ The first medium (material1) should be non-absorptive. As usual the resulting wa
 <li>traceHandlerList: list of TraceHandler objects</li>
 </ul>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>filenameList :</strong>  list of filenames containing the field traces (see TraceHandler constructor)</li>
-<li><strong>filenameSpectrumList :</strong>  list of filenames containing the spectrum traces (spectrometer data; see TraceHandler constructor)</li>
-<li><strong>timeList :</strong>  list of time arrays (see TraceHandler constructor)</li>
-<li><strong>fieldList :</strong>  list of field arrays (see TraceHandler constructor)</li>
-<li><strong>stdevList :</strong>  list of standard deviation arrays (see TraceHandler constructor)</li>
-<li><strong>wvlList :</strong>  list of wavelength arrays (spectrometer data; see TraceHandler constructor)</li>
-<li><strong>spectrumList :</strong>  list of spectrum arrays (spectrometer data; see TraceHandler constructor)</li>
-<li><strong>traceHandlerList :</strong>  list of TraceHandler objects</li>
-</ul>
+<p>Args:
+    filenameList : list of filenames containing the field traces (see TraceHandler constructor)
+    filenameSpectrumList : list of filenames containing the spectrum traces (spectrometer data; see TraceHandler constructor)
+    timeList : list of time arrays (see TraceHandler constructor)
+    fieldList : list of field arrays (see TraceHandler constructor)
+    stdevList : list of standard deviation arrays (see TraceHandler constructor)
+    wvlList : list of wavelength arrays (spectrometer data; see TraceHandler constructor)
+    spectrumList : list of spectrum arrays (spectrometer data; see TraceHandler constructor)
+    traceHandlerList : list of TraceHandler objects</p>
 </div>
 
 
@@ -3632,18 +3541,15 @@ The first medium (material1) should be non-absorptive. As usual the resulting wa
 
             <div class="docstring"><p>Append a new trace to the list. Usual rules apply.</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li>filename</li>
-<li>filename_spectrum</li>
-<li>timeV</li>
-<li>fieldV</li>
-<li>stdevV</li>
-<li>wvl</li>
-<li>spectrum</li>
-<li>traceHandler</li>
-</ul>
+<p>Args:
+    filename
+    filename_spectrum
+    timeV
+    fieldV
+    stdevV
+    wvl
+    spectrum
+    traceHandler</p>
 </div>
 
 
@@ -3675,11 +3581,8 @@ The first medium (material1) should be non-absorptive. As usual the resulting wa
 
             <div class="docstring"><p>flips the trace number 'index'</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>index:</strong>  int</li>
-</ul>
+<p>Args:
+    index: int</p>
 </div>
 
 
@@ -3788,17 +3691,14 @@ The first medium (material1) should be non-absorptive. As usual the resulting wa
 
             <div class="docstring"><p>plots all traces.</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>low_lim (float):</strong>  for xaxis</li>
-<li><strong>up_lim (float):</strong>  for xaxis</li>
-<li><strong>labels (list):</strong>  list of labels for the legend</li>
-<li><strong>delay_shift (list):</strong>  list of delay offsets (one per trace)</li>
-<li><strong>offset (float):</strong>  y-axis offset between traces</li>
-<li><strong>errorbar (bool):</strong>  whether to plot errors. Default False</li>
-<li><strong>normalize (bool):</strong>  Default True</li>
-</ul>
+<p>Args:
+    low_lim (float): for xaxis
+    up_lim (float): for xaxis
+    labels (list): list of labels for the legend
+    delay_shift (list): list of delay offsets (one per trace)
+    offset (float): y-axis offset between traces
+    errorbar (bool): whether to plot errors. Default False
+    normalize (bool): Default True</p>
 </div>
 
 

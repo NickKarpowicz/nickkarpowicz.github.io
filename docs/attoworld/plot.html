@@ -177,40 +177,39 @@ more easily obtaining a consistent style across plots made by different co-autho
 </span><span id="set_style-47"><a href="#set_style-47"><span class="linenos">47</span></a>            <span class="s1">&#39;xtick.color&#39;</span><span class="p">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>
 </span><span id="set_style-48"><a href="#set_style-48"><span class="linenos">48</span></a>            <span class="s1">&#39;ytick.color&#39;</span><span class="p">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>
 </span><span id="set_style-49"><a href="#set_style-49"><span class="linenos">49</span></a>            <span class="s1">&#39;grid.color&#39;</span><span class="p">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>
-</span><span id="set_style-50"><a href="#set_style-50"><span class="linenos">50</span></a>            <span class="s1">&#39;lines.color&#39;</span><span class="p">:</span> <span class="s1">&#39;white&#39;</span>
-</span><span id="set_style-51"><a href="#set_style-51"><span class="linenos">51</span></a>            <span class="p">})</span>
-</span><span id="set_style-52"><a href="#set_style-52"><span class="linenos">52</span></a>        <span class="c1"># Light case is combined with _, which will capture anything else that didn&#39;t match.</span>
-</span><span id="set_style-53"><a href="#set_style-53"><span class="linenos">53</span></a>        <span class="c1"># It must be the last case, for that reason.</span>
-</span><span id="set_style-54"><a href="#set_style-54"><span class="linenos">54</span></a>        <span class="k">case</span><span class="w"> </span><span class="s1">&#39;light&#39;</span> <span class="o">|</span> <span class="k">_</span><span class="p">:</span>
-</span><span id="set_style-55"><a href="#set_style-55"><span class="linenos">55</span></a>            <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Helvetica&#39;</span><span class="p">,</span> <span class="s1">&#39;Nimbus Sans L&#39;</span><span class="p">,</span> <span class="s1">&#39;Arial&#39;</span><span class="p">,</span> <span class="s1">&#39;Verdana&#39;</span><span class="p">,</span> <span class="s1">&#39;DejaVu Sans&#39;</span><span class="p">,</span> <span class="s1">&#39;Liberation Sans&#39;</span><span class="p">,</span> <span class="s1">&#39;Bitstream Vera Sans&#39;</span><span class="p">,</span> <span class="s1">&#39;sans-serif&#39;</span><span class="p">],</span>
-</span><span id="set_style-56"><a href="#set_style-56"><span class="linenos">56</span></a>            <span class="s1">&#39;font.family&#39;</span><span class="p">:</span> <span class="s1">&#39;sans-serif&#39;</span><span class="p">,</span>
-</span><span id="set_style-57"><a href="#set_style-57"><span class="linenos">57</span></a>            <span class="c1">#colorblind-friendly color cycle from https://gist.github.com/thriveth/8560036</span>
-</span><span id="set_style-58"><a href="#set_style-58"><span class="linenos">58</span></a>            <span class="s1">&#39;axes.prop_cycle&#39;</span><span class="p">:</span> <span class="n">cycler</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;#377eb8&#39;</span><span class="p">,</span> <span class="s1">&#39;#ff7f00&#39;</span><span class="p">,</span> <span class="s1">&#39;#4daf4a&#39;</span><span class="p">,</span> <span class="s1">&#39;#f781bf&#39;</span><span class="p">,</span> <span class="s1">&#39;#a65628&#39;</span><span class="p">,</span> <span class="s1">&#39;#984ea3&#39;</span><span class="p">,</span> <span class="s1">&#39;#999999&#39;</span><span class="p">,</span> <span class="s1">&#39;#e41a1c&#39;</span><span class="p">,</span> <span class="s1">&#39;#dede00&#39;</span><span class="p">]),</span>
-</span><span id="set_style-59"><a href="#set_style-59"><span class="linenos">59</span></a>            <span class="s1">&#39;figure.facecolor&#39;</span><span class="p">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>
-</span><span id="set_style-60"><a href="#set_style-60"><span class="linenos">60</span></a>            <span class="s1">&#39;figure.edgecolor&#39;</span><span class="p">:</span><span class="s1">&#39;white&#39;</span><span class="p">,</span>
-</span><span id="set_style-61"><a href="#set_style-61"><span class="linenos">61</span></a>            <span class="s1">&#39;savefig.facecolor&#39;</span><span class="p">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>
-</span><span id="set_style-62"><a href="#set_style-62"><span class="linenos">62</span></a>            <span class="s1">&#39;savefig.edgecolor&#39;</span><span class="p">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>
-</span><span id="set_style-63"><a href="#set_style-63"><span class="linenos">63</span></a>            <span class="s1">&#39;axes.facecolor&#39;</span><span class="p">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>
-</span><span id="set_style-64"><a href="#set_style-64"><span class="linenos">64</span></a>            <span class="s1">&#39;text.color&#39;</span><span class="p">:</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>
-</span><span id="set_style-65"><a href="#set_style-65"><span class="linenos">65</span></a>            <span class="s1">&#39;axes.edgecolor&#39;</span><span class="p">:</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>
-</span><span id="set_style-66"><a href="#set_style-66"><span class="linenos">66</span></a>            <span class="s1">&#39;axes.labelcolor&#39;</span><span class="p">:</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>
-</span><span id="set_style-67"><a href="#set_style-67"><span class="linenos">67</span></a>            <span class="s1">&#39;xtick.color&#39;</span><span class="p">:</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>
-</span><span id="set_style-68"><a href="#set_style-68"><span class="linenos">68</span></a>            <span class="s1">&#39;ytick.color&#39;</span><span class="p">:</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>
-</span><span id="set_style-69"><a href="#set_style-69"><span class="linenos">69</span></a>            <span class="s1">&#39;grid.color&#39;</span><span class="p">:</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>
-</span><span id="set_style-70"><a href="#set_style-70"><span class="linenos">70</span></a>            <span class="s1">&#39;lines.color&#39;</span><span class="p">:</span> <span class="s1">&#39;black&#39;</span><span class="p">})</span>
+</span><span id="set_style-50"><a href="#set_style-50"><span class="linenos">50</span></a>            <span class="s1">&#39;lines.color&#39;</span><span class="p">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>
+</span><span id="set_style-51"><a href="#set_style-51"><span class="linenos">51</span></a>            <span class="s1">&#39;image.cmap&#39;</span><span class="p">:</span> <span class="s1">&#39;magma&#39;</span>
+</span><span id="set_style-52"><a href="#set_style-52"><span class="linenos">52</span></a>            <span class="p">})</span>
+</span><span id="set_style-53"><a href="#set_style-53"><span class="linenos">53</span></a>        <span class="c1"># Light case is combined with _, which will capture anything else that didn&#39;t match.</span>
+</span><span id="set_style-54"><a href="#set_style-54"><span class="linenos">54</span></a>        <span class="c1"># It must be the last case, for that reason.</span>
+</span><span id="set_style-55"><a href="#set_style-55"><span class="linenos">55</span></a>        <span class="k">case</span><span class="w"> </span><span class="s1">&#39;light&#39;</span> <span class="o">|</span> <span class="k">_</span><span class="p">:</span>
+</span><span id="set_style-56"><a href="#set_style-56"><span class="linenos">56</span></a>            <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;Helvetica&#39;</span><span class="p">,</span> <span class="s1">&#39;Nimbus Sans L&#39;</span><span class="p">,</span> <span class="s1">&#39;Arial&#39;</span><span class="p">,</span> <span class="s1">&#39;Verdana&#39;</span><span class="p">,</span> <span class="s1">&#39;DejaVu Sans&#39;</span><span class="p">,</span> <span class="s1">&#39;Liberation Sans&#39;</span><span class="p">,</span> <span class="s1">&#39;Bitstream Vera Sans&#39;</span><span class="p">,</span> <span class="s1">&#39;sans-serif&#39;</span><span class="p">],</span>
+</span><span id="set_style-57"><a href="#set_style-57"><span class="linenos">57</span></a>            <span class="s1">&#39;font.family&#39;</span><span class="p">:</span> <span class="s1">&#39;sans-serif&#39;</span><span class="p">,</span>
+</span><span id="set_style-58"><a href="#set_style-58"><span class="linenos">58</span></a>            <span class="c1">#colorblind-friendly color cycle from https://gist.github.com/thriveth/8560036</span>
+</span><span id="set_style-59"><a href="#set_style-59"><span class="linenos">59</span></a>            <span class="s1">&#39;axes.prop_cycle&#39;</span><span class="p">:</span> <span class="n">cycler</span><span class="p">(</span><span class="n">color</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;#377eb8&#39;</span><span class="p">,</span> <span class="s1">&#39;#ff7f00&#39;</span><span class="p">,</span> <span class="s1">&#39;#4daf4a&#39;</span><span class="p">,</span> <span class="s1">&#39;#f781bf&#39;</span><span class="p">,</span> <span class="s1">&#39;#a65628&#39;</span><span class="p">,</span> <span class="s1">&#39;#984ea3&#39;</span><span class="p">,</span> <span class="s1">&#39;#999999&#39;</span><span class="p">,</span> <span class="s1">&#39;#e41a1c&#39;</span><span class="p">,</span> <span class="s1">&#39;#dede00&#39;</span><span class="p">]),</span>
+</span><span id="set_style-60"><a href="#set_style-60"><span class="linenos">60</span></a>            <span class="s1">&#39;figure.facecolor&#39;</span><span class="p">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>
+</span><span id="set_style-61"><a href="#set_style-61"><span class="linenos">61</span></a>            <span class="s1">&#39;figure.edgecolor&#39;</span><span class="p">:</span><span class="s1">&#39;white&#39;</span><span class="p">,</span>
+</span><span id="set_style-62"><a href="#set_style-62"><span class="linenos">62</span></a>            <span class="s1">&#39;savefig.facecolor&#39;</span><span class="p">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>
+</span><span id="set_style-63"><a href="#set_style-63"><span class="linenos">63</span></a>            <span class="s1">&#39;savefig.edgecolor&#39;</span><span class="p">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>
+</span><span id="set_style-64"><a href="#set_style-64"><span class="linenos">64</span></a>            <span class="s1">&#39;axes.facecolor&#39;</span><span class="p">:</span> <span class="s1">&#39;white&#39;</span><span class="p">,</span>
+</span><span id="set_style-65"><a href="#set_style-65"><span class="linenos">65</span></a>            <span class="s1">&#39;text.color&#39;</span><span class="p">:</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>
+</span><span id="set_style-66"><a href="#set_style-66"><span class="linenos">66</span></a>            <span class="s1">&#39;axes.edgecolor&#39;</span><span class="p">:</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>
+</span><span id="set_style-67"><a href="#set_style-67"><span class="linenos">67</span></a>            <span class="s1">&#39;axes.labelcolor&#39;</span><span class="p">:</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>
+</span><span id="set_style-68"><a href="#set_style-68"><span class="linenos">68</span></a>            <span class="s1">&#39;xtick.color&#39;</span><span class="p">:</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>
+</span><span id="set_style-69"><a href="#set_style-69"><span class="linenos">69</span></a>            <span class="s1">&#39;ytick.color&#39;</span><span class="p">:</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>
+</span><span id="set_style-70"><a href="#set_style-70"><span class="linenos">70</span></a>            <span class="s1">&#39;grid.color&#39;</span><span class="p">:</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>
+</span><span id="set_style-71"><a href="#set_style-71"><span class="linenos">71</span></a>            <span class="s1">&#39;lines.color&#39;</span><span class="p">:</span> <span class="s1">&#39;black&#39;</span><span class="p">,</span>
+</span><span id="set_style-72"><a href="#set_style-72"><span class="linenos">72</span></a>            <span class="s1">&#39;image.cmap&#39;</span><span class="p">:</span> <span class="s1">&#39;viridis&#39;</span><span class="p">})</span>
 </span></pre></div>
 
 
             <div class="docstring"><p>Set colors and fonts for matplotlib plots</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>mode (str):</strong>  Select color theme.
-Options:
-    <code>light</code>: color-blind friendly colors (default)
-    <code>nick_dark</code>: dark mode that matches Nick's slides</li>
-</ul>
+<p>Args:
+    mode (str): Select color theme.
+                Options:
+                    <code>light</code>: color-blind friendly colors (default)
+                    <code>nick_dark</code>: dark mode that matches Nick's slides</p>
 </div>
 
 
@@ -226,51 +225,48 @@ Options:
 
     </div>
     <a class="headerlink" href="#label_letter"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="label_letter-72"><a href="#label_letter-72"><span class="linenos"> 72</span></a><span class="k">def</span> <span class="nf">label_letter</span><span class="p">(</span>
-</span><span id="label_letter-73"><a href="#label_letter-73"><span class="linenos"> 73</span></a>    <span class="n">letter</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span>
-</span><span id="label_letter-74"><a href="#label_letter-74"><span class="linenos"> 74</span></a>    <span class="n">axis</span><span class="p">:</span> <span class="n">Axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">(),</span>
-</span><span id="label_letter-75"><a href="#label_letter-75"><span class="linenos"> 75</span></a>    <span class="n">style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Nature&#39;</span><span class="p">,</span>
-</span><span id="label_letter-76"><a href="#label_letter-76"><span class="linenos"> 76</span></a>    <span class="n">x_position</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.14</span><span class="p">,</span>
-</span><span id="label_letter-77"><a href="#label_letter-77"><span class="linenos"> 77</span></a>    <span class="n">y_position</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.08</span><span class="p">):</span>
-</span><span id="label_letter-78"><a href="#label_letter-78"><span class="linenos"> 78</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="label_letter-79"><a href="#label_letter-79"><span class="linenos"> 79</span></a><span class="sd">        Put a letter in the corner of a set of axes to label them</span>
-</span><span id="label_letter-80"><a href="#label_letter-80"><span class="linenos"> 80</span></a>
-</span><span id="label_letter-81"><a href="#label_letter-81"><span class="linenos"> 81</span></a><span class="sd">        Args:</span>
-</span><span id="label_letter-82"><a href="#label_letter-82"><span class="linenos"> 82</span></a><span class="sd">            axis: The axes to use (default is current ones)</span>
-</span><span id="label_letter-83"><a href="#label_letter-83"><span class="linenos"> 83</span></a><span class="sd">            letter (str): The letter to use</span>
-</span><span id="label_letter-84"><a href="#label_letter-84"><span class="linenos"> 84</span></a><span class="sd">            style (str): The journal style to apply. Options are ```Nature```, ```Science```, and ```OSA```</span>
-</span><span id="label_letter-85"><a href="#label_letter-85"><span class="linenos"> 85</span></a><span class="sd">            x_position (float): where to put the label horizontally relative to the axes of the figure</span>
-</span><span id="label_letter-86"><a href="#label_letter-86"><span class="linenos"> 86</span></a><span class="sd">            y_position (float): vertical position</span>
-</span><span id="label_letter-87"><a href="#label_letter-87"><span class="linenos"> 87</span></a>
-</span><span id="label_letter-88"><a href="#label_letter-88"><span class="linenos"> 88</span></a><span class="sd">        &quot;&quot;&quot;</span>
-</span><span id="label_letter-89"><a href="#label_letter-89"><span class="linenos"> 89</span></a>        <span class="n">letter_string</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">letter</span><span class="si">}</span><span class="s1">&#39;</span>
-</span><span id="label_letter-90"><a href="#label_letter-90"><span class="linenos"> 90</span></a>        <span class="n">fontweight</span> <span class="o">=</span> <span class="s1">&#39;normal&#39;</span>
-</span><span id="label_letter-91"><a href="#label_letter-91"><span class="linenos"> 91</span></a>        <span class="k">match</span> <span class="n">style</span><span class="p">:</span>
-</span><span id="label_letter-92"><a href="#label_letter-92"><span class="linenos"> 92</span></a>            <span class="k">case</span> <span class="s1">&#39;Nature&#39;</span><span class="p">:</span>
-</span><span id="label_letter-93"><a href="#label_letter-93"><span class="linenos"> 93</span></a>                <span class="n">letter_string</span> <span class="o">=</span> <span class="n">letter_string</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
-</span><span id="label_letter-94"><a href="#label_letter-94"><span class="linenos"> 94</span></a>                <span class="n">fontweight</span> <span class="o">=</span> <span class="s1">&#39;bold&#39;</span>
-</span><span id="label_letter-95"><a href="#label_letter-95"><span class="linenos"> 95</span></a>            <span class="k">case</span> <span class="s1">&#39;Science&#39;</span><span class="p">:</span>
-</span><span id="label_letter-96"><a href="#label_letter-96"><span class="linenos"> 96</span></a>                <span class="n">letter_string</span> <span class="o">=</span> <span class="n">letter_string</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
-</span><span id="label_letter-97"><a href="#label_letter-97"><span class="linenos"> 97</span></a>                <span class="n">fontweight</span> <span class="o">=</span> <span class="s1">&#39;bold&#39;</span>
-</span><span id="label_letter-98"><a href="#label_letter-98"><span class="linenos"> 98</span></a>            <span class="k">case</span> <span class="s1">&#39;OSA&#39;</span><span class="p">:</span>
-</span><span id="label_letter-99"><a href="#label_letter-99"><span class="linenos"> 99</span></a>                <span class="n">letter_string</span> <span class="o">=</span> <span class="s1">&#39;(&#39;</span><span class="o">+</span><span class="n">letter_string</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">+</span><span class="s1">&#39;)&#39;</span>
-</span><span id="label_letter-100"><a href="#label_letter-100"><span class="linenos">100</span></a>                <span class="n">fontweight</span> <span class="o">=</span> <span class="s1">&#39;bold&#39;</span>
-</span><span id="label_letter-101"><a href="#label_letter-101"><span class="linenos">101</span></a>
-</span><span id="label_letter-102"><a href="#label_letter-102"><span class="linenos">102</span></a>        <span class="n">axis</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x_position</span><span class="p">,</span> <span class="n">y_position</span><span class="p">,</span> <span class="n">letter_string</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">axis</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="n">fontweight</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="label_letter-74"><a href="#label_letter-74"><span class="linenos"> 74</span></a><span class="k">def</span> <span class="nf">label_letter</span><span class="p">(</span>
+</span><span id="label_letter-75"><a href="#label_letter-75"><span class="linenos"> 75</span></a>    <span class="n">letter</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;a&#39;</span><span class="p">,</span>
+</span><span id="label_letter-76"><a href="#label_letter-76"><span class="linenos"> 76</span></a>    <span class="n">axis</span><span class="p">:</span> <span class="n">Axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">gca</span><span class="p">(),</span>
+</span><span id="label_letter-77"><a href="#label_letter-77"><span class="linenos"> 77</span></a>    <span class="n">style</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Nature&#39;</span><span class="p">,</span>
+</span><span id="label_letter-78"><a href="#label_letter-78"><span class="linenos"> 78</span></a>    <span class="n">x_position</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="o">-</span><span class="mf">0.14</span><span class="p">,</span>
+</span><span id="label_letter-79"><a href="#label_letter-79"><span class="linenos"> 79</span></a>    <span class="n">y_position</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.08</span><span class="p">):</span>
+</span><span id="label_letter-80"><a href="#label_letter-80"><span class="linenos"> 80</span></a><span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="label_letter-81"><a href="#label_letter-81"><span class="linenos"> 81</span></a><span class="sd">        Put a letter in the corner of a set of axes to label them</span>
+</span><span id="label_letter-82"><a href="#label_letter-82"><span class="linenos"> 82</span></a>
+</span><span id="label_letter-83"><a href="#label_letter-83"><span class="linenos"> 83</span></a><span class="sd">        Args:</span>
+</span><span id="label_letter-84"><a href="#label_letter-84"><span class="linenos"> 84</span></a><span class="sd">            axis: The axes to use (default is current ones)</span>
+</span><span id="label_letter-85"><a href="#label_letter-85"><span class="linenos"> 85</span></a><span class="sd">            letter (str): The letter to use</span>
+</span><span id="label_letter-86"><a href="#label_letter-86"><span class="linenos"> 86</span></a><span class="sd">            style (str): The journal style to apply. Options are ```Nature```, ```Science```, and ```OSA```</span>
+</span><span id="label_letter-87"><a href="#label_letter-87"><span class="linenos"> 87</span></a><span class="sd">            x_position (float): where to put the label horizontally relative to the axes of the figure</span>
+</span><span id="label_letter-88"><a href="#label_letter-88"><span class="linenos"> 88</span></a><span class="sd">            y_position (float): vertical position</span>
+</span><span id="label_letter-89"><a href="#label_letter-89"><span class="linenos"> 89</span></a>
+</span><span id="label_letter-90"><a href="#label_letter-90"><span class="linenos"> 90</span></a><span class="sd">        &quot;&quot;&quot;</span>
+</span><span id="label_letter-91"><a href="#label_letter-91"><span class="linenos"> 91</span></a>        <span class="n">letter_string</span> <span class="o">=</span> <span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">letter</span><span class="si">}</span><span class="s1">&#39;</span>
+</span><span id="label_letter-92"><a href="#label_letter-92"><span class="linenos"> 92</span></a>        <span class="n">fontweight</span> <span class="o">=</span> <span class="s1">&#39;normal&#39;</span>
+</span><span id="label_letter-93"><a href="#label_letter-93"><span class="linenos"> 93</span></a>        <span class="k">match</span> <span class="n">style</span><span class="p">:</span>
+</span><span id="label_letter-94"><a href="#label_letter-94"><span class="linenos"> 94</span></a>            <span class="k">case</span> <span class="s1">&#39;Nature&#39;</span><span class="p">:</span>
+</span><span id="label_letter-95"><a href="#label_letter-95"><span class="linenos"> 95</span></a>                <span class="n">letter_string</span> <span class="o">=</span> <span class="n">letter_string</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+</span><span id="label_letter-96"><a href="#label_letter-96"><span class="linenos"> 96</span></a>                <span class="n">fontweight</span> <span class="o">=</span> <span class="s1">&#39;bold&#39;</span>
+</span><span id="label_letter-97"><a href="#label_letter-97"><span class="linenos"> 97</span></a>            <span class="k">case</span> <span class="s1">&#39;Science&#39;</span><span class="p">:</span>
+</span><span id="label_letter-98"><a href="#label_letter-98"><span class="linenos"> 98</span></a>                <span class="n">letter_string</span> <span class="o">=</span> <span class="n">letter_string</span><span class="o">.</span><span class="n">upper</span><span class="p">()</span>
+</span><span id="label_letter-99"><a href="#label_letter-99"><span class="linenos"> 99</span></a>                <span class="n">fontweight</span> <span class="o">=</span> <span class="s1">&#39;bold&#39;</span>
+</span><span id="label_letter-100"><a href="#label_letter-100"><span class="linenos">100</span></a>            <span class="k">case</span> <span class="s1">&#39;OSA&#39;</span><span class="p">:</span>
+</span><span id="label_letter-101"><a href="#label_letter-101"><span class="linenos">101</span></a>                <span class="n">letter_string</span> <span class="o">=</span> <span class="s1">&#39;(&#39;</span><span class="o">+</span><span class="n">letter_string</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span><span class="o">+</span><span class="s1">&#39;)&#39;</span>
+</span><span id="label_letter-102"><a href="#label_letter-102"><span class="linenos">102</span></a>                <span class="n">fontweight</span> <span class="o">=</span> <span class="s1">&#39;bold&#39;</span>
+</span><span id="label_letter-103"><a href="#label_letter-103"><span class="linenos">103</span></a>
+</span><span id="label_letter-104"><a href="#label_letter-104"><span class="linenos">104</span></a>        <span class="n">axis</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">x_position</span><span class="p">,</span> <span class="n">y_position</span><span class="p">,</span> <span class="n">letter_string</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">axis</span><span class="o">.</span><span class="n">transAxes</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="n">fontweight</span><span class="p">)</span>
 </span></pre></div>
 
 
             <div class="docstring"><p>Put a letter in the corner of a set of axes to label them</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>axis:</strong>  The axes to use (default is current ones)</li>
-<li><strong>letter (str):</strong>  The letter to use</li>
-<li><strong>style (str):</strong>  The journal style to apply. Options are <code>Nature</code>, <code>Science</code>, and <code>OSA</code></li>
-<li><strong>x_position (float):</strong>  where to put the label horizontally relative to the axes of the figure</li>
-<li><strong>y_position (float):</strong>  vertical position</li>
-</ul>
+<p>Args:
+    axis: The axes to use (default is current ones)
+    letter (str): The letter to use
+    style (str): The journal style to apply. Options are <code>Nature</code>, <code>Science</code>, and <code>OSA</code>
+    x_position (float): where to put the label horizontally relative to the axes of the figure
+    y_position (float): vertical position</p>
 </div>
 
 
@@ -287,35 +283,36 @@ Options:
 
     </div>
     <a class="headerlink" href="#Char"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="Char-104"><a href="#Char-104"><span class="linenos">104</span></a><span class="nd">@dataclass</span>
-</span><span id="Char-105"><a href="#Char-105"><span class="linenos">105</span></a><span class="k">class</span> <span class="nc">Char</span><span class="p">:</span>
-</span><span id="Char-106"><a href="#Char-106"><span class="linenos">106</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="Char-107"><a href="#Char-107"><span class="linenos">107</span></a><span class="sd">    Contains useful characters and strings for plot labels.</span>
-</span><span id="Char-108"><a href="#Char-108"><span class="linenos">108</span></a>
-</span><span id="Char-109"><a href="#Char-109"><span class="linenos">109</span></a><span class="sd">    Examples:</span>
-</span><span id="Char-110"><a href="#Char-110"><span class="linenos">110</span></a><span class="sd">        &gt;&gt;&gt; plt.xlabel(aw.plot.Char.wavelength_micron)</span>
-</span><span id="Char-111"><a href="#Char-111"><span class="linenos">111</span></a><span class="sd">        &gt;&gt;&gt; plt.ylabel(f&#39;{aw.plot.Char.theta} ({aw.plot.Char.degrees}))</span>
-</span><span id="Char-112"><a href="#Char-112"><span class="linenos">112</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="Char-113"><a href="#Char-113"><span class="linenos">113</span></a>    <span class="n">mu</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\u03bc</span><span class="s1">&#39;</span>
-</span><span id="Char-114"><a href="#Char-114"><span class="linenos">114</span></a>    <span class="n">phi</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\u03a6</span><span class="s1">&#39;</span>
-</span><span id="Char-115"><a href="#Char-115"><span class="linenos">115</span></a>    <span class="n">lam</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\u03bb</span><span class="s1">&#39;</span>
-</span><span id="Char-116"><a href="#Char-116"><span class="linenos">116</span></a>    <span class="n">theta</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\u03b8</span><span class="s1">&#39;</span>
-</span><span id="Char-117"><a href="#Char-117"><span class="linenos">117</span></a>    <span class="n">micron</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\u03bc</span><span class="s1">m&#39;</span>
-</span><span id="Char-118"><a href="#Char-118"><span class="linenos">118</span></a>    <span class="n">degrees</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\u00B0</span><span class="s1">&#39;</span>
-</span><span id="Char-119"><a href="#Char-119"><span class="linenos">119</span></a>    <span class="n">wavelength_micron</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Wavelength (</span><span class="se">\u03bc</span><span class="s1">m)&#39;</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="Char-106"><a href="#Char-106"><span class="linenos">106</span></a><span class="nd">@dataclass</span>
+</span><span id="Char-107"><a href="#Char-107"><span class="linenos">107</span></a><span class="k">class</span> <span class="nc">Char</span><span class="p">:</span>
+</span><span id="Char-108"><a href="#Char-108"><span class="linenos">108</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="Char-109"><a href="#Char-109"><span class="linenos">109</span></a><span class="sd">    Contains useful characters and strings for plot labels.</span>
+</span><span id="Char-110"><a href="#Char-110"><span class="linenos">110</span></a>
+</span><span id="Char-111"><a href="#Char-111"><span class="linenos">111</span></a><span class="sd">    Examples:</span>
+</span><span id="Char-112"><a href="#Char-112"><span class="linenos">112</span></a><span class="sd">        &gt;&gt;&gt; plt.xlabel(aw.plot.Char.wavelength_micron)</span>
+</span><span id="Char-113"><a href="#Char-113"><span class="linenos">113</span></a><span class="sd">        &gt;&gt;&gt; plt.ylabel(f&#39;{aw.plot.Char.theta} ({aw.plot.Char.degrees}))</span>
+</span><span id="Char-114"><a href="#Char-114"><span class="linenos">114</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="Char-115"><a href="#Char-115"><span class="linenos">115</span></a>    <span class="n">mu</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\u03bc</span><span class="s1">&#39;</span>
+</span><span id="Char-116"><a href="#Char-116"><span class="linenos">116</span></a>    <span class="n">phi</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\u03a6</span><span class="s1">&#39;</span>
+</span><span id="Char-117"><a href="#Char-117"><span class="linenos">117</span></a>    <span class="n">lam</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\u03bb</span><span class="s1">&#39;</span>
+</span><span id="Char-118"><a href="#Char-118"><span class="linenos">118</span></a>    <span class="n">theta</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\u03b8</span><span class="s1">&#39;</span>
+</span><span id="Char-119"><a href="#Char-119"><span class="linenos">119</span></a>    <span class="n">micron</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\u03bc</span><span class="s1">m&#39;</span>
+</span><span id="Char-120"><a href="#Char-120"><span class="linenos">120</span></a>    <span class="n">degrees</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\u00B0</span><span class="s1">&#39;</span>
+</span><span id="Char-121"><a href="#Char-121"><span class="linenos">121</span></a>    <span class="n">wavelength_micron</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Wavelength (</span><span class="se">\u03bc</span><span class="s1">m)&#39;</span>
 </span></pre></div>
 
 
             <div class="docstring"><p>Contains useful characters and strings for plot labels.</p>
 
-<h6 id="examples">Examples:</h6>
+<p>Examples:</p>
 
 <blockquote>
-  <div class="pdoc-code codehilite">
-<pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">aw</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">Char</span><span class="o">.</span><span class="n">wavelength_micron</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">aw</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">Char</span><span class="o">.</span><span class="n">theta</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">aw</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">Char</span><span class="o">.</span><span class="n">degrees</span><span class="si">}</span><span class="s1">))</span>
-</code></pre>
-  </div>
+  <blockquote>
+    <blockquote>
+      <p>plt.xlabel(aw.plot.Char.wavelength_micron)
+      plt.ylabel(f'{aw.plot.Char.theta} ({aw.plot.Char.degrees}))</p>
+    </blockquote>
+  </blockquote>
 </blockquote>
 </div>
 

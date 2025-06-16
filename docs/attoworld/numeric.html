@@ -151,30 +151,19 @@
             <div class="docstring"><p>Generate a finite difference stencil using the algorithm described by B. Fornberg
 in Mathematics of Computation 51, 699-706 (1988).</p>
 
-<h6 id="arguments">Arguments:</h6>
+<p>Args:
+    order (int): the order of the derivative
+    positions (np.ndarray): the positions at which the functions will be evaluated in the stencil. Must be larger than 2 elements in size.
+    position_out (float): the position at which using the stencil will evaluate the derivative, default 0.0.
+Returns:
+    np.ndarray: the finite difference stencil with weights corresponding to the positions in the positions input array</p>
 
-<ul>
-<li><strong>order (int):</strong>  the order of the derivative</li>
-<li><strong>positions (np.ndarray):</strong>  the positions at which the functions will be evaluated in the stencil. Must be larger than 2 elements in size.</li>
-<li><strong>position_out (float):</strong>  the position at which using the stencil will evaluate the derivative, default 0.0.</li>
-</ul>
+<p>Examples:</p>
 
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>np.ndarray: the finite difference stencil with weights corresponding to the positions in the positions input array</p>
-</blockquote>
-
-<h6 id="examples">Examples:</h6>
-
-<blockquote>
-  <div class="pdoc-code codehilite">
-<pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">stencil</span> <span class="o">=</span> <span class="n">fornberg_stencil</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">1.0</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">,</span> <span class="mf">1.0</span><span class="p">]))</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="nb">print</span><span class="p">(</span><span class="n">stencil</span><span class="p">)</span>
-<span class="go">[-0.5  0.   0.5]</span>
+<pre><code>&gt;&gt;&gt; stencil = fornberg_stencil(1, np.array([-1.0, 0.0, 1.0]))
+&gt;&gt;&gt; print(stencil)
+[-0.5  0.   0.5]
 </code></pre>
-  </div>
-</blockquote>
 </div>
 
 
@@ -191,18 +180,12 @@ in Mathematics of Computation 51, 699-706 (1988).</p>
     
             <div class="docstring"><p>Find the location and value of the maximum of a smooth, uniformly sampled signal, interpolating to find the sub-pixel location</p>
 
-<h6 id="arguments">Arguments:</h6>
+<p>Args:
+    y (np.ndarray): The signal whose maximum should be located
+    neighbors (int): the number of neighboring points to consider in the optimization (default 3)</p>
 
-<ul>
-<li><strong>y (np.ndarray):</strong>  The signal whose maximum should be located</li>
-<li><strong>neighbors (int):</strong>  the number of neighboring points to consider in the optimization (default 3)</li>
-</ul>
-
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>(float, float): location, interpolated maximum</p>
-</blockquote>
+<p>Returns:
+    (float, float): location, interpolated maximum</p>
 </div>
 
 
@@ -219,20 +202,13 @@ in Mathematics of Computation 51, 699-706 (1988).</p>
     
             <div class="docstring"><p>Find the full-width-at-half-maximum value of a continuously-spaced distribution.</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>y (np.ndarray):</strong>  the distribution data</li>
-<li><strong>dx (float):</strong>  the x step size of the data</li>
-<li><strong>intercept_value (float):</strong>  The value at which to take the intercepts (i.e. only full-width-at-HALF-max for 0.5)</li>
-<li><strong>neighbors (int):</strong>  The number of neighboring points in each direction to use when constructing interpolants. Higher values are more accurate, but only for smooth data.</li>
-</ul>
-
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>float: The full width at intercept_value maximum</p>
-</blockquote>
+<p>Args:
+    y (np.ndarray): the distribution data
+    dx (float): the x step size of the data
+    intercept_value (float): The value at which to take the intercepts (i.e. only full-width-at-HALF-max for 0.5)
+    neighbors (int): The number of neighboring points in each direction to use when constructing interpolants. Higher values are more accurate, but only for smooth data.
+Returns:
+    float: The full width at intercept_value maximum</p>
 </div>
 
 
@@ -247,21 +223,13 @@ in Mathematics of Computation 51, 699-706 (1988).</p>
     </div>
     <a class="headerlink" href="#find_first_intercept"></a>
     
-            <div class="docstring"><p>Find the first intercept with a value</p>
-
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>y (np.ndarray):</strong>  the distribution data</li>
-<li><strong>intercept_value (float):</strong>  The value at which to take the intercept</li>
-<li><strong>neighbors (int):</strong>  The number of neighboring points in each direction to use when constructing interpolants. Higher values are more accurate, but only for smooth data.</li>
-</ul>
-
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>float: "index" of the intercept, a float with non-integer value, indicating where between the pixels the intercept is</p>
-</blockquote>
+            <div class="docstring"><p>Find the first intercept with a value
+Args:
+    y (np.ndarray): the distribution data
+    intercept_value (float): The value at which to take the intercept
+    neighbors (int): The number of neighboring points in each direction to use when constructing interpolants. Higher values are more accurate, but only for smooth data.
+Returns:
+    float: "index" of the intercept, a float with non-integer value, indicating where between the pixels the intercept is</p>
 </div>
 
 
@@ -276,21 +244,13 @@ in Mathematics of Computation 51, 699-706 (1988).</p>
     </div>
     <a class="headerlink" href="#find_last_intercept"></a>
     
-            <div class="docstring"><p>Find the last intercept with a value</p>
-
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>y (np.ndarray):</strong>  the distribution data</li>
-<li><strong>intercept_value (float):</strong>  The value at which to take the intercept</li>
-<li><strong>neighbors (int):</strong>  The number of neighboring points in each direction to use when constructing interpolants. Higher values are more accurate, but only for smooth data.</li>
-</ul>
-
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>float: "index" of the intercept, a float with non-integer value, indicating where between the pixels the intercept is</p>
-</blockquote>
+            <div class="docstring"><p>Find the last intercept with a value
+Args:
+    y (np.ndarray): the distribution data
+    intercept_value (float): The value at which to take the intercept
+    neighbors (int): The number of neighboring points in each direction to use when constructing interpolants. Higher values are more accurate, but only for smooth data.
+Returns:
+    float: "index" of the intercept, a float with non-integer value, indicating where between the pixels the intercept is</p>
 </div>
 
 
@@ -308,19 +268,12 @@ in Mathematics of Computation 51, 699-706 (1988).</p>
             <div class="docstring"><p>Use a Fornberg stencil to take a derivative of arbitrary order and accuracy, handling the edge
 by using modified stencils that only use internal points.</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>data (np.ndarray):</strong>  the data whose derivative should be taken</li>
-<li><strong>order (int):</strong>  the order of the derivative</li>
-<li><strong>neighbors (int):</strong>  the number of nearest neighbors to consider in each direction.</li>
-</ul>
-
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>np.ndarray: the derivative</p>
-</blockquote>
+<p>Args:
+    data (np.ndarray): the data whose derivative should be taken
+    order (int): the order of the derivative
+    neighbors (int): the number of nearest neighbors to consider in each direction.
+Returns:
+    np.ndarray: the derivative</p>
 </div>
 
 
@@ -338,19 +291,12 @@ by using modified stencils that only use internal points.</p>
             <div class="docstring"><p>Use a Fornberg stencil to take a derivative of arbitrary order and accuracy, handling the edge
 by treating it as a periodic boundary</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>data (np.ndarray):</strong>  the data whose derivative should be taken</li>
-<li><strong>order (int):</strong>  the order of the derivative</li>
-<li><strong>neighbors (int):</strong>  the number of nearest neighbors to consider in each direction.</li>
-</ul>
-
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>np.ndarray: the derivative</p>
-</blockquote>
+<p>Args:
+    data (np.ndarray): the data whose derivative should be taken
+    order (int): the order of the derivative
+    neighbors (int): the number of nearest neighbors to consider in each direction.
+Returns:
+    np.ndarray: the derivative</p>
 </div>
 
 
@@ -367,23 +313,17 @@ by treating it as a periodic boundary</p>
     
             <div class="docstring"><p>Interpolate sorted data, given a list of intersection locations</p>
 
-<h6 id="arguments">Arguments:</h6>
+<p>Args:
+    x_out (np.ndarray): array of output x values, the array onto which y_in will be interpolated
+    x_in (np.ndarray): array of input x values
+    y_in (np.ndarray): array of input y values
+    inputs_are_sorted (bool): true is x_in values are in ascending order (default). Set to false for unsorted data.
+    neighbors (int): number of nearest neighbors to include in the interpolation
+    extrapolate (bool): unless set to true, values outside of the range of x_in will be zero
+    derivative_order(int): order of derivative to take. 0 (default) is plain interpolation, 1 takes first derivative, and so on.</p>
 
-<ul>
-<li><strong>x_out (np.ndarray):</strong>  array of output x values, the array onto which y_in will be interpolated</li>
-<li><strong>x_in (np.ndarray):</strong>  array of input x values</li>
-<li><strong>y_in (np.ndarray):</strong>  array of input y values</li>
-<li><strong>inputs_are_sorted (bool):</strong>  true is x_in values are in ascending order (default). Set to false for unsorted data.</li>
-<li><strong>neighbors (int):</strong>  number of nearest neighbors to include in the interpolation</li>
-<li><strong>extrapolate (bool):</strong>  unless set to true, values outside of the range of x_in will be zero</li>
-<li><strong>derivative_order(int):</strong>  order of derivative to take. 0 (default) is plain interpolation, 1 takes first derivative, and so on.</li>
-</ul>
-
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>np.ndarray: the interpolated y_out</p>
-</blockquote>
+<p>Returns:
+    np.ndarray: the interpolated y_out</p>
 </div>
 
 
@@ -431,21 +371,18 @@ by treating it as a periodic boundary</p>
 
             <div class="docstring"><p>Defines various physical constants in atomic units.</p>
 
-<h6 id="attributes">Attributes:</h6>
-
-<ul>
-<li><strong>meter:</strong>  Atomic unit of length in meters.</li>
-<li><strong>nm:</strong>  Atomic unit of length in nanometers.</li>
-<li><strong>second:</strong>  Atomic unit of time in seconds.</li>
-<li><strong>fs:</strong>  Atomic unit of time in femtoseconds.</li>
-<li><strong>Joule:</strong>  Atomic unit of energy in Joules.</li>
-<li><strong>eV:</strong>  Atomic unit of energy in electronvolts.</li>
-<li><strong>Volts_per_meter:</strong>  Atomic unit of electric field in V/m.</li>
-<li><strong>Volts_per_Angstrom:</strong>  Atomic unit of electric field in V/Angström.</li>
-<li><strong>speed_of_light:</strong>  Vacuum speed of light in atomic units.</li>
-<li><strong>Coulomb:</strong>  Atomic unit of electric charge in Coulombs.</li>
-<li><strong>PW_per_cm2_au:</strong>  PW/cm^2 in atomic units.</li>
-</ul>
+<p>Attributes:
+  meter: Atomic unit of length in meters.
+  nm: Atomic unit of length in nanometers.
+  second: Atomic unit of time in seconds.
+  fs: Atomic unit of time in femtoseconds.
+  Joule: Atomic unit of energy in Joules.
+  eV: Atomic unit of energy in electronvolts.
+  Volts_per_meter: Atomic unit of electric field in V/m.
+  Volts_per_Angstrom: Atomic unit of electric field in V/Angström.
+  speed_of_light: Vacuum speed of light in atomic units.
+  Coulomb: Atomic unit of electric charge in Coulombs.
+  PW_per_cm2_au: PW/cm^2 in atomic units.</p>
 </div>
 
 

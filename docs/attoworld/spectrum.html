@@ -263,20 +263,13 @@
 
             <div class="docstring"><p>Convert a wavelength spectrum in W/nm into a frequency spectrum in W/THz</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>wavelength_nm (np.ndarray):</strong>  the wavelengths included in the data, in nanometers</li>
-<li><strong>spectrum (np.ndarray):</strong>  the spectrum corresponding to the input wavelength scale</li>
-<li><strong>frequencies:</strong>  (optional) frequency vector for the output. If not specified, a vector will be calculated such that resolution and range are preserved.</li>
-</ul>
-
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>f: frequencies (Hz)
-  scaled_spectrum: the frequency-domain spectrum</p>
-</blockquote>
+<p>Args:
+    wavelength_nm (np.ndarray): the wavelengths included in the data, in nanometers
+    spectrum (np.ndarray): the spectrum corresponding to the input wavelength scale
+    frequencies: (optional) frequency vector for the output. If not specified, a vector will be calculated such that resolution and range are preserved.
+Returns:
+    f: frequencies (Hz)
+    scaled_spectrum: the frequency-domain spectrum</p>
 </div>
 
 
@@ -314,22 +307,14 @@
 
 
             <div class="docstring"><p>Convert a frequency spectrum in W/Hz into a wavelength spectrum in W/m.
-SI units.</p>
-
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>frequencies (np.ndarray):</strong>  the frequencies included in the data, in Hz</li>
-<li><strong>spectrum (np.ndarray):</strong>  the spectrum corresponding to the input frequency scale</li>
-<li><strong>wavelengths:</strong>  (optional) wavelength vector for the output. If not specified, a the output data will be on the same grid, but scaled</li>
-</ul>
-
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>wavelengths: wavelengths in m
-  scaled_spectrum: the wavelength-domain spectrum</p>
-</blockquote>
+SI units.
+Args:
+    frequencies (np.ndarray): the frequencies included in the data, in Hz
+    spectrum (np.ndarray): the spectrum corresponding to the input frequency scale
+    wavelengths: (optional) wavelength vector for the output. If not specified, a the output data will be on the same grid, but scaled
+Returns:
+    wavelengths: wavelengths in m
+    scaled_spectrum: the wavelength-domain spectrum</p>
 </div>
 
 
@@ -375,20 +360,14 @@ SI units.</p>
 
             <div class="docstring"><p>Calculates the transform-limited pulse corresponding to a spectrum</p>
 
-<h6 id="arguments">Arguments:</h6>
+<p>Args:
+    wavelength_nm: the wavelengths included in the data, in nanometers
+    spectrum: the spectrum corresponding to the input wavelength scale
+    gate_level: (optional) level, relative to the maximum at which to apply a gate to the spectrum. For example, with gate_level=0.01, values less than 1% of the maximum signal will be set to zero</p>
 
-<ul>
-<li><strong>wavelength_nm:</strong>  the wavelengths included in the data, in nanometers</li>
-<li><strong>spectrum:</strong>  the spectrum corresponding to the input wavelength scale</li>
-<li><strong>gate_level:</strong>  (optional) level, relative to the maximum at which to apply a gate to the spectrum. For example, with gate_level=0.01, values less than 1% of the maximum signal will be set to zero</li>
-</ul>
-
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>t: time vector (s)
-  pulse: the pulse intensity vs. time</p>
-</blockquote>
+<p>Returns:
+    t: time vector (s)
+    pulse: the pulse intensity vs. time</p>
 </div>
 
 
@@ -428,11 +407,8 @@ SI units.</p>
 
             <div class="docstring"><p>Load calibration data in a .npz file for the Reso spectrometer</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>calibration_data_filepath (StrOrBytesPath):</strong>  path of the file to load</li>
-</ul>
+<p>Args:
+    calibration_data_filepath (StrOrBytesPath): path of the file to load</p>
 </div>
 
 
@@ -466,18 +442,12 @@ SI units.</p>
 
             <div class="docstring"><p>basic box smoothing for the spectra</p>
 
-<h6 id="arguments">ARGUMENTS:</h6>
+<p>ARGUMENTS:
+    y = spectrum to be smoothed [numpy array]
+    box_pts = width of smoothing box [int, number of points]</p>
 
-<blockquote>
-  <p>y = spectrum to be smoothed [numpy array]
-  box_pts = width of smoothing box [int, number of points]</p>
-</blockquote>
-
-<h6 id="returns">RETURNS:</h6>
-
-<blockquote>
-  <p>smoothed_y [numpy array]</p>
-</blockquote>
+<p>RETURNS:
+    smoothed_y [numpy array]</p>
 </div>
 
 
@@ -530,14 +500,11 @@ SI units.</p>
 <p>each edge is w-wide
 amplitude = 1</p>
 
-<h6 id="arguments">ARGUMENTS:</h6>
-
-<blockquote>
-  <p>x: float = input value
-  center = center of the t. function
-  FWHM = full width at half maximum of the t. function
-  w = width of the edges of the t. function (0 &lt; w &lt; FWHM)</p>
-</blockquote>
+<p>ARGUMENTS:
+    x: float = input value
+    center = center of the t. function
+    FWHM = full width at half maximum of the t. function
+    w = width of the edges of the t. function (0 &lt; w &lt; FWHM)</p>
 </div>
 
 
@@ -587,20 +554,14 @@ amplitude = 1</p>
 
 <p>The difference with the function tukey_f is that this function can take as input a numpy array or a list, and returns a numpy array or a list.</p>
 
-<h6 id="arguments">Arguments:</h6>
+<p>Args:
+    x: input array (numpy array or list)
+    center: center of the window
+    FWHM: full width at half maximum
+    w: width of the edges of the window (w &gt; 0)</p>
 
-<ul>
-<li><strong>x:</strong>  input array (numpy array or list)</li>
-<li><strong>center:</strong>  center of the window</li>
-<li><strong>FWHM:</strong>  full width at half maximum</li>
-<li><strong>w:</strong>  width of the edges of the window (w &gt; 0)</li>
-</ul>
-
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>window (numpy array or list)</p>
-</blockquote>
+<p>Returns:
+    window (numpy array or list)</p>
 </div>
 
 
@@ -743,17 +704,11 @@ os.system("cat " + filename + ".xls &gt; " + filename + ".txt")</p>
 
 <p>44 (skipped) rows at the beginning of the file (all headers)</p>
 
-<h6 id="arguments">Arguments:</h6>
+<p>Args:
+    filename: name of the file (without extension)</p>
 
-<ul>
-<li><strong>filename:</strong>  name of the file (without extension)</li>
-</ul>
-
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>numpy array with the spectral data (see original excel for more details)</p>
-</blockquote>
+<p>Returns:
+    numpy array with the spectral data (see original excel for more details)</p>
 </div>
 
 
@@ -880,33 +835,27 @@ os.system("cat " + filename + ".xls &gt; " + filename + ".txt")</p>
             <div class="docstring"><p>For the UV spectrometer. Calibrate the spectrum number 'column' in the the 'data' array. Intensity calibration factor is loaded in the first lines of UVSpectrumAnalysis.py.
     Notice: each saved spectrum has 7 columns in the excel file; however, the argument column refers to the index of the spectrum, not the actual column in the file.</p>
 
-<h6 id="arguments">Arguments:</h6>
+<p>Args:
+    data: data [numpy] array (see read_spectrometer_excel)
+    column: index of the spectrum to be calibrated
+    calibration_file_path: path of the calibration file
+    dark: dark spectrum (optional)
+    dark_c: column of the dark spectrum (optional)
+    stitch: Boolean, if True, the spectra are stitched together (optional, default False)
+            if True, the spectrum will be calculated by stitching the 5 partial spectra in the previous columns.
+            the stitching only works if the spectrum number 'column' is a FULL-SPECTRUM in the xls file.
+            Stitching was implemented because the internal software of the spectrometer is not good enough at it (the saved full spectrum typically has discontinuities).
+    smooth_points: number of points for smoothing (optional, default 10). if 0, no smoothing is applied
+    null_calibration: Boolean, if True, the intensity calibration is not applied (optional, default False)
+    wavelength_calibration_intercept: intercept of the wavelength calibration (optional, default 3.538). If None no wavelength calibration is applied
+    wavelength_calibration_slope: slope of the wavelength calibration (optional, default 1.003427). If None no wavelength calibration is applied
+            Wavelength calibration is in the form λ_true = λ_measured * slope + intercept
+            Notice: wavelength calibration has an error of +/- 1  to 2 nm due to the stitching process.
+                for a better calibration compute and apply the correction to each of the 5 partial spectra</p>
 
-<ul>
-<li><strong>data:</strong>  data [numpy] array (see read_spectrometer_excel)</li>
-<li><strong>column:</strong>  index of the spectrum to be calibrated</li>
-<li><strong>calibration_file_path:</strong>  path of the calibration file</li>
-<li><strong>dark:</strong>  dark spectrum (optional)</li>
-<li><strong>dark_c:</strong>  column of the dark spectrum (optional)</li>
-<li><strong>stitch:</strong>  Boolean, if True, the spectra are stitched together (optional, default False)
-if True, the spectrum will be calculated by stitching the 5 partial spectra in the previous columns.
-the stitching only works if the spectrum number 'column' is a FULL-SPECTRUM in the xls file.
-Stitching was implemented because the internal software of the spectrometer is not good enough at it (the saved full spectrum typically has discontinuities).</li>
-<li><strong>smooth_points:</strong>  number of points for smoothing (optional, default 10). if 0, no smoothing is applied</li>
-<li><strong>null_calibration:</strong>  Boolean, if True, the intensity calibration is not applied (optional, default False)</li>
-<li><strong>wavelength_calibration_intercept:</strong>  intercept of the wavelength calibration (optional, default 3.538). If None no wavelength calibration is applied</li>
-<li><strong>wavelength_calibration_slope:</strong>  slope of the wavelength calibration (optional, default 1.003427). If None no wavelength calibration is applied
-Wavelength calibration is in the form λ_true = λ_measured * slope + intercept
-Notice: wavelength calibration has an error of +/- 1  to 2 nm due to the stitching process.
-    for a better calibration compute and apply the correction to each of the 5 partial spectra</li>
-</ul>
-
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>wavelength: wavelength array
-  spectrum: calibrated spectrum</p>
-</blockquote>
+<p>Returns:
+    wavelength: wavelength array
+    spectrum: calibrated spectrum</p>
 </div>
 
 
@@ -1095,30 +1044,27 @@ Notice: wavelength calibration has an error of +/- 1  to 2 nm due to the stitchi
 <p>Notice: The excel file usually contains several spectra.
 Notice: each saved spectrum has 7 columns in the excel file; please consider that the argument 'column' refers to the index of the spectrum, not the actual column in the file.</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>filenameList:</strong>  input file list (without extension)</li>
-<li><strong>columnList:</strong>  list of the positions in the file of the spectra to be plotted (e.g. [1, 0, 5] -> plot 1st sp. for 1st file, 5th spectrum for 3rd file, ...)</li>
-<li><strong>pdfFilename:</strong>  output filename</li>
-<li><strong>darkTupleList:</strong>  [("darkFilename1stspectrum", spectrum_number_in_1stDark_filename), ( ..,.. ), ...]</li>
-<li><strong>legendItem List:</strong>  list of entries for the legend (optional, keyword)</li>
-<li><strong>normalizationList:</strong>  list of (multiplicative) normalization factors for the spectra (optional, keyword)</li>
-<li><strong>color_gradient:</strong>  Boolean, whether plot should be displayed with color gradient instead of in matplotlib default color cycle</li>
-<li><strong>additive_constant_log_intensity:</strong>  additive constant to the spectral intensity, so that the logarithmic plot does not have values too close to 0</li>
-<li><strong>wavelength_range:</strong>  [min lambda, max lambda] for plotting</li>
-<li><strong>title:</strong>  title of the figure</li>
-<li><strong>plotList:</strong>  list of booleans: this function will plot the entry filenameList[i] if plotList[i] = True, otherwise the i-th data will not be shown in the plot</li>
-<li><strong>invert_order:</strong>  Boolean, if True, the order of the spectra will be inverted (i.e. the last spectrum in the list will be plotted first)</li>
-<li><strong>do_calibrate:</strong>  Boolean, if True, the spectra will be calibrated (default True, see calibrate() function)</li>
-<li><strong>calibration_file_path:</strong>  str, path to the calibration file (default "./calibration_data/Reso_Spectrometer_CalibrationCorrection.npz"). Ignored if do_calibrate = False</li>
-<li><strong>stitch:</strong>  Boolean, if True, the spectra will be stitched together (optional, default False)
-if True, the spectrum will be calculated by stitching the 5 partial spectra in the previous columns.
-the stitching only works if the spectrum number 'column' is a FULL-SPECTRUM in the xls file.
-Stitching was implemented because the internal software of the spectrometer does not do it properly (the saved full spectrum tipically has discontinuities).
-Stitching here works only if do_calibrate = True</li>
-<li><strong>smooth_points:</strong>  number of points for smoothing (optional, default 10)</li>
-</ul>
+<p>Args:
+    filenameList: input file list (without extension)
+    columnList: list of the positions in the file of the spectra to be plotted (e.g. [1, 0, 5] -> plot 1st sp. for 1st file, 5th spectrum for 3rd file, ...)
+    pdfFilename: output filename
+    darkTupleList: [("darkFilename1stspectrum", spectrum_number_in_1stDark_filename), ( ..,.. ), ...]
+    legendItem List: list of entries for the legend (optional, keyword)
+    normalizationList: list of (multiplicative) normalization factors for the spectra (optional, keyword)
+    color_gradient: Boolean, whether plot should be displayed with color gradient instead of in matplotlib default color cycle
+    additive_constant_log_intensity: additive constant to the spectral intensity, so that the logarithmic plot does not have values too close to 0
+    wavelength_range: [min lambda, max lambda] for plotting
+    title: title of the figure
+    plotList: list of booleans: this function will plot the entry filenameList[i] if plotList[i] = True, otherwise the i-th data will not be shown in the plot
+    invert_order: Boolean, if True, the order of the spectra will be inverted (i.e. the last spectrum in the list will be plotted first)
+    do_calibrate: Boolean, if True, the spectra will be calibrated (default True, see calibrate() function)
+    calibration_file_path: str, path to the calibration file (default "./calibration_data/Reso_Spectrometer_CalibrationCorrection.npz"). Ignored if do_calibrate = False
+    stitch: Boolean, if True, the spectra will be stitched together (optional, default False)
+        if True, the spectrum will be calculated by stitching the 5 partial spectra in the previous columns.
+        the stitching only works if the spectrum number 'column' is a FULL-SPECTRUM in the xls file.
+        Stitching was implemented because the internal software of the spectrometer does not do it properly (the saved full spectrum tipically has discontinuities).
+        Stitching here works only if do_calibrate = True
+    smooth_points: number of points for smoothing (optional, default 10)</p>
 
 <p>DEPENDS ON read_spectrometer_excel()
 DEPENDS ON calibrate() [optional]</p>
@@ -1163,13 +1109,10 @@ DEPENDS ON calibrate() [optional]</p>
 
             <div class="docstring"><p>Eliminates outliers in the data by replacing them with the mean of the surrounding values.</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>y (np.ndarray):</strong>  Input data array.</li>
-<li><strong>threshold (float):</strong>  Threshold in units of sigma for outlier detection. Default is 3.</li>
-<li><strong>window_points (int):</strong>  Number of points to consider for the mean and sigma calculation. Default is 20.</li>
-</ul>
+<p>Args:
+    y (np.ndarray): Input data array.
+    threshold (float): Threshold in units of sigma for outlier detection. Default is 3.
+    window_points (int): Number of points to consider for the mean and sigma calculation. Default is 20.</p>
 </div>
 
 
@@ -1236,15 +1179,12 @@ DEPENDS ON calibrate() [optional]</p>
 The function also applies a Gaussian filter to the spectrum data to smooth it.
 The function can optionally eliminate outliers in the spectrum data and remove offsets from each column individually.</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li>filename</li>
-<li><strong>remove_offsets_individually (bool):</strong>  If True, compute and remove offsets from each column individually</li>
-<li><strong>nm_smearing (float):</strong>  sigma in nm of the gaussian filter applied to smooth the spectrum.</li>
-<li><strong>eliminate_outliers_spectrum (bool):</strong>  = If True, eliminate single pixel outliers in the spectral data and replace them with average of surrounding values.
-default is False.</li>
-</ul>
+<p>Args:
+    filename
+    remove_offsets_individually (bool): If True, compute and remove offsets from each column individually
+    nm_smearing (float): sigma in nm of the gaussian filter applied to smooth the spectrum.
+    eliminate_outliers_spectrum (bool): = If True, eliminate single pixel outliers in the spectral data and replace them with average of surrounding values.
+        default is False.</p>
 </div>
 
 
@@ -1740,17 +1680,14 @@ wavelengths are in nm.
 
             <div class="docstring"><p>Provide either a filename or the wavelengths and spectrum arrays to the constructor.</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>filename (str):</strong>  Path to the file containing the spectrum data.</li>
-<li><strong>wavelengths and spectrum (np.ndarray):</strong>  = Wavelengths and spectrum data arrays. (alternative to filename)</li>
-<li><strong>remove_offsets_individually (bool):</strong>  = If True, compute and remove offsets from each column individually
-(filename is expected to have one column of wavelength data and arbitrarily many columns of equivalent spectra [to be averaged]).</li>
-<li><strong>nm_smearing (float):</strong>  Smearing in nm to be applied to the spectrum.</li>
-<li><strong>eliminate_outliers_spectrum (bool):</strong>  If True, eliminate single pixel outliers in the spectral data and replace them with average of surrounding values.</li>
-<li><strong>filetype (str):</strong>  Type of the file to be read. Options are 'MayaScarab' (default) or 'OceanOptics'.</li>
-</ul>
+<p>Args:
+    filename (str): Path to the file containing the spectrum data.
+    wavelengths and spectrum (np.ndarray): = Wavelengths and spectrum data arrays. (alternative to filename)
+    remove_offsets_individually (bool): = If True, compute and remove offsets from each column individually
+        (filename is expected to have one column of wavelength data and arbitrarily many columns of equivalent spectra [to be averaged]).
+    nm_smearing (float): Smearing in nm to be applied to the spectrum.
+    eliminate_outliers_spectrum (bool): If True, eliminate single pixel outliers in the spectral data and replace them with average of surrounding values.
+    filetype (str): Type of the file to be read. Options are 'MayaScarab' (default) or 'OceanOptics'.</p>
 </div>
 
 
@@ -2034,14 +1971,11 @@ The file will contain the wavelength, calibration factor, calibration lamp true 
 <p>The method assumes that the true calibration lamp data and the measured spectrum of the calibration lamp are loaded in the object
 The normalization of the three curves is arbitrary. By default the region between 420 and 800 nm is used for normalization.</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>low_lim, up_lim(float):</strong>  Wavelength limits for the x-axis.</li>
-<li><strong>low_lim_y, up_lim_y (float):</strong>  Intensity limits for the y-axis.</li>
-<li><strong>wavelength_ROI (list):</strong>  [wvl1, wvl2] = Wavelength range for the normalization of the calibration factor (for display purposes).
-Default is [420, 800] nm.</li>
-</ul>
+<p>Args:
+    low_lim, up_lim(float): Wavelength limits for the x-axis.
+    low_lim_y, up_lim_y (float): Intensity limits for the y-axis.
+    wavelength_ROI (list): [wvl1, wvl2] = Wavelength range for the normalization of the calibration factor (for display purposes).
+        Default is [420, 800] nm.</p>
 </div>
 
 
@@ -2079,12 +2013,9 @@ Default is [420, 800] nm.</li>
 <p>Form of the calibration: true_wavelength = intercept + slope * measured_wavelength
 The function modifies the wavelength axis in place.</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>intercept:</strong>  float,</li>
-<li><strong>slope:</strong>  float</li>
-</ul>
+<p>Args:
+    intercept: float,
+    slope: float</p>
 </div>
 
 
@@ -2127,25 +2058,19 @@ The function modifies the wavelength axis in place.</p>
 
             <div class="docstring"><p>Applies a Tukey window to the spectrum (e.g. to remove noise at the edges).</p>
 
-<h6 id="tukey-window-is-defined-as">Tukey window is defined as:</h6>
-
-<blockquote>
-  <ul>
-  <li>cosine-shaped window between edge1-edge1_width/2 and edge1+edge1_width/2</li>
-  <li>1 between edge1+edge1_width/2 and edge2-edge2_width/2</li>
-  <li>cosine-shaped window between edge2-edge2_width/2 and edge2+edge2_width/2</li>
-  <li>0 everywhere else</li>
-  </ul>
-</blockquote>
-
-<p>In this case, tukey window is computed in the wavelength domain.</p>
-
-<h6 id="arguments">Arguments:</h6>
+<p>Tukey window is defined as:</p>
 
 <ul>
-<li><strong>edge1, edge2 (float):</strong>  Wavelength limits for the Tukey window (edge2-edge1 = FWHM, in nm)</li>
-<li><strong>edge1_width, edge2_width (float):</strong>  Width of the cosine-shaped edge of the tukey window (in nm).</li>
+<li>cosine-shaped window between edge1-edge1_width/2 and edge1+edge1_width/2</li>
+<li>1 between edge1+edge1_width/2 and edge2-edge2_width/2</li>
+<li>cosine-shaped window between edge2-edge2_width/2 and edge2+edge2_width/2</li>
+<li>0 everywhere else
+In this case, tukey window is computed in the wavelength domain.</li>
 </ul>
+
+<p>Args:
+    edge1, edge2 (float): Wavelength limits for the Tukey window (edge2-edge1 = FWHM, in nm)
+    edge1_width, edge2_width (float): Width of the cosine-shaped edge of the tukey window (in nm).</p>
 </div>
 
 
@@ -2192,12 +2117,10 @@ The function modifies the wavelength axis in place.</p>
 
             <div class="docstring"><p>normalizes the current spectrum with another spectrum, and stores the result in the present object.</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>spectrumObject (either 'c'/'calib'/'calibration'/'lamp' or SpectrumHandler object):</strong>  the current spectrum is divided at each wavelength by the loaded calibration lamp data or by the spectrum passed as SpectrumHandler object.</li>
-<li><strong>nm_smearing (float):</strong>  sigma in nm for the gaussian smoothing</li>
-</ul>
+<p>Args:
+    spectrumObject (either 'c'/'calib'/'calibration'/'lamp' or SpectrumHandler object):
+        the current spectrum is divided at each wavelength by the loaded calibration lamp data or by the spectrum passed as SpectrumHandler object.
+    nm_smearing (float): sigma in nm for the gaussian smoothing</p>
 </div>
 
 
@@ -2232,11 +2155,8 @@ The function modifies the wavelength axis in place.</p>
 
             <div class="docstring"><p>adds two spectra and stores the result in the present object</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>spectrumObject (SpectrumHandler):</strong>  spectrum to be added</li>
-</ul>
+<p>Args:
+    spectrumObject (SpectrumHandler): spectrum to be added</p>
 </div>
 
 
@@ -2271,11 +2191,8 @@ The function modifies the wavelength axis in place.</p>
 
             <div class="docstring"><p>multiplies the current spectrum by a second one at each wavelength.</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li>spectrumObject (SpectrumHandler)</li>
-</ul>
+<p>Args:
+    spectrumObject (SpectrumHandler)</p>
 </div>
 
 
@@ -2303,11 +2220,8 @@ The function modifies the wavelength axis in place.</p>
 
             <div class="docstring"><p>multiplies the current spectrum by a constant.</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li>scalar (float)</li>
-</ul>
+<p>Args:
+    scalar (float)</p>
 </div>
 
 
@@ -2335,11 +2249,8 @@ The function modifies the wavelength axis in place.</p>
 
             <div class="docstring"><p>adds a constant offset.</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li>scalar (float)</li>
-</ul>
+<p>Args:
+    scalar (float)</p>
 </div>
 
 
@@ -2431,19 +2342,16 @@ The function modifies the wavelength axis in place.</p>
 <li>the true tabulated spectrum of the calibration lamp is loaded as self.calibration_lamp_spectrum [via load_calibration_lamp_data()]</li>
 </ul>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>transmission_additional_optics:</strong>  list of SpectrumHandler objects = list of transmission spectra of additional optics to be taken into account when computing the calibration factor.
-The transmission ['reflection' for mirrors] spectra of additional optics will be included (multiplied) in the calibration factor
-Additional optics are assumed to be in the beam path of any standard measurement (e.g. integrating sphere) BUT NOT PRESENT during the calibration lamp measurement.</li>
-<li><strong>smoothing:</strong>  Type of smoothing to be applied to the calibration factor. Options are 'poly' (default) None or an integer number. If 'poly', a polynomial fit is applied to the calibration factor.
-If None, no smoothing is applied. If an integer number, a box filter of that size is applied to the calibration factor.</li>
-<li><strong>extend_calibration (bool):</strong>  If True, the calibration factor is extended to the full wavelength range of the spectrometer (the first and last values of the calibration curve are used for the extension).
-This is a quick and dirty solution to deal with the fact that the calibration lamp spectrum is not available for the full wavelength range of the spectrometer.</li>
-<li><strong>wavelength_ROI (list):</strong>  [wvl1, wvl2] Wavelength range for the normalization of the calibration factor (for display purposes).
-Default is [420, 800] nm.</li>
-</ul>
+<p>Args:
+   transmission_additional_optics: list of SpectrumHandler objects = list of transmission spectra of additional optics to be taken into account when computing the calibration factor.
+       The transmission ['reflection' for mirrors] spectra of additional optics will be included (multiplied) in the calibration factor
+       Additional optics are assumed to be in the beam path of any standard measurement (e.g. integrating sphere) BUT NOT PRESENT during the calibration lamp measurement.
+   smoothing: Type of smoothing to be applied to the calibration factor. Options are 'poly' (default) None or an integer number. If 'poly', a polynomial fit is applied to the calibration factor.
+       If None, no smoothing is applied. If an integer number, a box filter of that size is applied to the calibration factor.
+   extend_calibration (bool): If True, the calibration factor is extended to the full wavelength range of the spectrometer (the first and last values of the calibration curve are used for the extension).
+       This is a quick and dirty solution to deal with the fact that the calibration lamp spectrum is not available for the full wavelength range of the spectrometer.
+   wavelength_ROI (list): [wvl1, wvl2] Wavelength range for the normalization of the calibration factor (for display purposes).
+       Default is [420, 800] nm.</p>
 </div>
 
 
@@ -2581,18 +2489,15 @@ Default is [420, 800] nm.</li>
 
             <div class="docstring"><p>Constructor for the MultiSpectrumHandler class.</p>
 
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>filenameList:</strong>  list = List of filenames to be read.</li>
-<li><strong>wavelengthList:</strong>  list = List of wavelength arrays. (alternative to filename)</li>
-<li><strong>spectrumList:</strong>  list = List of spectrum arrays. (alternative to filename)</li>
-<li><strong>remove_offsets_individually:</strong>  bool = If True, compute and remove offsets from each column individually
-(filename is expected to have one column of wavelength data and arbitrarily many columns of equivalent spectra [to be averaged]).</li>
-<li><strong>nm_smearing:</strong>  float = Smearing in nm to be applied to the spectrum.</li>
-<li><strong>eliminate_outliers_spectrum:</strong>  bool = If True, eliminate single pixel outliers in the spectral data and replace them with average of surrounding values.</li>
-<li><strong>filetype:</strong>  str = Type of the file to be read. Options are 'MayaScarab' (default) or 'OceanOptics'.</li>
-</ul>
+<p>Args:
+    filenameList: list = List of filenames to be read.
+    wavelengthList: list = List of wavelength arrays. (alternative to filename)
+    spectrumList: list = List of spectrum arrays. (alternative to filename)
+    remove_offsets_individually: bool = If True, compute and remove offsets from each column individually
+        (filename is expected to have one column of wavelength data and arbitrarily many columns of equivalent spectra [to be averaged]).
+    nm_smearing: float = Smearing in nm to be applied to the spectrum.
+    eliminate_outliers_spectrum: bool = If True, eliminate single pixel outliers in the spectral data and replace them with average of surrounding values.
+    filetype: str = Type of the file to be read. Options are 'MayaScarab' (default) or 'OceanOptics'.</p>
 </div>
 
 

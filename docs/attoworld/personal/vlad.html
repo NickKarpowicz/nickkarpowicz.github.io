@@ -1226,17 +1226,11 @@ class defining atomic unit constants.</p>
 
             <div class="docstring"><p>Computes the exponent for the smallest power of 2 &gt;= number.</p>
 
-<h6 id="arguments">Arguments:</h6>
+<p>Args:
+  number: The input number.</p>
 
-<ul>
-<li><strong>number:</strong>  The input number.</li>
-</ul>
-
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>The smallest integer exponent <code>exp</code> such that 2**exp &gt;= number.</p>
-</blockquote>
+<p>Returns:
+  The smallest integer exponent <code>exp</code> such that 2**exp &gt;= number.</p>
 </div>
 
 
@@ -1312,19 +1306,13 @@ class defining atomic unit constants.</p>
 If x_begin &lt;= x_end, it's a cosine-squared fall-off.
 If x_begin &gt; x_end, it's a sine-squared rise-on.</p>
 
-<h6 id="arguments">Arguments:</h6>
+<p>Args:
+  x_grid: A 1D array of x-coordinates.
+  x_begin: The x-coordinate where the transition starts (value is 1).
+  x_end: The x-coordinate where the transition ends (value is 0).</p>
 
-<ul>
-<li><strong>x_grid:</strong>  A 1D array of x-coordinates.</li>
-<li><strong>x_begin:</strong>  The x-coordinate where the transition starts (value is 1).</li>
-<li><strong>x_end:</strong>  The x-coordinate where the transition ends (value is 0).</li>
-</ul>
-
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>A 1D array of the same size as x_grid, containing the window values.</p>
-</blockquote>
+<p>Returns:
+  A 1D array of the same size as x_grid, containing the window values.</p>
 </div>
 
 
@@ -1387,20 +1375,14 @@ significant part of the array.</p>
 <p>The significant part is defined relative to the maximum absolute value
 in the array. Elements A[:i1] and A[i2:] are considered "small".</p>
 
-<h6 id="arguments">Arguments:</h6>
+<p>Args:
+  array_data: The input 1D array.
+  threshold: The relative threshold to determine significance.
+             Elements are significant if abs(element) &gt;= threshold * max(abs(array_data)).</p>
 
-<ul>
-<li><strong>array_data:</strong>  The input 1D array.</li>
-<li><strong>threshold:</strong>  The relative threshold to determine significance.
-Elements are significant if abs(element) &gt;= threshold * max(abs(array_data)).</li>
-</ul>
-
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>A tuple (i1, i2) representing the start (inclusive) and
+<p>Returns:
+  A tuple (i1, i2) representing the start (inclusive) and
   end (exclusive) indices of the significant part.</p>
-</blockquote>
 </div>
 
 
@@ -1477,19 +1459,13 @@ as A[i1] and A[i2-1] could themselves be small by this definition.
 A slice like A[i1+1 : i2-1] or A[i1+1 : idx_first_small_after_peak]
 might better correspond to "all elements are not small".</p>
 
-<h6 id="arguments">Arguments:</h6>
+<p>Args:
+  array_data: The input 1D array.
+  threshold: The relative threshold to determine smallness.
+             Elements are small if abs(element) &lt; threshold * max(abs(array_data)).</p>
 
-<ul>
-<li><strong>array_data:</strong>  The input 1D array.</li>
-<li><strong>threshold:</strong>  The relative threshold to determine smallness.
-Elements are small if abs(element) &lt; threshold * max(abs(array_data)).</li>
-</ul>
-
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>A tuple (i1, i2).</p>
-</blockquote>
+<p>Returns:
+  A tuple (i1, i2).</p>
 </div>
 
 
@@ -1599,24 +1575,18 @@ Elements are small if abs(element) &lt; threshold * max(abs(array_data)).</li>
 <p>The function performs a Fourier transform, multiplies by a spectral
 window, and then performs an inverse Fourier transform.</p>
 
-<h6 id="arguments">Arguments:</h6>
+<p>Args:
+  data: A 1D array or a 2D array (num_time_points, num_series)
+        where each column is a time series.
+  time_step: The time step between data points.
+  spectral_window: A 2D array (num_window_points, 2) where the first
+                   column contains circular frequencies (ascending) and
+                   the second column contains the window function W(omega).
+  periodic: If True, data is assumed to be periodic. Otherwise, data is
+            mirrored and padded to reduce edge effects.</p>
 
-<ul>
-<li><strong>data:</strong>  A 1D array or a 2D array (num_time_points, num_series)
-where each column is a time series.</li>
-<li><strong>time_step:</strong>  The time step between data points.</li>
-<li><strong>spectral_window:</strong>  A 2D array (num_window_points, 2) where the first
-column contains circular frequencies (ascending) and
-the second column contains the window function W(omega).</li>
-<li><strong>periodic:</strong>  If True, data is assumed to be periodic. Otherwise, data is
-mirrored and padded to reduce edge effects.</li>
-</ul>
-
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>The filtered data, with the same shape as the input <code>data</code>.</p>
-</blockquote>
+<p>Returns:
+  The filtered data, with the same shape as the input <code>data</code>.</p>
 </div>
 
 
@@ -1673,20 +1643,14 @@ mirrored and padded to reduce edge effects.</li>
 
             <div class="docstring"><p>Performs a weighted least-squares polynomial fit.</p>
 
-<h6 id="arguments">Arguments:</h6>
+<p>Args:
+  x_coords: 1D array of sample point x-coordinates.
+  y_values: 1D array of sample point y-values to fit.
+  weights: 1D array of weights for each sample point.
+  degree: Degree of the fitting polynomial.</p>
 
-<ul>
-<li><strong>x_coords:</strong>  1D array of sample point x-coordinates.</li>
-<li><strong>y_values:</strong>  1D array of sample point y-values to fit.</li>
-<li><strong>weights:</strong>  1D array of weights for each sample point.</li>
-<li><strong>degree:</strong>  Degree of the fitting polynomial.</li>
-</ul>
-
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>A 1D array of polynomial coefficients [p_degree, ..., p_1, p_0].</p>
-</blockquote>
+<p>Returns:
+  A 1D array of polynomial coefficients [p_degree, ..., p_1, p_0].</p>
 </div>
 
 
@@ -2023,50 +1987,41 @@ mirrored and padded to reduce edge effects.</li>
 defined as:
     $F<a href="\omega">Y</a> = \int_{-\infty}^\infty dt Y(t) \exp(i \omega t)$</p>
 
-<h6 id="arguments">Arguments:</h6>
+<p>Args:
+    time_points: A 1D NumPy array of shape (N_t,) representing the time
+        discretization of Y(t). Must be sorted in ascending order. N_t must
+        be greater than 1.
+    y_data: A NumPy array of shape (N_t, N_data) or (N_t,) containing the
+        time-dependent data to Fourier transform. If 1D, it's treated as
+        a single data series.
+    target_frequencies: An optional 1D NumPy array of shape (N_omega,)
+        specifying the circular frequencies at which to compute the
+        transform. Must be sorted in ascending order. If None, the transform
+        is returned on an optimal internal frequency grid.
+    is_periodic: A boolean indicating if Y(t) is assumed to be periodic.
+        If True, the time step is expected to be constant, and
+        Y(t_end + dt) = Y(t_start). If False, precautions are taken to
+        minimize artifacts from the DFT's implicit periodicity assumption.
+    pulse_center_times: An optional scalar or 1D NumPy array of length
+        N_data. If the input data represents a pulse not centered in its
+        time window, specifying the center of each pulse (t0) helps avoid
+        interpolation artifacts. If None, the center of the time window is
+        used.</p>
 
-<ul>
-<li><strong>time_points:</strong>  A 1D NumPy array of shape (N_t,) representing the time
-discretization of Y(t). Must be sorted in ascending order. N_t must
-be greater than 1.</li>
-<li><strong>y_data:</strong>  A NumPy array of shape (N_t, N_data) or (N_t,) containing the
-time-dependent data to Fourier transform. If 1D, it's treated as
-a single data series.</li>
-<li><strong>target_frequencies:</strong>  An optional 1D NumPy array of shape (N_omega,)
-specifying the circular frequencies at which to compute the
-transform. Must be sorted in ascending order. If None, the transform
-is returned on an optimal internal frequency grid.</li>
-<li><strong>is_periodic:</strong>  A boolean indicating if Y(t) is assumed to be periodic.
-If True, the time step is expected to be constant, and
-Y(t_end + dt) = Y(t_start). If False, precautions are taken to
-minimize artifacts from the DFT's implicit periodicity assumption.</li>
-<li><strong>pulse_center_times:</strong>  An optional scalar or 1D NumPy array of length
-N_data. If the input data represents a pulse not centered in its
-time window, specifying the center of each pulse (t0) helps avoid
-interpolation artifacts. If None, the center of the time window is
-used.</li>
-</ul>
+<p>Returns:
+    If <code>target_frequencies</code> is None:
+        A tuple <code>(transformed_y, fft_omega_grid)</code>, where:
+        - <code>transformed_y</code> (np.ndarray): The Fourier-transformed data,
+          shape (N_fft, N_data) or (N_fft,) if input <code>y_data</code> was 1D.
+        - <code>fft_omega_grid</code> (np.ndarray): The array of circular frequencies
+          (shape (N_fft,)) corresponding to <code>transformed_y</code>.
+    If <code>target_frequencies</code> is not None:
+        An np.ndarray of shape (N_omega, N_data) or (N_omega,) containing
+        the Fourier transform of <code>y_data</code> evaluated at the specified
+        <code>target_frequencies</code>.</p>
 
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>If <code>target_frequencies</code> is None:
-      A tuple <code>(transformed_y, fft_omega_grid)</code>, where:
-      - <code>transformed_y</code> (np.ndarray): The Fourier-transformed data,
-        shape (N_fft, N_data) or (N_fft,) if input <code>y_data</code> was 1D.
-      - <code>fft_omega_grid</code> (np.ndarray): The array of circular frequencies
-        (shape (N_fft,)) corresponding to <code>transformed_y</code>.
-  If <code>target_frequencies</code> is not None:
-      An np.ndarray of shape (N_omega, N_data) or (N_omega,) containing
-      the Fourier transform of <code>y_data</code> evaluated at the specified
-      <code>target_frequencies</code>.</p>
-</blockquote>
-
-<h6 id="raises">Raises:</h6>
-
-<ul>
-<li><strong>ValueError:</strong>  If <code>time_points</code> has fewer than 2 elements.</li>
-</ul>
+<p>Raises:
+    ValueError: If <code>time_points</code> has fewer than 2 elements.</p>
 </div>
 
 
@@ -2152,26 +2107,20 @@ used.</li>
 
 <p>Computes $ F^{-1}<a href="t">Y</a> = 1 / (2 \pi) \int_{-\infty}^\infty d\omega Y(\omega) \exp(-i t \omega) $.</p>
 
-<h6 id="arguments">Arguments:</h6>
+<p>Args:
+  omega_points: 1D array of circular frequencies (N_omega), sorted.
+  data_series: Frequency-dependent data (N_omega) or (N_omega, N_data_series).
+  time_points_target: Optional 1D array of time points (N_t), sorted.
+                      If None, times are determined by IFFT.
+  is_periodic: If True, data_series is assumed periodic in frequency.
+  frequency_offset: Scalar or array (N_data_series). Central frequency
+                    offset(s) if data is not centered at omega=0.</p>
 
-<ul>
-<li><strong>omega_points:</strong>  1D array of circular frequencies (N_omega), sorted.</li>
-<li><strong>data_series:</strong>  Frequency-dependent data (N_omega) or (N_omega, N_data_series).</li>
-<li><strong>time_points_target:</strong>  Optional 1D array of time points (N_t), sorted.
-If None, times are determined by IFFT.</li>
-<li><strong>is_periodic:</strong>  If True, data_series is assumed periodic in frequency.</li>
-<li><strong>frequency_offset:</strong>  Scalar or array (N_data_series). Central frequency
-offset(s) if data is not centered at omega=0.</li>
-</ul>
-
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>If time_points_target is None:
+<p>Returns:
+  If time_points_target is None:
     A tuple (transformed_data, time_grid).
   If time_points_target is provided:
     Transformed data interpolated at the given time_points_target.</p>
-</blockquote>
 </div>
 
 
@@ -2258,18 +2207,12 @@ offset(s) if data is not centered at omega=0.</li>
 
             <div class="docstring"><p>Finds all x-values where linearly interpolated y(x) = 0.</p>
 
-<h6 id="arguments">Arguments:</h6>
+<p>Args:
+  x_values: 1D array of x-coordinates, sorted ascending, no duplicates.
+  y_values: 1D array of y-coordinates, same shape as x_values.</p>
 
-<ul>
-<li><strong>x_values:</strong>  1D array of x-coordinates, sorted ascending, no duplicates.</li>
-<li><strong>y_values:</strong>  1D array of y-coordinates, same shape as x_values.</li>
-</ul>
-
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>A 1D array of x-values where y(x) crosses zero. Empty if no crossings.</p>
-</blockquote>
+<p>Returns:
+  A 1D array of x-values where y(x) crosses zero. Empty if no crossings.</p>
 </div>
 
 
@@ -2335,18 +2278,12 @@ offset(s) if data is not centered at omega=0.</li>
 <p>Extrema are found where the derivative y'(x) (approximated by finite
 differences) crosses zero.</p>
 
-<h6 id="arguments">Arguments:</h6>
+<p>Args:
+  x_values: 1D array of x-coordinates, sorted ascending, no duplicates.
+  y_values: 1D array of y-coordinates, same shape as x_values.</p>
 
-<ul>
-<li><strong>x_values:</strong>  1D array of x-coordinates, sorted ascending, no duplicates.</li>
-<li><strong>y_values:</strong>  1D array of y-coordinates, same shape as x_values.</li>
-</ul>
-
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>A 1D array of x-values where y(x) has local extrema. Empty if none.</p>
-</blockquote>
+<p>Returns:
+  A 1D array of x-values where y(x) has local extrema. Empty if none.</p>
 </div>
 
 
@@ -2418,17 +2355,11 @@ differences) crosses zero.</p>
 <p>Multiplies <code>complex_array</code> by <code>exp(1j*phi)</code> where <code>phi</code> is chosen to
 minimize <code>sum(imag(exp(1j*phi) * complex_array)**2)</code>.</p>
 
-<h6 id="arguments">Arguments:</h6>
+<p>Args:
+  complex_array: A NumPy array of complex numbers.</p>
 
-<ul>
-<li><strong>complex_array:</strong>  A NumPy array of complex numbers.</li>
-</ul>
-
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>The phase-rotated complex NumPy array.</p>
-</blockquote>
+<p>Returns:
+  The phase-rotated complex NumPy array.</p>
 </div>
 
 
@@ -2538,22 +2469,16 @@ minimize <code>sum(imag(exp(1j*phi) * complex_array)**2)</code>.</p>
 <p>Uses an algorithm suitable for integrating f(x) * exp(i * phi(x)) dx
 over small intervals, particularly when phi(x) changes rapidly.</p>
 
-<h6 id="arguments">Arguments:</h6>
+<p>Args:
+  x_values: 1D array of sorted x-coordinates.
+  func_values: Array of function values f(x). Can be 1D (N_x) or 2D
+               (N_x, N_series).
+  phase_values: Array of real-valued phase phi(x). Same shape as func_values.
+  phase_step_threshold: Small positive number. Prevents division by
+                        small d_phi in the integration formula.</p>
 
-<ul>
-<li><strong>x_values:</strong>  1D array of sorted x-coordinates.</li>
-<li><strong>func_values:</strong>  Array of function values f(x). Can be 1D (N_x) or 2D
-(N_x, N_series).</li>
-<li><strong>phase_values:</strong>  Array of real-valued phase phi(x). Same shape as func_values.</li>
-<li><strong>phase_step_threshold:</strong>  Small positive number. Prevents division by
-small d_phi in the integration formula.</li>
-</ul>
-
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>A scalar or 1D array (N_series) of integral results.</p>
-</blockquote>
+<p>Returns:
+  A scalar or 1D array (N_series) of integral results.</p>
 </div>
 
 
@@ -2738,30 +2663,24 @@ The relationship is $\epsilon(\omega) = 1 + 4 \pi \chi(\omega)$, where
 $P(\omega) = \chi(\omega) E(\omega)$, and for $E(t)=\delta(t)$, $E(\omega)=1$.
 So $\chi(\omega) = P_{\delta}(\omega)$.</p>
 
-<h6 id="arguments">Arguments:</h6>
+<p>Args:
+  time_step: Time step (atomic units) of the polarization grid.
+  polarization_delta_response: 1D array of polarization response P(t)
+                               (atomic units) induced by E(t)=delta(t).
+                               P_delta[0] corresponds to t=time_step.
+  omega_array: 1D array of circular frequencies (a.u.) for permittivity calculation.
+               All frequencies must be non-zero.
+  momentum_relaxation_rate: If non-zero, models Drude-like momentum relaxation
+                            (gamma in 1/(omega<em>(omega+i</em>gamma))).
+  dephasing_time: If not None/zero, an exponential decay (rate 1/dephasing_time)
+                  is applied to coherent dipole oscillations in P_delta.
+  disregard_drift_current: If True, the J_drift component of polarization
+                           has no effect on the result.
+  allow_for_linear_displacement: If True, fits P(t) ~ J_drift<em>t + P_offset.
+                                 If False, fits P(t) ~ J_drift</em>t (P_offset=0).</p>
 
-<ul>
-<li><strong>time_step:</strong>  Time step (atomic units) of the polarization grid.</li>
-<li><strong>polarization_delta_response:</strong>  1D array of polarization response P(t)
-(atomic units) induced by E(t)=delta(t).
-P_delta[0] corresponds to t=time_step.</li>
-<li><strong>omega_array:</strong>  1D array of circular frequencies (a.u.) for permittivity calculation.
-All frequencies must be non-zero.</li>
-<li><strong>momentum_relaxation_rate:</strong>  If non-zero, models Drude-like momentum relaxation
-(gamma in 1/(omega<em>(omega+i</em>gamma))).</li>
-<li><strong>dephasing_time:</strong>  If not None/zero, an exponential decay (rate 1/dephasing_time)
-is applied to coherent dipole oscillations in P_delta.</li>
-<li><strong>disregard_drift_current:</strong>  If True, the J_drift component of polarization
-has no effect on the result.</li>
-<li><strong>allow_for_linear_displacement:</strong>  If True, fits P(t) ~ J_drift*t + P_offset.
-If False, fits P(t) ~ J_drift*t (P_offset=0).</li>
-</ul>
-
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>A complex array (same shape as omega_array) of permittivity values.</p>
-</blockquote>
+<p>Returns:
+  A complex array (same shape as omega_array) of permittivity values.</p>
 </div>
 
 
