@@ -33,6 +33,9 @@
             <li>
                     <a class="function" href="#dark_plot">dark_plot</a>
             </li>
+            <li>
+                    <a class="function" href="#get_effective_response">get_effective_response</a>
+            </li>
     </ul>
 
 
@@ -61,8 +64,8 @@
 </span><span id="L-3"><a href="#L-3"><span class="linenos">3</span></a><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-4"><a href="#L-4"><span class="linenos">4</span></a>
 </span><span id="L-5"><a href="#L-5"><span class="linenos">5</span></a><span class="kn">from</span> <span class="nn">.nick</span> <span class="kn">import</span> <span class="n">dark_plot</span>
-</span><span id="L-6"><a href="#L-6"><span class="linenos">6</span></a>
-</span><span id="L-7"><a href="#L-7"><span class="linenos">7</span></a><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;dark_plot&quot;</span><span class="p">]</span>
+</span><span id="L-6"><a href="#L-6"><span class="linenos">6</span></a><span class="kn">from</span> <span class="nn">.impulse_response</span> <span class="kn">import</span> <span class="n">get_effective_response</span>
+</span><span id="L-7"><a href="#L-7"><span class="linenos">7</span></a><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;dark_plot&quot;</span><span class="p">,</span> <span class="s2">&quot;get_effective_response&quot;</span><span class="p">]</span>
 </span></pre></div>
 
 
@@ -101,6 +104,59 @@
 
 
             <div class="docstring"><p>Use a dark style for matplotlib plots.</p>
+</div>
+
+
+                </section>
+                <section id="get_effective_response">
+                            <input id="get_effective_response-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">get_effective_response</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">E_signal</span>,</span><span class="param">	<span class="n">E_reference</span>,</span><span class="param">	<span class="n">dt</span><span class="p">:</span> <span class="nb">float</span>,</span><span class="param">	<span class="n">filter_f0</span><span class="p">:</span> <span class="nb">float</span>,</span><span class="param">	<span class="n">filter_sigma</span><span class="p">:</span> <span class="nb">float</span>,</span><span class="param">	<span class="n">filter_order</span><span class="p">:</span> <span class="nb">int</span></span><span class="return-annotation">):</span></span>
+
+                <label class="view-source-button" for="get_effective_response-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#get_effective_response"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="get_effective_response-96"><a href="#get_effective_response-96"><span class="linenos"> 96</span></a><span class="k">def</span> <span class="nf">get_effective_response</span><span class="p">(</span><span class="n">E_signal</span><span class="p">,</span> <span class="n">E_reference</span><span class="p">,</span> <span class="n">dt</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">filter_f0</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">filter_sigma</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">filter_order</span><span class="p">:</span> <span class="nb">int</span><span class="p">):</span>
+</span><span id="get_effective_response-97"><a href="#get_effective_response-97"><span class="linenos"> 97</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="get_effective_response-98"><a href="#get_effective_response-98"><span class="linenos"> 98</span></a><span class="sd">    Calculate the effective impulse response with the reactive response removed</span>
+</span><span id="get_effective_response-99"><a href="#get_effective_response-99"><span class="linenos"> 99</span></a>
+</span><span id="get_effective_response-100"><a href="#get_effective_response-100"><span class="linenos">100</span></a><span class="sd">    Args:</span>
+</span><span id="get_effective_response-101"><a href="#get_effective_response-101"><span class="linenos">101</span></a><span class="sd">        E_signal: the signal waveform array</span>
+</span><span id="get_effective_response-102"><a href="#get_effective_response-102"><span class="linenos">102</span></a><span class="sd">        E_reference: the reference waveform</span>
+</span><span id="get_effective_response-103"><a href="#get_effective_response-103"><span class="linenos">103</span></a><span class="sd">        dt (float): the time step</span>
+</span><span id="get_effective_response-104"><a href="#get_effective_response-104"><span class="linenos">104</span></a><span class="sd">        filter_f0 (float): central frequency of the bandpass</span>
+</span><span id="get_effective_response-105"><a href="#get_effective_response-105"><span class="linenos">105</span></a><span class="sd">        filter_sigma (float): width of the bandpass</span>
+</span><span id="get_effective_response-106"><a href="#get_effective_response-106"><span class="linenos">106</span></a><span class="sd">        filter_order (int): order of the bandpass</span>
+</span><span id="get_effective_response-107"><a href="#get_effective_response-107"><span class="linenos">107</span></a>
+</span><span id="get_effective_response-108"><a href="#get_effective_response-108"><span class="linenos">108</span></a><span class="sd">    Returns:</span>
+</span><span id="get_effective_response-109"><a href="#get_effective_response-109"><span class="linenos">109</span></a><span class="sd">        np.ndarray: the impuse response</span>
+</span><span id="get_effective_response-110"><a href="#get_effective_response-110"><span class="linenos">110</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="get_effective_response-111"><a href="#get_effective_response-111"><span class="linenos">111</span></a>
+</span><span id="get_effective_response-112"><a href="#get_effective_response-112"><span class="linenos">112</span></a>    <span class="n">analytic_signal</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">hilbert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">E_signal</span><span class="p">))</span>
+</span><span id="get_effective_response-113"><a href="#get_effective_response-113"><span class="linenos">113</span></a>    <span class="n">analytic_reference</span> <span class="o">=</span> <span class="n">sig</span><span class="o">.</span><span class="n">hilbert</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">E_reference</span><span class="p">))</span>
+</span><span id="get_effective_response-114"><a href="#get_effective_response-114"><span class="linenos">114</span></a>
+</span><span id="get_effective_response-115"><a href="#get_effective_response-115"><span class="linenos">115</span></a>    <span class="n">response</span> <span class="o">=</span> <span class="n">filtered_impulse_response</span><span class="p">(</span><span class="n">analytic_signal</span><span class="p">,</span> <span class="n">analytic_reference</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">filter_f0</span><span class="p">,</span> <span class="n">filter_sigma</span><span class="p">,</span> <span class="n">filter_order</span><span class="p">)</span>
+</span><span id="get_effective_response-116"><a href="#get_effective_response-116"><span class="linenos">116</span></a>    <span class="n">window_response</span> <span class="o">=</span> <span class="n">filtered_impulse_response</span><span class="p">(</span><span class="n">analytic_reference</span><span class="p">,</span> <span class="n">analytic_reference</span><span class="p">,</span> <span class="n">dt</span><span class="p">,</span> <span class="n">filter_f0</span><span class="p">,</span> <span class="n">filter_sigma</span><span class="p">,</span> <span class="n">filter_order</span><span class="p">)</span>
+</span><span id="get_effective_response-117"><a href="#get_effective_response-117"><span class="linenos">117</span></a>    <span class="n">matched_window_response</span> <span class="o">=</span> <span class="n">minimize_response_difference</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">window_response</span><span class="p">)</span>
+</span><span id="get_effective_response-118"><a href="#get_effective_response-118"><span class="linenos">118</span></a>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">real</span><span class="p">(</span><span class="n">response</span><span class="o">-</span><span class="n">matched_window_response</span><span class="p">)</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Calculate the effective impulse response with the reactive response removed</p>
+
+<p>Args:
+    E_signal: the signal waveform array
+    E_reference: the reference waveform
+    dt (float): the time step
+    filter_f0 (float): central frequency of the bandpass
+    filter_sigma (float): width of the bandpass
+    filter_order (int): order of the bandpass</p>
+
+<p>Returns:
+    np.ndarray: the impuse response</p>
 </div>
 
 
