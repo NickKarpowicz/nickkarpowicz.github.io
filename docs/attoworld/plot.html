@@ -205,11 +205,14 @@ more easily obtaining a consistent style across plots made by different co-autho
 
             <div class="docstring"><p>Set colors and fonts for matplotlib plots</p>
 
-<p>Args:
-    mode (str): Select color theme.
-                Options:
-                    <code>light</code>: color-blind friendly colors (default)
-                    <code>nick_dark</code>: dark mode that matches Nick's slides</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>mode (str):</strong>  Select color theme.
+Options:
+    <code>light</code>: color-blind friendly colors (default)
+    <code>nick_dark</code>: dark mode that matches Nick's slides</li>
+</ul>
 </div>
 
 
@@ -261,12 +264,15 @@ more easily obtaining a consistent style across plots made by different co-autho
 
             <div class="docstring"><p>Put a letter in the corner of a set of axes to label them</p>
 
-<p>Args:
-    axis: The axes to use (default is current ones)
-    letter (str): The letter to use
-    style (str): The journal style to apply. Options are <code>Nature</code>, <code>Science</code>, and <code>OSA</code>
-    x_position (float): where to put the label horizontally relative to the axes of the figure
-    y_position (float): vertical position</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>axis:</strong>  The axes to use (default is current ones)</li>
+<li><strong>letter (str):</strong>  The letter to use</li>
+<li><strong>style (str):</strong>  The journal style to apply. Options are <code>Nature</code>, <code>Science</code>, and <code>OSA</code></li>
+<li><strong>x_position (float):</strong>  where to put the label horizontally relative to the axes of the figure</li>
+<li><strong>y_position (float):</strong>  vertical position</li>
+</ul>
 </div>
 
 
@@ -304,15 +310,14 @@ more easily obtaining a consistent style across plots made by different co-autho
 
             <div class="docstring"><p>Contains useful characters and strings for plot labels.</p>
 
-<p>Examples:</p>
+<h6 id="examples">Examples:</h6>
 
 <blockquote>
-  <blockquote>
-    <blockquote>
-      <p>plt.xlabel(aw.plot.Char.wavelength_micron)
-      plt.ylabel(f'{aw.plot.Char.theta} ({aw.plot.Char.degrees}))</p>
-    </blockquote>
-  </blockquote>
+  <div class="pdoc-code codehilite">
+<pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">aw</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">Char</span><span class="o">.</span><span class="n">wavelength_micron</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">aw</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">Char</span><span class="o">.</span><span class="n">theta</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">aw</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">Char</span><span class="o">.</span><span class="n">degrees</span><span class="si">}</span><span class="s1">))</span>
+</code></pre>
+  </div>
 </blockquote>
 </div>
 

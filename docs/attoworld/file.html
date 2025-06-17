@@ -428,12 +428,19 @@
 
             <div class="docstring"><p>Load the contents of an attolab scanner file in .mat format</p>
 
-<p>Args:
-    phase (float): phase to use when interpreting the lock-in data
-    filename (str): path to the mat file
-Returns:
-    time_delay: array of time delay values
-    signal: signals corresponding to the time delays</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>phase (float):</strong>  phase to use when interpreting the lock-in data</li>
+<li><strong>filename (str):</strong>  path to the mat file</li>
+</ul>
+
+<h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>time_delay: array of time delay values
+  signal: signals corresponding to the time delays</p>
+</blockquote>
 </div>
 
 
@@ -475,15 +482,21 @@ Returns:
 
             <div class="docstring"><p>Loads a waveform from a text file</p>
 
-<p>Args:
-    filename (str): path to the file
-    time_multiplier (float): multiplier needed to convert the time unit in the file to seconds
-    time_field (str): name (header) of the column containing the times
-    wave_field (str): name (header) of the column containing the waveform
-    sep (str): separator used in the file format (tab is default)</p>
+<h6 id="arguments">Arguments:</h6>
 
-<p>Returns:
-    Waveform: the waveform</p>
+<ul>
+<li><strong>filename (str):</strong>  path to the file</li>
+<li><strong>time_multiplier (float):</strong>  multiplier needed to convert the time unit in the file to seconds</li>
+<li><strong>time_field (str):</strong>  name (header) of the column containing the times</li>
+<li><strong>wave_field (str):</strong>  name (header) of the column containing the waveform</li>
+<li><strong>sep (str):</strong>  separator used in the file format (tab is default)</li>
+</ul>
+
+<h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>Waveform: the waveform</p>
+</blockquote>
 </div>
 
 
@@ -521,14 +534,21 @@ Returns:
 
             <div class="docstring"><p>Load a spectrum contained in a text file.</p>
 
-<p>Args:
-    filename (str): path to the file
-    wavelength_multiplier (float): multiplier to convert wavelength to m
-    wavelength_field (str): name of the field in the data corresponding to wavelength
-    spectrum_field (str): name of the field in the data corresponding to spectral intensity
-    sep (str): column separator
-Returns:
-    IntensitySpectrum: the intensity spectrum</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>filename (str):</strong>  path to the file</li>
+<li><strong>wavelength_multiplier (float):</strong>  multiplier to convert wavelength to m</li>
+<li><strong>wavelength_field (str):</strong>  name of the field in the data corresponding to wavelength</li>
+<li><strong>spectrum_field (str):</strong>  name of the field in the data corresponding to spectral intensity</li>
+<li><strong>sep (str):</strong>  column separator</li>
+</ul>
+
+<h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>IntensitySpectrum: the intensity spectrum</p>
+</blockquote>
 </div>
 
 
@@ -649,11 +669,14 @@ Returns:
 
             <div class="docstring"><p>Stores data from a FROG measurement</p>
 
-<p>Attributes:
-    spectrum (ComplexSpectrum): the reconstructed complex spectrum
-    pulse (Waveform): time-domain reconstructed field
-    measured_spectrogram (Spectrogram): measured (binned) data
-    reconstructed_spectrogram (Spectrogram): spectrogram resulting from reconstructed field</p>
+<h6 id="attributes">Attributes:</h6>
+
+<ul>
+<li><strong>spectrum (ComplexSpectrum):</strong>  the reconstructed complex spectrum</li>
+<li><strong>pulse (Waveform):</strong>  time-domain reconstructed field</li>
+<li><strong>measured_spectrogram (Spectrogram):</strong>  measured (binned) data</li>
+<li><strong>reconstructed_spectrogram (Spectrogram):</strong>  spectrogram resulting from reconstructed field</li>
+</ul>
 </div>
 
 
@@ -743,8 +766,11 @@ Returns:
 
             <div class="docstring"><p>Plot the measured spectrogram.</p>
 
-<p>Args:
-    ax: optionally plot onto a pre-existing matplotlib Axes</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>ax:</strong>  optionally plot onto a pre-existing matplotlib Axes</li>
+</ul>
 </div>
 
 
@@ -779,8 +805,11 @@ Returns:
 
             <div class="docstring"><p>Plot the reconstructed spectrogram.</p>
 
-<p>Args:
-    ax: optionally plot onto a pre-existing matplotlib Axes</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>ax:</strong>  optionally plot onto a pre-existing matplotlib Axes</li>
+</ul>
 </div>
 
 
@@ -811,10 +840,13 @@ Returns:
 
             <div class="docstring"><p>Plot the reconstructed pulse.</p>
 
-<p>Args:
-    ax: optionally plot onto a pre-existing matplotlib Axes
-    phase_blanking: only show phase information (instantaneous frequency) above this level relative to max intensity
-    xlim: pass arguments to set_xlim() to constrain the x-axis</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>ax:</strong>  optionally plot onto a pre-existing matplotlib Axes</li>
+<li><strong>phase_blanking:</strong>  only show phase information (instantaneous frequency) above this level relative to max intensity</li>
+<li><strong>xlim:</strong>  pass arguments to set_xlim() to constrain the x-axis</li>
+</ul>
 </div>
 
 
@@ -845,10 +877,13 @@ Returns:
 
             <div class="docstring"><p>Plot the reconstructed spectrum and group delay curve.</p>
 
-<p>Args:
-    ax: optionally plot onto a pre-existing matplotlib Axes
-    phase_blanking: only show phase information (group delay) above this level relative to max intensity
-    xlim: pass arguments to set_xlim() to constrain the x-axis</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>ax:</strong>  optionally plot onto a pre-existing matplotlib Axes</li>
+<li><strong>phase_blanking:</strong>  only show phase information (group delay) above this level relative to max intensity</li>
+<li><strong>xlim:</strong>  pass arguments to set_xlim() to constrain the x-axis</li>
+</ul>
 </div>
 
 
@@ -890,10 +925,13 @@ Returns:
             <div class="docstring"><p>Produce a 4-panel plot of the FROG results, combining calls to plot_measured_spectrogram(),
 plot_reconstructed_spectrogram(), plot_pulse() and plot_spectrum() as subplots, with letter labels.</p>
 
-<p>Args:
-    phase_blanking: relative intensity at which to show phase information
-    time_xlim: x-axis limits to pass to the plot of the pulse
-    wavelength_xlim: x-axis limits to pass to the plot of the spectrum</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>phase_blanking:</strong>  relative intensity at which to show phase information</li>
+<li><strong>time_xlim:</strong>  x-axis limits to pass to the plot of the pulse</li>
+<li><strong>wavelength_xlim:</strong>  x-axis limits to pass to the plot of the spectrum</li>
+</ul>
 </div>
 
 
@@ -989,8 +1027,11 @@ plot_reconstructed_spectrogram(), plot_pulse() and plot_spectrum() as subplots, 
 
             <div class="docstring"><p>Read a spectrogram file made by the Trebino FROG code</p>
 
-<p>Args:
-    filename (Path | str): the name (path) of the file</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>filename (Path | str):</strong>  the name (path) of the file</li>
+</ul>
 </div>
 
 
@@ -1024,8 +1065,11 @@ plot_reconstructed_spectrogram(), plot_pulse() and plot_spectrum() as subplots, 
 
             <div class="docstring"><p>Read a .Speck file made by the Trebino FROG code</p>
 
-<p>Args:
-    filename (Path | str): the name (path) of the file</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>filename (Path | str):</strong>  the name (path) of the file</li>
+</ul>
 </div>
 
 
@@ -1060,8 +1104,11 @@ plot_reconstructed_spectrogram(), plot_pulse() and plot_spectrum() as subplots, 
 
             <div class="docstring"><p>Read a set of data produced by the Trebino FROG reconstruction code.</p>
 
-<p>Args:
-    filename: Base filename of the .bin file; e.g. if the data are mydata.bin.Speck.dat etc., this will be "mydata.bin"</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>filename:</strong>  Base filename of the .bin file; e.g. if the data are mydata.bin.Speck.dat etc., this will be "mydata.bin"</li>
+</ul>
 </div>
 
 
@@ -1270,20 +1317,21 @@ plot_reconstructed_spectrogram(), plot_pulse() and plot_spectrum() as subplots, 
 <p>The result must be in the HDF5 format using the saving option in the Luna.Interface.prop_capillary() function [filepath="..."].
 As opposed to most of the analysis routines here, units are in SI!</p>
 
-<p>Attributes:
-    z: position along the fiber (for the field data)
-    fieldFT: complex FFT of the field (positive freq axis); shape: (n_z, n_modes, n_freq) [or (n_z, n_freq) after mode selection/averaging]
-    omega: angular frequency axis for the FFT field; shape: (n_z, n_modes, n_freq) [or (n_z, n_freq) after mode selection/averaging]</p>
+<h6 id="attributes">Attributes:</h6>
 
-<pre><code>stats_z: position along the fiber (for stats data)
-stats_density: particle density along the fiber (m^-3)
-stats_electrondensity: electron density along the fiber (m^-3)
-stats_pressure: gas pressure profile along the fiber (bar)
-stats_energy: pulse energy along the fiber (J)
-stats_peakpower: peak power of the pulse along the fiber (W)
-stats_peakintensity: peak intensity of the pulse along the fiber
-stats_peak_ionization_rate: peak ionization rate along the fiber
-</code></pre>
+<ul>
+<li><strong>z:</strong>  position along the fiber (for the field data)</li>
+<li><strong>fieldFT:</strong>  complex FFT of the field (positive freq axis); shape: (n_z, n_modes, n_freq) [or (n_z, n_freq) after mode selection/averaging]</li>
+<li><strong>omega:</strong>  angular frequency axis for the FFT field; shape: (n_z, n_modes, n_freq) [or (n_z, n_freq) after mode selection/averaging]</li>
+<li><strong>stats_z:</strong>  position along the fiber (for stats data)</li>
+<li><strong>stats_density:</strong>  particle density along the fiber (m^-3)</li>
+<li><strong>stats_electrondensity:</strong>  electron density along the fiber (m^-3)</li>
+<li><strong>stats_pressure:</strong>  gas pressure profile along the fiber (bar)</li>
+<li><strong>stats_energy:</strong>  pulse energy along the fiber (J)</li>
+<li><strong>stats_peakpower:</strong>  peak power of the pulse along the fiber (W)</li>
+<li><strong>stats_peakintensity:</strong>  peak intensity of the pulse along the fiber</li>
+<li><strong>stats_peak_ionization_rate:</strong>  peak ionization rate along the fiber</li>
+</ul>
 </div>
 
 
@@ -1325,8 +1373,11 @@ stats_peak_ionization_rate: peak ionization rate along the fiber
 
             <div class="docstring"><p>Constructor of class LunaResult.</p>
 
-<p>Args:
-    filename: saved result, file path</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>filename:</strong>  saved result, file path</li>
+</ul>
 </div>
 
 
@@ -1604,12 +1655,18 @@ stats_peak_ionization_rate: peak ionization rate along the fiber
             <div class="docstring"><p>Get the electric field in time from the Luna result file. If no mode was previously selected, the method computes the average of all modes.
 Therefore, after calling get_time_field(), mode selection is not possible any more.</p>
 
-<p>Args:
-    position (float): position along the fiber in m. If None, the end of the fiber is used.</p>
+<h6 id="arguments">Arguments:</h6>
 
-<p>Returns:
-    timeV (numpy.ndarray): time axis in seconds
-    fieldV (numpy.ndarray): electric field in V/m</p>
+<ul>
+<li><strong>position (float):</strong>  position along the fiber in m. If None, the end of the fiber is used.</li>
+</ul>
+
+<h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>timeV (numpy.ndarray): time axis in seconds
+  fieldV (numpy.ndarray): electric field in V/m</p>
+</blockquote>
 </div>
 
 
@@ -1649,12 +1706,18 @@ Therefore, after calling get_time_field(), mode selection is not possible any mo
 
             <div class="docstring"><p>Get the spectrum from the Luna result file (|FFT|^2 * (2 * pi * c / λ^2))</p>
 
-<p>Args:
-    position (float): position along the fiber in m. If None, the end of the fiber is used.</p>
+<h6 id="arguments">Arguments:</h6>
 
-<p>Returns:
-    wvl (numpy.ndarray): wavelength axis in m
-    wvlSpectrum (numpy.ndarray): electric field spectrum in V/m</p>
+<ul>
+<li><strong>position (float):</strong>  position along the fiber in m. If None, the end of the fiber is used.</li>
+</ul>
+
+<h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>wvl (numpy.ndarray): wavelength axis in m
+  wvlSpectrum (numpy.ndarray): electric field spectrum in V/m</p>
+</blockquote>
 </div>
 
 
@@ -1694,12 +1757,18 @@ Therefore, after calling get_time_field(), mode selection is not possible any mo
 
             <div class="docstring"><p>Get the spectral phase from the Luna result file</p>
 
-<p>Args:
-    position (float): position along the fiber in m. If None, the end of the fiber is used.</p>
+<h6 id="arguments">Arguments:</h6>
 
-<p>Returns:
-    wvl (numpy.ndarray): wavelength axis in m
-    phase (numpy.ndarray): spectral phase in rad</p>
+<ul>
+<li><strong>position (float):</strong>  position along the fiber in m. If None, the end of the fiber is used.</li>
+</ul>
+
+<h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>wvl (numpy.ndarray): wavelength axis in m
+  phase (numpy.ndarray): spectral phase in rad</p>
+</blockquote>
 </div>
 
 
@@ -1954,11 +2023,14 @@ Therefore, after calling get_time_field(), mode selection is not possible any mo
             <div class="docstring"><p>Contains data describing an electric field waveform.
 In SI units.</p>
 
-<p>Attributes:
-    wave (np.ndarray): the waveform data
-    time (np.ndarray): time vector corresponding to the wave array
-    dt (float): the time step of time, if it is uniformly spaced
-    is_uniformly_spaced (bool): says whether or not the time steps are uniform</p>
+<h6 id="attributes">Attributes:</h6>
+
+<ul>
+<li><strong>wave (np.ndarray):</strong>  the waveform data</li>
+<li><strong>time (np.ndarray):</strong>  time vector corresponding to the wave array</li>
+<li><strong>dt (float):</strong>  the time step of time, if it is uniformly spaced</li>
+<li><strong>is_uniformly_spaced (bool):</strong>  says whether or not the time steps are uniform</li>
+</ul>
 </div>
 
 
@@ -2135,18 +2207,20 @@ In SI units.</p>
 
             <div class="docstring"><p>Create a windowed version of the waveform. Output will be uniformly spaced in time, even if current state isn't.</p>
 
-<p>Args:
-    window_desc: String or tuple describing the desired window in the same format as scipy.signal.windows.get_window.</p>
+<h6 id="arguments">Arguments:</h6>
 
-<p>Examples:</p>
+<ul>
+<li><strong>window_desc:</strong>  String or tuple describing the desired window in the same format as scipy.signal.windows.get_window.</li>
+</ul>
+
+<h6 id="examples">Examples:</h6>
 
 <blockquote>
-  <blockquote>
-    <blockquote>
-      <p>waveform_with_tukey_window = waveform.to_windowed('tukey')
-      waveform_with_supergaussian_window = waveform.to_windowed(('general_gaussian', 2, 500))</p>
-    </blockquote>
-  </blockquote>
+  <div class="pdoc-code codehilite">
+<pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">waveform_with_tukey_window</span> <span class="o">=</span> <span class="n">waveform</span><span class="o">.</span><span class="n">to_windowed</span><span class="p">(</span><span class="s1">&#39;tukey&#39;</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">waveform_with_supergaussian_window</span> <span class="o">=</span> <span class="n">waveform</span><span class="o">.</span><span class="n">to_windowed</span><span class="p">((</span><span class="s1">&#39;general_gaussian&#39;</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">500</span><span class="p">))</span>
+</code></pre>
+  </div>
 </blockquote>
 </div>
 
@@ -2182,10 +2256,13 @@ In SI units.</p>
 $e^{\frac{(f-f_0)^r}{2\sigma^r}}$
 where $f_0$ is the frequency argument, $\sigma$ is the sigma argument, and r is the order argument</p>
 
-<p>Args:
-    frequency: the central frequency (Hz) of the bandpass
-    sigma: the width of the bandpass (Hz)
-    order: the order of the supergaussian</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>frequency:</strong>  the central frequency (Hz) of the bandpass</li>
+<li><strong>sigma:</strong>  the width of the bandpass (Hz)</li>
+<li><strong>order:</strong>  the order of the supergaussian</li>
+</ul>
 </div>
 
 
@@ -2235,8 +2312,11 @@ where $f_0$ is the frequency argument, $\sigma$ is the sigma argument, and r is 
 
             <div class="docstring"><p>Converts to a ComplexSpectrum class</p>
 
-<p>Args:
-    padding_factor (int): factor by which to expand the temporal length in the FFT, giving a smoother spectrum</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>padding_factor (int):</strong>  factor by which to expand the temporal length in the FFT, giving a smoother spectrum</li>
+</ul>
 </div>
 
 
@@ -2265,8 +2345,11 @@ where $f_0$ is the frequency argument, $\sigma$ is the sigma argument, and r is 
 
             <div class="docstring"><p>Converts to an intensity spectrum</p>
 
-<p>Args:
-    wavelength_scaled (bool): Correct the spectral intensities for plotting on a wavelength scale</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>wavelength_scaled (bool):</strong>  Correct the spectral intensities for plotting on a wavelength scale</li>
+</ul>
 </div>
 
 
@@ -2360,8 +2443,11 @@ where $f_0$ is the frequency argument, $\sigma$ is the sigma argument, and r is 
 
             <div class="docstring"><p>Return a ComplexEnvelope class corresponding to the waveform</p>
 
-<p>Args:
-    f0 (float): central frequency to use when constructing the envelope. E.g. oscillation at this frequency will be cancelled.</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>f0 (float):</strong>  central frequency to use when constructing the envelope. E.g. oscillation at this frequency will be cancelled.</li>
+</ul>
 </div>
 
 
@@ -2390,8 +2476,11 @@ where $f_0$ is the frequency argument, $\sigma$ is the sigma argument, and r is 
 
             <div class="docstring"><p>Get the full-width-at-half-maximum of the intensity envelope.</p>
 
-<p>Returns:
-    float: the FWHM</p>
+<h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>float: the FWHM</p>
+</blockquote>
 </div>
 
 
@@ -2424,8 +2513,11 @@ where $f_0$ is the frequency argument, $\sigma$ is the sigma argument, and r is 
 
             <div class="docstring"><p>Get the full-width-at-half-maximum of the square of the field</p>
 
-<p>Returns:
-    float: the FWHM</p>
+<h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>float: the FWHM</p>
+</blockquote>
 </div>
 
 
@@ -2638,10 +2730,13 @@ where $f_0$ is the frequency argument, $\sigma$ is the sigma argument, and r is 
 $e^{\frac{(f-f_0)^r}{2\sigma^r}}$
 where $f_0$ is the frequency argument, $\sigma$ is the sigma argument, and r is the order argument</p>
 
-<p>Args:
-    frequency: the central frequency (Hz) of the bandpass
-    sigma: the width of the bandpass (Hz)
-    order: the order of the supergaussian</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>frequency:</strong>  the central frequency (Hz) of the bandpass</li>
+<li><strong>sigma:</strong>  the width of the bandpass (Hz)</li>
+<li><strong>order:</strong>  the order of the supergaussian</li>
+</ul>
 </div>
 
 
@@ -2744,8 +2839,11 @@ where $f_0$ is the frequency argument, $\sigma$ is the sigma argument, and r is 
 
             <div class="docstring"><p>Create an IntensitySpectrum based on the current ComplexSpectrum</p>
 
-<p>Args:
-    wavelength_scaled (bool): Apply the wavelength^-2 Jakobian such to correspond to W/nm spectrum</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>wavelength_scaled (bool):</strong>  Apply the wavelength^-2 Jakobian such to correspond to W/nm spectrum</li>
+</ul>
 </div>
 
 
@@ -2934,12 +3032,15 @@ where $f_0$ is the frequency argument, $\sigma$ is the sigma argument, and r is 
 
             <div class="docstring"><p>Contains an intensity spectrum - real valued. SI units</p>
 
-<p>Attributes:
-    spectrum (Optional[np.ndarray]): the spectral intensity
-    phase (Optional[np.ndarray]): the spectral phase
-    freq (Optional[np.ndarray]): the frequencies corresponding to the spectrum
-    wavelength (Optional[np.ndarray]): the wavelengths
-    is_frequency_scaled (bool): has the lamda^-2 Jakobian been applied to Fourier transformed data?</p>
+<h6 id="attributes">Attributes:</h6>
+
+<ul>
+<li><strong>spectrum (Optional[np.ndarray]):</strong>  the spectral intensity</li>
+<li><strong>phase (Optional[np.ndarray]):</strong>  the spectral phase</li>
+<li><strong>freq (Optional[np.ndarray]):</strong>  the frequencies corresponding to the spectrum</li>
+<li><strong>wavelength (Optional[np.ndarray]):</strong>  the wavelengths</li>
+<li><strong>is_frequency_scaled (bool):</strong>  has the lamda^-2 Jakobian been applied to Fourier transformed data?</li>
+</ul>
 </div>
 
 
@@ -3052,8 +3153,11 @@ where $f_0$ is the frequency argument, $\sigma$ is the sigma argument, and r is 
 </span></pre></div>
 
 
-            <div class="docstring"><p>Returns:
-    Optional[np.ndarray]: the wavelengths in nm</p>
+            <div class="docstring"><h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>Optional[np.ndarray]: the wavelengths in nm</p>
+</blockquote>
 </div>
 
 
@@ -3081,8 +3185,11 @@ where $f_0$ is the frequency argument, $\sigma$ is the sigma argument, and r is 
 </span></pre></div>
 
 
-            <div class="docstring"><p>Returns:
-    Optional[np.ndarray]: the wavelengths in microns</p>
+            <div class="docstring"><h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>Optional[np.ndarray]: the wavelengths in microns</p>
+</blockquote>
 </div>
 
 
@@ -3112,9 +3219,12 @@ where $f_0$ is the frequency argument, $\sigma$ is the sigma argument, and r is 
 
             <div class="docstring"><p>Generate an instance based on a spepctrum array and wavelength array in nm (typical spectrometer data)</p>
 
-<p>Args:
-    wavelengths_nanometers: the wavelengths in nanometers
-    spectrum: the spectral intensity</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>wavelengths_nanometers:</strong>  the wavelengths in nanometers</li>
+<li><strong>spectrum:</strong>  the spectral intensity</li>
+</ul>
 </div>
 
 
@@ -3163,11 +3273,17 @@ where $f_0$ is the frequency argument, $\sigma$ is the sigma argument, and r is 
 
             <div class="docstring"><p>Returns the transform-limited pulse corresponding to the spectrum.</p>
 
-<p>Args:
-    gate_level (float): Apply a gate such that only values above gate_level*max(spectrum) are included</p>
+<h6 id="arguments">Arguments:</h6>
 
-<p>Returns:
-    ComplexEnvelope: the transform-limited pulse</p>
+<ul>
+<li><strong>gate_level (float):</strong>  Apply a gate such that only values above gate_level*max(spectrum) are included</li>
+</ul>
+
+<h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>ComplexEnvelope: the transform-limited pulse</p>
+</blockquote>
 </div>
 
 
@@ -3205,8 +3321,11 @@ where $f_0$ is the frequency argument, $\sigma$ is the sigma argument, and r is 
 
             <div class="docstring"><p>Return a wavelength-scaled spectrum, independent of the state of the current instance</p>
 
-<p>Returns:
-    np.ndarray, np.ndarray: wavelength and spectrum</p>
+<h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>np.ndarray, np.ndarray: wavelength and spectrum</p>
+</blockquote>
 </div>
 
 
@@ -3244,8 +3363,11 @@ where $f_0$ is the frequency argument, $\sigma$ is the sigma argument, and r is 
 
             <div class="docstring"><p>Return a frequency-scaled spectrum, independent of the state of the current instance</p>
 
-<p>Returns:
-    np.ndarray, np.ndarray: wavelength and spectrum</p>
+<h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>np.ndarray, np.ndarray: wavelength and spectrum</p>
+</blockquote>
 </div>
 
 
@@ -3341,10 +3463,13 @@ where $f_0$ is the frequency argument, $\sigma$ is the sigma argument, and r is 
 
             <div class="docstring"><p>Plot the spectrum and group delay curve.</p>
 
-<p>Args:
-    ax: optionally plot onto a pre-existing matplotlib Axes
-    phase_blanking: only show phase information (group delay) above this level relative to max intensity
-    xlim: pass arguments to set_xlim() to constrain the x-axis</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>ax:</strong>  optionally plot onto a pre-existing matplotlib Axes</li>
+<li><strong>phase_blanking:</strong>  only show phase information (group delay) above this level relative to max intensity</li>
+<li><strong>xlim:</strong>  pass arguments to set_xlim() to constrain the x-axis</li>
+</ul>
 </div>
 
 
@@ -3471,11 +3596,14 @@ where $f_0$ is the frequency argument, $\sigma$ is the sigma argument, and r is 
 
             <div class="docstring"><p>Data corresponding to a complex envelope of a pulse, e.g. from a FROG measurement.</p>
 
-<p>Attributes:
-    envelope (Optional[np.ndarray]): the complex envelope
-    time: (Optional[np.ndarray]): the time array
-    dt (float): the time step
-    carrier_frequency (float): the carrier frequency of the envelope</p>
+<h6 id="attributes">Attributes:</h6>
+
+<ul>
+<li><strong>envelope (Optional[np.ndarray]):</strong>  the complex envelope</li>
+<li><strong>time:</strong>  (Optional[np.ndarray]): the time array</li>
+<li><strong>dt (float):</strong>  the time step</li>
+<li><strong>carrier_frequency (float):</strong>  the carrier frequency of the envelope</li>
+</ul>
 </div>
 
 
@@ -3600,9 +3728,13 @@ where $f_0$ is the frequency argument, $\sigma$ is the sigma argument, and r is 
 </span></pre></div>
 
 
-            <div class="docstring"><p>Full-width-at-half-maximum value of the envelope
-Returns:
-    float: the fwhm</p>
+            <div class="docstring"><p>Full-width-at-half-maximum value of the envelope</p>
+
+<h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>float: the fwhm</p>
+</blockquote>
 </div>
 
 
@@ -3729,10 +3861,13 @@ Returns:
 
             <div class="docstring"><p>Plot the pulse.</p>
 
-<p>Args:
-    ax: optionally plot onto a pre-existing matplotlib Axes
-    phase_blanking: only show phase information (instantaneous frequency) above this level relative to max intensity
-    xlim: pass arguments to set_xlim() to constrain the x-axis</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>ax:</strong>  optionally plot onto a pre-existing matplotlib Axes</li>
+<li><strong>phase_blanking:</strong>  only show phase information (instantaneous frequency) above this level relative to max intensity</li>
+<li><strong>xlim:</strong>  pass arguments to set_xlim() to constrain the x-axis</li>
+</ul>
 </div>
 
 

@@ -626,20 +626,21 @@
 <p>The result must be in the HDF5 format using the saving option in the Luna.Interface.prop_capillary() function [filepath="..."].
 As opposed to most of the analysis routines here, units are in SI!</p>
 
-<p>Attributes:
-    z: position along the fiber (for the field data)
-    fieldFT: complex FFT of the field (positive freq axis); shape: (n_z, n_modes, n_freq) [or (n_z, n_freq) after mode selection/averaging]
-    omega: angular frequency axis for the FFT field; shape: (n_z, n_modes, n_freq) [or (n_z, n_freq) after mode selection/averaging]</p>
+<h6 id="attributes">Attributes:</h6>
 
-<pre><code>stats_z: position along the fiber (for stats data)
-stats_density: particle density along the fiber (m^-3)
-stats_electrondensity: electron density along the fiber (m^-3)
-stats_pressure: gas pressure profile along the fiber (bar)
-stats_energy: pulse energy along the fiber (J)
-stats_peakpower: peak power of the pulse along the fiber (W)
-stats_peakintensity: peak intensity of the pulse along the fiber
-stats_peak_ionization_rate: peak ionization rate along the fiber
-</code></pre>
+<ul>
+<li><strong>z:</strong>  position along the fiber (for the field data)</li>
+<li><strong>fieldFT:</strong>  complex FFT of the field (positive freq axis); shape: (n_z, n_modes, n_freq) [or (n_z, n_freq) after mode selection/averaging]</li>
+<li><strong>omega:</strong>  angular frequency axis for the FFT field; shape: (n_z, n_modes, n_freq) [or (n_z, n_freq) after mode selection/averaging]</li>
+<li><strong>stats_z:</strong>  position along the fiber (for stats data)</li>
+<li><strong>stats_density:</strong>  particle density along the fiber (m^-3)</li>
+<li><strong>stats_electrondensity:</strong>  electron density along the fiber (m^-3)</li>
+<li><strong>stats_pressure:</strong>  gas pressure profile along the fiber (bar)</li>
+<li><strong>stats_energy:</strong>  pulse energy along the fiber (J)</li>
+<li><strong>stats_peakpower:</strong>  peak power of the pulse along the fiber (W)</li>
+<li><strong>stats_peakintensity:</strong>  peak intensity of the pulse along the fiber</li>
+<li><strong>stats_peak_ionization_rate:</strong>  peak ionization rate along the fiber</li>
+</ul>
 </div>
 
 
@@ -681,8 +682,11 @@ stats_peak_ionization_rate: peak ionization rate along the fiber
 
             <div class="docstring"><p>Constructor of class LunaResult.</p>
 
-<p>Args:
-    filename: saved result, file path</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>filename:</strong>  saved result, file path</li>
+</ul>
 </div>
 
 
@@ -960,12 +964,18 @@ stats_peak_ionization_rate: peak ionization rate along the fiber
             <div class="docstring"><p>Get the electric field in time from the Luna result file. If no mode was previously selected, the method computes the average of all modes.
 Therefore, after calling get_time_field(), mode selection is not possible any more.</p>
 
-<p>Args:
-    position (float): position along the fiber in m. If None, the end of the fiber is used.</p>
+<h6 id="arguments">Arguments:</h6>
 
-<p>Returns:
-    timeV (numpy.ndarray): time axis in seconds
-    fieldV (numpy.ndarray): electric field in V/m</p>
+<ul>
+<li><strong>position (float):</strong>  position along the fiber in m. If None, the end of the fiber is used.</li>
+</ul>
+
+<h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>timeV (numpy.ndarray): time axis in seconds
+  fieldV (numpy.ndarray): electric field in V/m</p>
+</blockquote>
 </div>
 
 
@@ -1005,12 +1015,18 @@ Therefore, after calling get_time_field(), mode selection is not possible any mo
 
             <div class="docstring"><p>Get the spectrum from the Luna result file (|FFT|^2 * (2 * pi * c / λ^2))</p>
 
-<p>Args:
-    position (float): position along the fiber in m. If None, the end of the fiber is used.</p>
+<h6 id="arguments">Arguments:</h6>
 
-<p>Returns:
-    wvl (numpy.ndarray): wavelength axis in m
-    wvlSpectrum (numpy.ndarray): electric field spectrum in V/m</p>
+<ul>
+<li><strong>position (float):</strong>  position along the fiber in m. If None, the end of the fiber is used.</li>
+</ul>
+
+<h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>wvl (numpy.ndarray): wavelength axis in m
+  wvlSpectrum (numpy.ndarray): electric field spectrum in V/m</p>
+</blockquote>
 </div>
 
 
@@ -1050,12 +1066,18 @@ Therefore, after calling get_time_field(), mode selection is not possible any mo
 
             <div class="docstring"><p>Get the spectral phase from the Luna result file</p>
 
-<p>Args:
-    position (float): position along the fiber in m. If None, the end of the fiber is used.</p>
+<h6 id="arguments">Arguments:</h6>
 
-<p>Returns:
-    wvl (numpy.ndarray): wavelength axis in m
-    phase (numpy.ndarray): spectral phase in rad</p>
+<ul>
+<li><strong>position (float):</strong>  position along the fiber in m. If None, the end of the fiber is used.</li>
+</ul>
+
+<h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>wvl (numpy.ndarray): wavelength axis in m
+  phase (numpy.ndarray): spectral phase in rad</p>
+</blockquote>
 </div>
 
 

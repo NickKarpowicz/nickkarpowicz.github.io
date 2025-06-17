@@ -136,13 +136,20 @@
 
             <div class="docstring"><p>Convert a wavelength spectrum in W/nm into a frequency spectrum in W/THz</p>
 
-<p>Args:
-    wavelength_nm (np.ndarray): the wavelengths included in the data, in nanometers
-    spectrum (np.ndarray): the spectrum corresponding to the input wavelength scale
-    frequencies: (optional) frequency vector for the output. If not specified, a vector will be calculated such that resolution and range are preserved.
-Returns:
-    f: frequencies (Hz)
-    scaled_spectrum: the frequency-domain spectrum</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>wavelength_nm (np.ndarray):</strong>  the wavelengths included in the data, in nanometers</li>
+<li><strong>spectrum (np.ndarray):</strong>  the spectrum corresponding to the input wavelength scale</li>
+<li><strong>frequencies:</strong>  (optional) frequency vector for the output. If not specified, a vector will be calculated such that resolution and range are preserved.</li>
+</ul>
+
+<h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>f: frequencies (Hz)
+  scaled_spectrum: the frequency-domain spectrum</p>
+</blockquote>
 </div>
 
 
@@ -180,14 +187,22 @@ Returns:
 
 
             <div class="docstring"><p>Convert a frequency spectrum in W/Hz into a wavelength spectrum in W/m.
-SI units.
-Args:
-    frequencies (np.ndarray): the frequencies included in the data, in Hz
-    spectrum (np.ndarray): the spectrum corresponding to the input frequency scale
-    wavelengths: (optional) wavelength vector for the output. If not specified, a the output data will be on the same grid, but scaled
-Returns:
-    wavelengths: wavelengths in m
-    scaled_spectrum: the wavelength-domain spectrum</p>
+SI units.</p>
+
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>frequencies (np.ndarray):</strong>  the frequencies included in the data, in Hz</li>
+<li><strong>spectrum (np.ndarray):</strong>  the spectrum corresponding to the input frequency scale</li>
+<li><strong>wavelengths:</strong>  (optional) wavelength vector for the output. If not specified, a the output data will be on the same grid, but scaled</li>
+</ul>
+
+<h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>wavelengths: wavelengths in m
+  scaled_spectrum: the wavelength-domain spectrum</p>
+</blockquote>
 </div>
 
 
@@ -233,14 +248,20 @@ Returns:
 
             <div class="docstring"><p>Calculates the transform-limited pulse corresponding to a spectrum</p>
 
-<p>Args:
-    wavelength_nm: the wavelengths included in the data, in nanometers
-    spectrum: the spectrum corresponding to the input wavelength scale
-    gate_level: (optional) level, relative to the maximum at which to apply a gate to the spectrum. For example, with gate_level=0.01, values less than 1% of the maximum signal will be set to zero</p>
+<h6 id="arguments">Arguments:</h6>
 
-<p>Returns:
-    t: time vector (s)
-    pulse: the pulse intensity vs. time</p>
+<ul>
+<li><strong>wavelength_nm:</strong>  the wavelengths included in the data, in nanometers</li>
+<li><strong>spectrum:</strong>  the spectrum corresponding to the input wavelength scale</li>
+<li><strong>gate_level:</strong>  (optional) level, relative to the maximum at which to apply a gate to the spectrum. For example, with gate_level=0.01, values less than 1% of the maximum signal will be set to zero</li>
+</ul>
+
+<h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>t: time vector (s)
+  pulse: the pulse intensity vs. time</p>
+</blockquote>
 </div>
 
 
@@ -280,8 +301,11 @@ Returns:
 
             <div class="docstring"><p>Load calibration data in a .npz file for the Reso spectrometer</p>
 
-<p>Args:
-    calibration_data_filepath (StrOrBytesPath): path of the file to load</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>calibration_data_filepath (StrOrBytesPath):</strong>  path of the file to load</li>
+</ul>
 </div>
 
 
@@ -337,11 +361,17 @@ os.system("cat " + filename + ".xls &gt; " + filename + ".txt")</p>
 
 <p>44 (skipped) rows at the beginning of the file (all headers)</p>
 
-<p>Args:
-    filename: name of the file (without extension)</p>
+<h6 id="arguments">Arguments:</h6>
 
-<p>Returns:
-    numpy array with the spectral data (see original excel for more details)</p>
+<ul>
+<li><strong>filename:</strong>  name of the file (without extension)</li>
+</ul>
+
+<h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>numpy array with the spectral data (see original excel for more details)</p>
+</blockquote>
 </div>
 
 
@@ -499,27 +529,33 @@ wavelengths are in nm.
             <div class="docstring"><p>For the UV spectrometer. Calibrate the spectrum number 'column' in the the 'data' array. Intensity calibration factor is loaded in the first lines of UVSpectrumAnalysis.py.
     Notice: each saved spectrum has 7 columns in the excel file; however, the argument column refers to the index of the spectrum, not the actual column in the file.</p>
 
-<p>Args:
-    data: data [numpy] array (see read_spectrometer_excel)
-    column: index of the spectrum to be calibrated
-    calibration_file_path: path of the calibration file
-    dark: dark spectrum (optional)
-    dark_c: column of the dark spectrum (optional)
-    stitch: Boolean, if True, the spectra are stitched together (optional, default False)
-            if True, the spectrum will be calculated by stitching the 5 partial spectra in the previous columns.
-            the stitching only works if the spectrum number 'column' is a FULL-SPECTRUM in the xls file.
-            Stitching was implemented because the internal software of the spectrometer is not good enough at it (the saved full spectrum typically has discontinuities).
-    smooth_points: number of points for smoothing (optional, default 10). if 0, no smoothing is applied
-    null_calibration: Boolean, if True, the intensity calibration is not applied (optional, default False)
-    wavelength_calibration_intercept: intercept of the wavelength calibration (optional, default 3.538). If None no wavelength calibration is applied
-    wavelength_calibration_slope: slope of the wavelength calibration (optional, default 1.003427). If None no wavelength calibration is applied
-            Wavelength calibration is in the form λ_true = λ_measured * slope + intercept
-            Notice: wavelength calibration has an error of +/- 1  to 2 nm due to the stitching process.
-                for a better calibration compute and apply the correction to each of the 5 partial spectra</p>
+<h6 id="arguments">Arguments:</h6>
 
-<p>Returns:
-    wavelength: wavelength array
-    spectrum: calibrated spectrum</p>
+<ul>
+<li><strong>data:</strong>  data [numpy] array (see read_spectrometer_excel)</li>
+<li><strong>column:</strong>  index of the spectrum to be calibrated</li>
+<li><strong>calibration_file_path:</strong>  path of the calibration file</li>
+<li><strong>dark:</strong>  dark spectrum (optional)</li>
+<li><strong>dark_c:</strong>  column of the dark spectrum (optional)</li>
+<li><strong>stitch:</strong>  Boolean, if True, the spectra are stitched together (optional, default False)
+if True, the spectrum will be calculated by stitching the 5 partial spectra in the previous columns.
+the stitching only works if the spectrum number 'column' is a FULL-SPECTRUM in the xls file.
+Stitching was implemented because the internal software of the spectrometer is not good enough at it (the saved full spectrum typically has discontinuities).</li>
+<li><strong>smooth_points:</strong>  number of points for smoothing (optional, default 10). if 0, no smoothing is applied</li>
+<li><strong>null_calibration:</strong>  Boolean, if True, the intensity calibration is not applied (optional, default False)</li>
+<li><strong>wavelength_calibration_intercept:</strong>  intercept of the wavelength calibration (optional, default 3.538). If None no wavelength calibration is applied</li>
+<li><strong>wavelength_calibration_slope:</strong>  slope of the wavelength calibration (optional, default 1.003427). If None no wavelength calibration is applied
+Wavelength calibration is in the form λ_true = λ_measured * slope + intercept
+Notice: wavelength calibration has an error of +/- 1  to 2 nm due to the stitching process.
+    for a better calibration compute and apply the correction to each of the 5 partial spectra</li>
+</ul>
+
+<h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>wavelength: wavelength array
+  spectrum: calibrated spectrum</p>
+</blockquote>
 </div>
 
 

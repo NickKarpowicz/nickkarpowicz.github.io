@@ -530,17 +530,20 @@
 
             <div class="docstring"><p>if trace_file is None, this function only loads, fits and plots the beam profile; if trace_file is given, the function additionally calculates the peak intensity and field.</p>
 
-<p>Args:
-    profile_file: name of the file containing the beam profile; the file (txt or csv) contains the 2D array of the beam profile
-    trace_file: None; name of the file containing the trace; the file (txt or csv) contains the time and field arrays as tab-separated columns
-    magnification: 1.; ratio of lens-camera/lens-z0 lengths; This is used to give the correct size of the beam profile at z0 in um
-    pixelsize: 5. um; pixel size of the camera
-    power: 20. mW; power of the laser beam; this is used to calculate the peak intensity
-    reprate: 4 kHz; repetition rate of the laser; this is used to calculate the peak intensity
-    ROI_diam: 100; diameter of the region of interest in pixels; the center of the ROI is the maximum of the camera data (which is assumed to be not saturated)
-    cutoff_gaus_fit_profile: 25. pixels; the 2d gaussian is fitted to the beam profile up to this distance from the peak
-    forced_background: None; if not None, the subtracted background is set to this value; otherwise it's computed from the outer ring of the ROI (camera data)
-    trace_cutoff_radius: 50. fs; for intensity calculation, the integral of the trace is computed only in the range t[peak]-trace_cutoff_radius &lt; t &lt; t[peak]+trace_cutoff_radius</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>profile_file:</strong>  name of the file containing the beam profile; the file (txt or csv) contains the 2D array of the beam profile</li>
+<li><strong>trace_file:</strong>  None; name of the file containing the trace; the file (txt or csv) contains the time and field arrays as tab-separated columns</li>
+<li><strong>magnification:</strong>  1.; ratio of lens-camera/lens-z0 lengths; This is used to give the correct size of the beam profile at z0 in um</li>
+<li><strong>pixelsize:</strong>  5. um; pixel size of the camera</li>
+<li><strong>power:</strong>  20. mW; power of the laser beam; this is used to calculate the peak intensity</li>
+<li><strong>reprate:</strong>  4 kHz; repetition rate of the laser; this is used to calculate the peak intensity</li>
+<li><strong>ROI_diam:</strong>  100; diameter of the region of interest in pixels; the center of the ROI is the maximum of the camera data (which is assumed to be not saturated)</li>
+<li><strong>cutoff_gaus_fit_profile:</strong>  25. pixels; the 2d gaussian is fitted to the beam profile up to this distance from the peak</li>
+<li><strong>forced_background:</strong>  None; if not None, the subtracted background is set to this value; otherwise it's computed from the outer ring of the ROI (camera data)</li>
+<li><strong>trace_cutoff_radius:</strong>  50. fs; for intensity calculation, the integral of the trace is computed only in the range t[peak]-trace_cutoff_radius &lt; t &lt; t[peak]+trace_cutoff_radius</li>
+</ul>
 </div>
 
 
@@ -1413,28 +1416,27 @@
 
 <p>Most of the class methods modify the object data in place, and don't return anything.</p>
 
-<p>Attributes:
-    fieldTimeV: (WAVEFORM DATA in the time domain) time array (fs)
-    fieldV: (WAVEFORM DATA in the time domain) field array
-    fieldStdevV: (WAVEFORM DATA in the time domain) field standard deviation (or sigma) array</p>
+<h6 id="attributes">Attributes:</h6>
 
-<pre><code>frequencyAxis: (WAVEFORM DATA in the frequency domain) frequency axis of the FFT in PHz (should be np.fft compatible, i.e., equally spaced, in the form [0, df, 2*df, ..., fmax, -fmax[-df], ..., -df])
-fftFieldV: (WAVEFORM DATA in the frequency domain) FFT field (complex)
-complexFieldTimeV: (WAVEFORM DATA in the frequency domain) time axis of the complex field (fs)
-complexFieldV: (WAVEFORM DATA in the frequency domain) complex field ( = IFFT{FFT(ω)θ(ω)}(t), where θ(ω) = 1 if ω &gt;= 0, θ(ω) = 0 otherwise )
-wvlAxis: (WAVEFORM DATA in the frequency domain) wavelength axis for the FFT spectrum (nm)
-fftSpectrum: (WAVEFORM DATA in the frequency domain) wavelength-dependent positive FFT spectrum ( = |FFT{field}|^2 * df/dλ, λ &gt; 0 )
-fftphase: (WAVEFORM DATA in the frequency domain) wavelength-dependent spectral phase
-
-wvlSpectrometer: (SPECTROMETER DATA) wavelength (nm)
-ISpectrometer: (SPECTROMETER DATA) spectral intensity
-
-fsZeroPadding: (= 150 by default) time span in fs for zero padding (appending zeroes both before and after the trace, in order to get a smoother fft)
-filename: filename to load the trace from
-filename_spectrum: filename to load the spectrum from
-normalization_trace: normalization factor for the trace
-zero_delay: time zero, corresponds to the maximum envelope
-</code></pre>
+<ul>
+<li><strong>fieldTimeV:</strong>  (WAVEFORM DATA in the time domain) time array (fs)</li>
+<li><strong>fieldV:</strong>  (WAVEFORM DATA in the time domain) field array</li>
+<li><strong>fieldStdevV:</strong>  (WAVEFORM DATA in the time domain) field standard deviation (or sigma) array</li>
+<li><strong>frequencyAxis:</strong>  (WAVEFORM DATA in the frequency domain) frequency axis of the FFT in PHz (should be np.fft compatible, i.e., equally spaced, in the form [0, df, 2*df, ..., fmax, -fmax[-df], ..., -df])</li>
+<li><strong>fftFieldV:</strong>  (WAVEFORM DATA in the frequency domain) FFT field (complex)</li>
+<li><strong>complexFieldTimeV:</strong>  (WAVEFORM DATA in the frequency domain) time axis of the complex field (fs)</li>
+<li><strong>complexFieldV:</strong>  (WAVEFORM DATA in the frequency domain) complex field ( = IFFT{FFT(ω)θ(ω)}(t), where θ(ω) = 1 if ω &gt;= 0, θ(ω) = 0 otherwise )</li>
+<li><strong>wvlAxis:</strong>  (WAVEFORM DATA in the frequency domain) wavelength axis for the FFT spectrum (nm)</li>
+<li><strong>fftSpectrum:</strong>  (WAVEFORM DATA in the frequency domain) wavelength-dependent positive FFT spectrum ( = |FFT{field}|^2 * df/dλ, λ &gt; 0 )</li>
+<li><strong>fftphase:</strong>  (WAVEFORM DATA in the frequency domain) wavelength-dependent spectral phase</li>
+<li><strong>wvlSpectrometer:</strong>  (SPECTROMETER DATA) wavelength (nm)</li>
+<li><strong>ISpectrometer:</strong>  (SPECTROMETER DATA) spectral intensity</li>
+<li><strong>fsZeroPadding:</strong>  (= 150 by default) time span in fs for zero padding (appending zeroes both before and after the trace, in order to get a smoother fft)</li>
+<li><strong>filename:</strong>  filename to load the trace from</li>
+<li><strong>filename_spectrum:</strong>  filename to load the spectrum from</li>
+<li><strong>normalization_trace:</strong>  normalization factor for the trace</li>
+<li><strong>zero_delay:</strong>  time zero, corresponds to the maximum envelope</li>
+</ul>
 </div>
 
 
@@ -1518,18 +1520,21 @@ zero_delay: time zero, corresponds to the maximum envelope
 <li>wvl_FFT_trace, spectrum_FFT_trace and phase_FFT_trace: the wavelength (nm) spectrum (a.u.) and phase (rad) vectors</li>
 </ul>
 
-<p>Args:
-    filename (str): the name of the file containing the trace (two columns - time and field, tab separated)
-    filename_spectrum (str): the name of the file containing the spectrum (two columns - wavelength and spectral intensity, tab separated)
-        this does not correspond to the fourier transform of the trace, but to some spectrometer data that you would like to compare to the loaded trace
-    time (array): the time vector (fs)
-    field (array): the electric field vector (a.u.)
-    stdev (array): the standard deviation (or sigma) of the electric field vector (a.u.)
-    wvl (array): the wavelength vector (nm) (spectrometer)
-    spectrum (array): the spectral intensity vector (a.u.) (spectrometer)
-    wvl_FFT_trace (array): the wavelength vector (nm) of the FFT trace (to reconstruct a trace from spectral data)
-    spectrum_FFT_trace (array): the spectral intensity vector (a.u.) of the FFT trace (to reconstruct a trace from spectral data)
-    phase_FFT_trace (array): the spectral phase vector (rad) of the FFT trace (to reconstruct a trace from spectral data)</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>filename (str):</strong>  the name of the file containing the trace (two columns - time and field, tab separated)</li>
+<li><strong>filename_spectrum (str):</strong>  the name of the file containing the spectrum (two columns - wavelength and spectral intensity, tab separated)
+this does not correspond to the fourier transform of the trace, but to some spectrometer data that you would like to compare to the loaded trace</li>
+<li><strong>time (array):</strong>  the time vector (fs)</li>
+<li><strong>field (array):</strong>  the electric field vector (a.u.)</li>
+<li><strong>stdev (array):</strong>  the standard deviation (or sigma) of the electric field vector (a.u.)</li>
+<li><strong>wvl (array):</strong>  the wavelength vector (nm) (spectrometer)</li>
+<li><strong>spectrum (array):</strong>  the spectral intensity vector (a.u.) (spectrometer)</li>
+<li><strong>wvl_FFT_trace (array):</strong>  the wavelength vector (nm) of the FFT trace (to reconstruct a trace from spectral data)</li>
+<li><strong>spectrum_FFT_trace (array):</strong>  the spectral intensity vector (a.u.) of the FFT trace (to reconstruct a trace from spectral data)</li>
+<li><strong>phase_FFT_trace (array):</strong>  the spectral phase vector (rad) of the FFT trace (to reconstruct a trace from spectral data)</li>
+</ul>
 </div>
 
 
@@ -1752,9 +1757,12 @@ zero_delay: time zero, corresponds to the maximum envelope
 
 <p>The spectrum does not correspond to the fourier transform of the trace, but to some spectrometer data that you would like to compare with the loaded trace</p>
 
-<p>Args:
-    wvl: wavelength array (nm)
-    spectrum: spectral intensity array</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>wvl:</strong>  wavelength array (nm)</li>
+<li><strong>spectrum:</strong>  spectral intensity array</li>
+</ul>
 </div>
 
 
@@ -1794,10 +1802,13 @@ zero_delay: time zero, corresponds to the maximum envelope
 
             <div class="docstring"><p>loads the trace from time and field arrays and stores it in the class.</p>
 
-<p>Args:
-    fieldTimeV: time array (fs)
-    fieldV: field array
-    fieldStdevV: standard deviation - or sigma - to be associated to the trace (optional, default = None)</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>fieldTimeV:</strong>  time array (fs)</li>
+<li><strong>fieldV:</strong>  field array</li>
+<li><strong>fieldStdevV:</strong>  standard deviation - or sigma - to be associated to the trace (optional, default = None)</li>
+</ul>
 </div>
 
 
@@ -1904,10 +1915,13 @@ zero_delay: time zero, corresponds to the maximum envelope
 
 <p>This function has a different job than load_spectrum_from_arrays(): in fact, it retrieves the trace from the given spectral data via fourier transform.</p>
 
-<p>Args:
-    wvl_FFT_trace: wavelength array in nm
-    spectrum_FFT_trace: (wavelength-)spectral intensity array. This is assumed to be |FFT{field}|^2 * df/dλ
-    phase_FFT_trace: spectral phase in rad</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>wvl_FFT_trace:</strong>  wavelength array in nm</li>
+<li><strong>spectrum_FFT_trace:</strong>  (wavelength-)spectral intensity array. This is assumed to be |FFT{field}|^2 * df/dλ</li>
+<li><strong>phase_FFT_trace:</strong>  spectral phase in rad</li>
+</ul>
 </div>
 
 
@@ -1944,8 +1958,11 @@ zero_delay: time zero, corresponds to the maximum envelope
 
 <p>The spectrum does not correspond to the fourier transform of the trace, but to the spectrometer data that you would like to compare with the loaded trace</p>
 
-<p>Args:
-    fname: filename</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>fname:</strong>  filename</li>
+</ul>
 </div>
 
 
@@ -1978,9 +1995,12 @@ zero_delay: time zero, corresponds to the maximum envelope
 
             <div class="docstring"><p>updates the fft of the trace from the time domain data.</p>
 
-<p>Args:
-    zero_pad_field: bool; if true (default) add zeros before and after the trace before computing fft (for a smoother spectrum)
-        The length of appended zeros is defined by self.fsZeroPadding.</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>zero_pad_field:</strong>  bool; if true (default) add zeros before and after the trace before computing fft (for a smoother spectrum)
+The length of appended zeros is defined by self.fsZeroPadding.</li>
+</ul>
 </div>
 
 
@@ -2156,8 +2176,11 @@ zero_delay: time zero, corresponds to the maximum envelope
 
 <p>Useful when retrieving the trace via ifft (method update_trace_from_fft()).</p>
 
-<p>Args:
-    timeRange (float): the time range (fs) to strip from the beginning and end of the trace. If None (default), fsZeroPadding is used.</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>timeRange (float):</strong>  the time range (fs) to strip from the beginning and end of the trace. If None (default), fsZeroPadding is used.</li>
+</ul>
 </div>
 
 
@@ -2216,9 +2239,12 @@ zero_delay: time zero, corresponds to the maximum envelope
 
             <div class="docstring"><p>applies a tukey window to the trace in the time domain.</p>
 
-<p>Args:
-    lowEdge, upEdge: lower and upper edge of the window upEdge-lowEdge = FWHM of the window
-    lowEdgeWidth, upEdgeWidth: width of the cosine-shaped edges (from 0 to 1 or viceversa)</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>lowEdge, upEdge:</strong>  lower and upper edge of the window upEdge-lowEdge = FWHM of the window</li>
+<li><strong>lowEdgeWidth, upEdgeWidth:</strong>  width of the cosine-shaped edges (from 0 to 1 or viceversa)</li>
+</ul>
 </div>
 
 
@@ -2274,8 +2300,11 @@ zero_delay: time zero, corresponds to the maximum envelope
 
 <p>This is done by 'zero-padding' the fourier transform of the trace, i.e., by extending the frequency axis by a factor ntimes_finer, and adding corresponding zeros to the FFT field.</p>
 
-<p>Args:
-    ntimes_finer (int): the factor by which to shrink the time step of the trace in time domain. Must be &gt;= 1.</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>ntimes_finer (int):</strong>  the factor by which to shrink the time step of the trace in time domain. Must be &gt;= 1.</li>
+</ul>
 </div>
 
 
@@ -2309,8 +2338,11 @@ zero_delay: time zero, corresponds to the maximum envelope
 
             <div class="docstring"><p>computes the time derivative of the trace.</p>
 
-<p>Args:
-    spectrally: bool; if True (default) the derivative will be computed in the spectral domain (maybe more stable numerically)</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>spectrally:</strong>  bool; if True (default) the derivative will be computed in the spectral domain (maybe more stable numerically)</li>
+</ul>
 </div>
 
 
@@ -2346,8 +2378,11 @@ zero_delay: time zero, corresponds to the maximum envelope
 
             <div class="docstring"><p>integrates the trace in time.</p>
 
-<p>Args:
-    spectrally (bool): if True (default) the integral will be computed in the spectral domain (maybe more stable numerically)</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>spectrally (bool):</strong>  if True (default) the integral will be computed in the spectral domain (maybe more stable numerically)</li>
+</ul>
 </div>
 
 
@@ -2383,9 +2418,12 @@ zero_delay: time zero, corresponds to the maximum envelope
 
             <div class="docstring"><p>Saves the trace to file</p>
 
-<p>Args:
-    filename
-    low_lim, up_lim: only save the trace between low_lim and up_lim (default: None, None)</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li>filename</li>
+<li><strong>low_lim, up_lim:</strong>  only save the trace between low_lim and up_lim (default: None, None)</li>
+</ul>
 </div>
 
 
@@ -2444,8 +2482,11 @@ zero_delay: time zero, corresponds to the maximum envelope
 
             <div class="docstring"><p>Normalizes the spectrum of the trace (|FFT{trace}|^2 * df/dλ) to its integral (area)</p>
 
-<p>Args:
-    spectrum_range (list): the range of wavelengths (nm) to consider for the normalization. Default is [60, 930] nm.</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>spectrum_range (list):</strong>  the range of wavelengths (nm) to consider for the normalization. Default is [60, 930] nm.</li>
+</ul>
 </div>
 
 
@@ -2606,8 +2647,11 @@ zero_delay: time zero, corresponds to the maximum envelope
 <p>convention: field [V/Å], time [fs], fluence [J/cm²]
 F = c eps_0 integral(E^2)dt</p>
 
-<p>Returns:
-    fluence: float</p>
+<h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>fluence: float</p>
+</blockquote>
 </div>
 
 
@@ -2701,9 +2745,12 @@ F = c eps_0 integral(E^2)dt</p>
 
             <div class="docstring"><p>Get the envelope of the trace.</p>
 
-<p>Returns:
-    time array (fs)
-    envelope array</p>
+<h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>time array (fs)
+  envelope array</p>
+</blockquote>
 </div>
 
 
@@ -2738,9 +2785,12 @@ F = c eps_0 integral(E^2)dt</p>
 
 <p>If complexFieldV is already computed and stored, no re-calculation occurs</p>
 
-<p>Returns:
-    time array (fs)
-    instantaneous phase array (fs)</p>
+<h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>time array (fs)
+  instantaneous phase array (fs)</p>
+</blockquote>
 </div>
 
 
@@ -2774,10 +2824,11 @@ F = c eps_0 integral(E^2)dt</p>
 
             <div class="docstring"><p>Get the time value corresponding to the envelope peak.</p>
 
-<p>Returns:</p>
+<h6 id="returns">Returns:</h6>
 
-<pre><code>zero_delay: float
-</code></pre>
+<blockquote>
+  <p>zero_delay: float</p>
+</blockquote>
 </div>
 
 
@@ -2808,8 +2859,11 @@ F = c eps_0 integral(E^2)dt</p>
 
             <div class="docstring"><p>get the FWHM of the trace.</p>
 
-<p>Returns:
-    FWHM: float</p>
+<h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>FWHM: float</p>
+</blockquote>
 </div>
 
 
@@ -2863,11 +2917,14 @@ F = c eps_0 integral(E^2)dt</p>
 and it is reaches zero at lowWavelengthEdge-lowEdgeWidth/2  and  upWavelengthEdge+highEdgeWidth/2.
 Notice that the edges are only cosine-shaped in the frequency domain. In the wavelength domain upWavelengthEdge - lowWavelengthEdge does not coincide with the FWHM of the tukey function</p>
 
-<p>Args:
-    lowWavelengthEdge: float (nm)
-    upWavelengthEdge: float (nm)
-    lowEdgeWidth: float (nm)
-    highEdgeWidth: float (nm)</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>lowWavelengthEdge:</strong>  float (nm)</li>
+<li><strong>upWavelengthEdge:</strong>  float (nm)</li>
+<li><strong>lowEdgeWidth:</strong>  float (nm)</li>
+<li><strong>highEdgeWidth:</strong>  float (nm)</li>
+</ul>
 </div>
 
 
@@ -2922,9 +2979,12 @@ Notice that the edges are only cosine-shaped in the frequency domain. In the wav
 
             <div class="docstring"><p>Applies a spectral transmission function to the trace (e.g. spectral filter).</p>
 
-<p>Args:
-    wavelengths: ndarray = wavelength array (nm)
-    f: ndarray = transmission function f(λ)</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>wavelengths:</strong>  ndarray = wavelength array (nm)</li>
+<li><strong>f:</strong>  ndarray = transmission function f(λ)</li>
+</ul>
 </div>
 
 
@@ -2994,11 +3054,14 @@ Notice that the edges are only cosine-shaped in the frequency domain. In the wav
             <div class="docstring"><p>Applies a spectrum to the phase of the trace. This means that a new trace is computed and stored in the TraceHandler object (replacing the existing one);
 the new trace has spectral intensity equal to the applied spectrum and spectral phase equal to the phase of the existing trace.</p>
 
-<p>Args:
-    wvl: wavelength array (nm). If None (default) the comparison spectrum stored in the class (self.wvlSpectrometer and self.ISpectrometer) is applied.
-    spectrum: spectral intensity array. If None (default) the comparison spectrum stored in the class (self.wvlSpectrometer and self.ISpectrometer) is applied.
-    CEP_shift: a possible artificial phase shift IN UNITS OF PI! (default = 0)
-    stripZeroPadding (bool): whether to eliminate the zero padding (zeros appended to the trace). Default is True</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>wvl:</strong>  wavelength array (nm). If None (default) the comparison spectrum stored in the class (self.wvlSpectrometer and self.ISpectrometer) is applied.</li>
+<li><strong>spectrum:</strong>  spectral intensity array. If None (default) the comparison spectrum stored in the class (self.wvlSpectrometer and self.ISpectrometer) is applied.</li>
+<li><strong>CEP_shift:</strong>  a possible artificial phase shift IN UNITS OF PI! (default = 0)</li>
+<li><strong>stripZeroPadding (bool):</strong>  whether to eliminate the zero padding (zeros appended to the trace). Default is True</li>
+</ul>
 </div>
 
 
@@ -3110,17 +3173,20 @@ the new trace has spectral intensity equal to the applied spectrum and spectral 
             <div class="docstring"><p>calculates the fresnel reflection of the pulse at the interface between two materials. The waveform is travelling from material 1 to material 2.
 The first medium (material1) should be non-absorptive. As usual the resulting waveform is stored in the TraceHandler object, replacing the previous one.</p>
 
-<p>Refractive index files should contain 3 space-separated columns, respectively with headers: wvl n k, where wvl is the wavelength in um, n and k resp. the real and imaginary part of the refractive index.
-Args:
-    material2: the filename (without '.txt') of the refractive index data for the material after the interface (e.g. Si Al MgF2); wavelength is in um in the refractive index file
-    angle_in: the incidence angle in degrees
-    material1: the filename (without '.txt') of the refractive index data for the material before the interface. If None (default), vacuum is assumed
-    forward (bool):  if True (default) forward reflection is computed (the result waveform is the reflection of the previously stored waveform.</p>
+<p>Refractive index files should contain 3 space-separated columns, respectively with headers: wvl n k, where wvl is the wavelength in um, n and k resp. the real and imaginary part of the refractive index.</p>
 
-<pre><code>    if False backward reflection is computed (the previous waveform is the reflection of the result waveform)
-s_polarized (bool): True. Reflection calculation only implemented for s-polarized light
-path (str): path for the refractive index files. Defaults to "./RefractiveIndices/"
-</code></pre>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>material2:</strong>  the filename (without '.txt') of the refractive index data for the material after the interface (e.g. Si Al MgF2); wavelength is in um in the refractive index file</li>
+<li><strong>angle_in:</strong>  the incidence angle in degrees</li>
+<li><strong>material1:</strong>  the filename (without '.txt') of the refractive index data for the material before the interface. If None (default), vacuum is assumed</li>
+<li><p><strong>forward (bool):</strong>   if True (default) forward reflection is computed (the result waveform is the reflection of the previously stored waveform.</p>
+
+<p>if False backward reflection is computed (the previous waveform is the reflection of the result waveform)</p></li>
+<li><strong>s_polarized (bool):</strong>  True. Reflection calculation only implemented for s-polarized light</li>
+<li><strong>path (str):</strong>  path for the refractive index files. Defaults to "./RefractiveIndices/"</li>
+</ul>
 </div>
 
 
@@ -3203,10 +3269,13 @@ path (str): path for the refractive index files. Defaults to "./RefractiveIndice
 
             <div class="docstring"><p>Performs time-frequency analysis by using scipy's short time fourier transform (fourier transform of the trace convoluted by a 'sigma_time' broad gaussian).</p>
 
-<p>Args:
-    sigma_time: sigma of the gaussian window
-    low_lim, up_lim (float): xaxis limits for plotting. Default None
-    low_lim_freq, up_lim_freq (float): xaxis limits for plotting. Default None</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>sigma_time:</strong>  sigma of the gaussian window</li>
+<li><strong>low_lim, up_lim (float):</strong>  xaxis limits for plotting. Default None</li>
+<li><strong>low_lim_freq, up_lim_freq (float):</strong>  xaxis limits for plotting. Default None</li>
+</ul>
 </div>
 
 
@@ -3249,9 +3318,12 @@ path (str): path for the refractive index files. Defaults to "./RefractiveIndice
 
             <div class="docstring"><p>Plots the field trace.</p>
 
-<p>Args:
-    low_lim, up_lim: float = xaxis limits for plotting. Default None
-    normalize: bool = if True (default) normalize the peak of the trace to 1</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>low_lim, up_lim:</strong>  float = xaxis limits for plotting. Default None</li>
+<li><strong>normalize:</strong>  bool = if True (default) normalize the peak of the trace to 1</li>
+</ul>
 </div>
 
 
@@ -3304,9 +3376,12 @@ path (str): path for the refractive index files. Defaults to "./RefractiveIndice
 
             <div class="docstring"><p>Plots the trace spectrum and phase together with the spectrometer measurement [if provided].</p>
 
-<p>Args:
-    low_lim, up_lim (float): xaxis limits for plotting. Default: 40, 1000
-    no_phase: if True, don't plot the phase. Default: False</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>low_lim, up_lim (float):</strong>  xaxis limits for plotting. Default: 40, 1000</li>
+<li><strong>no_phase:</strong>  if True, don't plot the phase. Default: False</li>
+</ul>
 </div>
 
 
@@ -3517,9 +3592,12 @@ path (str): path for the refractive index files. Defaults to "./RefractiveIndice
 
 <p>All stored traces are accessible as TraceHandler object in the corresponding list.</p>
 
-<p>Attributes:
-    traceHandlers (list): list of traceHandler objects
-    fsZeroPadding (float): zero padding in fs for the traces (default 150 fs)</p>
+<h6 id="attributes">Attributes:</h6>
+
+<ul>
+<li><strong>traceHandlers (list):</strong>  list of traceHandler objects</li>
+<li><strong>fsZeroPadding (float):</strong>  zero padding in fs for the traces (default 150 fs)</li>
+</ul>
 </div>
 
 
@@ -3595,15 +3673,18 @@ path (str): path for the refractive index files. Defaults to "./RefractiveIndice
 <li>traceHandlerList: list of TraceHandler objects</li>
 </ul>
 
-<p>Args:
-    filenameList : list of filenames containing the field traces (see TraceHandler constructor)
-    filenameSpectrumList : list of filenames containing the spectrum traces (spectrometer data; see TraceHandler constructor)
-    timeList : list of time arrays (see TraceHandler constructor)
-    fieldList : list of field arrays (see TraceHandler constructor)
-    stdevList : list of standard deviation arrays (see TraceHandler constructor)
-    wvlList : list of wavelength arrays (spectrometer data; see TraceHandler constructor)
-    spectrumList : list of spectrum arrays (spectrometer data; see TraceHandler constructor)
-    traceHandlerList : list of TraceHandler objects</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>filenameList :</strong>  list of filenames containing the field traces (see TraceHandler constructor)</li>
+<li><strong>filenameSpectrumList :</strong>  list of filenames containing the spectrum traces (spectrometer data; see TraceHandler constructor)</li>
+<li><strong>timeList :</strong>  list of time arrays (see TraceHandler constructor)</li>
+<li><strong>fieldList :</strong>  list of field arrays (see TraceHandler constructor)</li>
+<li><strong>stdevList :</strong>  list of standard deviation arrays (see TraceHandler constructor)</li>
+<li><strong>wvlList :</strong>  list of wavelength arrays (spectrometer data; see TraceHandler constructor)</li>
+<li><strong>spectrumList :</strong>  list of spectrum arrays (spectrometer data; see TraceHandler constructor)</li>
+<li><strong>traceHandlerList :</strong>  list of TraceHandler objects</li>
+</ul>
 </div>
 
 
@@ -3673,15 +3754,18 @@ path (str): path for the refractive index files. Defaults to "./RefractiveIndice
 
             <div class="docstring"><p>Append a new trace to the list. Usual rules apply.</p>
 
-<p>Args:
-    filename
-    filename_spectrum
-    timeV
-    fieldV
-    stdevV
-    wvl
-    spectrum
-    traceHandler</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li>filename</li>
+<li>filename_spectrum</li>
+<li>timeV</li>
+<li>fieldV</li>
+<li>stdevV</li>
+<li>wvl</li>
+<li>spectrum</li>
+<li>traceHandler</li>
+</ul>
 </div>
 
 
@@ -3713,8 +3797,11 @@ path (str): path for the refractive index files. Defaults to "./RefractiveIndice
 
             <div class="docstring"><p>flips the trace number 'index'</p>
 
-<p>Args:
-    index: int</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>index:</strong>  int</li>
+</ul>
 </div>
 
 
@@ -3823,14 +3910,17 @@ path (str): path for the refractive index files. Defaults to "./RefractiveIndice
 
             <div class="docstring"><p>plots all traces.</p>
 
-<p>Args:
-    low_lim (float): for xaxis
-    up_lim (float): for xaxis
-    labels (list): list of labels for the legend
-    delay_shift (list): list of delay offsets (one per trace)
-    offset (float): y-axis offset between traces
-    errorbar (bool): whether to plot errors. Default False
-    normalize (bool): Default True</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>low_lim (float):</strong>  for xaxis</li>
+<li><strong>up_lim (float):</strong>  for xaxis</li>
+<li><strong>labels (list):</strong>  list of labels for the legend</li>
+<li><strong>delay_shift (list):</strong>  list of delay offsets (one per trace)</li>
+<li><strong>offset (float):</strong>  y-axis offset between traces</li>
+<li><strong>errorbar (bool):</strong>  whether to plot errors. Default False</li>
+<li><strong>normalize (bool):</strong>  Default True</li>
+</ul>
 </div>
 
 
@@ -3925,8 +4015,11 @@ logscale: (bool); whether to plot in a logscale</p>
 
             <div class="docstring"><p>Load calibration data in a .npz file for the Reso spectrometer</p>
 
-<p>Args:
-    calibration_data_filepath (StrOrBytesPath): path of the file to load</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>calibration_data_filepath (StrOrBytesPath):</strong>  path of the file to load</li>
+</ul>
 </div>
 
 
@@ -3960,12 +4053,18 @@ logscale: (bool); whether to plot in a logscale</p>
 
             <div class="docstring"><p>basic box smoothing for the spectra</p>
 
-<p>ARGUMENTS:
-    y = spectrum to be smoothed [numpy array]
-    box_pts = width of smoothing box [int, number of points]</p>
+<h6 id="arguments">ARGUMENTS:</h6>
 
-<p>RETURNS:
-    smoothed_y [numpy array]</p>
+<blockquote>
+  <p>y = spectrum to be smoothed [numpy array]
+  box_pts = width of smoothing box [int, number of points]</p>
+</blockquote>
+
+<h6 id="returns">RETURNS:</h6>
+
+<blockquote>
+  <p>smoothed_y [numpy array]</p>
+</blockquote>
 </div>
 
 
@@ -4018,11 +4117,14 @@ logscale: (bool); whether to plot in a logscale</p>
 <p>each edge is w-wide
 amplitude = 1</p>
 
-<p>ARGUMENTS:
-    x: float = input value
-    center = center of the t. function
-    FWHM = full width at half maximum of the t. function
-    w = width of the edges of the t. function (0 &lt; w &lt; FWHM)</p>
+<h6 id="arguments">ARGUMENTS:</h6>
+
+<blockquote>
+  <p>x: float = input value
+  center = center of the t. function
+  FWHM = full width at half maximum of the t. function
+  w = width of the edges of the t. function (0 &lt; w &lt; FWHM)</p>
+</blockquote>
 </div>
 
 
@@ -4072,14 +4174,20 @@ amplitude = 1</p>
 
 <p>The difference with the function tukey_f is that this function can take as input a numpy array or a list, and returns a numpy array or a list.</p>
 
-<p>Args:
-    x: input array (numpy array or list)
-    center: center of the window
-    FWHM: full width at half maximum
-    w: width of the edges of the window (w &gt; 0)</p>
+<h6 id="arguments">Arguments:</h6>
 
-<p>Returns:
-    window (numpy array or list)</p>
+<ul>
+<li><strong>x:</strong>  input array (numpy array or list)</li>
+<li><strong>center:</strong>  center of the window</li>
+<li><strong>FWHM:</strong>  full width at half maximum</li>
+<li><strong>w:</strong>  width of the edges of the window (w &gt; 0)</li>
+</ul>
+
+<h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>window (numpy array or list)</p>
+</blockquote>
 </div>
 
 
@@ -4222,11 +4330,17 @@ os.system("cat " + filename + ".xls &gt; " + filename + ".txt")</p>
 
 <p>44 (skipped) rows at the beginning of the file (all headers)</p>
 
-<p>Args:
-    filename: name of the file (without extension)</p>
+<h6 id="arguments">Arguments:</h6>
 
-<p>Returns:
-    numpy array with the spectral data (see original excel for more details)</p>
+<ul>
+<li><strong>filename:</strong>  name of the file (without extension)</li>
+</ul>
+
+<h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>numpy array with the spectral data (see original excel for more details)</p>
+</blockquote>
 </div>
 
 
@@ -4353,27 +4467,33 @@ os.system("cat " + filename + ".xls &gt; " + filename + ".txt")</p>
             <div class="docstring"><p>For the UV spectrometer. Calibrate the spectrum number 'column' in the the 'data' array. Intensity calibration factor is loaded in the first lines of UVSpectrumAnalysis.py.
     Notice: each saved spectrum has 7 columns in the excel file; however, the argument column refers to the index of the spectrum, not the actual column in the file.</p>
 
-<p>Args:
-    data: data [numpy] array (see read_spectrometer_excel)
-    column: index of the spectrum to be calibrated
-    calibration_file_path: path of the calibration file
-    dark: dark spectrum (optional)
-    dark_c: column of the dark spectrum (optional)
-    stitch: Boolean, if True, the spectra are stitched together (optional, default False)
-            if True, the spectrum will be calculated by stitching the 5 partial spectra in the previous columns.
-            the stitching only works if the spectrum number 'column' is a FULL-SPECTRUM in the xls file.
-            Stitching was implemented because the internal software of the spectrometer is not good enough at it (the saved full spectrum typically has discontinuities).
-    smooth_points: number of points for smoothing (optional, default 10). if 0, no smoothing is applied
-    null_calibration: Boolean, if True, the intensity calibration is not applied (optional, default False)
-    wavelength_calibration_intercept: intercept of the wavelength calibration (optional, default 3.538). If None no wavelength calibration is applied
-    wavelength_calibration_slope: slope of the wavelength calibration (optional, default 1.003427). If None no wavelength calibration is applied
-            Wavelength calibration is in the form λ_true = λ_measured * slope + intercept
-            Notice: wavelength calibration has an error of +/- 1  to 2 nm due to the stitching process.
-                for a better calibration compute and apply the correction to each of the 5 partial spectra</p>
+<h6 id="arguments">Arguments:</h6>
 
-<p>Returns:
-    wavelength: wavelength array
-    spectrum: calibrated spectrum</p>
+<ul>
+<li><strong>data:</strong>  data [numpy] array (see read_spectrometer_excel)</li>
+<li><strong>column:</strong>  index of the spectrum to be calibrated</li>
+<li><strong>calibration_file_path:</strong>  path of the calibration file</li>
+<li><strong>dark:</strong>  dark spectrum (optional)</li>
+<li><strong>dark_c:</strong>  column of the dark spectrum (optional)</li>
+<li><strong>stitch:</strong>  Boolean, if True, the spectra are stitched together (optional, default False)
+if True, the spectrum will be calculated by stitching the 5 partial spectra in the previous columns.
+the stitching only works if the spectrum number 'column' is a FULL-SPECTRUM in the xls file.
+Stitching was implemented because the internal software of the spectrometer is not good enough at it (the saved full spectrum typically has discontinuities).</li>
+<li><strong>smooth_points:</strong>  number of points for smoothing (optional, default 10). if 0, no smoothing is applied</li>
+<li><strong>null_calibration:</strong>  Boolean, if True, the intensity calibration is not applied (optional, default False)</li>
+<li><strong>wavelength_calibration_intercept:</strong>  intercept of the wavelength calibration (optional, default 3.538). If None no wavelength calibration is applied</li>
+<li><strong>wavelength_calibration_slope:</strong>  slope of the wavelength calibration (optional, default 1.003427). If None no wavelength calibration is applied
+Wavelength calibration is in the form λ_true = λ_measured * slope + intercept
+Notice: wavelength calibration has an error of +/- 1  to 2 nm due to the stitching process.
+    for a better calibration compute and apply the correction to each of the 5 partial spectra</li>
+</ul>
+
+<h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>wavelength: wavelength array
+  spectrum: calibrated spectrum</p>
+</blockquote>
 </div>
 
 
@@ -4562,27 +4682,30 @@ os.system("cat " + filename + ".xls &gt; " + filename + ".txt")</p>
 <p>Notice: The excel file usually contains several spectra.
 Notice: each saved spectrum has 7 columns in the excel file; please consider that the argument 'column' refers to the index of the spectrum, not the actual column in the file.</p>
 
-<p>Args:
-    filenameList: input file list (without extension)
-    columnList: list of the positions in the file of the spectra to be plotted (e.g. [1, 0, 5] -> plot 1st sp. for 1st file, 5th spectrum for 3rd file, ...)
-    pdfFilename: output filename
-    darkTupleList: [("darkFilename1stspectrum", spectrum_number_in_1stDark_filename), ( ..,.. ), ...]
-    legendItem List: list of entries for the legend (optional, keyword)
-    normalizationList: list of (multiplicative) normalization factors for the spectra (optional, keyword)
-    color_gradient: Boolean, whether plot should be displayed with color gradient instead of in matplotlib default color cycle
-    additive_constant_log_intensity: additive constant to the spectral intensity, so that the logarithmic plot does not have values too close to 0
-    wavelength_range: [min lambda, max lambda] for plotting
-    title: title of the figure
-    plotList: list of booleans: this function will plot the entry filenameList[i] if plotList[i] = True, otherwise the i-th data will not be shown in the plot
-    invert_order: Boolean, if True, the order of the spectra will be inverted (i.e. the last spectrum in the list will be plotted first)
-    do_calibrate: Boolean, if True, the spectra will be calibrated (default True, see calibrate() function)
-    calibration_file_path: str, path to the calibration file (default "./calibration_data/Reso_Spectrometer_CalibrationCorrection.npz"). Ignored if do_calibrate = False
-    stitch: Boolean, if True, the spectra will be stitched together (optional, default False)
-        if True, the spectrum will be calculated by stitching the 5 partial spectra in the previous columns.
-        the stitching only works if the spectrum number 'column' is a FULL-SPECTRUM in the xls file.
-        Stitching was implemented because the internal software of the spectrometer does not do it properly (the saved full spectrum tipically has discontinuities).
-        Stitching here works only if do_calibrate = True
-    smooth_points: number of points for smoothing (optional, default 10)</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>filenameList:</strong>  input file list (without extension)</li>
+<li><strong>columnList:</strong>  list of the positions in the file of the spectra to be plotted (e.g. [1, 0, 5] -> plot 1st sp. for 1st file, 5th spectrum for 3rd file, ...)</li>
+<li><strong>pdfFilename:</strong>  output filename</li>
+<li><strong>darkTupleList:</strong>  [("darkFilename1stspectrum", spectrum_number_in_1stDark_filename), ( ..,.. ), ...]</li>
+<li><strong>legendItem List:</strong>  list of entries for the legend (optional, keyword)</li>
+<li><strong>normalizationList:</strong>  list of (multiplicative) normalization factors for the spectra (optional, keyword)</li>
+<li><strong>color_gradient:</strong>  Boolean, whether plot should be displayed with color gradient instead of in matplotlib default color cycle</li>
+<li><strong>additive_constant_log_intensity:</strong>  additive constant to the spectral intensity, so that the logarithmic plot does not have values too close to 0</li>
+<li><strong>wavelength_range:</strong>  [min lambda, max lambda] for plotting</li>
+<li><strong>title:</strong>  title of the figure</li>
+<li><strong>plotList:</strong>  list of booleans: this function will plot the entry filenameList[i] if plotList[i] = True, otherwise the i-th data will not be shown in the plot</li>
+<li><strong>invert_order:</strong>  Boolean, if True, the order of the spectra will be inverted (i.e. the last spectrum in the list will be plotted first)</li>
+<li><strong>do_calibrate:</strong>  Boolean, if True, the spectra will be calibrated (default True, see calibrate() function)</li>
+<li><strong>calibration_file_path:</strong>  str, path to the calibration file (default "./calibration_data/Reso_Spectrometer_CalibrationCorrection.npz"). Ignored if do_calibrate = False</li>
+<li><strong>stitch:</strong>  Boolean, if True, the spectra will be stitched together (optional, default False)
+if True, the spectrum will be calculated by stitching the 5 partial spectra in the previous columns.
+the stitching only works if the spectrum number 'column' is a FULL-SPECTRUM in the xls file.
+Stitching was implemented because the internal software of the spectrometer does not do it properly (the saved full spectrum tipically has discontinuities).
+Stitching here works only if do_calibrate = True</li>
+<li><strong>smooth_points:</strong>  number of points for smoothing (optional, default 10)</li>
+</ul>
 
 <p>DEPENDS ON read_spectrometer_excel()
 DEPENDS ON calibrate() [optional]</p>
@@ -4627,10 +4750,13 @@ DEPENDS ON calibrate() [optional]</p>
 
             <div class="docstring"><p>Eliminates outliers in the data by replacing them with the mean of the surrounding values.</p>
 
-<p>Args:
-    y (np.ndarray): Input data array.
-    threshold (float): Threshold in units of sigma for outlier detection. Default is 3.
-    window_points (int): Number of points to consider for the mean and sigma calculation. Default is 20.</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>y (np.ndarray):</strong>  Input data array.</li>
+<li><strong>threshold (float):</strong>  Threshold in units of sigma for outlier detection. Default is 3.</li>
+<li><strong>window_points (int):</strong>  Number of points to consider for the mean and sigma calculation. Default is 20.</li>
+</ul>
 </div>
 
 
@@ -4697,12 +4823,15 @@ DEPENDS ON calibrate() [optional]</p>
 The function also applies a Gaussian filter to the spectrum data to smooth it.
 The function can optionally eliminate outliers in the spectrum data and remove offsets from each column individually.</p>
 
-<p>Args:
-    filename
-    remove_offsets_individually (bool): If True, compute and remove offsets from each column individually
-    nm_smearing (float): sigma in nm of the gaussian filter applied to smooth the spectrum.
-    eliminate_outliers_spectrum (bool): = If True, eliminate single pixel outliers in the spectral data and replace them with average of surrounding values.
-        default is False.</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li>filename</li>
+<li><strong>remove_offsets_individually (bool):</strong>  If True, compute and remove offsets from each column individually</li>
+<li><strong>nm_smearing (float):</strong>  sigma in nm of the gaussian filter applied to smooth the spectrum.</li>
+<li><strong>eliminate_outliers_spectrum (bool):</strong>  = If True, eliminate single pixel outliers in the spectral data and replace them with average of surrounding values.
+default is False.</li>
+</ul>
 </div>
 
 
@@ -5198,14 +5327,17 @@ wavelengths are in nm.
 
             <div class="docstring"><p>Provide either a filename or the wavelengths and spectrum arrays to the constructor.</p>
 
-<p>Args:
-    filename (str): Path to the file containing the spectrum data.
-    wavelengths and spectrum (np.ndarray): = Wavelengths and spectrum data arrays. (alternative to filename)
-    remove_offsets_individually (bool): = If True, compute and remove offsets from each column individually
-        (filename is expected to have one column of wavelength data and arbitrarily many columns of equivalent spectra [to be averaged]).
-    nm_smearing (float): Smearing in nm to be applied to the spectrum.
-    eliminate_outliers_spectrum (bool): If True, eliminate single pixel outliers in the spectral data and replace them with average of surrounding values.
-    filetype (str): Type of the file to be read. Options are 'MayaScarab' (default) or 'OceanOptics'.</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>filename (str):</strong>  Path to the file containing the spectrum data.</li>
+<li><strong>wavelengths and spectrum (np.ndarray):</strong>  = Wavelengths and spectrum data arrays. (alternative to filename)</li>
+<li><strong>remove_offsets_individually (bool):</strong>  = If True, compute and remove offsets from each column individually
+(filename is expected to have one column of wavelength data and arbitrarily many columns of equivalent spectra [to be averaged]).</li>
+<li><strong>nm_smearing (float):</strong>  Smearing in nm to be applied to the spectrum.</li>
+<li><strong>eliminate_outliers_spectrum (bool):</strong>  If True, eliminate single pixel outliers in the spectral data and replace them with average of surrounding values.</li>
+<li><strong>filetype (str):</strong>  Type of the file to be read. Options are 'MayaScarab' (default) or 'OceanOptics'.</li>
+</ul>
 </div>
 
 
@@ -5489,11 +5621,14 @@ The file will contain the wavelength, calibration factor, calibration lamp true 
 <p>The method assumes that the true calibration lamp data and the measured spectrum of the calibration lamp are loaded in the object
 The normalization of the three curves is arbitrary. By default the region between 420 and 800 nm is used for normalization.</p>
 
-<p>Args:
-    low_lim, up_lim(float): Wavelength limits for the x-axis.
-    low_lim_y, up_lim_y (float): Intensity limits for the y-axis.
-    wavelength_ROI (list): [wvl1, wvl2] = Wavelength range for the normalization of the calibration factor (for display purposes).
-        Default is [420, 800] nm.</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>low_lim, up_lim(float):</strong>  Wavelength limits for the x-axis.</li>
+<li><strong>low_lim_y, up_lim_y (float):</strong>  Intensity limits for the y-axis.</li>
+<li><strong>wavelength_ROI (list):</strong>  [wvl1, wvl2] = Wavelength range for the normalization of the calibration factor (for display purposes).
+Default is [420, 800] nm.</li>
+</ul>
 </div>
 
 
@@ -5531,9 +5666,12 @@ The normalization of the three curves is arbitrary. By default the region betwee
 <p>Form of the calibration: true_wavelength = intercept + slope * measured_wavelength
 The function modifies the wavelength axis in place.</p>
 
-<p>Args:
-    intercept: float,
-    slope: float</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>intercept:</strong>  float,</li>
+<li><strong>slope:</strong>  float</li>
+</ul>
 </div>
 
 
@@ -5576,19 +5714,25 @@ The function modifies the wavelength axis in place.</p>
 
             <div class="docstring"><p>Applies a Tukey window to the spectrum (e.g. to remove noise at the edges).</p>
 
-<p>Tukey window is defined as:</p>
+<h6 id="tukey-window-is-defined-as">Tukey window is defined as:</h6>
+
+<blockquote>
+  <ul>
+  <li>cosine-shaped window between edge1-edge1_width/2 and edge1+edge1_width/2</li>
+  <li>1 between edge1+edge1_width/2 and edge2-edge2_width/2</li>
+  <li>cosine-shaped window between edge2-edge2_width/2 and edge2+edge2_width/2</li>
+  <li>0 everywhere else</li>
+  </ul>
+</blockquote>
+
+<p>In this case, tukey window is computed in the wavelength domain.</p>
+
+<h6 id="arguments">Arguments:</h6>
 
 <ul>
-<li>cosine-shaped window between edge1-edge1_width/2 and edge1+edge1_width/2</li>
-<li>1 between edge1+edge1_width/2 and edge2-edge2_width/2</li>
-<li>cosine-shaped window between edge2-edge2_width/2 and edge2+edge2_width/2</li>
-<li>0 everywhere else
-In this case, tukey window is computed in the wavelength domain.</li>
+<li><strong>edge1, edge2 (float):</strong>  Wavelength limits for the Tukey window (edge2-edge1 = FWHM, in nm)</li>
+<li><strong>edge1_width, edge2_width (float):</strong>  Width of the cosine-shaped edge of the tukey window (in nm).</li>
 </ul>
-
-<p>Args:
-    edge1, edge2 (float): Wavelength limits for the Tukey window (edge2-edge1 = FWHM, in nm)
-    edge1_width, edge2_width (float): Width of the cosine-shaped edge of the tukey window (in nm).</p>
 </div>
 
 
@@ -5635,10 +5779,12 @@ In this case, tukey window is computed in the wavelength domain.</li>
 
             <div class="docstring"><p>normalizes the current spectrum with another spectrum, and stores the result in the present object.</p>
 
-<p>Args:
-    spectrumObject (either 'c'/'calib'/'calibration'/'lamp' or SpectrumHandler object):
-        the current spectrum is divided at each wavelength by the loaded calibration lamp data or by the spectrum passed as SpectrumHandler object.
-    nm_smearing (float): sigma in nm for the gaussian smoothing</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>spectrumObject (either 'c'/'calib'/'calibration'/'lamp' or SpectrumHandler object):</strong>  the current spectrum is divided at each wavelength by the loaded calibration lamp data or by the spectrum passed as SpectrumHandler object.</li>
+<li><strong>nm_smearing (float):</strong>  sigma in nm for the gaussian smoothing</li>
+</ul>
 </div>
 
 
@@ -5673,8 +5819,11 @@ In this case, tukey window is computed in the wavelength domain.</li>
 
             <div class="docstring"><p>adds two spectra and stores the result in the present object</p>
 
-<p>Args:
-    spectrumObject (SpectrumHandler): spectrum to be added</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>spectrumObject (SpectrumHandler):</strong>  spectrum to be added</li>
+</ul>
 </div>
 
 
@@ -5709,8 +5858,11 @@ In this case, tukey window is computed in the wavelength domain.</li>
 
             <div class="docstring"><p>multiplies the current spectrum by a second one at each wavelength.</p>
 
-<p>Args:
-    spectrumObject (SpectrumHandler)</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li>spectrumObject (SpectrumHandler)</li>
+</ul>
 </div>
 
 
@@ -5738,8 +5890,11 @@ In this case, tukey window is computed in the wavelength domain.</li>
 
             <div class="docstring"><p>multiplies the current spectrum by a constant.</p>
 
-<p>Args:
-    scalar (float)</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li>scalar (float)</li>
+</ul>
 </div>
 
 
@@ -5767,8 +5922,11 @@ In this case, tukey window is computed in the wavelength domain.</li>
 
             <div class="docstring"><p>adds a constant offset.</p>
 
-<p>Args:
-    scalar (float)</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li>scalar (float)</li>
+</ul>
 </div>
 
 
@@ -5860,16 +6018,19 @@ In this case, tukey window is computed in the wavelength domain.</li>
 <li>the true tabulated spectrum of the calibration lamp is loaded as self.calibration_lamp_spectrum [via load_calibration_lamp_data()]</li>
 </ul>
 
-<p>Args:
-   transmission_additional_optics: list of SpectrumHandler objects = list of transmission spectra of additional optics to be taken into account when computing the calibration factor.
-       The transmission ['reflection' for mirrors] spectra of additional optics will be included (multiplied) in the calibration factor
-       Additional optics are assumed to be in the beam path of any standard measurement (e.g. integrating sphere) BUT NOT PRESENT during the calibration lamp measurement.
-   smoothing: Type of smoothing to be applied to the calibration factor. Options are 'poly' (default) None or an integer number. If 'poly', a polynomial fit is applied to the calibration factor.
-       If None, no smoothing is applied. If an integer number, a box filter of that size is applied to the calibration factor.
-   extend_calibration (bool): If True, the calibration factor is extended to the full wavelength range of the spectrometer (the first and last values of the calibration curve are used for the extension).
-       This is a quick and dirty solution to deal with the fact that the calibration lamp spectrum is not available for the full wavelength range of the spectrometer.
-   wavelength_ROI (list): [wvl1, wvl2] Wavelength range for the normalization of the calibration factor (for display purposes).
-       Default is [420, 800] nm.</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>transmission_additional_optics:</strong>  list of SpectrumHandler objects = list of transmission spectra of additional optics to be taken into account when computing the calibration factor.
+The transmission ['reflection' for mirrors] spectra of additional optics will be included (multiplied) in the calibration factor
+Additional optics are assumed to be in the beam path of any standard measurement (e.g. integrating sphere) BUT NOT PRESENT during the calibration lamp measurement.</li>
+<li><strong>smoothing:</strong>  Type of smoothing to be applied to the calibration factor. Options are 'poly' (default) None or an integer number. If 'poly', a polynomial fit is applied to the calibration factor.
+If None, no smoothing is applied. If an integer number, a box filter of that size is applied to the calibration factor.</li>
+<li><strong>extend_calibration (bool):</strong>  If True, the calibration factor is extended to the full wavelength range of the spectrometer (the first and last values of the calibration curve are used for the extension).
+This is a quick and dirty solution to deal with the fact that the calibration lamp spectrum is not available for the full wavelength range of the spectrometer.</li>
+<li><strong>wavelength_ROI (list):</strong>  [wvl1, wvl2] Wavelength range for the normalization of the calibration factor (for display purposes).
+Default is [420, 800] nm.</li>
+</ul>
 </div>
 
 
@@ -6007,15 +6168,18 @@ In this case, tukey window is computed in the wavelength domain.</li>
 
             <div class="docstring"><p>Constructor for the MultiSpectrumHandler class.</p>
 
-<p>Args:
-    filenameList: list = List of filenames to be read.
-    wavelengthList: list = List of wavelength arrays. (alternative to filename)
-    spectrumList: list = List of spectrum arrays. (alternative to filename)
-    remove_offsets_individually: bool = If True, compute and remove offsets from each column individually
-        (filename is expected to have one column of wavelength data and arbitrarily many columns of equivalent spectra [to be averaged]).
-    nm_smearing: float = Smearing in nm to be applied to the spectrum.
-    eliminate_outliers_spectrum: bool = If True, eliminate single pixel outliers in the spectral data and replace them with average of surrounding values.
-    filetype: str = Type of the file to be read. Options are 'MayaScarab' (default) or 'OceanOptics'.</p>
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>filenameList:</strong>  list = List of filenames to be read.</li>
+<li><strong>wavelengthList:</strong>  list = List of wavelength arrays. (alternative to filename)</li>
+<li><strong>spectrumList:</strong>  list = List of spectrum arrays. (alternative to filename)</li>
+<li><strong>remove_offsets_individually:</strong>  bool = If True, compute and remove offsets from each column individually
+(filename is expected to have one column of wavelength data and arbitrarily many columns of equivalent spectra [to be averaged]).</li>
+<li><strong>nm_smearing:</strong>  float = Smearing in nm to be applied to the spectrum.</li>
+<li><strong>eliminate_outliers_spectrum:</strong>  bool = If True, eliminate single pixel outliers in the spectral data and replace them with average of surrounding values.</li>
+<li><strong>filetype:</strong>  str = Type of the file to be read. Options are 'MayaScarab' (default) or 'OceanOptics'.</li>
+</ul>
 </div>
 
 
