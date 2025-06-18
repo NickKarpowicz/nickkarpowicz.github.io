@@ -64,7 +64,13 @@
                                 <a class="variable" href="#Char.degrees">degrees</a>
                         </li>
                         <li>
+                                <a class="variable" href="#Char.angstrom">angstrom</a>
+                        </li>
+                        <li>
                                 <a class="variable" href="#Char.wavelength_micron">wavelength_micron</a>
+                        </li>
+                        <li>
+                                <a class="variable" href="#Char.energy_microjoule">energy_microjoule</a>
                         </li>
                 </ul>
 
@@ -296,7 +302,7 @@ Options:
 </span><span id="Char-110"><a href="#Char-110"><span class="linenos">110</span></a>
 </span><span id="Char-111"><a href="#Char-111"><span class="linenos">111</span></a><span class="sd">    Examples:</span>
 </span><span id="Char-112"><a href="#Char-112"><span class="linenos">112</span></a><span class="sd">        &gt;&gt;&gt; plt.xlabel(aw.plot.Char.wavelength_micron)</span>
-</span><span id="Char-113"><a href="#Char-113"><span class="linenos">113</span></a><span class="sd">        &gt;&gt;&gt; plt.ylabel(f&#39;{aw.plot.Char.theta} ({aw.plot.Char.degrees}))</span>
+</span><span id="Char-113"><a href="#Char-113"><span class="linenos">113</span></a><span class="sd">        &gt;&gt;&gt; plt.ylabel(f&#39;{aw.plot.Char.theta} ({aw.plot.Char.degrees})&#39;)</span>
 </span><span id="Char-114"><a href="#Char-114"><span class="linenos">114</span></a><span class="sd">    &quot;&quot;&quot;</span>
 </span><span id="Char-115"><a href="#Char-115"><span class="linenos">115</span></a>    <span class="n">mu</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\u03bc</span><span class="s1">&#39;</span>
 </span><span id="Char-116"><a href="#Char-116"><span class="linenos">116</span></a>    <span class="n">phi</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\u03a6</span><span class="s1">&#39;</span>
@@ -304,7 +310,9 @@ Options:
 </span><span id="Char-118"><a href="#Char-118"><span class="linenos">118</span></a>    <span class="n">theta</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\u03b8</span><span class="s1">&#39;</span>
 </span><span id="Char-119"><a href="#Char-119"><span class="linenos">119</span></a>    <span class="n">micron</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\u03bc</span><span class="s1">m&#39;</span>
 </span><span id="Char-120"><a href="#Char-120"><span class="linenos">120</span></a>    <span class="n">degrees</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\u00B0</span><span class="s1">&#39;</span>
-</span><span id="Char-121"><a href="#Char-121"><span class="linenos">121</span></a>    <span class="n">wavelength_micron</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Wavelength (</span><span class="se">\u03bc</span><span class="s1">m)&#39;</span>
+</span><span id="Char-121"><a href="#Char-121"><span class="linenos">121</span></a>    <span class="n">angstrom</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;</span><span class="se">\u212B</span><span class="s1">&#39;</span>
+</span><span id="Char-122"><a href="#Char-122"><span class="linenos">122</span></a>    <span class="n">wavelength_micron</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Wavelength (</span><span class="se">\u03bc</span><span class="s1">m)&#39;</span>
+</span><span id="Char-123"><a href="#Char-123"><span class="linenos">123</span></a>    <span class="n">energy_microjoule</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Energy (</span><span class="se">\u03bc</span><span class="s1">J)&#39;</span>
 </span></pre></div>
 
 
@@ -315,7 +323,7 @@ Options:
 <blockquote>
   <div class="pdoc-code codehilite">
 <pre><span></span><code><span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="n">aw</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">Char</span><span class="o">.</span><span class="n">wavelength_micron</span><span class="p">)</span>
-<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">aw</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">Char</span><span class="o">.</span><span class="n">theta</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">aw</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">Char</span><span class="o">.</span><span class="n">degrees</span><span class="si">}</span><span class="s1">))</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">aw</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">Char</span><span class="o">.</span><span class="n">theta</span><span class="si">}</span><span class="s1"> (</span><span class="si">{</span><span class="n">aw</span><span class="o">.</span><span class="n">plot</span><span class="o">.</span><span class="n">Char</span><span class="o">.</span><span class="n">degrees</span><span class="si">}</span><span class="s1">)&#39;</span><span class="p">)</span>
 </code></pre>
   </div>
 </blockquote>
@@ -325,7 +333,7 @@ Options:
                             <div id="Char.__init__" class="classattr">
                                 <div class="attr function">
             
-        <span class="name">Char</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">mu</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;μ&#39;</span>,</span><span class="param">	<span class="n">phi</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Φ&#39;</span>,</span><span class="param">	<span class="n">lam</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;λ&#39;</span>,</span><span class="param">	<span class="n">theta</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;θ&#39;</span>,</span><span class="param">	<span class="n">micron</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;μm&#39;</span>,</span><span class="param">	<span class="n">degrees</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;°&#39;</span>,</span><span class="param">	<span class="n">wavelength_micron</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Wavelength (μm)&#39;</span></span>)</span>
+        <span class="name">Char</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">mu</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;μ&#39;</span>,</span><span class="param">	<span class="n">phi</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Φ&#39;</span>,</span><span class="param">	<span class="n">lam</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;λ&#39;</span>,</span><span class="param">	<span class="n">theta</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;θ&#39;</span>,</span><span class="param">	<span class="n">micron</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;μm&#39;</span>,</span><span class="param">	<span class="n">degrees</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;°&#39;</span>,</span><span class="param">	<span class="n">angstrom</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Å&#39;</span>,</span><span class="param">	<span class="n">wavelength_micron</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Wavelength (μm)&#39;</span>,</span><span class="param">	<span class="n">energy_microjoule</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;Energy (μJ)&#39;</span></span>)</span>
 
         
     </div>
@@ -406,6 +414,18 @@ Options:
     
 
                             </div>
+                            <div id="Char.angstrom" class="classattr">
+                                <div class="attr variable">
+            <span class="name">angstrom</span><span class="annotation">: str</span>        =
+<span class="default_value">&#39;Å&#39;</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Char.angstrom"></a>
+    
+    
+
+                            </div>
                             <div id="Char.wavelength_micron" class="classattr">
                                 <div class="attr variable">
             <span class="name">wavelength_micron</span><span class="annotation">: str</span>        =
@@ -414,6 +434,18 @@ Options:
         
     </div>
     <a class="headerlink" href="#Char.wavelength_micron"></a>
+    
+    
+
+                            </div>
+                            <div id="Char.energy_microjoule" class="classattr">
+                                <div class="attr variable">
+            <span class="name">energy_microjoule</span><span class="annotation">: str</span>        =
+<span class="default_value">&#39;Energy (μJ)&#39;</span>
+
+        
+    </div>
+    <a class="headerlink" href="#Char.energy_microjoule"></a>
     
     
 

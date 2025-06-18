@@ -33,6 +33,15 @@
             <li>
                     <a class="function" href="#align_waves">align_waves</a>
             </li>
+            <li>
+                    <a class="function" href="#reconstruct_shg_frog">reconstruct_shg_frog</a>
+            </li>
+            <li>
+                    <a class="function" href="#generate_shg_spectrogram">generate_shg_spectrogram</a>
+            </li>
+            <li>
+                    <a class="function" href="#bundle_frog_reconstruction">bundle_frog_reconstruction</a>
+            </li>
     </ul>
 
 
@@ -56,14 +65,18 @@
 
                         <label class="view-source-button" for="mod-wave-view-source"><span>View Source</span></label>
 
-                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos">1</span></a><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-2"><a href="#L-2"><span class="linenos">2</span></a><span class="sd">This module will contain data processing routines that operate on measured or simulated waveforms.</span>
-</span><span id="L-3"><a href="#L-3"><span class="linenos">3</span></a><span class="sd">&quot;&quot;&quot;</span>
-</span><span id="L-4"><a href="#L-4"><span class="linenos">4</span></a>
-</span><span id="L-5"><a href="#L-5"><span class="linenos">5</span></a><span class="kn">from</span> <span class="nn">.wave</span> <span class="kn">import</span> <span class="n">align_waves</span>
-</span><span id="L-6"><a href="#L-6"><span class="linenos">6</span></a><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-</span><span id="L-7"><a href="#L-7"><span class="linenos">7</span></a>    <span class="s2">&quot;align_waves&quot;</span>
-</span><span id="L-8"><a href="#L-8"><span class="linenos">8</span></a><span class="p">]</span>
+                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos"> 1</span></a><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a><span class="sd">This module will contain data processing routines that operate on measured or simulated waveforms.</span>
+</span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a>
+</span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a><span class="kn">from</span> <span class="nn">.wave</span> <span class="kn">import</span> <span class="n">align_waves</span>
+</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a><span class="kn">from</span> <span class="nn">.frog</span> <span class="kn">import</span> <span class="n">reconstruct_shg_frog</span><span class="p">,</span> <span class="n">generate_shg_spectrogram</span><span class="p">,</span> <span class="n">bundle_frog_reconstruction</span>
+</span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a>    <span class="s1">&#39;align_waves&#39;</span><span class="p">,</span>
+</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a>    <span class="s1">&#39;reconstruct_shg_frog&#39;</span><span class="p">,</span>
+</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a>    <span class="s1">&#39;generate_shg_spectrogram&#39;</span><span class="p">,</span>
+</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a>    <span class="s1">&#39;bundle_frog_reconstruction&#39;</span>
+</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a><span class="p">]</span>
 </span></pre></div>
 
 
@@ -148,6 +161,185 @@
 
 <blockquote>
   <p>np.ndarray: set of aligned waves</p>
+</blockquote>
+</div>
+
+
+                </section>
+                <section id="reconstruct_shg_frog">
+                            <input id="reconstruct_shg_frog-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">reconstruct_shg_frog</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">measurement</span><span class="p">:</span> <span class="n"><a href="file.html#Spectrogram">attoworld.file.Spectrogram</a></span>,</span><span class="param">	<span class="n">test_iterations</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span>,</span><span class="param">	<span class="n">polish_iterations</span><span class="o">=</span><span class="mi">5000</span>,</span><span class="param">	<span class="n">repeats</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">256</span></span><span class="return-annotation">):</span></span>
+
+                <label class="view-source-button" for="reconstruct_shg_frog-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#reconstruct_shg_frog"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="reconstruct_shg_frog-133"><a href="#reconstruct_shg_frog-133"><span class="linenos">133</span></a><span class="k">def</span> <span class="nf">reconstruct_shg_frog</span><span class="p">(</span><span class="n">measurement</span><span class="p">:</span> <span class="n">Spectrogram</span><span class="p">,</span> <span class="n">test_iterations</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span><span class="p">,</span> <span class="n">polish_iterations</span><span class="o">=</span><span class="mi">5000</span><span class="p">,</span> <span class="n">repeats</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">256</span><span class="p">):</span>
+</span><span id="reconstruct_shg_frog-134"><a href="#reconstruct_shg_frog-134"><span class="linenos">134</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="reconstruct_shg_frog-135"><a href="#reconstruct_shg_frog-135"><span class="linenos">135</span></a><span class="sd">    Run the core FROG loop several times and pick the best result</span>
+</span><span id="reconstruct_shg_frog-136"><a href="#reconstruct_shg_frog-136"><span class="linenos">136</span></a>
+</span><span id="reconstruct_shg_frog-137"><a href="#reconstruct_shg_frog-137"><span class="linenos">137</span></a><span class="sd">    Args:</span>
+</span><span id="reconstruct_shg_frog-138"><a href="#reconstruct_shg_frog-138"><span class="linenos">138</span></a><span class="sd">        measurement (np.ndarray): measured spectrogram, sqrt + fftshift(axes=0)</span>
+</span><span id="reconstruct_shg_frog-139"><a href="#reconstruct_shg_frog-139"><span class="linenos">139</span></a><span class="sd">        test_iterations (int): number of iterations for the multiple tests</span>
+</span><span id="reconstruct_shg_frog-140"><a href="#reconstruct_shg_frog-140"><span class="linenos">140</span></a><span class="sd">        polish_iteration (int): number of extra iterations to apply to the winner</span>
+</span><span id="reconstruct_shg_frog-141"><a href="#reconstruct_shg_frog-141"><span class="linenos">141</span></a><span class="sd">        repeats (int): number of different initial guesses to try</span>
+</span><span id="reconstruct_shg_frog-142"><a href="#reconstruct_shg_frog-142"><span class="linenos">142</span></a>
+</span><span id="reconstruct_shg_frog-143"><a href="#reconstruct_shg_frog-143"><span class="linenos">143</span></a><span class="sd">    Returns:</span>
+</span><span id="reconstruct_shg_frog-144"><a href="#reconstruct_shg_frog-144"><span class="linenos">144</span></a><span class="sd">    FrogData: the completed reconstruction</span>
+</span><span id="reconstruct_shg_frog-145"><a href="#reconstruct_shg_frog-145"><span class="linenos">145</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="reconstruct_shg_frog-146"><a href="#reconstruct_shg_frog-146"><span class="linenos">146</span></a>    <span class="n">sqrt_sg</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">measurement</span><span class="o">.</span><span class="n">data</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">measurement</span><span class="o">.</span><span class="n">data</span><span class="p">[:])),</span> <span class="n">axes</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</span><span id="reconstruct_shg_frog-147"><a href="#reconstruct_shg_frog-147"><span class="linenos">147</span></a>    <span class="n">sqrt_sg</span> <span class="o">/=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">sqrt_sg</span><span class="p">)</span>
+</span><span id="reconstruct_shg_frog-148"><a href="#reconstruct_shg_frog-148"><span class="linenos">148</span></a>    <span class="n">results</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">sqrt_sg</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">repeats</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">complex128</span><span class="p">)</span>
+</span><span id="reconstruct_shg_frog-149"><a href="#reconstruct_shg_frog-149"><span class="linenos">149</span></a>    <span class="n">errors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">repeats</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">)</span>
+</span><span id="reconstruct_shg_frog-150"><a href="#reconstruct_shg_frog-150"><span class="linenos">150</span></a>    <span class="k">for</span> <span class="n">_i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">repeats</span><span class="p">):</span>
+</span><span id="reconstruct_shg_frog-151"><a href="#reconstruct_shg_frog-151"><span class="linenos">151</span></a>        <span class="n">results</span><span class="p">[:,</span><span class="n">_i</span><span class="p">]</span> <span class="o">=</span> <span class="n">reconstruct_shg_frog_core</span><span class="p">(</span><span class="n">sqrt_sg</span><span class="p">,</span> <span class="n">max_iterations</span><span class="o">=</span><span class="n">test_iterations</span><span class="p">)</span>
+</span><span id="reconstruct_shg_frog-152"><a href="#reconstruct_shg_frog-152"><span class="linenos">152</span></a>        <span class="n">errors</span><span class="p">[</span><span class="n">_i</span><span class="p">]</span> <span class="o">=</span> <span class="n">calculate_g_error</span><span class="p">(</span><span class="n">sqrt_sg</span><span class="p">,</span> <span class="n">results</span><span class="p">[:,</span><span class="n">_i</span><span class="p">])</span>
+</span><span id="reconstruct_shg_frog-153"><a href="#reconstruct_shg_frog-153"><span class="linenos">153</span></a>    <span class="n">min_error_index</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">errors</span><span class="p">)</span>
+</span><span id="reconstruct_shg_frog-154"><a href="#reconstruct_shg_frog-154"><span class="linenos">154</span></a>    <span class="n">result</span> <span class="o">=</span> <span class="n">reconstruct_shg_frog_core</span><span class="p">(</span>
+</span><span id="reconstruct_shg_frog-155"><a href="#reconstruct_shg_frog-155"><span class="linenos">155</span></a>        <span class="n">sqrt_sg</span><span class="p">,</span>
+</span><span id="reconstruct_shg_frog-156"><a href="#reconstruct_shg_frog-156"><span class="linenos">156</span></a>        <span class="n">guess</span><span class="o">=</span><span class="n">results</span><span class="p">[:,</span><span class="n">min_error_index</span><span class="p">],</span>
+</span><span id="reconstruct_shg_frog-157"><a href="#reconstruct_shg_frog-157"><span class="linenos">157</span></a>        <span class="n">max_iterations</span><span class="o">=</span><span class="n">polish_iterations</span><span class="p">)</span>
+</span><span id="reconstruct_shg_frog-158"><a href="#reconstruct_shg_frog-158"><span class="linenos">158</span></a>
+</span><span id="reconstruct_shg_frog-159"><a href="#reconstruct_shg_frog-159"><span class="linenos">159</span></a>    <span class="k">return</span> <span class="n">bundle_frog_reconstruction</span><span class="p">(</span>
+</span><span id="reconstruct_shg_frog-160"><a href="#reconstruct_shg_frog-160"><span class="linenos">160</span></a>        <span class="n">t</span><span class="o">=</span><span class="n">measurement</span><span class="o">.</span><span class="n">time</span><span class="p">,</span>
+</span><span id="reconstruct_shg_frog-161"><a href="#reconstruct_shg_frog-161"><span class="linenos">161</span></a>        <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="p">,</span>
+</span><span id="reconstruct_shg_frog-162"><a href="#reconstruct_shg_frog-162"><span class="linenos">162</span></a>        <span class="n">measurement</span><span class="o">=</span><span class="n">sqrt_sg</span><span class="p">,</span>
+</span><span id="reconstruct_shg_frog-163"><a href="#reconstruct_shg_frog-163"><span class="linenos">163</span></a>        <span class="n">f0</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">measurement</span><span class="o">.</span><span class="n">freq</span><span class="p">)</span><span class="o">/</span><span class="mf">2.0</span><span class="p">))</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Run the core FROG loop several times and pick the best result</p>
+
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>measurement (np.ndarray):</strong>  measured spectrogram, sqrt + fftshift(axes=0)</li>
+<li><strong>test_iterations (int):</strong>  number of iterations for the multiple tests</li>
+<li><strong>polish_iteration (int):</strong>  number of extra iterations to apply to the winner</li>
+<li><strong>repeats (int):</strong>  number of different initial guesses to try</li>
+</ul>
+
+<p>Returns:
+FrogData: the completed reconstruction</p>
+</div>
+
+
+                </section>
+                <section id="generate_shg_spectrogram">
+                            <input id="generate_shg_spectrogram-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">generate_shg_spectrogram</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">Et</span>, </span><span class="param"><span class="n">Gt</span></span><span class="return-annotation">):</span></span>
+
+                <label class="view-source-button" for="generate_shg_spectrogram-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#generate_shg_spectrogram"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="generate_shg_spectrogram-54"><a href="#generate_shg_spectrogram-54"><span class="linenos">54</span></a><span class="k">def</span> <span class="nf">generate_shg_spectrogram</span><span class="p">(</span><span class="n">Et</span><span class="p">,</span> <span class="n">Gt</span><span class="p">):</span>
+</span><span id="generate_shg_spectrogram-55"><a href="#generate_shg_spectrogram-55"><span class="linenos">55</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="generate_shg_spectrogram-56"><a href="#generate_shg_spectrogram-56"><span class="linenos">56</span></a><span class="sd">    Generate a SHG spectrogram, same pattern as in FROG book</span>
+</span><span id="generate_shg_spectrogram-57"><a href="#generate_shg_spectrogram-57"><span class="linenos">57</span></a>
+</span><span id="generate_shg_spectrogram-58"><a href="#generate_shg_spectrogram-58"><span class="linenos">58</span></a><span class="sd">    Args:</span>
+</span><span id="generate_shg_spectrogram-59"><a href="#generate_shg_spectrogram-59"><span class="linenos">59</span></a><span class="sd">        Et: field</span>
+</span><span id="generate_shg_spectrogram-60"><a href="#generate_shg_spectrogram-60"><span class="linenos">60</span></a><span class="sd">        Gt: gate (same as field unless XFROG)</span>
+</span><span id="generate_shg_spectrogram-61"><a href="#generate_shg_spectrogram-61"><span class="linenos">61</span></a><span class="sd">    Returns:</span>
+</span><span id="generate_shg_spectrogram-62"><a href="#generate_shg_spectrogram-62"><span class="linenos">62</span></a><span class="sd">        np.ndarray: the complex spectrogram</span>
+</span><span id="generate_shg_spectrogram-63"><a href="#generate_shg_spectrogram-63"><span class="linenos">63</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="generate_shg_spectrogram-64"><a href="#generate_shg_spectrogram-64"><span class="linenos">64</span></a>    <span class="n">spectrogram_timetime</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">outer</span><span class="p">(</span><span class="n">Et</span><span class="p">,</span> <span class="n">Gt</span><span class="p">)</span>
+</span><span id="generate_shg_spectrogram-65"><a href="#generate_shg_spectrogram-65"><span class="linenos">65</span></a>    <span class="k">for</span> <span class="n">_i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">Et</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]):</span>
+</span><span id="generate_shg_spectrogram-66"><a href="#generate_shg_spectrogram-66"><span class="linenos">66</span></a>        <span class="n">spectrogram_timetime</span><span class="p">[</span><span class="n">_i</span><span class="p">,:]</span> <span class="o">=</span> <span class="n">blank_roll</span><span class="p">(</span><span class="n">spectrogram_timetime</span><span class="p">[</span><span class="n">_i</span><span class="p">,:],</span><span class="o">-</span><span class="n">_i</span> <span class="o">+</span> <span class="nb">int</span><span class="p">(</span><span class="n">Et</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="mi">2</span><span class="p">))</span>
+</span><span id="generate_shg_spectrogram-67"><a href="#generate_shg_spectrogram-67"><span class="linenos">67</span></a>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fft</span><span class="p">(</span><span class="n">spectrogram_timetime</span><span class="p">,</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Generate a SHG spectrogram, same pattern as in FROG book</p>
+
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>Et:</strong>  field</li>
+<li><strong>Gt:</strong>  gate (same as field unless XFROG)</li>
+</ul>
+
+<h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>np.ndarray: the complex spectrogram</p>
+</blockquote>
+</div>
+
+
+                </section>
+                <section id="bundle_frog_reconstruction">
+                            <input id="bundle_frog_reconstruction-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
+<div class="attr function">
+            
+        <span class="def">def</span>
+        <span class="name">bundle_frog_reconstruction</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">t</span>,</span><span class="param">	<span class="n">result</span>,</span><span class="param">	<span class="n">measurement</span>,</span><span class="param">	<span class="n">f0</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">375000000000000.0</span>,</span><span class="param">	<span class="n">interpolation_factor</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">100</span></span><span class="return-annotation">):</span></span>
+
+                <label class="view-source-button" for="bundle_frog_reconstruction-view-source"><span>View Source</span></label>
+
+    </div>
+    <a class="headerlink" href="#bundle_frog_reconstruction"></a>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="bundle_frog_reconstruction-16"><a href="#bundle_frog_reconstruction-16"><span class="linenos">16</span></a><span class="k">def</span> <span class="nf">bundle_frog_reconstruction</span><span class="p">(</span><span class="n">t</span><span class="p">,</span> <span class="n">result</span><span class="p">,</span> <span class="n">measurement</span><span class="p">,</span> <span class="n">f0</span><span class="p">:</span> <span class="nb">float</span><span class="o">=</span><span class="mf">375e12</span><span class="p">,</span> <span class="n">interpolation_factor</span><span class="p">:</span> <span class="nb">int</span><span class="o">=</span><span class="mi">100</span><span class="p">):</span>
+</span><span id="bundle_frog_reconstruction-17"><a href="#bundle_frog_reconstruction-17"><span class="linenos">17</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="bundle_frog_reconstruction-18"><a href="#bundle_frog_reconstruction-18"><span class="linenos">18</span></a><span class="sd">    Turn the results of a FROG reconstruction into a FrogData struct</span>
+</span><span id="bundle_frog_reconstruction-19"><a href="#bundle_frog_reconstruction-19"><span class="linenos">19</span></a>
+</span><span id="bundle_frog_reconstruction-20"><a href="#bundle_frog_reconstruction-20"><span class="linenos">20</span></a><span class="sd">    Args:</span>
+</span><span id="bundle_frog_reconstruction-21"><a href="#bundle_frog_reconstruction-21"><span class="linenos">21</span></a><span class="sd">        t: the time vector (s)</span>
+</span><span id="bundle_frog_reconstruction-22"><a href="#bundle_frog_reconstruction-22"><span class="linenos">22</span></a><span class="sd">        result: the reconstructed complex envelope</span>
+</span><span id="bundle_frog_reconstruction-23"><a href="#bundle_frog_reconstruction-23"><span class="linenos">23</span></a><span class="sd">        measurement: the measured spectrogram, sqrt-ed and fftshift-ed</span>
+</span><span id="bundle_frog_reconstruction-24"><a href="#bundle_frog_reconstruction-24"><span class="linenos">24</span></a><span class="sd">        f0 (float): the central frequency (Hz)</span>
+</span><span id="bundle_frog_reconstruction-25"><a href="#bundle_frog_reconstruction-25"><span class="linenos">25</span></a><span class="sd">        interpolation_factor (int): factor by which to interpolate to get a valid waveform (Nyquist)</span>
+</span><span id="bundle_frog_reconstruction-26"><a href="#bundle_frog_reconstruction-26"><span class="linenos">26</span></a>
+</span><span id="bundle_frog_reconstruction-27"><a href="#bundle_frog_reconstruction-27"><span class="linenos">27</span></a><span class="sd">    Returns:</span>
+</span><span id="bundle_frog_reconstruction-28"><a href="#bundle_frog_reconstruction-28"><span class="linenos">28</span></a><span class="sd">        FrogData: the bundled data</span>
+</span><span id="bundle_frog_reconstruction-29"><a href="#bundle_frog_reconstruction-29"><span class="linenos">29</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="bundle_frog_reconstruction-30"><a href="#bundle_frog_reconstruction-30"><span class="linenos">30</span></a>    <span class="n">f</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="n">d</span><span class="o">=</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+</span><span id="bundle_frog_reconstruction-31"><a href="#bundle_frog_reconstruction-31"><span class="linenos">31</span></a>    <span class="n">sg_freq</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="o">*</span><span class="n">f0</span>
+</span><span id="bundle_frog_reconstruction-32"><a href="#bundle_frog_reconstruction-32"><span class="linenos">32</span></a>    <span class="n">result_sg</span> <span class="o">=</span> <span class="n">Spectrogram</span><span class="p">(</span>
+</span><span id="bundle_frog_reconstruction-33"><a href="#bundle_frog_reconstruction-33"><span class="linenos">33</span></a>        <span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">generate_shg_spectrogram</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">result</span><span class="p">))</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span><span class="n">axes</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+</span><span id="bundle_frog_reconstruction-34"><a href="#bundle_frog_reconstruction-34"><span class="linenos">34</span></a>        <span class="n">time</span><span class="o">=</span><span class="n">t</span><span class="p">,</span>
+</span><span id="bundle_frog_reconstruction-35"><a href="#bundle_frog_reconstruction-35"><span class="linenos">35</span></a>        <span class="n">freq</span><span class="o">=</span><span class="n">sg_freq</span><span class="p">)</span>
+</span><span id="bundle_frog_reconstruction-36"><a href="#bundle_frog_reconstruction-36"><span class="linenos">36</span></a>    <span class="n">measurement_sg</span> <span class="o">=</span> <span class="n">Spectrogram</span><span class="p">(</span>
+</span><span id="bundle_frog_reconstruction-37"><a href="#bundle_frog_reconstruction-37"><span class="linenos">37</span></a>        <span class="n">data</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">measurement</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span><span class="p">,</span> <span class="n">axes</span><span class="o">=</span><span class="mi">0</span><span class="p">),</span>
+</span><span id="bundle_frog_reconstruction-38"><a href="#bundle_frog_reconstruction-38"><span class="linenos">38</span></a>        <span class="n">time</span><span class="o">=</span><span class="n">t</span><span class="p">,</span>
+</span><span id="bundle_frog_reconstruction-39"><a href="#bundle_frog_reconstruction-39"><span class="linenos">39</span></a>        <span class="n">freq</span><span class="o">=</span><span class="n">sg_freq</span><span class="p">)</span>
+</span><span id="bundle_frog_reconstruction-40"><a href="#bundle_frog_reconstruction-40"><span class="linenos">40</span></a>    <span class="n">result_ce</span> <span class="o">=</span> <span class="n">ComplexEnvelope</span><span class="p">(</span>
+</span><span id="bundle_frog_reconstruction-41"><a href="#bundle_frog_reconstruction-41"><span class="linenos">41</span></a>        <span class="n">time</span> <span class="o">=</span> <span class="n">t</span><span class="p">,</span>
+</span><span id="bundle_frog_reconstruction-42"><a href="#bundle_frog_reconstruction-42"><span class="linenos">42</span></a>        <span class="n">dt</span><span class="o">=</span><span class="p">(</span><span class="n">t</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="n">t</span><span class="p">[</span><span class="mi">0</span><span class="p">]),</span>
+</span><span id="bundle_frog_reconstruction-43"><a href="#bundle_frog_reconstruction-43"><span class="linenos">43</span></a>        <span class="n">carrier_frequency</span><span class="o">=</span><span class="n">f0</span><span class="p">,</span>
+</span><span id="bundle_frog_reconstruction-44"><a href="#bundle_frog_reconstruction-44"><span class="linenos">44</span></a>        <span class="n">envelope</span><span class="o">=</span><span class="n">result</span><span class="p">)</span><span class="o">.</span><span class="n">to_waveform</span><span class="p">(</span><span class="n">interpolation_factor</span><span class="o">=</span><span class="n">interpolation_factor</span><span class="p">)</span>
+</span><span id="bundle_frog_reconstruction-45"><a href="#bundle_frog_reconstruction-45"><span class="linenos">45</span></a>    <span class="n">result_cs</span> <span class="o">=</span> <span class="n">result_ce</span><span class="o">.</span><span class="n">to_complex_spectrum</span><span class="p">()</span>
+</span><span id="bundle_frog_reconstruction-46"><a href="#bundle_frog_reconstruction-46"><span class="linenos">46</span></a>
+</span><span id="bundle_frog_reconstruction-47"><a href="#bundle_frog_reconstruction-47"><span class="linenos">47</span></a>    <span class="k">return</span> <span class="n">FrogData</span><span class="p">(</span>
+</span><span id="bundle_frog_reconstruction-48"><a href="#bundle_frog_reconstruction-48"><span class="linenos">48</span></a>        <span class="n">measured_spectrogram</span><span class="o">=</span><span class="n">measurement_sg</span><span class="p">,</span>
+</span><span id="bundle_frog_reconstruction-49"><a href="#bundle_frog_reconstruction-49"><span class="linenos">49</span></a>        <span class="n">pulse</span><span class="o">=</span><span class="n">result_ce</span><span class="p">,</span>
+</span><span id="bundle_frog_reconstruction-50"><a href="#bundle_frog_reconstruction-50"><span class="linenos">50</span></a>        <span class="n">reconstructed_spectrogram</span><span class="o">=</span><span class="n">result_sg</span><span class="p">,</span>
+</span><span id="bundle_frog_reconstruction-51"><a href="#bundle_frog_reconstruction-51"><span class="linenos">51</span></a>        <span class="n">spectrum</span><span class="o">=</span><span class="n">result_cs</span><span class="p">)</span>
+</span></pre></div>
+
+
+            <div class="docstring"><p>Turn the results of a FROG reconstruction into a FrogData struct</p>
+
+<h6 id="arguments">Arguments:</h6>
+
+<ul>
+<li><strong>t:</strong>  the time vector (s)</li>
+<li><strong>result:</strong>  the reconstructed complex envelope</li>
+<li><strong>measurement:</strong>  the measured spectrogram, sqrt-ed and fftshift-ed</li>
+<li><strong>f0 (float):</strong>  the central frequency (Hz)</li>
+<li><strong>interpolation_factor (int):</strong>  factor by which to interpolate to get a valid waveform (Nyquist)</li>
+</ul>
+
+<h6 id="returns">Returns:</h6>
+
+<blockquote>
+  <p>FrogData: the bundled data</p>
 </blockquote>
 </div>
 
