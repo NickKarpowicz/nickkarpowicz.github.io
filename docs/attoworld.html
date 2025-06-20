@@ -24,7 +24,7 @@
 
             <h2>Submodules</h2>
             <ul>
-                    <li><a href="attoworld/file.html">file</a></li>
+                    <li><a href="attoworld/data.html">data</a></li>
                     <li><a href="attoworld/numeric.html">numeric</a></li>
                     <li><a href="attoworld/personal.html">personal</a></li>
                     <li><a href="attoworld/plot.html">plot</a></li>
@@ -52,11 +52,11 @@ attoworld    </h1>
 <p>The module has several submodules to keep it organized:</p>
 
 <ul>
-<li><strong><a href="attoworld/file.html">file</a></strong>: functions for reading/writing the various data formats used across the labs</li>
+<li><strong><a href="attoworld/data.html">data</a></strong>: classes and for handling the various data formats used across the labs</li>
 <li><strong><a href="attoworld/numeric.html">numeric</a></strong>: numerical tools</li>
 <li><strong><a href="attoworld/personal.html">personal</a></strong>: a module where we can add our own functions that might not be of general interest, but are still good to have available to we can easily share work</li>
 <li><strong><a href="attoworld/plot.html">plot</a></strong>: functions for plotting with a consistent style</li>
-<li><strong><a href="attoworld/wave.html">wave</a></strong>: functions for processing waveforms</li>
+<li><strong><a href="attoworld/wave.html">wave</a></strong>: functions for processing waveforms and pulses</li>
 <li><strong><a href="attoworld/spectrum.html">spectrum</a></strong>: functions for processing spectra</li>
 <li><strong><a href="attoworld/attoworld_rs.html">attoworld_rs</a></strong>: A place to put Rust code with a Python interface for cases where it's particularly important that the program be fast and correct.</li>
 </ul>
@@ -70,16 +70,16 @@ attoworld    </h1>
 </span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a><span class="sd">Tools from the Attosecond science group at the Max Planck Institute of Quantum Optics, a.k.a. [Attoworld](https://www.attoworld.de)</span>
 </span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a>
 </span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a><span class="sd">The module has several submodules to keep it organized:</span>
-</span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a><span class="sd">- **[file](attoworld/file.html)**: functions for reading/writing the various data formats used across the labs</span>
+</span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a><span class="sd">- **[data](attoworld/data.html)**: classes and for handling the various data formats used across the labs</span>
 </span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a><span class="sd">- **[numeric](attoworld/numeric.html)**: numerical tools</span>
 </span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a><span class="sd">- **[personal](attoworld/personal.html)**: a module where we can add our own functions that might not be of general interest, but are still good to have available to we can easily share work</span>
 </span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a><span class="sd">- **[plot](attoworld/plot.html)**: functions for plotting with a consistent style</span>
-</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a><span class="sd">- **[wave](attoworld/wave.html)**: functions for processing waveforms</span>
+</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a><span class="sd">- **[wave](attoworld/wave.html)**: functions for processing waveforms and pulses</span>
 </span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a><span class="sd">- **[spectrum](attoworld/spectrum.html)**: functions for processing spectra</span>
 </span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a><span class="sd">- **[attoworld_rs](attoworld/attoworld_rs.html)**: A place to put Rust code with a Python interface for cases where it&#39;s particularly important that the program be fast and correct.</span>
 </span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a>
-</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a><span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">file</span>
+</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a><span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">data</span>
 </span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a><span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">numeric</span>
 </span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a><span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">personal</span>
 </span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a><span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">plot</span>
@@ -87,7 +87,7 @@ attoworld    </h1>
 </span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a><span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">wave</span>
 </span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a><span class="kn">from</span> <span class="nn">.</span> <span class="kn">import</span> <span class="n">attoworld_rs</span>
 </span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>
-</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;file&quot;</span><span class="p">,</span> <span class="s2">&quot;numeric&quot;</span><span class="p">,</span> <span class="s2">&quot;personal&quot;</span><span class="p">,</span> <span class="s2">&quot;plot&quot;</span><span class="p">,</span> <span class="s2">&quot;spectrum&quot;</span><span class="p">,</span> <span class="s2">&quot;wave&quot;</span><span class="p">,</span> <span class="s2">&quot;attoworld_rs&quot;</span><span class="p">]</span>
+</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;data&quot;</span><span class="p">,</span> <span class="s2">&quot;numeric&quot;</span><span class="p">,</span> <span class="s2">&quot;personal&quot;</span><span class="p">,</span> <span class="s2">&quot;plot&quot;</span><span class="p">,</span> <span class="s2">&quot;spectrum&quot;</span><span class="p">,</span> <span class="s2">&quot;wave&quot;</span><span class="p">,</span> <span class="s2">&quot;attoworld_rs&quot;</span><span class="p">]</span>
 </span></pre></div>
 
 
