@@ -34,7 +34,7 @@
                     <a class="class" href="#CalibrationData">CalibrationData</a>
                             <ul class="memberlist">
                         <li>
-                                <a class="variable" href="#CalibrationData.MPQ_ATTO_RESO_MARCO">MPQ_ATTO_RESO_MARCO</a>
+                                <a class="variable" href="#CalibrationData.mpq_atto_reso_marco">mpq_atto_reso_marco</a>
                         </li>
                 </ul>
 
@@ -43,19 +43,16 @@
                     <a class="class" href="#CalibrationLampReferences">CalibrationLampReferences</a>
                             <ul class="memberlist">
                         <li>
-                                <a class="variable" href="#CalibrationLampReferences.MPQ_ATTO_DEUTERIUM_HALOGEN">MPQ_ATTO_DEUTERIUM_HALOGEN</a>
+                                <a class="variable" href="#CalibrationLampReferences.mpq_atto_deuterium_halogen">mpq_atto_deuterium_halogen</a>
                         </li>
                         <li>
-                                <a class="variable" href="#CalibrationLampReferences.MPQ_ATTO_HALOGEN">MPQ_ATTO_HALOGEN</a>
+                                <a class="variable" href="#CalibrationLampReferences.mpq_atto_halogen">mpq_atto_halogen</a>
                         </li>
                 </ul>
 
             </li>
             <li>
                     <a class="function" href="#get_calibration_path">get_calibration_path</a>
-            </li>
-            <li>
-                    <a class="function" href="#load_calibration_reso">load_calibration_reso</a>
             </li>
             <li>
                     <a class="function" href="#wavelength_to_frequency">wavelength_to_frequency</a>
@@ -74,9 +71,6 @@
             </li>
             <li>
                     <a class="function" href="#read_spectrum_ocean_optics">read_spectrum_ocean_optics</a>
-            </li>
-            <li>
-                    <a class="function" href="#calibrate_reso">calibrate_reso</a>
             </li>
     </ul>
 
@@ -112,33 +106,27 @@
 </span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a><span class="p">)</span>
 </span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a>
 </span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a><span class="kn">from</span> <span class="nn">.spectrum</span> <span class="kn">import</span> <span class="p">(</span>
-</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a>    <span class="n">load_calibration_reso</span><span class="p">,</span>
-</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a>    <span class="n">wavelength_to_frequency</span><span class="p">,</span>
-</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a>    <span class="n">frequency_to_wavelength</span><span class="p">,</span>
-</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a>    <span class="n">transform_limited_pulse_from_spectrometer</span><span class="p">,</span>
-</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a><span class="p">)</span>
-</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a><span class="kn">from</span> <span class="nn">..personal.marco</span> <span class="kn">import</span> <span class="p">(</span>
-</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a>    <span class="n">load_calibration_data</span><span class="p">,</span>
-</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a>    <span class="n">read_spectrometer_excel</span><span class="p">,</span>
-</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a>    <span class="n">read_spectrum_ocean_optics</span><span class="p">,</span>
-</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a><span class="p">)</span>
-</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>
-</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>
-</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a><span class="kn">from</span> <span class="nn">..personal.marco</span> <span class="kn">import</span> <span class="n">calibrate</span> <span class="k">as</span> <span class="n">calibrate_reso</span>
-</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a>
-</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
-</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>    <span class="s2">&quot;CalibrationData&quot;</span><span class="p">,</span>
-</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>    <span class="s2">&quot;CalibrationLampReferences&quot;</span><span class="p">,</span>
-</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>    <span class="s2">&quot;get_calibration_path&quot;</span><span class="p">,</span>
-</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>    <span class="s2">&quot;load_calibration_reso&quot;</span><span class="p">,</span>
-</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>    <span class="s2">&quot;wavelength_to_frequency&quot;</span><span class="p">,</span>
-</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>    <span class="s2">&quot;frequency_to_wavelength&quot;</span><span class="p">,</span>
-</span><span id="L-33"><a href="#L-33"><span class="linenos">33</span></a>    <span class="s2">&quot;transform_limited_pulse_from_spectrometer&quot;</span><span class="p">,</span>
-</span><span id="L-34"><a href="#L-34"><span class="linenos">34</span></a>    <span class="s2">&quot;load_calibration_data&quot;</span><span class="p">,</span>
-</span><span id="L-35"><a href="#L-35"><span class="linenos">35</span></a>    <span class="s2">&quot;read_spectrometer_excel&quot;</span><span class="p">,</span>
-</span><span id="L-36"><a href="#L-36"><span class="linenos">36</span></a>    <span class="s2">&quot;read_spectrum_ocean_optics&quot;</span><span class="p">,</span>
-</span><span id="L-37"><a href="#L-37"><span class="linenos">37</span></a>    <span class="s2">&quot;calibrate_reso&quot;</span><span class="p">,</span>
-</span><span id="L-38"><a href="#L-38"><span class="linenos">38</span></a><span class="p">]</span>
+</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a>    <span class="n">wavelength_to_frequency</span><span class="p">,</span>
+</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a>    <span class="n">frequency_to_wavelength</span><span class="p">,</span>
+</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a>    <span class="n">transform_limited_pulse_from_spectrometer</span><span class="p">,</span>
+</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a><span class="p">)</span>
+</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a><span class="kn">from</span> <span class="nn">..personal.marco</span> <span class="kn">import</span> <span class="p">(</span>
+</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a>    <span class="n">load_calibration_data</span><span class="p">,</span>
+</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a>    <span class="n">read_spectrometer_excel</span><span class="p">,</span>
+</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a>    <span class="n">read_spectrum_ocean_optics</span><span class="p">,</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a><span class="p">)</span>
+</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>
+</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a><span class="n">__all__</span> <span class="o">=</span> <span class="p">[</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>    <span class="s2">&quot;CalibrationData&quot;</span><span class="p">,</span>
+</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a>    <span class="s2">&quot;CalibrationLampReferences&quot;</span><span class="p">,</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a>    <span class="s2">&quot;get_calibration_path&quot;</span><span class="p">,</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>    <span class="s2">&quot;wavelength_to_frequency&quot;</span><span class="p">,</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>    <span class="s2">&quot;frequency_to_wavelength&quot;</span><span class="p">,</span>
+</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>    <span class="s2">&quot;transform_limited_pulse_from_spectrometer&quot;</span><span class="p">,</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>    <span class="s2">&quot;load_calibration_data&quot;</span><span class="p">,</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>    <span class="s2">&quot;read_spectrometer_excel&quot;</span><span class="p">,</span>
+</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>    <span class="s2">&quot;read_spectrum_ocean_optics&quot;</span><span class="p">,</span>
+</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a><span class="p">]</span>
 </span></pre></div>
 
 
@@ -155,20 +143,20 @@
     </div>
     <a class="headerlink" href="#CalibrationData"></a>
             <div class="pdoc-code codehilite"><pre><span></span><span id="CalibrationData-11"><a href="#CalibrationData-11"><span class="linenos">11</span></a><span class="k">class</span> <span class="nc">CalibrationData</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-</span><span id="CalibrationData-12"><a href="#CalibrationData-12"><span class="linenos">12</span></a>    <span class="n">MPQ_ATTO_RESO_MARCO</span> <span class="o">=</span> <span class="s2">&quot;MPQ_Atto_Reso_Spectrometer_Marco.npz&quot;</span>
+</span><span id="CalibrationData-12"><a href="#CalibrationData-12"><span class="linenos">12</span></a>    <span class="n">mpq_atto_reso_marco</span> <span class="o">=</span> <span class="s2">&quot;MPQ_Atto_Reso_Spectrometer_Marco.npz&quot;</span>
 </span></pre></div>
 
 
     
 
-                            <div id="CalibrationData.MPQ_ATTO_RESO_MARCO" class="classattr">
+                            <div id="CalibrationData.mpq_atto_reso_marco" class="classattr">
                                 <div class="attr variable">
-            <span class="name">MPQ_ATTO_RESO_MARCO</span>        =
-<span class="default_value">&lt;<a href="#CalibrationData.MPQ_ATTO_RESO_MARCO">CalibrationData.MPQ_ATTO_RESO_MARCO</a>: &#39;MPQ_Atto_Reso_Spectrometer_Marco.npz&#39;&gt;</span>
+            <span class="name">mpq_atto_reso_marco</span>        =
+<span class="default_value">&lt;<a href="#CalibrationData.mpq_atto_reso_marco">CalibrationData.mpq_atto_reso_marco</a>: &#39;MPQ_Atto_Reso_Spectrometer_Marco.npz&#39;&gt;</span>
 
         
     </div>
-    <a class="headerlink" href="#CalibrationData.MPQ_ATTO_RESO_MARCO"></a>
+    <a class="headerlink" href="#CalibrationData.mpq_atto_reso_marco"></a>
     
     
 
@@ -186,33 +174,33 @@
     </div>
     <a class="headerlink" href="#CalibrationLampReferences"></a>
             <div class="pdoc-code codehilite"><pre><span></span><span id="CalibrationLampReferences-15"><a href="#CalibrationLampReferences-15"><span class="linenos">15</span></a><span class="k">class</span> <span class="nc">CalibrationLampReferences</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
-</span><span id="CalibrationLampReferences-16"><a href="#CalibrationLampReferences-16"><span class="linenos">16</span></a>    <span class="n">MPQ_ATTO_DEUTERIUM_HALOGEN</span> <span class="o">=</span> <span class="s2">&quot;7315273LS-Deuterium-Halogen_CC-VISNIR.lmp&quot;</span>
-</span><span id="CalibrationLampReferences-17"><a href="#CalibrationLampReferences-17"><span class="linenos">17</span></a>    <span class="n">MPQ_ATTO_HALOGEN</span> <span class="o">=</span> <span class="s2">&quot;7315273LS-Halogen_CC-VISNIR.lmp&quot;</span>
+</span><span id="CalibrationLampReferences-16"><a href="#CalibrationLampReferences-16"><span class="linenos">16</span></a>    <span class="n">mpq_atto_deuterium_halogen</span> <span class="o">=</span> <span class="s2">&quot;7315273LS-Deuterium-Halogen_CC-VISNIR.lmp&quot;</span>
+</span><span id="CalibrationLampReferences-17"><a href="#CalibrationLampReferences-17"><span class="linenos">17</span></a>    <span class="n">mpq_atto_halogen</span> <span class="o">=</span> <span class="s2">&quot;7315273LS-Halogen_CC-VISNIR.lmp&quot;</span>
 </span></pre></div>
 
 
     
 
-                            <div id="CalibrationLampReferences.MPQ_ATTO_DEUTERIUM_HALOGEN" class="classattr">
+                            <div id="CalibrationLampReferences.mpq_atto_deuterium_halogen" class="classattr">
                                 <div class="attr variable">
-            <span class="name">MPQ_ATTO_DEUTERIUM_HALOGEN</span>        =
-<span class="default_value">&lt;<a href="#CalibrationLampReferences.MPQ_ATTO_DEUTERIUM_HALOGEN">CalibrationLampReferences.MPQ_ATTO_DEUTERIUM_HALOGEN</a>: &#39;7315273LS-Deuterium-Halogen_CC-VISNIR.lmp&#39;&gt;</span>
+            <span class="name">mpq_atto_deuterium_halogen</span>        =
+<span class="default_value">&lt;<a href="#CalibrationLampReferences.mpq_atto_deuterium_halogen">CalibrationLampReferences.mpq_atto_deuterium_halogen</a>: &#39;7315273LS-Deuterium-Halogen_CC-VISNIR.lmp&#39;&gt;</span>
 
         
     </div>
-    <a class="headerlink" href="#CalibrationLampReferences.MPQ_ATTO_DEUTERIUM_HALOGEN"></a>
+    <a class="headerlink" href="#CalibrationLampReferences.mpq_atto_deuterium_halogen"></a>
     
     
 
                             </div>
-                            <div id="CalibrationLampReferences.MPQ_ATTO_HALOGEN" class="classattr">
+                            <div id="CalibrationLampReferences.mpq_atto_halogen" class="classattr">
                                 <div class="attr variable">
-            <span class="name">MPQ_ATTO_HALOGEN</span>        =
-<span class="default_value">&lt;<a href="#CalibrationLampReferences.MPQ_ATTO_HALOGEN">CalibrationLampReferences.MPQ_ATTO_HALOGEN</a>: &#39;7315273LS-Halogen_CC-VISNIR.lmp&#39;&gt;</span>
+            <span class="name">mpq_atto_halogen</span>        =
+<span class="default_value">&lt;<a href="#CalibrationLampReferences.mpq_atto_halogen">CalibrationLampReferences.mpq_atto_halogen</a>: &#39;7315273LS-Halogen_CC-VISNIR.lmp&#39;&gt;</span>
 
         
     </div>
-    <a class="headerlink" href="#CalibrationLampReferences.MPQ_ATTO_HALOGEN"></a>
+    <a class="headerlink" href="#CalibrationLampReferences.mpq_atto_halogen"></a>
     
     
 
@@ -238,34 +226,6 @@
     
 
                 </section>
-                <section id="load_calibration_reso">
-                            <input id="load_calibration_reso-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-<div class="attr function">
-            
-        <span class="def">def</span>
-        <span class="name">load_calibration_reso</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">filepath</span><span class="o">=</span><span class="n">PosixPath</span><span class="p">(</span><span class="s1">&#39;/home/nick/.local/lib/python3.13/site-packages/attoworld/spectrum/calibration_data/Reso_Spectrometer_CalibrationCorrection.npz&#39;</span><span class="p">)</span></span><span class="return-annotation">):</span></span>
-
-                <label class="view-source-button" for="load_calibration_reso-view-source"><span>View Source</span></label>
-
-    </div>
-    <a class="headerlink" href="#load_calibration_reso"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="load_calibration_reso-10"><a href="#load_calibration_reso-10"><span class="linenos">10</span></a><span class="k">def</span> <span class="nf">load_calibration_reso</span><span class="p">(</span>
-</span><span id="load_calibration_reso-11"><a href="#load_calibration_reso-11"><span class="linenos">11</span></a>    <span class="n">filepath</span><span class="o">=</span><span class="n">get_calibration_path</span><span class="p">()</span> <span class="o">/</span> <span class="s2">&quot;Reso_Spectrometer_CalibrationCorrection.npz&quot;</span><span class="p">,</span>
-</span><span id="load_calibration_reso-12"><a href="#load_calibration_reso-12"><span class="linenos">12</span></a><span class="p">):</span>
-</span><span id="load_calibration_reso-13"><a href="#load_calibration_reso-13"><span class="linenos">13</span></a>    <span class="n">calibration</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">load</span><span class="p">(</span><span class="n">filepath</span><span class="p">)</span>
-</span><span id="load_calibration_reso-14"><a href="#load_calibration_reso-14"><span class="linenos">14</span></a>    <span class="n">wavelength_calibration</span> <span class="o">=</span> <span class="n">calibration</span><span class="p">[</span><span class="s2">&quot;wavelength&quot;</span><span class="p">]</span>
-</span><span id="load_calibration_reso-15"><a href="#load_calibration_reso-15"><span class="linenos">15</span></a>    <span class="n">calibration_smoothed</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">calibration</span><span class="p">[</span><span class="s2">&quot;corr_factor_smoothed&quot;</span><span class="p">])</span>
-</span><span id="load_calibration_reso-16"><a href="#load_calibration_reso-16"><span class="linenos">16</span></a>    <span class="k">return</span> <span class="n">data</span><span class="o">.</span><span class="n">SpectrometerCalibration</span><span class="p">(</span>
-</span><span id="load_calibration_reso-17"><a href="#load_calibration_reso-17"><span class="linenos">17</span></a>        <span class="n">intensity_factors</span><span class="o">=</span><span class="n">calibration_smoothed</span><span class="p">,</span>
-</span><span id="load_calibration_reso-18"><a href="#load_calibration_reso-18"><span class="linenos">18</span></a>        <span class="n">corrected_wavelengths</span><span class="o">=</span><span class="n">wavelength_calibration</span><span class="p">,</span>
-</span><span id="load_calibration_reso-19"><a href="#load_calibration_reso-19"><span class="linenos">19</span></a>        <span class="n">corrected_frequencies</span><span class="o">=</span><span class="n">constants</span><span class="o">.</span><span class="n">speed_of_light</span> <span class="o">/</span> <span class="n">wavelength_calibration</span><span class="p">,</span>
-</span><span id="load_calibration_reso-20"><a href="#load_calibration_reso-20"><span class="linenos">20</span></a>    <span class="p">)</span>
-</span></pre></div>
-
-
-    
-
-                </section>
                 <section id="wavelength_to_frequency">
                             <input id="wavelength_to_frequency-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 <div class="attr function">
@@ -277,43 +237,43 @@
 
     </div>
     <a class="headerlink" href="#wavelength_to_frequency"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="wavelength_to_frequency-47"><a href="#wavelength_to_frequency-47"><span class="linenos">47</span></a><span class="k">def</span> <span class="nf">wavelength_to_frequency</span><span class="p">(</span>
-</span><span id="wavelength_to_frequency-48"><a href="#wavelength_to_frequency-48"><span class="linenos">48</span></a>    <span class="n">wavelengths_nm</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
-</span><span id="wavelength_to_frequency-49"><a href="#wavelength_to_frequency-49"><span class="linenos">49</span></a>    <span class="n">spectrum</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
-</span><span id="wavelength_to_frequency-50"><a href="#wavelength_to_frequency-50"><span class="linenos">50</span></a>    <span class="n">frequencies</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span id="wavelength_to_frequency-51"><a href="#wavelength_to_frequency-51"><span class="linenos">51</span></a><span class="p">):</span>
-</span><span id="wavelength_to_frequency-52"><a href="#wavelength_to_frequency-52"><span class="linenos">52</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a wavelength spectrum in W/nm into a frequency spectrum in W/THz</span>
-</span><span id="wavelength_to_frequency-53"><a href="#wavelength_to_frequency-53"><span class="linenos">53</span></a>
-</span><span id="wavelength_to_frequency-54"><a href="#wavelength_to_frequency-54"><span class="linenos">54</span></a><span class="sd">    Args:</span>
-</span><span id="wavelength_to_frequency-55"><a href="#wavelength_to_frequency-55"><span class="linenos">55</span></a><span class="sd">        wavelength_nm (np.ndarray): the wavelengths included in the data, in nanometers</span>
-</span><span id="wavelength_to_frequency-56"><a href="#wavelength_to_frequency-56"><span class="linenos">56</span></a><span class="sd">        spectrum (np.ndarray): the spectrum corresponding to the input wavelength scale</span>
-</span><span id="wavelength_to_frequency-57"><a href="#wavelength_to_frequency-57"><span class="linenos">57</span></a><span class="sd">        frequencies: (optional) frequency vector for the output. If not specified, a vector will be calculated such that resolution and range are preserved.</span>
-</span><span id="wavelength_to_frequency-58"><a href="#wavelength_to_frequency-58"><span class="linenos">58</span></a><span class="sd">    Returns:</span>
-</span><span id="wavelength_to_frequency-59"><a href="#wavelength_to_frequency-59"><span class="linenos">59</span></a><span class="sd">        f: frequencies (Hz)</span>
-</span><span id="wavelength_to_frequency-60"><a href="#wavelength_to_frequency-60"><span class="linenos">60</span></a><span class="sd">        scaled_spectrum: the frequency-domain spectrum</span>
-</span><span id="wavelength_to_frequency-61"><a href="#wavelength_to_frequency-61"><span class="linenos">61</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="wavelength_to_frequency-62"><a href="#wavelength_to_frequency-62"><span class="linenos">62</span></a>    <span class="c1"># Contributed by Nick Karpowicz</span>
-</span><span id="wavelength_to_frequency-63"><a href="#wavelength_to_frequency-63"><span class="linenos">63</span></a>    <span class="n">input_frequencies</span> <span class="o">=</span> <span class="mf">1e9</span> <span class="o">*</span> <span class="n">constants</span><span class="o">.</span><span class="n">speed_of_light</span> <span class="o">/</span> <span class="n">wavelengths_nm</span>
-</span><span id="wavelength_to_frequency-64"><a href="#wavelength_to_frequency-64"><span class="linenos">64</span></a>
-</span><span id="wavelength_to_frequency-65"><a href="#wavelength_to_frequency-65"><span class="linenos">65</span></a>    <span class="k">if</span> <span class="n">frequencies</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="wavelength_to_frequency-66"><a href="#wavelength_to_frequency-66"><span class="linenos">66</span></a>        <span class="n">frequency_step</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">input_frequencies</span><span class="p">)))</span>
-</span><span id="wavelength_to_frequency-67"><a href="#wavelength_to_frequency-67"><span class="linenos">67</span></a>        <span class="n">min_frequency</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">input_frequencies</span><span class="p">)</span>
-</span><span id="wavelength_to_frequency-68"><a href="#wavelength_to_frequency-68"><span class="linenos">68</span></a>        <span class="n">max_frequency</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">input_frequencies</span><span class="p">)</span>
-</span><span id="wavelength_to_frequency-69"><a href="#wavelength_to_frequency-69"><span class="linenos">69</span></a>        <span class="n">frequency_count</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">max_frequency</span> <span class="o">-</span> <span class="n">min_frequency</span><span class="p">)</span> <span class="o">/</span> <span class="n">frequency_step</span><span class="p">)</span>
-</span><span id="wavelength_to_frequency-70"><a href="#wavelength_to_frequency-70"><span class="linenos">70</span></a>        <span class="n">frequencies</span> <span class="o">=</span> <span class="n">min_frequency</span> <span class="o">+</span> <span class="n">frequency_step</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
-</span><span id="wavelength_to_frequency-71"><a href="#wavelength_to_frequency-71"><span class="linenos">71</span></a>            <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">frequency_count</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span>
-</span><span id="wavelength_to_frequency-72"><a href="#wavelength_to_frequency-72"><span class="linenos">72</span></a>        <span class="p">)</span>
-</span><span id="wavelength_to_frequency-73"><a href="#wavelength_to_frequency-73"><span class="linenos">73</span></a>
-</span><span id="wavelength_to_frequency-74"><a href="#wavelength_to_frequency-74"><span class="linenos">74</span></a>    <span class="c1"># apply Jakobian scaling and use W/THz</span>
-</span><span id="wavelength_to_frequency-75"><a href="#wavelength_to_frequency-75"><span class="linenos">75</span></a>    <span class="n">scaled_spectrum</span> <span class="o">=</span> <span class="p">(</span>
-</span><span id="wavelength_to_frequency-76"><a href="#wavelength_to_frequency-76"><span class="linenos">76</span></a>        <span class="mf">1e12</span> <span class="o">*</span> <span class="n">constants</span><span class="o">.</span><span class="n">speed_of_light</span> <span class="o">*</span> <span class="n">spectrum</span> <span class="o">/</span> <span class="p">(</span><span class="n">input_frequencies</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
-</span><span id="wavelength_to_frequency-77"><a href="#wavelength_to_frequency-77"><span class="linenos">77</span></a>    <span class="p">)</span>
-</span><span id="wavelength_to_frequency-78"><a href="#wavelength_to_frequency-78"><span class="linenos">78</span></a>
-</span><span id="wavelength_to_frequency-79"><a href="#wavelength_to_frequency-79"><span class="linenos">79</span></a>    <span class="n">scaled_spectrum</span> <span class="o">=</span> <span class="n">interpolate</span><span class="p">(</span>
-</span><span id="wavelength_to_frequency-80"><a href="#wavelength_to_frequency-80"><span class="linenos">80</span></a>        <span class="n">frequencies</span><span class="p">,</span> <span class="n">input_frequencies</span><span class="p">,</span> <span class="n">scaled_spectrum</span><span class="p">,</span> <span class="n">inputs_are_sorted</span><span class="o">=</span><span class="kc">False</span>
-</span><span id="wavelength_to_frequency-81"><a href="#wavelength_to_frequency-81"><span class="linenos">81</span></a>    <span class="p">)</span>
-</span><span id="wavelength_to_frequency-82"><a href="#wavelength_to_frequency-82"><span class="linenos">82</span></a>
-</span><span id="wavelength_to_frequency-83"><a href="#wavelength_to_frequency-83"><span class="linenos">83</span></a>    <span class="k">return</span> <span class="n">frequencies</span><span class="p">,</span> <span class="n">scaled_spectrum</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="wavelength_to_frequency-32"><a href="#wavelength_to_frequency-32"><span class="linenos">32</span></a><span class="k">def</span> <span class="nf">wavelength_to_frequency</span><span class="p">(</span>
+</span><span id="wavelength_to_frequency-33"><a href="#wavelength_to_frequency-33"><span class="linenos">33</span></a>    <span class="n">wavelengths_nm</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+</span><span id="wavelength_to_frequency-34"><a href="#wavelength_to_frequency-34"><span class="linenos">34</span></a>    <span class="n">spectrum</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+</span><span id="wavelength_to_frequency-35"><a href="#wavelength_to_frequency-35"><span class="linenos">35</span></a>    <span class="n">frequencies</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="wavelength_to_frequency-36"><a href="#wavelength_to_frequency-36"><span class="linenos">36</span></a><span class="p">):</span>
+</span><span id="wavelength_to_frequency-37"><a href="#wavelength_to_frequency-37"><span class="linenos">37</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a wavelength spectrum in W/nm into a frequency spectrum in W/THz</span>
+</span><span id="wavelength_to_frequency-38"><a href="#wavelength_to_frequency-38"><span class="linenos">38</span></a>
+</span><span id="wavelength_to_frequency-39"><a href="#wavelength_to_frequency-39"><span class="linenos">39</span></a><span class="sd">    Args:</span>
+</span><span id="wavelength_to_frequency-40"><a href="#wavelength_to_frequency-40"><span class="linenos">40</span></a><span class="sd">        wavelength_nm (np.ndarray): the wavelengths included in the data, in nanometers</span>
+</span><span id="wavelength_to_frequency-41"><a href="#wavelength_to_frequency-41"><span class="linenos">41</span></a><span class="sd">        spectrum (np.ndarray): the spectrum corresponding to the input wavelength scale</span>
+</span><span id="wavelength_to_frequency-42"><a href="#wavelength_to_frequency-42"><span class="linenos">42</span></a><span class="sd">        frequencies: (optional) frequency vector for the output. If not specified, a vector will be calculated such that resolution and range are preserved.</span>
+</span><span id="wavelength_to_frequency-43"><a href="#wavelength_to_frequency-43"><span class="linenos">43</span></a><span class="sd">    Returns:</span>
+</span><span id="wavelength_to_frequency-44"><a href="#wavelength_to_frequency-44"><span class="linenos">44</span></a><span class="sd">        f: frequencies (Hz)</span>
+</span><span id="wavelength_to_frequency-45"><a href="#wavelength_to_frequency-45"><span class="linenos">45</span></a><span class="sd">        scaled_spectrum: the frequency-domain spectrum</span>
+</span><span id="wavelength_to_frequency-46"><a href="#wavelength_to_frequency-46"><span class="linenos">46</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="wavelength_to_frequency-47"><a href="#wavelength_to_frequency-47"><span class="linenos">47</span></a>    <span class="c1"># Contributed by Nick Karpowicz</span>
+</span><span id="wavelength_to_frequency-48"><a href="#wavelength_to_frequency-48"><span class="linenos">48</span></a>    <span class="n">input_frequencies</span> <span class="o">=</span> <span class="mf">1e9</span> <span class="o">*</span> <span class="n">constants</span><span class="o">.</span><span class="n">speed_of_light</span> <span class="o">/</span> <span class="n">wavelengths_nm</span>
+</span><span id="wavelength_to_frequency-49"><a href="#wavelength_to_frequency-49"><span class="linenos">49</span></a>
+</span><span id="wavelength_to_frequency-50"><a href="#wavelength_to_frequency-50"><span class="linenos">50</span></a>    <span class="k">if</span> <span class="n">frequencies</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="wavelength_to_frequency-51"><a href="#wavelength_to_frequency-51"><span class="linenos">51</span></a>        <span class="n">frequency_step</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diff</span><span class="p">(</span><span class="n">input_frequencies</span><span class="p">)))</span>
+</span><span id="wavelength_to_frequency-52"><a href="#wavelength_to_frequency-52"><span class="linenos">52</span></a>        <span class="n">min_frequency</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">input_frequencies</span><span class="p">)</span>
+</span><span id="wavelength_to_frequency-53"><a href="#wavelength_to_frequency-53"><span class="linenos">53</span></a>        <span class="n">max_frequency</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">input_frequencies</span><span class="p">)</span>
+</span><span id="wavelength_to_frequency-54"><a href="#wavelength_to_frequency-54"><span class="linenos">54</span></a>        <span class="n">frequency_count</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ceil</span><span class="p">(</span><span class="n">max_frequency</span> <span class="o">-</span> <span class="n">min_frequency</span><span class="p">)</span> <span class="o">/</span> <span class="n">frequency_step</span><span class="p">)</span>
+</span><span id="wavelength_to_frequency-55"><a href="#wavelength_to_frequency-55"><span class="linenos">55</span></a>        <span class="n">frequencies</span> <span class="o">=</span> <span class="n">min_frequency</span> <span class="o">+</span> <span class="n">frequency_step</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span>
+</span><span id="wavelength_to_frequency-56"><a href="#wavelength_to_frequency-56"><span class="linenos">56</span></a>            <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">frequency_count</span><span class="p">),</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span>
+</span><span id="wavelength_to_frequency-57"><a href="#wavelength_to_frequency-57"><span class="linenos">57</span></a>        <span class="p">)</span>
+</span><span id="wavelength_to_frequency-58"><a href="#wavelength_to_frequency-58"><span class="linenos">58</span></a>
+</span><span id="wavelength_to_frequency-59"><a href="#wavelength_to_frequency-59"><span class="linenos">59</span></a>    <span class="c1"># apply Jakobian scaling and use W/THz</span>
+</span><span id="wavelength_to_frequency-60"><a href="#wavelength_to_frequency-60"><span class="linenos">60</span></a>    <span class="n">scaled_spectrum</span> <span class="o">=</span> <span class="p">(</span>
+</span><span id="wavelength_to_frequency-61"><a href="#wavelength_to_frequency-61"><span class="linenos">61</span></a>        <span class="mf">1e12</span> <span class="o">*</span> <span class="n">constants</span><span class="o">.</span><span class="n">speed_of_light</span> <span class="o">*</span> <span class="n">spectrum</span> <span class="o">/</span> <span class="p">(</span><span class="n">input_frequencies</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</span><span id="wavelength_to_frequency-62"><a href="#wavelength_to_frequency-62"><span class="linenos">62</span></a>    <span class="p">)</span>
+</span><span id="wavelength_to_frequency-63"><a href="#wavelength_to_frequency-63"><span class="linenos">63</span></a>
+</span><span id="wavelength_to_frequency-64"><a href="#wavelength_to_frequency-64"><span class="linenos">64</span></a>    <span class="n">scaled_spectrum</span> <span class="o">=</span> <span class="n">interpolate</span><span class="p">(</span>
+</span><span id="wavelength_to_frequency-65"><a href="#wavelength_to_frequency-65"><span class="linenos">65</span></a>        <span class="n">frequencies</span><span class="p">,</span> <span class="n">input_frequencies</span><span class="p">,</span> <span class="n">scaled_spectrum</span><span class="p">,</span> <span class="n">inputs_are_sorted</span><span class="o">=</span><span class="kc">False</span>
+</span><span id="wavelength_to_frequency-66"><a href="#wavelength_to_frequency-66"><span class="linenos">66</span></a>    <span class="p">)</span>
+</span><span id="wavelength_to_frequency-67"><a href="#wavelength_to_frequency-67"><span class="linenos">67</span></a>
+</span><span id="wavelength_to_frequency-68"><a href="#wavelength_to_frequency-68"><span class="linenos">68</span></a>    <span class="k">return</span> <span class="n">frequencies</span><span class="p">,</span> <span class="n">scaled_spectrum</span>
 </span></pre></div>
 
 
@@ -348,28 +308,28 @@
 
     </div>
     <a class="headerlink" href="#frequency_to_wavelength"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="frequency_to_wavelength-23"><a href="#frequency_to_wavelength-23"><span class="linenos">23</span></a><span class="k">def</span> <span class="nf">frequency_to_wavelength</span><span class="p">(</span>
-</span><span id="frequency_to_wavelength-24"><a href="#frequency_to_wavelength-24"><span class="linenos">24</span></a>    <span class="n">frequencies</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
-</span><span id="frequency_to_wavelength-25"><a href="#frequency_to_wavelength-25"><span class="linenos">25</span></a>    <span class="n">spectrum</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
-</span><span id="frequency_to_wavelength-26"><a href="#frequency_to_wavelength-26"><span class="linenos">26</span></a>    <span class="n">wavelengths</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
-</span><span id="frequency_to_wavelength-27"><a href="#frequency_to_wavelength-27"><span class="linenos">27</span></a><span class="p">):</span>
-</span><span id="frequency_to_wavelength-28"><a href="#frequency_to_wavelength-28"><span class="linenos">28</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a frequency spectrum in W/Hz into a wavelength spectrum in W/m.</span>
-</span><span id="frequency_to_wavelength-29"><a href="#frequency_to_wavelength-29"><span class="linenos">29</span></a><span class="sd">    SI units.</span>
-</span><span id="frequency_to_wavelength-30"><a href="#frequency_to_wavelength-30"><span class="linenos">30</span></a><span class="sd">    Args:</span>
-</span><span id="frequency_to_wavelength-31"><a href="#frequency_to_wavelength-31"><span class="linenos">31</span></a><span class="sd">        frequencies (np.ndarray): the frequencies included in the data, in Hz</span>
-</span><span id="frequency_to_wavelength-32"><a href="#frequency_to_wavelength-32"><span class="linenos">32</span></a><span class="sd">        spectrum (np.ndarray): the spectrum corresponding to the input frequency scale</span>
-</span><span id="frequency_to_wavelength-33"><a href="#frequency_to_wavelength-33"><span class="linenos">33</span></a><span class="sd">        wavelengths: (optional) wavelength vector for the output. If not specified, a the output data will be on the same grid, but scaled</span>
-</span><span id="frequency_to_wavelength-34"><a href="#frequency_to_wavelength-34"><span class="linenos">34</span></a><span class="sd">    Returns:</span>
-</span><span id="frequency_to_wavelength-35"><a href="#frequency_to_wavelength-35"><span class="linenos">35</span></a><span class="sd">        wavelengths: wavelengths in m</span>
-</span><span id="frequency_to_wavelength-36"><a href="#frequency_to_wavelength-36"><span class="linenos">36</span></a><span class="sd">        scaled_spectrum: the wavelength-domain spectrum</span>
-</span><span id="frequency_to_wavelength-37"><a href="#frequency_to_wavelength-37"><span class="linenos">37</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="frequency_to_wavelength-38"><a href="#frequency_to_wavelength-38"><span class="linenos">38</span></a>    <span class="k">if</span> <span class="n">wavelengths</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="frequency_to_wavelength-39"><a href="#frequency_to_wavelength-39"><span class="linenos">39</span></a>        <span class="n">wavelengths</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">speed_of_light</span> <span class="o">/</span> <span class="n">frequencies</span><span class="p">[</span><span class="n">frequencies</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">]</span>
-</span><span id="frequency_to_wavelength-40"><a href="#frequency_to_wavelength-40"><span class="linenos">40</span></a>        <span class="n">spectrum</span> <span class="o">=</span> <span class="n">spectrum</span><span class="p">[</span><span class="n">frequencies</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">]</span>
-</span><span id="frequency_to_wavelength-41"><a href="#frequency_to_wavelength-41"><span class="linenos">41</span></a>    <span class="k">else</span><span class="p">:</span>
-</span><span id="frequency_to_wavelength-42"><a href="#frequency_to_wavelength-42"><span class="linenos">42</span></a>        <span class="n">wavelengths</span> <span class="o">=</span> <span class="n">wavelengths</span><span class="p">[</span><span class="n">wavelengths</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">]</span>
-</span><span id="frequency_to_wavelength-43"><a href="#frequency_to_wavelength-43"><span class="linenos">43</span></a>
-</span><span id="frequency_to_wavelength-44"><a href="#frequency_to_wavelength-44"><span class="linenos">44</span></a>    <span class="k">return</span> <span class="n">wavelengths</span><span class="p">,</span> <span class="n">spectrum</span> <span class="o">/</span> <span class="p">(</span><span class="n">wavelengths</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="frequency_to_wavelength-8"><a href="#frequency_to_wavelength-8"><span class="linenos"> 8</span></a><span class="k">def</span> <span class="nf">frequency_to_wavelength</span><span class="p">(</span>
+</span><span id="frequency_to_wavelength-9"><a href="#frequency_to_wavelength-9"><span class="linenos"> 9</span></a>    <span class="n">frequencies</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+</span><span id="frequency_to_wavelength-10"><a href="#frequency_to_wavelength-10"><span class="linenos">10</span></a>    <span class="n">spectrum</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span>
+</span><span id="frequency_to_wavelength-11"><a href="#frequency_to_wavelength-11"><span class="linenos">11</span></a>    <span class="n">wavelengths</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+</span><span id="frequency_to_wavelength-12"><a href="#frequency_to_wavelength-12"><span class="linenos">12</span></a><span class="p">):</span>
+</span><span id="frequency_to_wavelength-13"><a href="#frequency_to_wavelength-13"><span class="linenos">13</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Convert a frequency spectrum in W/Hz into a wavelength spectrum in W/m.</span>
+</span><span id="frequency_to_wavelength-14"><a href="#frequency_to_wavelength-14"><span class="linenos">14</span></a><span class="sd">    SI units.</span>
+</span><span id="frequency_to_wavelength-15"><a href="#frequency_to_wavelength-15"><span class="linenos">15</span></a><span class="sd">    Args:</span>
+</span><span id="frequency_to_wavelength-16"><a href="#frequency_to_wavelength-16"><span class="linenos">16</span></a><span class="sd">        frequencies (np.ndarray): the frequencies included in the data, in Hz</span>
+</span><span id="frequency_to_wavelength-17"><a href="#frequency_to_wavelength-17"><span class="linenos">17</span></a><span class="sd">        spectrum (np.ndarray): the spectrum corresponding to the input frequency scale</span>
+</span><span id="frequency_to_wavelength-18"><a href="#frequency_to_wavelength-18"><span class="linenos">18</span></a><span class="sd">        wavelengths: (optional) wavelength vector for the output. If not specified, a the output data will be on the same grid, but scaled</span>
+</span><span id="frequency_to_wavelength-19"><a href="#frequency_to_wavelength-19"><span class="linenos">19</span></a><span class="sd">    Returns:</span>
+</span><span id="frequency_to_wavelength-20"><a href="#frequency_to_wavelength-20"><span class="linenos">20</span></a><span class="sd">        wavelengths: wavelengths in m</span>
+</span><span id="frequency_to_wavelength-21"><a href="#frequency_to_wavelength-21"><span class="linenos">21</span></a><span class="sd">        scaled_spectrum: the wavelength-domain spectrum</span>
+</span><span id="frequency_to_wavelength-22"><a href="#frequency_to_wavelength-22"><span class="linenos">22</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="frequency_to_wavelength-23"><a href="#frequency_to_wavelength-23"><span class="linenos">23</span></a>    <span class="k">if</span> <span class="n">wavelengths</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="frequency_to_wavelength-24"><a href="#frequency_to_wavelength-24"><span class="linenos">24</span></a>        <span class="n">wavelengths</span> <span class="o">=</span> <span class="n">constants</span><span class="o">.</span><span class="n">speed_of_light</span> <span class="o">/</span> <span class="n">frequencies</span><span class="p">[</span><span class="n">frequencies</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">]</span>
+</span><span id="frequency_to_wavelength-25"><a href="#frequency_to_wavelength-25"><span class="linenos">25</span></a>        <span class="n">spectrum</span> <span class="o">=</span> <span class="n">spectrum</span><span class="p">[</span><span class="n">frequencies</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">]</span>
+</span><span id="frequency_to_wavelength-26"><a href="#frequency_to_wavelength-26"><span class="linenos">26</span></a>    <span class="k">else</span><span class="p">:</span>
+</span><span id="frequency_to_wavelength-27"><a href="#frequency_to_wavelength-27"><span class="linenos">27</span></a>        <span class="n">wavelengths</span> <span class="o">=</span> <span class="n">wavelengths</span><span class="p">[</span><span class="n">wavelengths</span> <span class="o">&gt;</span> <span class="mf">0.0</span><span class="p">]</span>
+</span><span id="frequency_to_wavelength-28"><a href="#frequency_to_wavelength-28"><span class="linenos">28</span></a>
+</span><span id="frequency_to_wavelength-29"><a href="#frequency_to_wavelength-29"><span class="linenos">29</span></a>    <span class="k">return</span> <span class="n">wavelengths</span><span class="p">,</span> <span class="n">spectrum</span> <span class="o">/</span> <span class="p">(</span><span class="n">wavelengths</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
 </span></pre></div>
 
 
@@ -405,30 +365,32 @@ SI units.</p>
 
     </div>
     <a class="headerlink" href="#transform_limited_pulse_from_spectrometer"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="transform_limited_pulse_from_spectrometer-86"><a href="#transform_limited_pulse_from_spectrometer-86"><span class="linenos"> 86</span></a><span class="k">def</span> <span class="nf">transform_limited_pulse_from_spectrometer</span><span class="p">(</span>
-</span><span id="transform_limited_pulse_from_spectrometer-87"><a href="#transform_limited_pulse_from_spectrometer-87"><span class="linenos"> 87</span></a>    <span class="n">wavelengths_nm</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">spectrum</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">gate_level</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
-</span><span id="transform_limited_pulse_from_spectrometer-88"><a href="#transform_limited_pulse_from_spectrometer-88"><span class="linenos"> 88</span></a><span class="p">):</span>
-</span><span id="transform_limited_pulse_from_spectrometer-89"><a href="#transform_limited_pulse_from_spectrometer-89"><span class="linenos"> 89</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the transform-limited pulse corresponding to a spectrum</span>
-</span><span id="transform_limited_pulse_from_spectrometer-90"><a href="#transform_limited_pulse_from_spectrometer-90"><span class="linenos"> 90</span></a>
-</span><span id="transform_limited_pulse_from_spectrometer-91"><a href="#transform_limited_pulse_from_spectrometer-91"><span class="linenos"> 91</span></a><span class="sd">    Args:</span>
-</span><span id="transform_limited_pulse_from_spectrometer-92"><a href="#transform_limited_pulse_from_spectrometer-92"><span class="linenos"> 92</span></a><span class="sd">        wavelength_nm: the wavelengths included in the data, in nanometers</span>
-</span><span id="transform_limited_pulse_from_spectrometer-93"><a href="#transform_limited_pulse_from_spectrometer-93"><span class="linenos"> 93</span></a><span class="sd">        spectrum: the spectrum corresponding to the input wavelength scale</span>
-</span><span id="transform_limited_pulse_from_spectrometer-94"><a href="#transform_limited_pulse_from_spectrometer-94"><span class="linenos"> 94</span></a><span class="sd">        gate_level: (optional) level, relative to the maximum at which to apply a gate to the spectrum. For example, with gate_level=0.01, values less than 1% of the maximum signal will be set to zero</span>
-</span><span id="transform_limited_pulse_from_spectrometer-95"><a href="#transform_limited_pulse_from_spectrometer-95"><span class="linenos"> 95</span></a>
-</span><span id="transform_limited_pulse_from_spectrometer-96"><a href="#transform_limited_pulse_from_spectrometer-96"><span class="linenos"> 96</span></a><span class="sd">    Returns:</span>
-</span><span id="transform_limited_pulse_from_spectrometer-97"><a href="#transform_limited_pulse_from_spectrometer-97"><span class="linenos"> 97</span></a><span class="sd">        t: time vector (s)</span>
-</span><span id="transform_limited_pulse_from_spectrometer-98"><a href="#transform_limited_pulse_from_spectrometer-98"><span class="linenos"> 98</span></a><span class="sd">        pulse: the pulse intensity vs. time</span>
-</span><span id="transform_limited_pulse_from_spectrometer-99"><a href="#transform_limited_pulse_from_spectrometer-99"><span class="linenos"> 99</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="transform_limited_pulse_from_spectrometer-100"><a href="#transform_limited_pulse_from_spectrometer-100"><span class="linenos">100</span></a>    <span class="n">f</span><span class="p">,</span> <span class="n">spec</span> <span class="o">=</span> <span class="n">wavelength_to_frequency</span><span class="p">(</span><span class="n">wavelengths_nm</span><span class="p">,</span> <span class="n">spectrum</span><span class="p">)</span>
-</span><span id="transform_limited_pulse_from_spectrometer-101"><a href="#transform_limited_pulse_from_spectrometer-101"><span class="linenos">101</span></a>    <span class="n">df</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-</span><span id="transform_limited_pulse_from_spectrometer-102"><a href="#transform_limited_pulse_from_spectrometer-102"><span class="linenos">102</span></a>    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">d</span><span class="o">=</span><span class="n">df</span><span class="p">))</span>
-</span><span id="transform_limited_pulse_from_spectrometer-103"><a href="#transform_limited_pulse_from_spectrometer-103"><span class="linenos">103</span></a>    <span class="n">gated_spectrum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>
-</span><span id="transform_limited_pulse_from_spectrometer-104"><a href="#transform_limited_pulse_from_spectrometer-104"><span class="linenos">104</span></a>    <span class="k">if</span> <span class="n">gate_level</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="transform_limited_pulse_from_spectrometer-105"><a href="#transform_limited_pulse_from_spectrometer-105"><span class="linenos">105</span></a>        <span class="n">gated_spectrum</span><span class="p">[</span><span class="n">spec</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">gate_level</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">spec</span><span class="p">))]</span> <span class="o">=</span> <span class="mf">0.0</span>
-</span><span id="transform_limited_pulse_from_spectrometer-106"><a href="#transform_limited_pulse_from_spectrometer-106"><span class="linenos">106</span></a>
-</span><span id="transform_limited_pulse_from_spectrometer-107"><a href="#transform_limited_pulse_from_spectrometer-107"><span class="linenos">107</span></a>    <span class="n">pulse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">ifft</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">gated_spectrum</span><span class="p">))))</span> <span class="o">**</span> <span class="mi">2</span>
-</span><span id="transform_limited_pulse_from_spectrometer-108"><a href="#transform_limited_pulse_from_spectrometer-108"><span class="linenos">108</span></a>
-</span><span id="transform_limited_pulse_from_spectrometer-109"><a href="#transform_limited_pulse_from_spectrometer-109"><span class="linenos">109</span></a>    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">pulse</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="transform_limited_pulse_from_spectrometer-71"><a href="#transform_limited_pulse_from_spectrometer-71"><span class="linenos">71</span></a><span class="k">def</span> <span class="nf">transform_limited_pulse_from_spectrometer</span><span class="p">(</span>
+</span><span id="transform_limited_pulse_from_spectrometer-72"><a href="#transform_limited_pulse_from_spectrometer-72"><span class="linenos">72</span></a>    <span class="n">wavelengths_nm</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">spectrum</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">gate_level</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">float</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span>
+</span><span id="transform_limited_pulse_from_spectrometer-73"><a href="#transform_limited_pulse_from_spectrometer-73"><span class="linenos">73</span></a><span class="p">):</span>
+</span><span id="transform_limited_pulse_from_spectrometer-74"><a href="#transform_limited_pulse_from_spectrometer-74"><span class="linenos">74</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;Calculates the transform-limited pulse corresponding to a spectrum</span>
+</span><span id="transform_limited_pulse_from_spectrometer-75"><a href="#transform_limited_pulse_from_spectrometer-75"><span class="linenos">75</span></a>
+</span><span id="transform_limited_pulse_from_spectrometer-76"><a href="#transform_limited_pulse_from_spectrometer-76"><span class="linenos">76</span></a><span class="sd">    Args:</span>
+</span><span id="transform_limited_pulse_from_spectrometer-77"><a href="#transform_limited_pulse_from_spectrometer-77"><span class="linenos">77</span></a><span class="sd">        wavelength_nm: the wavelengths included in the data, in nanometers</span>
+</span><span id="transform_limited_pulse_from_spectrometer-78"><a href="#transform_limited_pulse_from_spectrometer-78"><span class="linenos">78</span></a><span class="sd">        spectrum: the spectrum corresponding to the input wavelength scale</span>
+</span><span id="transform_limited_pulse_from_spectrometer-79"><a href="#transform_limited_pulse_from_spectrometer-79"><span class="linenos">79</span></a><span class="sd">        gate_level: (optional) level, relative to the maximum at which to apply a gate to the spectrum. For example, with gate_level=0.01, values less than 1% of the maximum signal will be set to zero</span>
+</span><span id="transform_limited_pulse_from_spectrometer-80"><a href="#transform_limited_pulse_from_spectrometer-80"><span class="linenos">80</span></a>
+</span><span id="transform_limited_pulse_from_spectrometer-81"><a href="#transform_limited_pulse_from_spectrometer-81"><span class="linenos">81</span></a><span class="sd">    Returns:</span>
+</span><span id="transform_limited_pulse_from_spectrometer-82"><a href="#transform_limited_pulse_from_spectrometer-82"><span class="linenos">82</span></a><span class="sd">        t: time vector (s)</span>
+</span><span id="transform_limited_pulse_from_spectrometer-83"><a href="#transform_limited_pulse_from_spectrometer-83"><span class="linenos">83</span></a><span class="sd">        pulse: the pulse intensity vs. time</span>
+</span><span id="transform_limited_pulse_from_spectrometer-84"><a href="#transform_limited_pulse_from_spectrometer-84"><span class="linenos">84</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="transform_limited_pulse_from_spectrometer-85"><a href="#transform_limited_pulse_from_spectrometer-85"><span class="linenos">85</span></a>    <span class="n">f</span><span class="p">,</span> <span class="n">spec</span> <span class="o">=</span> <span class="n">wavelength_to_frequency</span><span class="p">(</span><span class="n">wavelengths_nm</span><span class="p">,</span> <span class="n">spectrum</span><span class="p">)</span>
+</span><span id="transform_limited_pulse_from_spectrometer-86"><a href="#transform_limited_pulse_from_spectrometer-86"><span class="linenos">86</span></a>    <span class="k">if</span> <span class="n">f</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="transform_limited_pulse_from_spectrometer-87"><a href="#transform_limited_pulse_from_spectrometer-87"><span class="linenos">87</span></a>        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;No frequencies!&quot;</span><span class="p">)</span>
+</span><span id="transform_limited_pulse_from_spectrometer-88"><a href="#transform_limited_pulse_from_spectrometer-88"><span class="linenos">88</span></a>    <span class="n">df</span> <span class="o">=</span> <span class="n">f</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">f</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span><span id="transform_limited_pulse_from_spectrometer-89"><a href="#transform_limited_pulse_from_spectrometer-89"><span class="linenos">89</span></a>    <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftfreq</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">d</span><span class="o">=</span><span class="n">df</span><span class="p">))</span>
+</span><span id="transform_limited_pulse_from_spectrometer-90"><a href="#transform_limited_pulse_from_spectrometer-90"><span class="linenos">90</span></a>    <span class="n">gated_spectrum</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">spec</span><span class="p">)</span>
+</span><span id="transform_limited_pulse_from_spectrometer-91"><a href="#transform_limited_pulse_from_spectrometer-91"><span class="linenos">91</span></a>    <span class="k">if</span> <span class="n">gate_level</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+</span><span id="transform_limited_pulse_from_spectrometer-92"><a href="#transform_limited_pulse_from_spectrometer-92"><span class="linenos">92</span></a>        <span class="n">gated_spectrum</span><span class="p">[</span><span class="n">spec</span> <span class="o">&lt;</span> <span class="p">(</span><span class="n">gate_level</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">spec</span><span class="p">))]</span> <span class="o">=</span> <span class="mf">0.0</span>
+</span><span id="transform_limited_pulse_from_spectrometer-93"><a href="#transform_limited_pulse_from_spectrometer-93"><span class="linenos">93</span></a>
+</span><span id="transform_limited_pulse_from_spectrometer-94"><a href="#transform_limited_pulse_from_spectrometer-94"><span class="linenos">94</span></a>    <span class="n">pulse</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">fftshift</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">fft</span><span class="o">.</span><span class="n">ifft</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">gated_spectrum</span><span class="p">))))</span> <span class="o">**</span> <span class="mi">2</span>
+</span><span id="transform_limited_pulse_from_spectrometer-95"><a href="#transform_limited_pulse_from_spectrometer-95"><span class="linenos">95</span></a>
+</span><span id="transform_limited_pulse_from_spectrometer-96"><a href="#transform_limited_pulse_from_spectrometer-96"><span class="linenos">96</span></a>    <span class="k">return</span> <span class="n">t</span><span class="p">,</span> <span class="n">pulse</span>
 </span></pre></div>
 
 
@@ -595,210 +557,6 @@ os.system("cat " + filename + ".xls &gt; " + filename + ".txt")</p>
 The file is expected to have one column of wavelength data and one column of spectrum data.
 wavelengths are in nm.
 14 lines of header are skipped.</p>
-</div>
-
-
-                </section>
-                <section id="calibrate_reso">
-                            <input id="calibrate_reso-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
-<div class="attr function">
-            
-        <span class="def">def</span>
-        <span class="name">calibrate_reso</span><span class="signature pdoc-code multiline">(<span class="param">	<span class="n">data</span>,</span><span class="param">	<span class="n">column</span><span class="p">:</span> <span class="nb">int</span>,</span><span class="param">	<span class="n">calibration_file_path</span><span class="o">=</span><span class="s1">&#39;./calibration_data/Reso_Spectrometer_CalibrationCorrection.npz&#39;</span>,</span><span class="param">	<span class="n">dark</span><span class="o">=</span><span class="kc">None</span>,</span><span class="param">	<span class="n">dark_c</span><span class="o">=</span><span class="kc">None</span>,</span><span class="param">	<span class="n">stitch</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>,</span><span class="param">	<span class="n">smooth_points</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span>,</span><span class="param">	<span class="n">null_calibration</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>,</span><span class="param">	<span class="n">wavelength_calibration_intercept</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">3.538</span>,</span><span class="param">	<span class="n">wavelength_calibration_slope</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.003427</span></span><span class="return-annotation">):</span></span>
-
-                <label class="view-source-button" for="calibrate_reso-view-source"><span>View Source</span></label>
-
-    </div>
-    <a class="headerlink" href="#calibrate_reso"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="calibrate_reso-199"><a href="#calibrate_reso-199"><span class="linenos">199</span></a><span class="k">def</span> <span class="nf">calibrate</span><span class="p">(</span>
-</span><span id="calibrate_reso-200"><a href="#calibrate_reso-200"><span class="linenos">200</span></a>    <span class="n">data</span><span class="p">,</span>
-</span><span id="calibrate_reso-201"><a href="#calibrate_reso-201"><span class="linenos">201</span></a>    <span class="n">column</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
-</span><span id="calibrate_reso-202"><a href="#calibrate_reso-202"><span class="linenos">202</span></a>    <span class="n">calibration_file_path</span><span class="o">=</span><span class="s2">&quot;./calibration_data/Reso_Spectrometer_CalibrationCorrection.npz&quot;</span><span class="p">,</span>
-</span><span id="calibrate_reso-203"><a href="#calibrate_reso-203"><span class="linenos">203</span></a>    <span class="n">dark</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-</span><span id="calibrate_reso-204"><a href="#calibrate_reso-204"><span class="linenos">204</span></a>    <span class="n">dark_c</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
-</span><span id="calibrate_reso-205"><a href="#calibrate_reso-205"><span class="linenos">205</span></a>    <span class="n">stitch</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-</span><span id="calibrate_reso-206"><a href="#calibrate_reso-206"><span class="linenos">206</span></a>    <span class="n">smooth_points</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">10</span><span class="p">,</span>
-</span><span id="calibrate_reso-207"><a href="#calibrate_reso-207"><span class="linenos">207</span></a>    <span class="n">null_calibration</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-</span><span id="calibrate_reso-208"><a href="#calibrate_reso-208"><span class="linenos">208</span></a>    <span class="n">wavelength_calibration_intercept</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">3.538</span><span class="p">,</span>
-</span><span id="calibrate_reso-209"><a href="#calibrate_reso-209"><span class="linenos">209</span></a>    <span class="n">wavelength_calibration_slope</span><span class="p">:</span> <span class="nb">float</span> <span class="o">=</span> <span class="mf">1.003427</span><span class="p">,</span>
-</span><span id="calibrate_reso-210"><a href="#calibrate_reso-210"><span class="linenos">210</span></a><span class="p">):</span>
-</span><span id="calibrate_reso-211"><a href="#calibrate_reso-211"><span class="linenos">211</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;For the UV spectrometer. Calibrate the spectrum number &#39;column&#39; in the the &#39;data&#39; array. Intensity calibration factor is loaded in the first lines of UVSpectrumAnalysis.py.</span>
-</span><span id="calibrate_reso-212"><a href="#calibrate_reso-212"><span class="linenos">212</span></a><span class="sd">        Notice: each saved spectrum has 7 columns in the excel file; however, the argument column refers to the index of the spectrum, not the actual column in the file.</span>
-</span><span id="calibrate_reso-213"><a href="#calibrate_reso-213"><span class="linenos">213</span></a>
-</span><span id="calibrate_reso-214"><a href="#calibrate_reso-214"><span class="linenos">214</span></a><span class="sd">    Args:</span>
-</span><span id="calibrate_reso-215"><a href="#calibrate_reso-215"><span class="linenos">215</span></a><span class="sd">        data: data [numpy] array (see read_spectrometer_excel)</span>
-</span><span id="calibrate_reso-216"><a href="#calibrate_reso-216"><span class="linenos">216</span></a><span class="sd">        column: index of the spectrum to be calibrated</span>
-</span><span id="calibrate_reso-217"><a href="#calibrate_reso-217"><span class="linenos">217</span></a><span class="sd">        calibration_file_path: path of the calibration file</span>
-</span><span id="calibrate_reso-218"><a href="#calibrate_reso-218"><span class="linenos">218</span></a><span class="sd">        dark: dark spectrum (optional)</span>
-</span><span id="calibrate_reso-219"><a href="#calibrate_reso-219"><span class="linenos">219</span></a><span class="sd">        dark_c: column of the dark spectrum (optional)</span>
-</span><span id="calibrate_reso-220"><a href="#calibrate_reso-220"><span class="linenos">220</span></a><span class="sd">        stitch: Boolean, if True, the spectra are stitched together (optional, default False)</span>
-</span><span id="calibrate_reso-221"><a href="#calibrate_reso-221"><span class="linenos">221</span></a><span class="sd">                if True, the spectrum will be calculated by stitching the 5 partial spectra in the previous columns.</span>
-</span><span id="calibrate_reso-222"><a href="#calibrate_reso-222"><span class="linenos">222</span></a><span class="sd">                the stitching only works if the spectrum number &#39;column&#39; is a FULL-SPECTRUM in the xls file.</span>
-</span><span id="calibrate_reso-223"><a href="#calibrate_reso-223"><span class="linenos">223</span></a><span class="sd">                Stitching was implemented because the internal software of the spectrometer is not good enough at it (the saved full spectrum typically has discontinuities).</span>
-</span><span id="calibrate_reso-224"><a href="#calibrate_reso-224"><span class="linenos">224</span></a><span class="sd">        smooth_points: number of points for smoothing (optional, default 10). if 0, no smoothing is applied</span>
-</span><span id="calibrate_reso-225"><a href="#calibrate_reso-225"><span class="linenos">225</span></a><span class="sd">        null_calibration: Boolean, if True, the intensity calibration is not applied (optional, default False)</span>
-</span><span id="calibrate_reso-226"><a href="#calibrate_reso-226"><span class="linenos">226</span></a><span class="sd">        wavelength_calibration_intercept: intercept of the wavelength calibration (optional, default 3.538). If None no wavelength calibration is applied</span>
-</span><span id="calibrate_reso-227"><a href="#calibrate_reso-227"><span class="linenos">227</span></a><span class="sd">        wavelength_calibration_slope: slope of the wavelength calibration (optional, default 1.003427). If None no wavelength calibration is applied</span>
-</span><span id="calibrate_reso-228"><a href="#calibrate_reso-228"><span class="linenos">228</span></a><span class="sd">                Wavelength calibration is in the form λ_true = λ_measured * slope + intercept</span>
-</span><span id="calibrate_reso-229"><a href="#calibrate_reso-229"><span class="linenos">229</span></a><span class="sd">                Notice: wavelength calibration has an error of +/- 1  to 2 nm due to the stitching process.</span>
-</span><span id="calibrate_reso-230"><a href="#calibrate_reso-230"><span class="linenos">230</span></a><span class="sd">                    for a better calibration compute and apply the correction to each of the 5 partial spectra</span>
-</span><span id="calibrate_reso-231"><a href="#calibrate_reso-231"><span class="linenos">231</span></a>
-</span><span id="calibrate_reso-232"><a href="#calibrate_reso-232"><span class="linenos">232</span></a><span class="sd">    Returns:</span>
-</span><span id="calibrate_reso-233"><a href="#calibrate_reso-233"><span class="linenos">233</span></a><span class="sd">        wavelength: wavelength array</span>
-</span><span id="calibrate_reso-234"><a href="#calibrate_reso-234"><span class="linenos">234</span></a><span class="sd">        spectrum: calibrated spectrum</span>
-</span><span id="calibrate_reso-235"><a href="#calibrate_reso-235"><span class="linenos">235</span></a><span class="sd">    &quot;&quot;&quot;</span>
-</span><span id="calibrate_reso-236"><a href="#calibrate_reso-236"><span class="linenos">236</span></a>    <span class="n">wavelength_calibration</span><span class="p">,</span> <span class="n">lamp_spec</span><span class="p">,</span> <span class="n">lamp_measbyReso</span><span class="p">,</span> <span class="n">calibration_smoothed</span> <span class="o">=</span> <span class="p">(</span>
-</span><span id="calibrate_reso-237"><a href="#calibrate_reso-237"><span class="linenos">237</span></a>        <span class="n">load_calibration_data</span><span class="p">(</span><span class="n">calibration_file_path</span><span class="p">)</span>
-</span><span id="calibrate_reso-238"><a href="#calibrate_reso-238"><span class="linenos">238</span></a>    <span class="p">)</span>
-</span><span id="calibrate_reso-239"><a href="#calibrate_reso-239"><span class="linenos">239</span></a>
-</span><span id="calibrate_reso-240"><a href="#calibrate_reso-240"><span class="linenos">240</span></a>    <span class="k">if</span> <span class="n">wavelength_calibration_slope</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">wavelength_calibration_intercept</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="calibrate_reso-241"><a href="#calibrate_reso-241"><span class="linenos">241</span></a>        <span class="n">cal_slope</span> <span class="o">=</span> <span class="mf">1.0</span>
-</span><span id="calibrate_reso-242"><a href="#calibrate_reso-242"><span class="linenos">242</span></a>        <span class="n">cal_intercept</span> <span class="o">=</span> <span class="mf">0.0</span>
-</span><span id="calibrate_reso-243"><a href="#calibrate_reso-243"><span class="linenos">243</span></a>    <span class="k">else</span><span class="p">:</span>
-</span><span id="calibrate_reso-244"><a href="#calibrate_reso-244"><span class="linenos">244</span></a>        <span class="n">cal_slope</span> <span class="o">=</span> <span class="n">wavelength_calibration_slope</span>
-</span><span id="calibrate_reso-245"><a href="#calibrate_reso-245"><span class="linenos">245</span></a>        <span class="n">cal_intercept</span> <span class="o">=</span> <span class="n">wavelength_calibration_intercept</span>
-</span><span id="calibrate_reso-246"><a href="#calibrate_reso-246"><span class="linenos">246</span></a>
-</span><span id="calibrate_reso-247"><a href="#calibrate_reso-247"><span class="linenos">247</span></a>    <span class="k">if</span> <span class="n">stitch</span><span class="p">:</span>
-</span><span id="calibrate_reso-248"><a href="#calibrate_reso-248"><span class="linenos">248</span></a>        <span class="c1"># check that the chosen spectrum (in column) is actually a full one</span>
-</span><span id="calibrate_reso-249"><a href="#calibrate_reso-249"><span class="linenos">249</span></a>        <span class="n">theoretically_complete_wvl</span> <span class="o">=</span> <span class="p">(</span>
-</span><span id="calibrate_reso-250"><a href="#calibrate_reso-250"><span class="linenos">250</span></a>            <span class="n">data</span><span class="p">[:,</span> <span class="mi">7</span> <span class="o">*</span> <span class="p">(</span><span class="n">column</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">cal_slope</span> <span class="o">+</span> <span class="n">cal_intercept</span>
-</span><span id="calibrate_reso-251"><a href="#calibrate_reso-251"><span class="linenos">251</span></a>        <span class="p">)</span>
-</span><span id="calibrate_reso-252"><a href="#calibrate_reso-252"><span class="linenos">252</span></a>        <span class="n">theoretically_complete_wvl</span> <span class="o">=</span> <span class="n">theoretically_complete_wvl</span><span class="p">[</span>
-</span><span id="calibrate_reso-253"><a href="#calibrate_reso-253"><span class="linenos">253</span></a>            <span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">theoretically_complete_wvl</span><span class="p">)</span>
-</span><span id="calibrate_reso-254"><a href="#calibrate_reso-254"><span class="linenos">254</span></a>        <span class="p">]</span>
-</span><span id="calibrate_reso-255"><a href="#calibrate_reso-255"><span class="linenos">255</span></a>        <span class="k">if</span> <span class="n">theoretically_complete_wvl</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">theoretically_complete_wvl</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">900</span><span class="p">:</span>
-</span><span id="calibrate_reso-256"><a href="#calibrate_reso-256"><span class="linenos">256</span></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-</span><span id="calibrate_reso-257"><a href="#calibrate_reso-257"><span class="linenos">257</span></a>                <span class="s2">&quot;in function calibrate(), the spectrum to be stitched is not a full spectrum, please check the column index&quot;</span>
-</span><span id="calibrate_reso-258"><a href="#calibrate_reso-258"><span class="linenos">258</span></a>            <span class="p">)</span>
-</span><span id="calibrate_reso-259"><a href="#calibrate_reso-259"><span class="linenos">259</span></a>
-</span><span id="calibrate_reso-260"><a href="#calibrate_reso-260"><span class="linenos">260</span></a>        <span class="n">extrema</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="calibrate_reso-261"><a href="#calibrate_reso-261"><span class="linenos">261</span></a>        <span class="n">spectra</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="calibrate_reso-262"><a href="#calibrate_reso-262"><span class="linenos">262</span></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
-</span><span id="calibrate_reso-263"><a href="#calibrate_reso-263"><span class="linenos">263</span></a>            <span class="n">wvl_single_sp</span> <span class="o">=</span> <span class="p">(</span>
-</span><span id="calibrate_reso-264"><a href="#calibrate_reso-264"><span class="linenos">264</span></a>                <span class="n">data</span><span class="p">[:,</span> <span class="mi">7</span> <span class="o">*</span> <span class="p">(</span><span class="n">column</span> <span class="o">-</span> <span class="mi">5</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">cal_slope</span> <span class="o">+</span> <span class="n">cal_intercept</span>
-</span><span id="calibrate_reso-265"><a href="#calibrate_reso-265"><span class="linenos">265</span></a>            <span class="p">)</span>
-</span><span id="calibrate_reso-266"><a href="#calibrate_reso-266"><span class="linenos">266</span></a>            <span class="n">single_sp</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">7</span> <span class="o">*</span> <span class="p">(</span><span class="n">column</span> <span class="o">-</span> <span class="mi">5</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span>
-</span><span id="calibrate_reso-267"><a href="#calibrate_reso-267"><span class="linenos">267</span></a>            <span class="k">if</span> <span class="n">dark</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">dark_c</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="calibrate_reso-268"><a href="#calibrate_reso-268"><span class="linenos">268</span></a>                <span class="n">single_sp</span> <span class="o">-=</span> <span class="n">dark</span><span class="p">[:,</span> <span class="mi">7</span> <span class="o">*</span> <span class="p">(</span><span class="n">dark_c</span> <span class="o">-</span> <span class="mi">5</span> <span class="o">+</span> <span class="n">i</span><span class="p">)</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span>
-</span><span id="calibrate_reso-269"><a href="#calibrate_reso-269"><span class="linenos">269</span></a>            <span class="n">wvl_single_sp</span> <span class="o">=</span> <span class="n">wvl_single_sp</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">wvl_single_sp</span><span class="p">)]</span>
-</span><span id="calibrate_reso-270"><a href="#calibrate_reso-270"><span class="linenos">270</span></a>            <span class="n">single_sp</span> <span class="o">=</span> <span class="n">single_sp</span><span class="p">[</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">single_sp</span><span class="p">)]</span>
-</span><span id="calibrate_reso-271"><a href="#calibrate_reso-271"><span class="linenos">271</span></a>            <span class="n">extrema</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">wvl_single_sp</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">wvl_single_sp</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]])</span>
-</span><span id="calibrate_reso-272"><a href="#calibrate_reso-272"><span class="linenos">272</span></a>            <span class="n">spectra</span><span class="o">.</span><span class="n">append</span><span class="p">([</span><span class="n">wvl_single_sp</span><span class="p">,</span> <span class="n">single_sp</span><span class="p">])</span>
-</span><span id="calibrate_reso-273"><a href="#calibrate_reso-273"><span class="linenos">273</span></a>
-</span><span id="calibrate_reso-274"><a href="#calibrate_reso-274"><span class="linenos">274</span></a>        <span class="n">overlaps</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span id="calibrate_reso-275"><a href="#calibrate_reso-275"><span class="linenos">275</span></a>        <span class="n">centers_of_overlap</span> <span class="o">=</span> <span class="p">[</span><span class="n">extrema</span><span class="p">[</span><span class="mi">0</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span>
-</span><span id="calibrate_reso-276"><a href="#calibrate_reso-276"><span class="linenos">276</span></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
-</span><span id="calibrate_reso-277"><a href="#calibrate_reso-277"><span class="linenos">277</span></a>            <span class="n">overlaps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">extrema</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">extrema</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">])</span>
-</span><span id="calibrate_reso-278"><a href="#calibrate_reso-278"><span class="linenos">278</span></a>            <span class="n">centers_of_overlap</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">extrema</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">extrema</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
-</span><span id="calibrate_reso-279"><a href="#calibrate_reso-279"><span class="linenos">279</span></a>
-</span><span id="calibrate_reso-280"><a href="#calibrate_reso-280"><span class="linenos">280</span></a>        <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">overlaps</span><span class="p">)</span>
-</span><span id="calibrate_reso-281"><a href="#calibrate_reso-281"><span class="linenos">281</span></a>        <span class="n">centers_of_overlap</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">extrema</span><span class="p">[</span><span class="mi">4</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="n">w</span> <span class="o">/</span> <span class="mi">2</span><span class="p">)</span>
-</span><span id="calibrate_reso-282"><a href="#calibrate_reso-282"><span class="linenos">282</span></a>        <span class="n">centers_of_overlap</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">centers_of_overlap</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">w</span> <span class="o">/</span> <span class="mi">2</span>
-</span><span id="calibrate_reso-283"><a href="#calibrate_reso-283"><span class="linenos">283</span></a>
-</span><span id="calibrate_reso-284"><a href="#calibrate_reso-284"><span class="linenos">284</span></a>        <span class="n">wavelength</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">7</span> <span class="o">*</span> <span class="n">column</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">cal_slope</span> <span class="o">+</span> <span class="n">cal_intercept</span>
-</span><span id="calibrate_reso-285"><a href="#calibrate_reso-285"><span class="linenos">285</span></a>        <span class="n">spectrum</span> <span class="o">=</span> <span class="n">wavelength</span> <span class="o">*</span> <span class="mf">0.0</span>
-</span><span id="calibrate_reso-286"><a href="#calibrate_reso-286"><span class="linenos">286</span></a>
-</span><span id="calibrate_reso-287"><a href="#calibrate_reso-287"><span class="linenos">287</span></a>        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
-</span><span id="calibrate_reso-288"><a href="#calibrate_reso-288"><span class="linenos">288</span></a>            <span class="n">center</span> <span class="o">=</span> <span class="n">centers_of_overlap</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">centers_of_overlap</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span>
-</span><span id="calibrate_reso-289"><a href="#calibrate_reso-289"><span class="linenos">289</span></a>            <span class="n">FWHM</span> <span class="o">=</span> <span class="n">centers_of_overlap</span><span class="p">[</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">centers_of_overlap</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-</span><span id="calibrate_reso-290"><a href="#calibrate_reso-290"><span class="linenos">290</span></a>            <span class="n">spectrum</span> <span class="o">+=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span>
-</span><span id="calibrate_reso-291"><a href="#calibrate_reso-291"><span class="linenos">291</span></a>                <span class="n">wavelength</span><span class="p">,</span>
-</span><span id="calibrate_reso-292"><a href="#calibrate_reso-292"><span class="linenos">292</span></a>                <span class="n">spectra</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
-</span><span id="calibrate_reso-293"><a href="#calibrate_reso-293"><span class="linenos">293</span></a>                <span class="n">spectra</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">tukey_window</span><span class="p">(</span><span class="n">spectra</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">center</span><span class="p">,</span> <span class="n">FWHM</span><span class="p">,</span> <span class="n">w</span><span class="p">),</span>
-</span><span id="calibrate_reso-294"><a href="#calibrate_reso-294"><span class="linenos">294</span></a>            <span class="p">)</span>
-</span><span id="calibrate_reso-295"><a href="#calibrate_reso-295"><span class="linenos">295</span></a>            <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-</span><span id="calibrate_reso-296"><a href="#calibrate_reso-296"><span class="linenos">296</span></a>                <span class="n">spectra</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
-</span><span id="calibrate_reso-297"><a href="#calibrate_reso-297"><span class="linenos">297</span></a>                <span class="n">spectra</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">tukey_window</span><span class="p">(</span><span class="n">spectra</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span> <span class="n">center</span><span class="p">,</span> <span class="n">FWHM</span><span class="p">,</span> <span class="n">w</span><span class="p">),</span>
-</span><span id="calibrate_reso-298"><a href="#calibrate_reso-298"><span class="linenos">298</span></a>            <span class="p">)</span>
-</span><span id="calibrate_reso-299"><a href="#calibrate_reso-299"><span class="linenos">299</span></a>        <span class="n">calibr_interpolated</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span>
-</span><span id="calibrate_reso-300"><a href="#calibrate_reso-300"><span class="linenos">300</span></a>            <span class="n">wavelength</span><span class="p">,</span> <span class="n">wavelength_calibration</span><span class="p">,</span> <span class="n">calibration_smoothed</span>
-</span><span id="calibrate_reso-301"><a href="#calibrate_reso-301"><span class="linenos">301</span></a>        <span class="p">)</span>
-</span><span id="calibrate_reso-302"><a href="#calibrate_reso-302"><span class="linenos">302</span></a>        <span class="k">if</span> <span class="ow">not</span> <span class="n">null_calibration</span><span class="p">:</span>
-</span><span id="calibrate_reso-303"><a href="#calibrate_reso-303"><span class="linenos">303</span></a>            <span class="n">spectrum</span> <span class="o">*=</span> <span class="n">calibr_interpolated</span>
-</span><span id="calibrate_reso-304"><a href="#calibrate_reso-304"><span class="linenos">304</span></a>
-</span><span id="calibrate_reso-305"><a href="#calibrate_reso-305"><span class="linenos">305</span></a>        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
-</span><span id="calibrate_reso-306"><a href="#calibrate_reso-306"><span class="linenos">306</span></a>            <span class="n">data</span><span class="p">[:,</span> <span class="mi">7</span> <span class="o">*</span> <span class="n">column</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">cal_slope</span> <span class="o">+</span> <span class="n">cal_intercept</span><span class="p">,</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">7</span> <span class="o">*</span> <span class="n">column</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span>
-</span><span id="calibrate_reso-307"><a href="#calibrate_reso-307"><span class="linenos">307</span></a>        <span class="p">)</span>
-</span><span id="calibrate_reso-308"><a href="#calibrate_reso-308"><span class="linenos">308</span></a>        <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">wavelength</span><span class="p">,</span> <span class="n">spectrum</span><span class="p">)</span>
-</span><span id="calibrate_reso-309"><a href="#calibrate_reso-309"><span class="linenos">309</span></a>
-</span><span id="calibrate_reso-310"><a href="#calibrate_reso-310"><span class="linenos">310</span></a>        <span class="k">if</span> <span class="n">w</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="calibrate_reso-311"><a href="#calibrate_reso-311"><span class="linenos">311</span></a>            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-</span><span id="calibrate_reso-312"><a href="#calibrate_reso-312"><span class="linenos">312</span></a>                <span class="s2">&quot;in function calibrate(), the spectra to be stitched do not overlap&quot;</span>
-</span><span id="calibrate_reso-313"><a href="#calibrate_reso-313"><span class="linenos">313</span></a>            <span class="p">)</span>
-</span><span id="calibrate_reso-314"><a href="#calibrate_reso-314"><span class="linenos">314</span></a>
-</span><span id="calibrate_reso-315"><a href="#calibrate_reso-315"><span class="linenos">315</span></a>    <span class="k">else</span><span class="p">:</span>
-</span><span id="calibrate_reso-316"><a href="#calibrate_reso-316"><span class="linenos">316</span></a>        <span class="n">wavelength</span> <span class="o">=</span> <span class="n">data</span><span class="p">[:,</span> <span class="mi">7</span> <span class="o">*</span> <span class="n">column</span> <span class="o">+</span> <span class="mi">1</span><span class="p">]</span> <span class="o">*</span> <span class="n">cal_slope</span> <span class="o">+</span> <span class="n">cal_intercept</span>
-</span><span id="calibrate_reso-317"><a href="#calibrate_reso-317"><span class="linenos">317</span></a>        <span class="k">if</span> <span class="n">dark</span> <span class="ow">is</span> <span class="kc">None</span> <span class="ow">or</span> <span class="n">dark_c</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-</span><span id="calibrate_reso-318"><a href="#calibrate_reso-318"><span class="linenos">318</span></a>            <span class="n">calibr_interpolated</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span>
-</span><span id="calibrate_reso-319"><a href="#calibrate_reso-319"><span class="linenos">319</span></a>                <span class="n">wavelength</span><span class="p">,</span> <span class="n">wavelength_calibration</span><span class="p">,</span> <span class="n">calibration_smoothed</span>
-</span><span id="calibrate_reso-320"><a href="#calibrate_reso-320"><span class="linenos">320</span></a>            <span class="p">)</span>
-</span><span id="calibrate_reso-321"><a href="#calibrate_reso-321"><span class="linenos">321</span></a>            <span class="k">if</span> <span class="n">null_calibration</span><span class="p">:</span>
-</span><span id="calibrate_reso-322"><a href="#calibrate_reso-322"><span class="linenos">322</span></a>                <span class="n">calibr_interpolated</span> <span class="o">=</span> <span class="n">calibr_interpolated</span> <span class="o">*</span> <span class="mf">0.0</span> <span class="o">+</span> <span class="mi">1</span>
-</span><span id="calibrate_reso-323"><a href="#calibrate_reso-323"><span class="linenos">323</span></a>            <span class="n">spectrum</span> <span class="o">=</span> <span class="p">(</span>
-</span><span id="calibrate_reso-324"><a href="#calibrate_reso-324"><span class="linenos">324</span></a>                <span class="n">data</span><span class="p">[:,</span> <span class="mi">7</span> <span class="o">*</span> <span class="n">column</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">min</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">7</span> <span class="o">*</span> <span class="n">column</span> <span class="o">+</span> <span class="mi">2</span><span class="p">])</span>
-</span><span id="calibrate_reso-325"><a href="#calibrate_reso-325"><span class="linenos">325</span></a>            <span class="p">)</span> <span class="o">*</span> <span class="n">calibr_interpolated</span>
-</span><span id="calibrate_reso-326"><a href="#calibrate_reso-326"><span class="linenos">326</span></a>        <span class="k">else</span><span class="p">:</span>
-</span><span id="calibrate_reso-327"><a href="#calibrate_reso-327"><span class="linenos">327</span></a>            <span class="n">calibr_interpolated</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">interp</span><span class="p">(</span>
-</span><span id="calibrate_reso-328"><a href="#calibrate_reso-328"><span class="linenos">328</span></a>                <span class="n">wavelength</span><span class="p">,</span> <span class="n">wavelength_calibration</span><span class="p">,</span> <span class="n">calibration_smoothed</span>
-</span><span id="calibrate_reso-329"><a href="#calibrate_reso-329"><span class="linenos">329</span></a>            <span class="p">)</span>
-</span><span id="calibrate_reso-330"><a href="#calibrate_reso-330"><span class="linenos">330</span></a>            <span class="k">if</span> <span class="n">null_calibration</span><span class="p">:</span>
-</span><span id="calibrate_reso-331"><a href="#calibrate_reso-331"><span class="linenos">331</span></a>                <span class="n">calibr_interpolated</span> <span class="o">=</span> <span class="n">calibr_interpolated</span> <span class="o">*</span> <span class="mf">0.0</span> <span class="o">+</span> <span class="mi">1</span>
-</span><span id="calibrate_reso-332"><a href="#calibrate_reso-332"><span class="linenos">332</span></a>            <span class="n">spectrum</span> <span class="o">=</span> <span class="p">(</span>
-</span><span id="calibrate_reso-333"><a href="#calibrate_reso-333"><span class="linenos">333</span></a>                <span class="n">data</span><span class="p">[:,</span> <span class="mi">7</span> <span class="o">*</span> <span class="n">column</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span> <span class="o">-</span> <span class="n">dark</span><span class="p">[:,</span> <span class="mi">7</span> <span class="o">*</span> <span class="n">dark_c</span> <span class="o">+</span> <span class="mi">2</span><span class="p">]</span>
-</span><span id="calibrate_reso-334"><a href="#calibrate_reso-334"><span class="linenos">334</span></a>            <span class="p">)</span> <span class="o">*</span> <span class="n">calibr_interpolated</span>
-</span><span id="calibrate_reso-335"><a href="#calibrate_reso-335"><span class="linenos">335</span></a>
-</span><span id="calibrate_reso-336"><a href="#calibrate_reso-336"><span class="linenos">336</span></a>            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">7</span> <span class="o">*</span> <span class="n">column</span> <span class="o">+</span> <span class="mi">2</span><span class="p">][</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">7</span> <span class="o">*</span> <span class="n">column</span> <span class="o">+</span> <span class="mi">2</span><span class="p">])])</span> <span class="o">!=</span> <span class="nb">len</span><span class="p">(</span>
-</span><span id="calibrate_reso-337"><a href="#calibrate_reso-337"><span class="linenos">337</span></a>                <span class="n">dark</span><span class="p">[:,</span> <span class="mi">7</span> <span class="o">*</span> <span class="n">dark_c</span> <span class="o">+</span> <span class="mi">2</span><span class="p">][</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">dark</span><span class="p">[:,</span> <span class="mi">7</span> <span class="o">*</span> <span class="n">dark_c</span> <span class="o">+</span> <span class="mi">2</span><span class="p">])]</span>
-</span><span id="calibrate_reso-338"><a href="#calibrate_reso-338"><span class="linenos">338</span></a>            <span class="p">):</span>
-</span><span id="calibrate_reso-339"><a href="#calibrate_reso-339"><span class="linenos">339</span></a>                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span>
-</span><span id="calibrate_reso-340"><a href="#calibrate_reso-340"><span class="linenos">340</span></a>                    <span class="s2">&quot;In function calibrate(), the dark spectrum is not the same length as the spectrum to be calibrated.</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="calibrate_reso-341"><a href="#calibrate_reso-341"><span class="linenos">341</span></a>                    <span class="s2">&quot;Please check the column indices of the dark spectrum and the main spectrum&quot;</span>
-</span><span id="calibrate_reso-342"><a href="#calibrate_reso-342"><span class="linenos">342</span></a>                <span class="p">)</span>
-</span><span id="calibrate_reso-343"><a href="#calibrate_reso-343"><span class="linenos">343</span></a>            <span class="k">if</span> <span class="p">(</span>
-</span><span id="calibrate_reso-344"><a href="#calibrate_reso-344"><span class="linenos">344</span></a>                <span class="n">data</span><span class="p">[:,</span> <span class="mi">7</span> <span class="o">*</span> <span class="n">column</span> <span class="o">+</span> <span class="mi">1</span><span class="p">][</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">data</span><span class="p">[:,</span> <span class="mi">7</span> <span class="o">*</span> <span class="n">column</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])][</span><span class="mi">0</span><span class="p">]</span>
-</span><span id="calibrate_reso-345"><a href="#calibrate_reso-345"><span class="linenos">345</span></a>                <span class="o">!=</span> <span class="n">dark</span><span class="p">[:,</span> <span class="mi">7</span> <span class="o">*</span> <span class="n">dark_c</span> <span class="o">+</span> <span class="mi">2</span><span class="p">][</span><span class="o">~</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">dark</span><span class="p">[:,</span> <span class="mi">7</span> <span class="o">*</span> <span class="n">dark_c</span> <span class="o">+</span> <span class="mi">1</span><span class="p">])][</span><span class="mi">0</span><span class="p">]</span>
-</span><span id="calibrate_reso-346"><a href="#calibrate_reso-346"><span class="linenos">346</span></a>            <span class="p">):</span>
-</span><span id="calibrate_reso-347"><a href="#calibrate_reso-347"><span class="linenos">347</span></a>                <span class="nb">print</span><span class="p">(</span>
-</span><span id="calibrate_reso-348"><a href="#calibrate_reso-348"><span class="linenos">348</span></a>                    <span class="s2">&quot;WARNING: In function calibrate(), the dark spectrum does not have the same wavelength as the spectrum to be calibrated.</span><span class="se">\n</span><span class="s2">&quot;</span>
-</span><span id="calibrate_reso-349"><a href="#calibrate_reso-349"><span class="linenos">349</span></a>                    <span class="s2">&quot;Please check the column indices of the dark spectrum and the main spectrum&quot;</span>
-</span><span id="calibrate_reso-350"><a href="#calibrate_reso-350"><span class="linenos">350</span></a>                <span class="p">)</span>
-</span><span id="calibrate_reso-351"><a href="#calibrate_reso-351"><span class="linenos">351</span></a>
-</span><span id="calibrate_reso-352"><a href="#calibrate_reso-352"><span class="linenos">352</span></a>    <span class="k">if</span> <span class="n">smooth_points</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="n">smooth_points</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
-</span><span id="calibrate_reso-353"><a href="#calibrate_reso-353"><span class="linenos">353</span></a>        <span class="n">spectrum</span> <span class="o">=</span> <span class="n">smooth</span><span class="p">(</span><span class="n">spectrum</span><span class="p">,</span> <span class="n">smooth_points</span><span class="p">)</span>
-</span><span id="calibrate_reso-354"><a href="#calibrate_reso-354"><span class="linenos">354</span></a>    <span class="k">return</span> <span class="n">wavelength</span><span class="p">,</span> <span class="n">spectrum</span>
-</span></pre></div>
-
-
-            <div class="docstring"><p>For the UV spectrometer. Calibrate the spectrum number 'column' in the the 'data' array. Intensity calibration factor is loaded in the first lines of UVSpectrumAnalysis.py.
-    Notice: each saved spectrum has 7 columns in the excel file; however, the argument column refers to the index of the spectrum, not the actual column in the file.</p>
-
-<h6 id="arguments">Arguments:</h6>
-
-<ul>
-<li><strong>data:</strong>  data [numpy] array (see read_spectrometer_excel)</li>
-<li><strong>column:</strong>  index of the spectrum to be calibrated</li>
-<li><strong>calibration_file_path:</strong>  path of the calibration file</li>
-<li><strong>dark:</strong>  dark spectrum (optional)</li>
-<li><strong>dark_c:</strong>  column of the dark spectrum (optional)</li>
-<li><strong>stitch:</strong>  Boolean, if True, the spectra are stitched together (optional, default False)
-if True, the spectrum will be calculated by stitching the 5 partial spectra in the previous columns.
-the stitching only works if the spectrum number 'column' is a FULL-SPECTRUM in the xls file.
-Stitching was implemented because the internal software of the spectrometer is not good enough at it (the saved full spectrum typically has discontinuities).</li>
-<li><strong>smooth_points:</strong>  number of points for smoothing (optional, default 10). if 0, no smoothing is applied</li>
-<li><strong>null_calibration:</strong>  Boolean, if True, the intensity calibration is not applied (optional, default False)</li>
-<li><strong>wavelength_calibration_intercept:</strong>  intercept of the wavelength calibration (optional, default 3.538). If None no wavelength calibration is applied</li>
-<li><strong>wavelength_calibration_slope:</strong>  slope of the wavelength calibration (optional, default 1.003427). If None no wavelength calibration is applied
-Wavelength calibration is in the form λ_true = λ_measured * slope + intercept
-Notice: wavelength calibration has an error of +/- 1  to 2 nm due to the stitching process.
-    for a better calibration compute and apply the correction to each of the 5 partial spectra</li>
-</ul>
-
-<h6 id="returns">Returns:</h6>
-
-<blockquote>
-  <p>wavelength: wavelength array
-  spectrum: calibrated spectrum</p>
-</blockquote>
 </div>
 
 
