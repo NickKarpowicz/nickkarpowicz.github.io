@@ -1,6 +1,6 @@
 import marimo
 
-__generated_with = "0.13.14"
+__generated_with = "0.15.0"
 app = marimo.App(width="medium")
 
 
@@ -21,20 +21,60 @@ def _(mo):
 
 @app.cell
 def _(mo):
-    thickness_slider = mo.ui.slider(start=0.0,stop=300,step=5,value=160.0, label="Thickness (\u03bcm)", show_value=True)
-    frequency_slider = mo.ui.slider(start=101,stop=600,step=1,value=300, label="Frequency (THz)", show_value=True)
-    bandwidth_slider = mo.ui.slider(start=10,stop=200, step=5, value=120, label="Bandwidth (THz)", show_value=True)
-    time_length_slider = mo.ui.slider(start=10, stop=100, step=5, value=40, label="Time range (fs)", show_value=True)
-    N_frequencies_slider = mo.ui.slider(start=3, stop=20, step=1, value=12, label="Number of frequencies", show_value=True)
+    thickness_slider = mo.ui.slider(
+        start=0.0,
+        stop=300,
+        step=1,
+        value=160.0,
+        label="Thickness (\u03bcm)",
+        show_value=True,
+    )
+    frequency_slider = mo.ui.slider(
+        start=101,
+        stop=600,
+        step=1,
+        value=300,
+        label="Frequency (THz)",
+        show_value=True,
+    )
+    bandwidth_slider = mo.ui.slider(
+        start=10,
+        stop=200,
+        step=5,
+        value=120,
+        label="Bandwidth (THz)",
+        show_value=True,
+    )
+    time_length_slider = mo.ui.slider(
+        start=10,
+        stop=100,
+        step=5,
+        value=40,
+        label="Time range (fs)",
+        show_value=True,
+    )
+    N_frequencies_slider = mo.ui.slider(
+        start=1,
+        stop=32,
+        step=1,
+        value=12,
+        label="Number of frequencies",
+        show_value=True,
+    )
+    moving_reference_frame_checkbox = mo.ui.checkbox(
+        value=True, label="Moving reference frame"
+    )
     mo.output.append(thickness_slider)
     mo.output.append(frequency_slider)
     mo.output.append(bandwidth_slider)
     mo.output.append(time_length_slider)
     mo.output.append(N_frequencies_slider)
+    mo.output.append(moving_reference_frame_checkbox)
     return (
         N_frequencies_slider,
         bandwidth_slider,
         frequency_slider,
+        moving_reference_frame_checkbox,
         thickness_slider,
         time_length_slider,
     )
@@ -48,6 +88,7 @@ def _(
     frequency_slider,
     get_group_index,
     lwe,
+    moving_reference_frame_checkbox,
     np,
     plt,
     sellmeier_coefficients,
@@ -56,38 +97,110 @@ def _(
     thickness_slider,
     time_length_slider,
 ):
-    def plot_group_velocity(thickness: float=0.0, t_length: float = time_length_slider.value*1e-15, N_grid: int=1024):
-        f_low = frequency_slider.value - 0.5*bandwidth_slider.value
-        f_high = (f_low+bandwidth_slider.value)
-        freqs = np.linspace(f_low*1e12, (f_low+bandwidth_slider.value)*1e12, N_frequencies_slider.value)
-        lams = 1e6*constants.speed_of_light/freqs
-        ns = np.real(lwe.sellmeier(lams,sellmeier_coefficients,0))
-        _t = np.linspace(-t_length,t_length,N_grid)
-        waves = np.zeros((_t.shape[0],freqs.shape[0]))
-        t0 = ns[0] * thickness / constants.speed_of_light
-        spacing = 12/N_frequencies_slider.value
-        _colors=[]
-        def color_curve(f,f0,sigma):
-            return np.exp(-(f0-f)**2/(2*sigma**2))
+    def plot_group_velocity(
+        thickness: float = 0.0,
+        t_length: float = time_length_slider.value * 1e-15,
+        N_grid: int = 1024,
+    ):
+        f_low = frequency_slider.value - 0.5 * bandwidth_slider.value
+        f_high = frequency_slider.value + 0.5 * bandwidth_slider.value
+        freqs = np.linspace(
+            f_low * 1e12,
+            (f_low + bandwidth_slider.value) * 1e12,
+            N_frequencies_slider.value,
+        )
+        central_freq = np.mean(freqs)
+        lams = 1e6 * constants.speed_of_light / freqs
+        ns = np.real(lwe.sellmeier(lams, sellmeier_coefficients, 0))
+        if moving_reference_frame_checkbox.value:
+            n0 = np.real(
+                lwe.sellmeier(
+                    np.array([1e6 * constants.speed_of_light / central_freq]),
+                    sellmeier_coefficients,
+                    0,
+                )
+            )
+        else:
+            n0 = 0.0
+
+        _t = np.linspace(-t_length, t_length, N_grid)
+        waves = np.zeros((_t.shape[0], freqs.shape[0]))
+        t0 = n0 * thickness / constants.speed_of_light
+        spacing = 12 / N_frequencies_slider.value
+        _colors = []
+
+        def color_curve(f, f0, sigma):
+            return np.exp(-((f0 - f) ** 2) / (2 * sigma**2))
+
         for _i in range(freqs.shape[0]):
-            _colors.append((
-                color_curve(f=freqs[_i]/1e12,f0=1.05*f_low,sigma=0.4*bandwidth_slider.value),
-                color_curve(f=freqs[_i]/1e12,f0=(f_low+f_high)/2,sigma=0.35*bandwidth_slider.value),
-                color_curve(f=freqs[_i]/1e12,f0=0.95*f_high,sigma=0.4*bandwidth_slider.value)))
-            _phase = -thickness * 2*np.pi*freqs[_i] * (ns[_i]-ns[0])/constants.speed_of_light
-            waves[:,_i] = np.cos(2*np.pi*freqs[_i]*_t + _phase)
-            _lineplot, = plt.plot(1e15*_t,waves[:,_i]+spacing*_i,color=_colors[_i],linewidth=1.25)
-            _markerplot, = plt.plot(1e15*(ns[_i]-ns[0]) * thickness/constants.speed_of_light, spacing*_i + 1,'d',color=_colors[_i])
-        n_group = get_group_index(sellmeier_coefficients,0,frequency=np.mean(freqs))
-        plt.plot(1e15*_t,2*np.sum(waves,axis=1)/freqs.shape[0] - 2*spacing,color='black', linewidth=2)
-        plt.plot(1e15*_t,2*np.abs(sig.hilbert(np.sum(waves,axis=1)))/freqs.shape[0] - 2*spacing,color='gray')
-        plt.plot(1e15*(n_group-ns[0]) * thickness/constants.speed_of_light,-2*spacing + 2,'d',color='black')
-        plt.xlim(-1e15*t_length/2,1e15*t_length/2)
+            _colors.append(
+                (
+                    color_curve(
+                        f=freqs[_i] / 1e12,
+                        f0=1 * f_low,
+                        sigma=0.35 * bandwidth_slider.value,
+                    ),
+                    color_curve(
+                        f=freqs[_i] / 1e12,
+                        f0=(f_low + f_high) / 2,
+                        sigma=0.35 * bandwidth_slider.value,
+                    ),
+                    color_curve(
+                        f=freqs[_i] / 1e12,
+                        f0=1 * f_high,
+                        sigma=0.35 * bandwidth_slider.value,
+                    ),
+                )
+            )
+            _phase = (
+                -thickness
+                * 2
+                * np.pi
+                * freqs[_i]
+                * (ns[_i] - n0)
+                / constants.speed_of_light
+            )
+            waves[:, _i] = np.cos(2 * np.pi * freqs[_i] * _t + _phase)
+            (_lineplot,) = plt.plot(
+                1e15 * _t,
+                waves[:, _i] + spacing * _i,
+                color=_colors[_i],
+                linewidth=1.25,
+            )
+            (_markerplot,) = plt.plot(
+                1e15 * (ns[_i] - n0) * thickness / constants.speed_of_light,
+                spacing * _i + 1,
+                "d",
+                color=_colors[_i],
+            )
+        n_group = get_group_index(
+            sellmeier_coefficients, 0, frequency=np.mean(freqs)
+        )
+        plt.plot(
+            1e15 * _t,
+            2 * np.sum(waves, axis=1) / freqs.shape[0] - 2 * spacing,
+            color="black",
+            linewidth=2,
+        )
+        plt.plot(
+            1e15 * _t,
+            2 * np.abs(sig.hilbert(np.sum(waves, axis=1))) / freqs.shape[0]
+            - 2 * spacing,
+            color="gray",
+        )
+        plt.plot(
+            1e15 * (n_group - n0) * thickness / constants.speed_of_light,
+            -2 * spacing + 2,
+            "d",
+            color="black",
+        )
+        plt.xlim(-1e15 * t_length / 2, 1e15 * t_length / 2)
         plt.xlabel("Time (fs)")
         plt.yticks([])
         return plt.gcf()
 
-    plot_group_velocity(thickness=1e-6*thickness_slider.value)
+
+    plot_group_velocity(thickness=1e-6 * thickness_slider.value)
     showmo()
     return
 
@@ -141,7 +254,6 @@ def _(
     plt.xlabel("Wavelength (\u03bcm)")
     plt.ylabel("Index")
     plt.legend()
-    #plt.savefig("group_index.pdf",bbox_inches='tight')
     showmo()
     return gvd, wavelength
 
@@ -151,9 +263,15 @@ def _(gvd, plt, showmo, wavelength):
     plt.plot(wavelength, 1e27*gvd)
     plt.xlabel("Wavelength (\u03bcm)")
     plt.ylabel("GVD (fs$^2$/mm)")
-    #plt.savefig("gdd.pdf",bbox_inches='tight')
     showmo()
     return
+
+
+@app.cell
+def _(eqn_type_input, np, sellmeier_input):
+    sellmeier_coefficients = np.fromstring(sellmeier_input.value, sep=" ")
+    eqn_type = int(eqn_type_input.value)
+    return eqn_type, sellmeier_coefficients
 
 
 @app.cell
@@ -195,6 +313,8 @@ def _():
     from scipy import constants
     import scipy.signal as sig
     import io
+
+    #These are some functions from the attoworld module, that I'm pasting directly to not have to include it since it's not in micropip yet
     def light_plot():
         """
         Use a light style for matplotlib plots.
@@ -256,18 +376,10 @@ def _():
         """
         Helper function to plot as an svg to have vector plots in marimo notebooks
         """
-        # Contributed by Nick Karpowicz
         svg_buffer = io.StringIO()
         plt.savefig(svg_buffer, format='svg')
         return mo.Html(svg_buffer.getvalue())
     return constants, fornberg_stencil, lwe, mo, np, plt, showmo, sig
-
-
-@app.cell
-def _(eqn_type_input, np, sellmeier_input):
-    sellmeier_coefficients = np.fromstring(sellmeier_input.value, sep=" ")
-    eqn_type = int(eqn_type_input.value)
-    return eqn_type, sellmeier_coefficients
 
 
 @app.cell
