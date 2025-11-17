@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="./favicon.ico" />
+    <!-- Preload is necessary because we show these images when we disconnect from the server,
+    but at that point we cannot load these images from the server -->
+    <link rel="preload" href="./assets/gradient-yHQUC_QB.png" as="image" />
+    <link rel="preload" href="./assets/noise-60BoTA8O.png" as="image" />
+    <!-- Preload the fonts -->
+    <link rel="preload" href="./assets/Lora-VariableFont_wght-B2ootaw-.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Regular-CxL0S8W7.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/PTSans-Bold-D9fedIX3.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Regular-BTCkDNvf.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Medium-DU3aDxX5.ttf" as="font" crossorigin="anonymous" />
+    <link rel="preload" href="./assets/FiraMono-Bold-CLVRCuM9.ttf" as="font" crossorigin="anonymous" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta name="description" content="a marimo app" />
+    <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+    <link rel="manifest" href="./manifest.json" />
+
+    <script data-marimo="true">
+      function __resizeIframe(obj) {
+        var scrollbarHeight = 20; // Max between windows, mac, and linux
+
+        function setHeight() {
+          // Guard against race condition where iframe isn't ready
+          if (!obj.contentWindow?.document?.documentElement) {
+            return;
+          }
+          var element = obj.contentWindow.document.documentElement;
+          // If there is no vertical scrollbar, we don't need to resize the iframe
+          if (element.scrollHeight === element.clientHeight) {
+            return;
+          }
+
+          // Create a new height that includes the scrollbar height if it's visible
+          var hasHorizontalScrollbar = element.scrollWidth > element.clientWidth;
+          var newHeight = element.scrollHeight + (hasHorizontalScrollbar ? scrollbarHeight : 0);
+
+          // Only update the height if it's different from the current height
+          if (obj.style.height !== `${newHeight}px`) {
+            obj.style.height = `${newHeight}px`;
+          }
+        }
+
+        // Resize the iframe to the height of the content and bottom scrollbar height
+        setHeight();
+
+        // Resize the iframe when the content changes
+        const resizeObserver = new ResizeObserver((entries) => {
+          setHeight();
+        });
+        // Only observe if iframe content is ready
+        if (obj.contentWindow?.document?.body) {
+          resizeObserver.observe(obj.contentWindow.document.body);
+        }
+      }
+    </script>
+    <marimo-filename hidden>notebook.py</marimo-filename>
+    <!-- TODO(Trevor): Legacy, required by VS Code plugin. Remove when plugin is updated (see marimo/server/_templates/template.py) -->
+    <marimo-version data-version="{{ version }}" hidden></marimo-version>
+    <marimo-user-config data-config="{{ user_config }}" hidden></marimo-user-config>
+    <marimo-server-token data-token="{{ server_token }}" hidden></marimo-server-token>
+    <!-- /TODO -->
+    <title>frog</title>
+    <script type="module" crossorigin src="./assets/index-DUlb-6KU.js"></script>
+    <link rel="modulepreload" crossorigin href="./assets/preload-helper-BnutJmlU.js">
+    <link rel="modulepreload" crossorigin href="./assets/chunk-DZLz74EQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-cj45iF1i.js">
+    <link rel="modulepreload" crossorigin href="./assets/compiler-runtime-bbSa6V1W.js">
+    <link rel="modulepreload" crossorigin href="./assets/jsx-runtime-DmpivWpf.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEventListener-DVwjxFkt.js">
+    <link rel="modulepreload" crossorigin href="./assets/react-dom-BjyRIiB0.js">
+    <link rel="modulepreload" crossorigin href="./assets/Combination-CJczP3q7.js">
+    <link rel="modulepreload" crossorigin href="./assets/clsx-BlAkgCmw.js">
+    <link rel="modulepreload" crossorigin href="./assets/cn-BaXqCYqP.js">
+    <link rel="modulepreload" crossorigin href="./assets/menu-items-CKlDAcIy.js">
+    <link rel="modulepreload" crossorigin href="./assets/hotkeys-jCLisiwR.js">
+    <link rel="modulepreload" crossorigin href="./assets/button-DCB7VoVL.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Cn3C5h2V.js">
+    <link rel="modulepreload" crossorigin href="./assets/createLucideIcon-DbfgBYhq.js">
+    <link rel="modulepreload" crossorigin href="./assets/check-DqnGmZZE.js">
+    <link rel="modulepreload" crossorigin href="./assets/select-E33nSIDn.js">
+    <link rel="modulepreload" crossorigin href="./assets/multi-map-CMSc8wqP.js">
+    <link rel="modulepreload" crossorigin href="./assets/chevron-right-Bu29x-gp.js">
+    <link rel="modulepreload" crossorigin href="./assets/dropdown-menu-k3cvSs56.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-QlUG_0sW.js">
+    <link rel="modulepreload" crossorigin href="./assets/_Uint8Array-D5Z9rM2X.js">
+    <link rel="modulepreload" crossorigin href="./assets/_getTag-CVRrQL_Q.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseIsEqual-CVFfFJm2.js">
+    <link rel="modulepreload" crossorigin href="./assets/jotai-C7U7c6dd.js">
+    <link rel="modulepreload" crossorigin href="./assets/invariant-D5a0EE05.js">
+    <link rel="modulepreload" crossorigin href="./assets/isArrayLikeObject-DKyJYtr8.js">
+    <link rel="modulepreload" crossorigin href="./assets/merge-Dvc5opZF.js">
+    <link rel="modulepreload" crossorigin href="./assets/zod-U2NFpcFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/utils-BPcfRUDE.js">
+    <link rel="modulepreload" crossorigin href="./assets/requests-CftYh9v2.js">
+    <link rel="modulepreload" crossorigin href="./assets/once-C5bmD4W5.js">
+    <link rel="modulepreload" crossorigin href="./assets/toDate-CbcWqY6f.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSlice-BWZ0PeaJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayMap-DQI2GUNb.js">
+    <link rel="modulepreload" crossorigin href="./assets/isSymbol-xTSywenE.js">
+    <link rel="modulepreload" crossorigin href="./assets/toString-CBnct2wx.js">
+    <link rel="modulepreload" crossorigin href="./assets/_hasUnicode-3DIK_jNi.js">
+    <link rel="modulepreload" crossorigin href="./assets/upperFirst-CBQfDRod.js">
+    <link rel="modulepreload" crossorigin href="./assets/capitalize-CBqvgOfA.js">
+    <link rel="modulepreload" crossorigin href="./assets/ai-model-dropdown-BuNmF2aO.js">
+    <link rel="modulepreload" crossorigin href="./assets/badge-DrRlgkPx.js">
+    <link rel="modulepreload" crossorigin href="./assets/use-toast-BBrPeu2N.js">
+    <link rel="modulepreload" crossorigin href="./assets/constants-CEISdYm1.js">
+    <link rel="modulepreload" crossorigin href="./assets/Deferred-NfAvvkGM.js">
+    <link rel="modulepreload" crossorigin href="./assets/config-DOzlN8_n.js">
+    <link rel="modulepreload" crossorigin href="./assets/uuid-D0hUC3Qw.js">
+    <link rel="modulepreload" crossorigin href="./assets/key-CaC9xuXQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/connection-DOETP_K0.js">
+    <link rel="modulepreload" crossorigin href="./assets/useLifecycle-DiLWmtpP.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNonce-CElEIK4R.js">
+    <link rel="modulepreload" crossorigin href="./assets/capabilities-MLRWIHmO.js">
+    <link rel="modulepreload" crossorigin href="./assets/createReducer-CTvsuJZY.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-C6GW8SWp.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-0FJpM7wG.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BFSjfL-I.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BrS3KFEl.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DvTgOH5F.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CZkQ2hcE.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DrAMGx2E.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-YP2XXp1Z.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CvIoRIOp.js">
+    <link rel="modulepreload" crossorigin href="./assets/stex-xveX5l_T.js">
+    <link rel="modulepreload" crossorigin href="./assets/cjs-Ck8KMDI1.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseProperty-c4IQJQis.js">
+    <link rel="modulepreload" crossorigin href="./assets/toNumber-CTOPJrpu.js">
+    <link rel="modulepreload" crossorigin href="./assets/now-BXqTLlmI.js">
+    <link rel="modulepreload" crossorigin href="./assets/debounce-BUM2losY.js">
+    <link rel="modulepreload" crossorigin href="./assets/toInteger-Bor4StOs.js">
+    <link rel="modulepreload" crossorigin href="./assets/type-CnQq0uaD.js">
+    <link rel="modulepreload" crossorigin href="./assets/marked.esm-BV7g2d65.js">
+    <link rel="modulepreload" crossorigin href="./assets/main-ChjX94eX.js">
+    <link rel="modulepreload" crossorigin href="./assets/cells-CAMtfgeb.js">
+    <link rel="modulepreload" crossorigin href="./assets/kbd-BEZA_QXE.js">
+    <link rel="modulepreload" crossorigin href="./assets/renderShortcut-Cp1zXREV.js">
+    <link rel="modulepreload" crossorigin href="./assets/useEvent-mw3fc-le.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeleteCell-yV4YK-xy.js">
+    <link rel="modulepreload" crossorigin href="./assets/lazy-NLnLn6Pi.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-D-ie3mwB.js">
+    <link rel="modulepreload" crossorigin href="./assets/precisionRound-JPbfj2M2.js">
+    <link rel="modulepreload" crossorigin href="./assets/defaultLocale-DzEPn_Ia.js">
+    <link rel="modulepreload" crossorigin href="./assets/vega-loader.browser-BJKnSXO3.js">
+    <link rel="modulepreload" crossorigin href="./assets/tooltip-CyyA9NKX.js">
+    <link rel="modulepreload" crossorigin href="./assets/ErrorBoundary-Bu1xrDr8.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-dialog-DkIHCxse.js">
+    <link rel="modulepreload" crossorigin href="./assets/dialog-DZWinI5N.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDebounce-Dc646H0x.js">
+    <link rel="modulepreload" crossorigin href="./assets/numbers-BrVMv_xq.js">
+    <link rel="modulepreload" crossorigin href="./assets/SSRProvider-3gFeNiun.js">
+    <link rel="modulepreload" crossorigin href="./assets/context-By5V2JVn.js">
+    <link rel="modulepreload" crossorigin href="./assets/useNumberFormatter-BFHkt56k.js">
+    <link rel="modulepreload" crossorigin href="./assets/usePress-CqxmpITG.js">
+    <link rel="modulepreload" crossorigin href="./assets/input-lkQFhlrZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/ImperativeModal-kroC_7ut.js">
+    <link rel="modulepreload" crossorigin href="./assets/cell-link-CGc-QK-U.js">
+    <link rel="modulepreload" crossorigin href="./assets/alert-DZiaW65G.js">
+    <link rel="modulepreload" crossorigin href="./assets/links-Cd3tV5IK.js">
+    <link rel="modulepreload" crossorigin href="./assets/state-dWjslxDZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/MarimoErrorOutput-CkZl2oHu.js">
+    <link rel="modulepreload" crossorigin href="./assets/spinner-CM1AwwT-.js">
+    <link rel="modulepreload" crossorigin href="./assets/_arrayReduce-DV4IVFuG.js">
+    <link rel="modulepreload" crossorigin href="./assets/startCase-RfubwhHM.js">
+    <link rel="modulepreload" crossorigin href="./assets/strings-jhyl_xMu.js">
+    <link rel="modulepreload" crossorigin href="./assets/command-CgWi9W7A.js">
+    <link rel="modulepreload" crossorigin href="./assets/popover-ieUH9gue.js">
+    <link rel="modulepreload" crossorigin href="./assets/useRunCells-DSf9mKXo.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-zuiMeyCQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-4VJP-N0g.js">
+    <link rel="modulepreload" crossorigin href="./assets/copy-icon-DFLZbTfh.js">
+    <link rel="modulepreload" crossorigin href="./assets/mode-BAOMKXFj.js">
+    <link rel="modulepreload" crossorigin href="./assets/purify.es-BNe8OHFA.js">
+    <link rel="modulepreload" crossorigin href="./assets/RenderHTML-DII6L-pL.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-Ny605LgF.js">
+    <link rel="modulepreload" crossorigin href="./assets/tabs-DvBunSCS.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAsyncData-BIQYiPhO.js">
+    <link rel="modulepreload" crossorigin href="./assets/useIframeCapabilities-CRfeZulz.js">
+    <link rel="modulepreload" crossorigin href="./assets/error-banner-B98iBZZ2.js">
+    <link rel="modulepreload" crossorigin href="./assets/formats-Dmio8FVx.js">
+    <link rel="modulepreload" crossorigin href="./assets/useTheme-Dsb69ewj.js">
+    <link rel="modulepreload" crossorigin href="./assets/en-US-Cok_jNd9.js">
+    <link rel="modulepreload" crossorigin href="./assets/isValid-BhOWABEg.js">
+    <link rel="modulepreload" crossorigin href="./assets/maps-B9m998ly.js">
+    <link rel="modulepreload" crossorigin href="./assets/shim-DuR5ZJNr.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-C81Fxkfa.js">
+    <link rel="modulepreload" crossorigin href="./assets/extends-BADOB1Xm.js">
+    <link rel="modulepreload" crossorigin href="./assets/emotion-is-prop-valid.esm-DY_d0mBI.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDateFormatter-DHQNk42q.js">
+    <link rel="modulepreload" crossorigin href="./assets/range-ZclXTdAh.js">
+    <link rel="modulepreload" crossorigin href="./assets/table-CTK995oK.js">
+    <link rel="modulepreload" crossorigin href="./assets/Output-bwodJiCi.js">
+    <link rel="modulepreload" crossorigin href="./assets/name-cell-input-kfZkR5qv.js">
+    <link rel="modulepreload" crossorigin href="./assets/useHotkey-VwOksnmL.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-B1wJF59y.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-D4dFcbt8.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CzaCAuEN.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CrvuMM2L.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-DZAt7AHl.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-Bu5OuYeo.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist--8e9VGsl.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-SXxUBTmG.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-D84pVwY7.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CXTAKsYC.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-BUfDRi87.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-CJIkd1DM.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-D5QNAo1x.js">
+    <link rel="modulepreload" crossorigin href="./assets/apl-CAJ5Afpm.js">
+    <link rel="modulepreload" crossorigin href="./assets/asciiarmor-B3glo3Hy.js">
+    <link rel="modulepreload" crossorigin href="./assets/asn1-iaUkdUJn.js">
+    <link rel="modulepreload" crossorigin href="./assets/brainfuck-C1Bv_mwK.js">
+    <link rel="modulepreload" crossorigin href="./assets/clike-BEDWkorR.js">
+    <link rel="modulepreload" crossorigin href="./assets/clojure-g07QXTjj.js">
+    <link rel="modulepreload" crossorigin href="./assets/cmake-DnTqIimN.js">
+    <link rel="modulepreload" crossorigin href="./assets/cobol-BKtG7u9D.js">
+    <link rel="modulepreload" crossorigin href="./assets/coffeescript-D5EX_wGl.js">
+    <link rel="modulepreload" crossorigin href="./assets/commonlisp-QBdsjaTi.js">
+    <link rel="modulepreload" crossorigin href="./assets/crystal-B0kV858U.js">
+    <link rel="modulepreload" crossorigin href="./assets/css-lnqtDlV_.js">
+    <link rel="modulepreload" crossorigin href="./assets/cypher-B_ciRc6O.js">
+    <link rel="modulepreload" crossorigin href="./assets/d-sGSUUdz9.js">
+    <link rel="modulepreload" crossorigin href="./assets/diff-okFUO1eS.js">
+    <link rel="modulepreload" crossorigin href="./assets/dtd-Covqp7FW.js">
+    <link rel="modulepreload" crossorigin href="./assets/dylan-Bf_wFnkY.js">
+    <link rel="modulepreload" crossorigin href="./assets/ecl-BON4bJzJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/eiffel-CWbinnR3.js">
+    <link rel="modulepreload" crossorigin href="./assets/elm-DKVclpIr.js">
+    <link rel="modulepreload" crossorigin href="./assets/erlang-D7Lapqoo.js">
+    <link rel="modulepreload" crossorigin href="./assets/simple-mode-NsCUKpko.js">
+    <link rel="modulepreload" crossorigin href="./assets/factor-B2ESt4eh.js">
+    <link rel="modulepreload" crossorigin href="./assets/forth-CCfEYbe1.js">
+    <link rel="modulepreload" crossorigin href="./assets/fortran-ph1UcBiZ.js">
+    <link rel="modulepreload" crossorigin href="./assets/gas-BwHh1zIK.js">
+    <link rel="modulepreload" crossorigin href="./assets/gherkin-a-S-92sq.js">
+    <link rel="modulepreload" crossorigin href="./assets/groovy-W6xB3OYy.js">
+    <link rel="modulepreload" crossorigin href="./assets/haskell-DCE9UteQ.js">
+    <link rel="modulepreload" crossorigin href="./assets/haxe-CLcQehNU.js">
+    <link rel="modulepreload" crossorigin href="./assets/idl-VKcM9gU6.js">
+    <link rel="modulepreload" crossorigin href="./assets/javascript-3wn7R2v8.js">
+    <link rel="modulepreload" crossorigin href="./assets/julia-CfdFJG3K.js">
+    <link rel="modulepreload" crossorigin href="./assets/livescript-FcXY3DYa.js">
+    <link rel="modulepreload" crossorigin href="./assets/lua-Co6rjiMf.js">
+    <link rel="modulepreload" crossorigin href="./assets/mathematica-yb42KhnJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/mbox-Kdy3h0JS.js">
+    <link rel="modulepreload" crossorigin href="./assets/mirc-DIfBuSAc.js">
+    <link rel="modulepreload" crossorigin href="./assets/mllike-BBifUJsv.js">
+    <link rel="modulepreload" crossorigin href="./assets/modelica-DfSVZeoi.js">
+    <link rel="modulepreload" crossorigin href="./assets/mscgen-BCcB4vmY.js">
+    <link rel="modulepreload" crossorigin href="./assets/mumps-Zs7zFruB.js">
+    <link rel="modulepreload" crossorigin href="./assets/nsis-z1VCt9tx.js">
+    <link rel="modulepreload" crossorigin href="./assets/ntriples-BZ-Gx5MV.js">
+    <link rel="modulepreload" crossorigin href="./assets/octave-DbhnFGQl.js">
+    <link rel="modulepreload" crossorigin href="./assets/oz-C8cfEyhB.js">
+    <link rel="modulepreload" crossorigin href="./assets/pascal-DjQLfZxE.js">
+    <link rel="modulepreload" crossorigin href="./assets/perl-BbHwsgL1.js">
+    <link rel="modulepreload" crossorigin href="./assets/pig-siFNrhhJ.js">
+    <link rel="modulepreload" crossorigin href="./assets/powershell-DtGrdgtc.js">
+    <link rel="modulepreload" crossorigin href="./assets/properties-ThqBcpfC.js">
+    <link rel="modulepreload" crossorigin href="./assets/protobuf-RiYv9VfD.js">
+    <link rel="modulepreload" crossorigin href="./assets/pug-CaaLw7eE.js">
+    <link rel="modulepreload" crossorigin href="./assets/puppet-U5CQLRYv.js">
+    <link rel="modulepreload" crossorigin href="./assets/python-Dt99D71K.js">
+    <link rel="modulepreload" crossorigin href="./assets/q-DIhdXtBp.js">
+    <link rel="modulepreload" crossorigin href="./assets/r-CWawXx6U.js">
+    <link rel="modulepreload" crossorigin href="./assets/rpm-CNr8ALvx.js">
+    <link rel="modulepreload" crossorigin href="./assets/ruby-DskfS84U.js">
+    <link rel="modulepreload" crossorigin href="./assets/sas-C2b2tSOH.js">
+    <link rel="modulepreload" crossorigin href="./assets/scheme-Cmmcrp64.js">
+    <link rel="modulepreload" crossorigin href="./assets/shell-Dyv1aCg9.js">
+    <link rel="modulepreload" crossorigin href="./assets/sieve-B_dGzCIS.js">
+    <link rel="modulepreload" crossorigin href="./assets/smalltalk-intFzbz6.js">
+    <link rel="modulepreload" crossorigin href="./assets/sparql-BX1c9HJU.js">
+    <link rel="modulepreload" crossorigin href="./assets/stylus-X6xt1FMB.js">
+    <link rel="modulepreload" crossorigin href="./assets/swift-BYNJXGdg.js">
+    <link rel="modulepreload" crossorigin href="./assets/tcl-BaybuQuE.js">
+    <link rel="modulepreload" crossorigin href="./assets/textile-77KFAyfi.js">
+    <link rel="modulepreload" crossorigin href="./assets/toml-D6E8t1IG.js">
+    <link rel="modulepreload" crossorigin href="./assets/troff-BfktZMhT.js">
+    <link rel="modulepreload" crossorigin href="./assets/ttcn-cfg-CstA0KVC.js">
+    <link rel="modulepreload" crossorigin href="./assets/ttcn-DOlRqUFL.js">
+    <link rel="modulepreload" crossorigin href="./assets/turtle-Cx-tHjh2.js">
+    <link rel="modulepreload" crossorigin href="./assets/vb-DerFRxqu.js">
+    <link rel="modulepreload" crossorigin href="./assets/vbscript-BPEY3B7J.js">
+    <link rel="modulepreload" crossorigin href="./assets/velocity-B-lFP8Gk.js">
+    <link rel="modulepreload" crossorigin href="./assets/verilog-C9TzcLDl.js">
+    <link rel="modulepreload" crossorigin href="./assets/vhdl-v8a_uH2H.js">
+    <link rel="modulepreload" crossorigin href="./assets/webidl-DmZw40AA.js">
+    <link rel="modulepreload" crossorigin href="./assets/xquery-BrIWpdRx.js">
+    <link rel="modulepreload" crossorigin href="./assets/yacas-ofPECLUx.js">
+    <link rel="modulepreload" crossorigin href="./assets/z80-DrGVKC-O.js">
+    <link rel="modulepreload" crossorigin href="./assets/esm-BJLcBgU0.js">
+    <link rel="modulepreload" crossorigin href="./assets/objectWithoutPropertiesLoose-BhduYW5j.js">
+    <link rel="modulepreload" crossorigin href="./assets/esm-DXZXojh_.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-C8_hvhi2.js">
+    <link rel="modulepreload" crossorigin href="./assets/ConsoleOutput-BwPQWTZk.js">
+    <link rel="modulepreload" crossorigin href="./assets/icons-DVWpV4I_.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-missing-import-CgnlhMvv.js">
+    <link rel="modulepreload" crossorigin href="./assets/blob-BgGJeXvG.js">
+    <link rel="modulepreload" crossorigin href="./assets/add-cell-with-ai-B5g8vtHB.js">
+    <link rel="modulepreload" crossorigin href="./assets/chart-no-axes-column-C14EHesU.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-function-C7Ij9TAd.js">
+    <link rel="modulepreload" crossorigin href="./assets/spec-D64rpvwX.js">
+    <link rel="modulepreload" crossorigin href="./assets/focus-Bg0Cm8D6.js">
+    <link rel="modulepreload" crossorigin href="./assets/useInstallPackage-CX-LUKF-.js">
+    <link rel="modulepreload" crossorigin href="./assets/column-preview-CEDUFvMb.js">
+    <link rel="modulepreload" crossorigin href="./assets/useAddCell-C5hu4Wun.js">
+    <link rel="modulepreload" crossorigin href="./assets/toggle-6a-IWcUo.js">
+    <link rel="modulepreload" crossorigin href="./assets/api-B8WZp3pa.js">
+    <link rel="modulepreload" crossorigin href="./assets/globals-DlvGFwxH.js">
+    <link rel="modulepreload" crossorigin href="./assets/share-Cyx6Ke3B.js">
+    <link rel="modulepreload" crossorigin href="./assets/dist-D4J1GeSh.js">
+    <link rel="modulepreload" crossorigin href="./assets/memoize-DhF8x4Aa.js">
+    <link rel="modulepreload" crossorigin href="./assets/_toKey-16owuO_q.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseSet-L2qemYhz.js">
+    <link rel="modulepreload" crossorigin href="./assets/utilities.esm-BUZA9ZNB.js">
+    <link rel="modulepreload" crossorigin href="./assets/floating-outline-DJ1FXuVN.js">
+    <link rel="modulepreload" crossorigin href="./assets/eye-off-DNEZNQI7.js">
+    <link rel="modulepreload" crossorigin href="./assets/plus-VNKMcdhl.js">
+    <link rel="modulepreload" crossorigin href="./assets/readonly-python-code-B1LohqR_.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-video-camera-Bt4f7oOT.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-text-KeEJTZsk.js">
+    <link rel="modulepreload" crossorigin href="./assets/file-DU2hKpP7.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-CKcqkReK.js">
+    <link rel="modulepreload" crossorigin href="./assets/label-BnC8-64i.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-x7Qa7Rrh.js">
+    <link rel="modulepreload" crossorigin href="./assets/textarea-faXBMy_c.js">
+    <link rel="modulepreload" crossorigin href="./assets/circle-x-65ujNh_O.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-ccw-Dmg0YI4-.js">
+    <link rel="modulepreload" crossorigin href="./assets/trash-2-BsccpX3E.js">
+    <link rel="modulepreload" crossorigin href="./assets/form-CAATHPdC.js">
+    <link rel="modulepreload" crossorigin href="./assets/field-D6TVJZGU.js">
+    <link rel="modulepreload" crossorigin href="./assets/switch-DBfU9QHL.js">
+    <link rel="modulepreload" crossorigin href="./assets/useBoolean-Do2iSPXV.js">
+    <link rel="modulepreload" crossorigin href="./assets/useDeepCompareMemoize-DVzR9zu0.js">
+    <link rel="modulepreload" crossorigin href="./assets/LazyAnyLanguageCodeMirror-C5EeHVjE.js">
+    <link rel="modulepreload" crossorigin href="./assets/types-BfF9hgo8.js">
+    <link rel="modulepreload" crossorigin href="./assets/prop-types-DVt2dPhq.js">
+    <link rel="modulepreload" crossorigin href="./assets/es-Bve1w9dd.js">
+    <link rel="modulepreload" crossorigin href="./assets/VisuallyHidden-BhVlvbgE.js">
+    <link rel="modulepreload" crossorigin href="./assets/_baseFlatten-ViL-mfkw.js">
+    <link rel="modulepreload" crossorigin href="./assets/get-BUGWIXZE.js">
+    <link rel="modulepreload" crossorigin href="./assets/hasIn-BgJKauE7.js">
+    <link rel="modulepreload" crossorigin href="./assets/_basePickBy-CSDa7ReR.js">
+    <link rel="modulepreload" crossorigin href="./assets/pick-BQzWKfma.js">
+    <link rel="modulepreload" crossorigin href="./assets/square-C2sucLEB.js">
+    <link rel="modulepreload" crossorigin href="./assets/download-BYnrx3yk.js">
+    <link rel="modulepreload" crossorigin href="./assets/globe-DW6c4--m.js">
+    <link rel="modulepreload" crossorigin href="./assets/send-DjnZs47z.js">
+    <link rel="modulepreload" crossorigin href="./assets/refresh-cw-z53rVhjq.js">
+    <link rel="modulepreload" crossorigin href="./assets/settings-Dt7V2Blo.js">
+    <link rel="modulepreload" crossorigin href="./assets/triangle-alert-DoSv9yQr.js">
+    <link rel="modulepreload" crossorigin href="./assets/bundle.esm-CC-LjhS-.js">
+    <link rel="stylesheet" crossorigin href="./assets/cells-BvrC6Bsv.css">
+    <link rel="stylesheet" crossorigin href="./assets/Output-j3zW187k.css">
+    <link rel="stylesheet" crossorigin href="./assets/ConsoleOutput-BFFTcC5Y.css">
+    <link rel="stylesheet" crossorigin href="./assets/index-CYOH-TAt.css">
+  <marimo-wasm hidden=""></marimo-wasm>
+    <script>
+        if (window.location.protocol === 'file:') {
+            alert('Warning: This file must be served by an HTTP server to function correctly.');
+        }
+    </script>
+    
+    <style>
+        #save-button {
+            display: none !important;
+        }
+        #filename-input {
+            display: none !important;
+        }
+    </style>
+    <marimo-code hidden="">import%20marimo%0A%0A__generated_with%20%3D%20%220.17.8%22%0Aapp%20%3D%20marimo.App(width%3D%22medium%22)%0A%0A%0A%40app.cell%0Aasync%20def%20_()%3A%0A%20%20%20%20import%20marimo%20as%20mo%0A%0A%20%20%20%20%23%20check%20if%20running%20in%20a%20browser%20for%20extra%20setup%0A%20%20%20%20import%20sys%0A%20%20%20%20is_in_web_notebook%20%3D%20sys.platform%20%3D%3D%20%22emscripten%22%0A%20%20%20%20if%20is_in_web_notebook%3A%0A%20%20%20%20%20%20%20%20import%20micropip%0A%20%20%20%20%20%20%20%20import%20zipfile%0A%20%20%20%20%20%20%20%20await%20micropip.install(%0A%20%20%20%20%20%20%20%20%20%20%20%20%22https%3A%2F%2Fnickkarpowicz.github.io%2Fwheels%2Fattoworld-2025.0.45-cp312-cp312-emscripten_3_1_58_wasm32.whl%22%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20def%20display_download_link_from_file(%0A%20%20%20%20%20%20%20%20%20%20%20%20path%2C%20output_name%2C%20mime_type%3D%22text%2Fplain%22%0A%20%20%20%20%20%20%20%20)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20with%20open(path%2C%20%22rb%22)%20as%20_file%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20mo.output.append(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20mo.download(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20data%3D_file%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20filename%3Doutput_name%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20mimetype%3Dmime_type%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20label%3Df%22Download%20%7Boutput_name%7D%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20)%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20import%20tkinter%20as%20tk%0A%20%20%20%20%20%20%20%20from%20tkinter%20import%20filedialog%0A%0A%20%20%20%20%20%20%20%20root%20%3D%20tk.Tk()%0A%20%20%20%20%20%20%20%20root.withdraw()%0A%0A%20%20%20%20import%20attoworld%20as%20aw%0A%20%20%20%20import%20numpy%20as%20np%0A%20%20%20%20import%20pathlib%0A%20%20%20%20import%20time%0A%0A%20%20%20%20aw.plot.set_style(%22nick_dark%22)%0A%20%20%20%20return%20(%0A%20%20%20%20%20%20%20%20aw%2C%0A%20%20%20%20%20%20%20%20display_download_link_from_file%2C%0A%20%20%20%20%20%20%20%20filedialog%2C%0A%20%20%20%20%20%20%20%20is_in_web_notebook%2C%0A%20%20%20%20%20%20%20%20mo%2C%0A%20%20%20%20%20%20%20%20np%2C%0A%20%20%20%20%20%20%20%20pathlib%2C%0A%20%20%20%20%20%20%20%20time%2C%0A%20%20%20%20%20%20%20%20zipfile%2C%0A%20%20%20%20)%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20mo.output.append(mo.md(%22%23%20FROG%20Reconstruction%3A%22))%0A%20%20%20%20mo.output.append(mo.md(%22---%22))%0A%20%20%20%20mo.output.append(mo.md(%22%23%23%23%20Select%20your%20FROG%20file%3A%22))%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20file_browser%20%3D%20mo.ui.file(filetypes%3D%5B%22.dwc%22%5D%2C%20label%3D%22Select%20.dwc%20file%22)%0A%20%20%20%20file_browser%0A%20%20%20%20return%20(file_browser%2C)%0A%0A%0A%40app.cell%0Adef%20_(aw%2C%20mo)%3A%0A%20%20%20%20calibration_selector%20%3D%20mo.ui.dropdown(options%3D%5Be.value%20for%20e%20in%20aw.spectrum.CalibrationData%5D%2Clabel%3D%22Calibration%3A%22)%0A%20%20%20%20calibration_selector%0A%20%20%20%20return%20(calibration_selector%2C)%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20mode_selector%20%3D%20mo.ui.dropdown(options%3D%5B%22SHG%20GP%22%2C%20%22SHG%20ptychographic%22%2C%20%22THG%22%2C%20%22Kerr%22%2C%20%22XFROG%22%2C%20%22BlindFROG%22%5D%2C%20label%3D%22FROG%20type%3A%22%2C%20value%3D%22SHG%20ptychographic%22)%0A%20%20%20%20mode_selector%0A%20%20%20%20return%20(mode_selector%2C)%0A%0A%0A%40app.cell%0Adef%20_(mo%2C%20mode_selector)%3A%0A%20%20%20%20xfrog_reference_file%20%3D%20mo.ui.file(filetypes%3D%5B%22.yml%22%2C%22.dat%22%5D%2C%20label%3D%22Select%20reference%20file%22)%0A%20%20%20%20xfrog_time_reverse_checkbox%20%3D%20mo.ui.checkbox(label%3D%22Reverse%20time%22)%0A%20%20%20%20if(mode_selector.value%20%3D%3D%20%22XFROG%22)%3A%0A%20%20%20%20%20%20%20%20mo.output.append(mo.md(%22---%22))%0A%20%20%20%20%20%20%20%20mo.output.append(mo.md(%22%23%23%23%20XFROG%20Reference%3A%22))%0A%20%20%20%20%20%20%20%20mo.output.append(xfrog_reference_file)%0A%20%20%20%20%20%20%20%20mo.output.append(xfrog_time_reverse_checkbox)%0A%20%20%20%20return%20xfrog_reference_file%2C%20xfrog_time_reverse_checkbox%0A%0A%0A%40app.cell%0Adef%20_(%0A%20%20%20%20aw%2C%0A%20%20%20%20mo%2C%0A%20%20%20%20mode_selector%2C%0A%20%20%20%20np%2C%0A%20%20%20%20pathlib%2C%0A%20%20%20%20xfrog_reference_file%2C%0A%20%20%20%20xfrog_time_reverse_checkbox%2C%0A)%3A%0A%20%20%20%20if((mode_selector.value%20%3D%3D%20%22XFROG%22)%20and%20(xfrog_reference_file.name()%20is%20not%20None))%3A%0A%20%20%20%20%20%20%20%20mo.output.append(mo.md(%22%23%23%23%20Loaded%20reference%3A%22))%0A%20%20%20%20%20%20%20%20_type%20%3D%20pathlib.Path(xfrog_reference_file.name()).suffix%0A%20%20%20%20%20%20%20%20if%20_type%20%3D%3D%20%22.yml%22%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20xfrog_reference%20%3D%20aw.data.FrogData.load_yaml_bytestream(xfrog_reference_file.contents())%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20xfrog_time_reverse_checkbox.value%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20xfrog_reference.raw_reconstruction%20%3D%20np.flipud(xfrog_reference.raw_reconstruction)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20xfrog_reference.pulse.wave%20%3D%20np.flipud(xfrog_reference.pulse.wave)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20xfrog_reference.spectrum.spectrum%20%3D%20np.conj(xfrog_reference.spectrum.spectrum)%0A%20%20%20%20%20%20%20%20%20%20%20%20xfrog_reference.plot_all(figsize%3D(9%2C6))%0A%20%20%20%20%20%20%20%20%20%20%20%20aw.plot.showmo()%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20xfrog_reference%3DNone%0A%20%20%20%20return%20(xfrog_reference%2C)%0A%0A%0A%40app.cell%0Adef%20_(aw%2C%20calibration_selector%2C%20file_browser%2C%20mo%2C%20np)%3A%0A%20%20%20%20_path%20%3D%20file_browser.contents()%0A%20%20%20%20if%20_path%20is%20not%20None%3A%0A%20%20%20%20%20%20%20%20input_data%20%3D%20aw.data.read_dwc(file_or_path%3D_path%2C%20is_buffer%3DTrue)%0A%20%20%20%20%20%20%20%20if%20calibration_selector.value%20is%20not%20None%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20calibration%20%3D%20aw.data.SpectrometerCalibration.from_npz(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20aw.spectrum.get_calibration_path()%20%2F%20calibration_selector.value%0A%20%20%20%20%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20%20%20%20%20input_data%20%3D%20calibration.apply_to_spectrogram(input_data)%0A%20%20%20%20%20%20%20%20mo.output.append(mo.md(%22Loaded%20spectrogram%20parameters%3A%22))%0A%20%20%20%20%20%20%20%20mo.output.append(mo.md(f%22%20%20%20%20time%20step%3A%20%7Bnp.mean(np.diff(input_data.time))%20*%201e15%3A.1g%7D%20fs%22))%0A%20%20%20%20%20%20%20%20mo.output.append(mo.md(f%22%20%20%20%20frequency%20step%3A%20%7Bnp.mean(np.diff(input_data.freq))%20*%201e-12%3A.1g%7D%20THz%22))%0A%20%20%20%20%20%20%20%20mo.output.append(mo.md(f%22%20%20%20%20central%20frequency%3A%20%7Bnp.mean(input_data.freq)%20*%201e-12%3A.1f%7D%20THz%22))%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20input_data%20%3D%20None%0A%20%20%20%20return%20(input_data%2C)%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20mo.output.append(mo.md(%22---%22))%0A%20%20%20%20mo.output.append(mo.md(%22%23%23%23%20Bin%20data%20onto%20evenly%20spaced%20grid%3A%22))%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20bin_loaded_file%20%3D%20mo.ui.file(filetypes%3D%5B%22.yml%22%5D%2C%20label%3D%22Load%20settings%20from%20.yml%22)%0A%20%20%20%20bin_loaded_file%0A%20%20%20%20return%20(bin_loaded_file%2C)%0A%0A%0A%40app.cell%0Adef%20_(aw%2C%20bin_loaded_file)%3A%0A%20%20%20%20_contents%20%3D%20bin_loaded_file.contents()%0A%20%20%20%20if%20_contents%20is%20not%20None%3A%0A%20%20%20%20%20%20%20%20loaded_settings%20%3D%20aw.data.FrogBinSettings.load_yaml_bytestream(_contents)%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20loaded_settings%20%3D%20aw.data.FrogBinSettings(%0A%20%20%20%20%20%20%20%20%20%20%20%20size%3D96%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20dt%3D3e-15%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20t0%3D0.0%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20auto_t0%3DTrue%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20f0%3D740e12%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20dc_offset%3D0.0002%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20freq_binning%3D1%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20time_binning%3D1%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20median_binning%3DFalse%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20spatial_chirp_correction%3DFalse%2C%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20return%20(loaded_settings%2C)%0A%0A%0A%40app.cell%0Adef%20_(is_in_web_notebook%2C%20loaded_settings%2C%20mo)%3A%0A%20%20%20%20bin_size%20%3D%20mo.ui.number(label%3D%22size%22%2C%20value%3Dloaded_settings.size%2C%20step%3D2)%0A%20%20%20%20bin_dt%20%3D%20mo.ui.number(label%3D%22dt%20(fs)%22%2C%20value%3Dloaded_settings.dt*1e15%2C%20step%3D0.1)%0A%20%20%20%20bin_t0%20%3D%20mo.ui.number(label%3D%22t0%20(fs)%22%2C%20value%3Dloaded_settings.t0%20*%201e-15%2C%20step%3D0.1)%0A%20%20%20%20bin_t0_auto%20%3D%20mo.ui.checkbox(label%3D%22Auto%20time%20centering%22%2C%20value%3Dloaded_settings.auto_t0)%0A%20%20%20%20bin_f0%20%3D%20mo.ui.number(label%3D%22f0%20(THz)%22%2C%20value%3Dloaded_settings.f0*1e-12%2C%20step%3D0.1)%0A%20%20%20%20bin_offset%20%3D%20mo.ui.number(label%3D%22dark%20noise%20level%22%2C%20value%3Dloaded_settings.dc_offset%2C%20step%3D1e-5)%0A%20%20%20%20bin_fblock%20%3D%20mo.ui.number(label%3D%22freq%20block%20avg.%22%2C%20start%3D1%2C%20value%3Dloaded_settings.freq_binning%2C%20step%3D1)%0A%20%20%20%20bin_tblock%20%3D%20mo.ui.number(label%3D%22time%20block%20avg.%22%2C%20start%3D1%2C%20value%3Dloaded_settings.time_binning%2C%20step%3D1)%0A%20%20%20%20bin_median%20%3D%20mo.ui.checkbox(label%3D%22median%20blocking%22%2C%20value%3Dloaded_settings.median_binning)%0A%20%20%20%20bin_spatial_chirp_correction%20%3D%20mo.ui.checkbox(label%3D%22correct%20spatial%20chirp%22%2C%20value%3Dloaded_settings.spatial_chirp_correction)%0A%20%20%20%20mo.output.append(bin_size)%0A%20%20%20%20mo.output.append(bin_dt)%0A%20%20%20%20mo.output.append(bin_t0)%0A%20%20%20%20mo.output.append(bin_t0_auto)%0A%20%20%20%20mo.output.append(bin_f0)%0A%20%20%20%20mo.output.append(bin_offset)%0A%20%20%20%20mo.output.append(bin_fblock)%0A%20%20%20%20mo.output.append(bin_tblock)%0A%20%20%20%20mo.output.append(bin_median)%0A%20%20%20%20mo.output.append(bin_spatial_chirp_correction)%0A%0A%20%20%20%20if%20not%20is_in_web_notebook%3A%0A%20%20%20%20%20%20%20%20bin_save_button%20%3D%20mo.ui.run_button(label%3D%22Save%20settings%22)%0A%20%20%20%20%20%20%20%20mo.output.append(bin_save_button)%0A%20%20%20%20return%20(%0A%20%20%20%20%20%20%20%20bin_dt%2C%0A%20%20%20%20%20%20%20%20bin_f0%2C%0A%20%20%20%20%20%20%20%20bin_fblock%2C%0A%20%20%20%20%20%20%20%20bin_median%2C%0A%20%20%20%20%20%20%20%20bin_offset%2C%0A%20%20%20%20%20%20%20%20bin_save_button%2C%0A%20%20%20%20%20%20%20%20bin_size%2C%0A%20%20%20%20%20%20%20%20bin_spatial_chirp_correction%2C%0A%20%20%20%20%20%20%20%20bin_t0%2C%0A%20%20%20%20%20%20%20%20bin_t0_auto%2C%0A%20%20%20%20%20%20%20%20bin_tblock%2C%0A%20%20%20%20)%0A%0A%0A%40app.cell%0Adef%20_(%0A%20%20%20%20aw%2C%0A%20%20%20%20bin_dt%2C%0A%20%20%20%20bin_f0%2C%0A%20%20%20%20bin_fblock%2C%0A%20%20%20%20bin_median%2C%0A%20%20%20%20bin_offset%2C%0A%20%20%20%20bin_size%2C%0A%20%20%20%20bin_spatial_chirp_correction%2C%0A%20%20%20%20bin_t0%2C%0A%20%20%20%20bin_t0_auto%2C%0A%20%20%20%20bin_tblock%2C%0A)%3A%0A%20%20%20%20if%20bin_t0_auto.value%3A%0A%20%20%20%20%20%20%20%20_t0%20%3D%20None%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20_t0%20%3D%20bin_t0.value%20*%201e-15%0A%20%20%20%20bin_settings%20%3D%20aw.data.FrogBinSettings(%0A%20%20%20%20%20%20%20%20size%3Dint(bin_size.value)%2C%0A%20%20%20%20%20%20%20%20dt%3Dbin_dt.value%20*%201e-15%2C%0A%20%20%20%20%20%20%20%20t0%3Dbin_t0.value%20*%201e-15%2C%0A%20%20%20%20%20%20%20%20auto_t0%3Dbin_t0_auto.value%2C%0A%20%20%20%20%20%20%20%20f0%3Dbin_f0.value%20*%201e12%2C%0A%20%20%20%20%20%20%20%20dc_offset%3Dbin_offset.value%2C%0A%20%20%20%20%20%20%20%20time_binning%3Dint(bin_tblock.value)%2C%0A%20%20%20%20%20%20%20%20freq_binning%3Dint(bin_fblock.value)%2C%0A%20%20%20%20%20%20%20%20median_binning%3Dbool(bin_median.value)%2C%0A%20%20%20%20%20%20%20%20spatial_chirp_correction%3Dbool(bin_spatial_chirp_correction.value)%2C%0A%20%20%20%20)%0A%20%20%20%20return%20(bin_settings%2C)%0A%0A%0A%40app.cell%0Adef%20_(%0A%20%20%20%20aw%2C%0A%20%20%20%20bin_settings%2C%0A%20%20%20%20display_download_link_from_file%2C%0A%20%20%20%20input_data%2C%0A%20%20%20%20is_in_web_notebook%2C%0A)%3A%0A%20%20%20%20%23%20if%20not%20bin_live.value%3A%0A%20%20%20%20%23%20%20%20%20%20mo.stop(not%20bin_button.value)%0A%20%20%20%20if%20input_data%20is%20not%20None%3A%0A%20%20%20%20%20%20%20%20frog_data%20%3D%20input_data.to_bin_pipeline_result(bin_settings)%0A%20%20%20%20%20%20%20%20frog_data.plot_log()%0A%20%20%20%20%20%20%20%20aw.plot.showmo()%0A%0A%20%20%20%20%20%20%20%20if%20is_in_web_notebook%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20bin_settings.save_yaml(%22bin_settings.yml%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20display_download_link_from_file(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20path%3D%22bin_settings.yml%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20output_name%3D%22bin_settings.yml%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20mime_type%3D%22text%2Fyaml%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20)%0A%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20frog_data%20%3D%20None%0A%20%20%20%20return%20(frog_data%2C)%0A%0A%0A%40app.cell%0Adef%20_(mo%2C%20mode_selector)%3A%0A%20%20%20%20ptycho_roi_lower%20%3D%20mo.ui.number(value%20%3D%20300.0%2C%20step%3D0.1%2C%20label%3D%22ROI%20lower%20frequency%20(THz)%22)%0A%20%20%20%20ptycho_roi_upper%20%3D%20mo.ui.number(value%20%3D%20900.0%2C%20step%3D0.1%2C%20label%3D%22ROI%20upper%20frequency%20(THz)%22)%0A%20%20%20%20ptycho_exclude_lower%20%3D%20mo.ui.number(value%20%3D%201000.0%2C%20step%3D0.1%2C%20label%3D%22Excluded%20region%20lower%20frequency%20(THz)%22)%0A%20%20%20%20ptycho_exclude_upper%20%3D%20mo.ui.number(value%20%3D%201200.0%2C%20step%3D0.1%2C%20label%3D%22Excluded%20region%20upper%20frequency%20(THz)%22)%0A%20%20%20%20ptycho_threshhold%20%3D%20mo.ui.number(value%20%3D%2010000.0%2C%20step%3D0.1%2C%20label%3D%22Ptychographic%20noise%20filter%20threshhold%22)%0A%20%20%20%20if%20mode_selector.value%20%3D%3D%20%22SHG%20ptychographic%22%3A%0A%20%20%20%20%20%20%20%20mo.output.append(mo.md(%22---%22))%0A%20%20%20%20%20%20%20%20mo.output.append(mo.md(%22%23%23%23%20Ptychographic%20FROG%20options%3A%22))%0A%20%20%20%20%20%20%20%20mo.output.append(ptycho_roi_lower)%0A%20%20%20%20%20%20%20%20mo.output.append(ptycho_roi_upper)%0A%20%20%20%20%20%20%20%20mo.output.append(ptycho_exclude_lower)%0A%20%20%20%20%20%20%20%20mo.output.append(ptycho_exclude_upper)%0A%20%20%20%20%20%20%20%20mo.output.append(ptycho_threshhold)%0A%20%20%20%20return%20(%0A%20%20%20%20%20%20%20%20ptycho_exclude_lower%2C%0A%20%20%20%20%20%20%20%20ptycho_exclude_upper%2C%0A%20%20%20%20%20%20%20%20ptycho_roi_lower%2C%0A%20%20%20%20%20%20%20%20ptycho_roi_upper%2C%0A%20%20%20%20%20%20%20%20ptycho_threshhold%2C%0A%20%20%20%20)%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20mo.output.append(mo.md(%22---%22))%0A%20%20%20%20mo.output.append(mo.md(%22%23%23%23%20Optional%20spectral%20constraint%3A%22))%0A%20%20%20%20spectral_constraint_file%20%3D%20mo.ui.file(label%3D%22Spectral%20contstraint%20file%22)%0A%20%20%20%20mo.output.append(spectral_constraint_file)%0A%20%20%20%20return%20(spectral_constraint_file%2C)%0A%0A%0A%40app.cell%0Adef%20_(mo%2C%20spectral_constraint_file)%3A%0A%20%20%20%20spectral_constraint_format%20%3D%20mo.ui.dropdown(options%3D%5B%22Columns%22%2C%20%22Text%20with%20headers%22%5D%2C%20value%3D%22Text%20with%20headers%22)%0A%20%20%20%20spectral_constraint_data%20%3D%20spectral_constraint_file.contents()%0A%20%20%20%20if%20spectral_constraint_data%20is%20not%20None%3A%0A%20%20%20%20%20%20%20%20mo.output.append(spectral_constraint_format)%0A%20%20%20%20return%20spectral_constraint_data%2C%20spectral_constraint_format%0A%0A%0A%40app.cell%0Adef%20_(mo%2C%20spectral_constraint_data%2C%20spectral_constraint_format)%3A%0A%20%20%20%20spectral_constraint_wavelength_header%20%3D%20mo.ui.text(label%3D%22Wavelength%20column%20key%3A%22%2C%20value%3D%22wavelength%20(nm)%22)%0A%20%20%20%20spectral_constraint_wavelength_multiplier%20%3D%20mo.ui.number(label%3D%22Wavelength%20multiplier%3A%22%2C%20value%3D1e9)%0A%20%20%20%20spectral_constraint_intensity_header%20%3D%20mo.ui.text(label%3D%22Intensity%20column%20key%3A%22%2C%20value%3D%22intensity%20(a.u.)%22)%0A%20%20%20%20spectral_constraint_skip_lines%20%3D%20mo.ui.number(value%3D0%2C%20label%3D%22Header%20lines%3A%22)%0A%20%20%20%20spectral_constraint_bandpass_f0%20%3D%20mo.ui.number(value%3D375%2C%20label%3D%22Bandpass%20central%20frequency%20(THz)%22)%0A%20%20%20%20spectral_constraint_bandpass_sigma%20%3D%20mo.ui.number(value%3D50%2C%20label%3D%22Bandpass%20width%20(THz)%22)%0A%20%20%20%20spectral_constraint_bandpass_order%20%3D%20mo.ui.number(value%3D4%2C%20start%3D2%2C%20step%3D2%2C%20label%3D%22Bandpass%20order%22)%0A%20%20%20%20if%20spectral_constraint_data%20is%20not%20None%3A%0A%20%20%20%20%20%20%20%20if%20spectral_constraint_format.value%20%3D%3D%20%22Text%20with%20headers%22%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20mo.output.append(spectral_constraint_wavelength_header)%0A%20%20%20%20%20%20%20%20%20%20%20%20mo.output.append(spectral_constraint_wavelength_multiplier)%0A%20%20%20%20%20%20%20%20%20%20%20%20mo.output.append(spectral_constraint_intensity_header)%0A%20%20%20%20%20%20%20%20if%20spectral_constraint_format.value%20%3D%3D%20%22Columns%22%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20mo.output.append(spectral_constraint_skip_lines)%0A%20%20%20%20%20%20%20%20mo.output.append(spectral_constraint_bandpass_f0)%0A%20%20%20%20%20%20%20%20mo.output.append(spectral_constraint_bandpass_sigma)%0A%20%20%20%20%20%20%20%20mo.output.append(spectral_constraint_bandpass_order)%0A%20%20%20%20return%20(%0A%20%20%20%20%20%20%20%20spectral_constraint_bandpass_f0%2C%0A%20%20%20%20%20%20%20%20spectral_constraint_bandpass_order%2C%0A%20%20%20%20%20%20%20%20spectral_constraint_bandpass_sigma%2C%0A%20%20%20%20%20%20%20%20spectral_constraint_intensity_header%2C%0A%20%20%20%20%20%20%20%20spectral_constraint_skip_lines%2C%0A%20%20%20%20%20%20%20%20spectral_constraint_wavelength_header%2C%0A%20%20%20%20%20%20%20%20spectral_constraint_wavelength_multiplier%2C%0A%20%20%20%20)%0A%0A%0A%40app.cell%0Adef%20_(%0A%20%20%20%20aw%2C%0A%20%20%20%20mo%2C%0A%20%20%20%20spectral_constraint_bandpass_f0%2C%0A%20%20%20%20spectral_constraint_bandpass_order%2C%0A%20%20%20%20spectral_constraint_bandpass_sigma%2C%0A%20%20%20%20spectral_constraint_data%2C%0A%20%20%20%20spectral_constraint_format%2C%0A%20%20%20%20spectral_constraint_intensity_header%2C%0A%20%20%20%20spectral_constraint_skip_lines%2C%0A%20%20%20%20spectral_constraint_wavelength_header%2C%0A%20%20%20%20spectral_constraint_wavelength_multiplier%2C%0A)%3A%0A%20%20%20%20spectral_constraint%20%3D%20None%0A%20%20%20%20if%20spectral_constraint_data%20is%20not%20None%3A%0A%20%20%20%20%20%20%20%20match%20spectral_constraint_format.value%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20case%20%22Columns%22%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20spectral_constraint%20%3D%20aw.data.load_mean_spectrum_from_scarab(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20spectral_constraint_data.decode(%22utf-8%22)%2C%20is_data_string%3DTrue%2C%20header_size%3Dspectral_constraint_skip_lines.value%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20%20%20%20%20case%20%22Text%20with%20headers%22%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20spectral_constraint%20%3D%20aw.data.load_spectrum_from_text(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20filename_or_data_string%3Dspectral_constraint_data.decode(%22utf-8%22)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wavelength_multiplier%3D1.0%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%2F%20spectral_constraint_wavelength_multiplier.value%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20wavelength_field%3Dspectral_constraint_wavelength_header.value%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20spectrum_field%3Dspectral_constraint_intensity_header.value%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20is_data_string%3DTrue%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20spectral_constraint%20%3D%20spectral_constraint.to_bandpassed(spectral_constraint_bandpass_f0.value%20*%201e12%2Cspectral_constraint_bandpass_sigma.value%20*%201e12%2Cint(spectral_constraint_bandpass_order.value))%0A%20%20%20%20%20%20%20%20mo.output.append(mo.md(%22%23%23%23%20Loaded%20spectral%20constraint%3A%22))%0A%20%20%20%20%20%20%20%20spectral_constraint.plot_with_group_delay()%0A%20%20%20%20%20%20%20%20aw.plot.showmo()%0A%20%20%20%20return%20(spectral_constraint%2C)%0A%0A%0A%40app.cell%0Adef%20_(mo)%3A%0A%20%20%20%20mo.output.append(mo.md(%22---%22))%0A%20%20%20%20mo.output.append(mo.md(%22%23%23%23%20Run%20the%20reconstruction%3A%22))%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(is_in_web_notebook%2C%20mo)%3A%0A%20%20%20%20recon_trials%20%3D%20mo.ui.number(value%3D16%2C%20label%3D%22Initial%20guesses%22)%0A%20%20%20%20recon_trial_length%20%3D%20mo.ui.number(value%3D128%2C%20label%3D%22Trial%20iterations%22)%0A%20%20%20%20recon_followups%20%3D%20mo.ui.number(value%3D1024%2C%20label%3D%22Finishing%20iterations%22)%0A%20%20%20%20reconstruct_button%20%3D%20mo.ui.run_button(label%3D%22reconstruct%22)%0A%20%20%20%20save_button%20%3D%20mo.ui.run_button(label%3D%22save%22)%0A%20%20%20%20save_plot_button%20%3D%20mo.ui.run_button(label%3D%22save%20plot%22)%0A%20%20%20%20mo.output.append(recon_trials)%0A%20%20%20%20mo.output.append(recon_trial_length)%0A%20%20%20%20mo.output.append(recon_followups)%0A%20%20%20%20mo.output.append(reconstruct_button)%0A%0A%20%20%20%20if%20not%20is_in_web_notebook%3A%0A%20%20%20%20%20%20%20%20mo.output.append(save_button)%0A%20%20%20%20%20%20%20%20mo.output.append(save_plot_button)%0A%20%20%20%20return%20(%0A%20%20%20%20%20%20%20%20recon_followups%2C%0A%20%20%20%20%20%20%20%20recon_trial_length%2C%0A%20%20%20%20%20%20%20%20recon_trials%2C%0A%20%20%20%20%20%20%20%20reconstruct_button%2C%0A%20%20%20%20%20%20%20%20save_button%2C%0A%20%20%20%20%20%20%20%20save_plot_button%2C%0A%20%20%20%20)%0A%0A%0A%40app.cell%0Adef%20_(is_in_web_notebook%2C%20mo)%3A%0A%20%20%20%20if%20is_in_web_notebook%3A%0A%20%20%20%20%20%20%20%20file_base%20%3D%20mo.ui.text(value%3D%22output%22%2C%20label%3D%22Output%20name%22)%0A%20%20%20%20%20%20%20%20mo.output.append(file_base)%0A%20%20%20%20return%20(file_base%2C)%0A%0A%0A%40app.cell%0Adef%20_(np)%3A%0A%20%20%20%20def%20resolve_frequency_roi(%0A%20%20%20%20%20%20%20%20freq%2C%0A%20%20%20%20%20%20%20%20start_roi%3A%20float%2C%0A%20%20%20%20%20%20%20%20stop_roi%3A%20float%2C%0A%20%20%20%20%20%20%20%20start_excluded_band%3A%20float%2C%0A%20%20%20%20%20%20%20%20stop_excluded_band%3A%20float%2C%0A%20%20%20%20)%3A%0A%20%20%20%20%20%20%20%20roi%20%3D%20(freq%20%3E%3D%20start_roi)%20*%20(freq%20%3C%3D%20stop_roi)%0A%20%20%20%20%20%20%20%20for%20i%20in%20range(len(freq))%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20if%20(freq%5Bi%5D%20%3E%3D%20start_excluded_band)%20and%20(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20freq%5Bi%5D%20%3C%3D%20stop_excluded_band%0A%20%20%20%20%20%20%20%20%20%20%20%20)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20roi%5Bi%5D%20%3D%20False%0A%20%20%20%20%20%20%20%20return%20np.fft.fftshift(roi)%0A%20%20%20%20return%20(resolve_frequency_roi%2C)%0A%0A%0A%40app.cell%0Adef%20_(%0A%20%20%20%20aw%2C%0A%20%20%20%20frog_data%2C%0A%20%20%20%20mo%2C%0A%20%20%20%20mode_selector%2C%0A%20%20%20%20ptycho_exclude_lower%2C%0A%20%20%20%20ptycho_exclude_upper%2C%0A%20%20%20%20ptycho_roi_lower%2C%0A%20%20%20%20ptycho_roi_upper%2C%0A%20%20%20%20ptycho_threshhold%2C%0A%20%20%20%20recon_followups%2C%0A%20%20%20%20recon_trial_length%2C%0A%20%20%20%20recon_trials%2C%0A%20%20%20%20reconstruct_button%2C%0A%20%20%20%20resolve_frequency_roi%2C%0A%20%20%20%20spectral_constraint%2C%0A%20%20%20%20time%2C%0A%20%20%20%20xfrog_reference%2C%0A)%3A%0A%20%20%20%20mo.stop(not%20reconstruct_button.value)%0A%20%20%20%20if%20frog_data%20is%20not%20None%3A%0A%20%20%20%20%20%20%20%20roi%20%3D%20None%0A%20%20%20%20%20%20%20%20ptycho_threshhold_float%20%3D%20None%0A%20%20%20%20%20%20%20%20match%20mode_selector.value%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20case%20%22SHG%20GP%22%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20frog_type%20%3D%20aw.attoworld_rs.FrogType.Shg%0A%20%20%20%20%20%20%20%20%20%20%20%20case%20%22THG%22%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20frog_type%20%3D%20aw.attoworld_rs.FrogType.Thg%0A%20%20%20%20%20%20%20%20%20%20%20%20case%20%22Kerr%22%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20frog_type%20%3D%20aw.attoworld_rs.FrogType.Kerr%0A%20%20%20%20%20%20%20%20%20%20%20%20case%20%22XFROG%22%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20frog_type%20%3D%20aw.attoworld_rs.FrogType.Xfrog%0A%20%20%20%20%20%20%20%20%20%20%20%20case%20%22BlindFROG%22%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20frog_type%20%3D%20aw.attoworld_rs.FrogType.Blindfrog%0A%20%20%20%20%20%20%20%20%20%20%20%20case%20%22SHG%20ptychographic%22%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20frog_type%20%3D%20aw.attoworld_rs.FrogType.PtychographicShg%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20roi%20%3D%20resolve_frequency_roi(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20frog_data.freq%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20ptycho_roi_lower.value%20*%201e12%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20ptycho_roi_upper.value%20*%201e12%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20ptycho_exclude_lower.value%20*%201e12%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20ptycho_exclude_upper.value%20*%201e12%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20ptycho_threshhold_float%20%3D%20ptycho_threshhold.value%0A%20%20%20%20%20%20%20%20_start_time%20%3D%20time.time()%0A%20%20%20%20%20%20%20%20result%2C%20result_gate%20%3D%20aw.wave.reconstruct_frog(%0A%20%20%20%20%20%20%20%20%20%20%20%20measurement%3Dfrog_data%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20repeats%3Dint(recon_trials.value)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20test_iterations%3Dint(recon_trial_length.value)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20polish_iterations%3Dint(recon_followups.value)%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20frog_type%3Dfrog_type%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20spectrum%3Dspectral_constraint%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20xfrog_gate%3Dxfrog_reference%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20roi%3Droi%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20ptychographic_threshhold%3Dptycho_threshhold_float%2C%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20_stop_time%20%3D%20time.time()%0A%20%20%20%20%20%20%20%20reconstruction_time%20%3D%20_stop_time%20-%20_start_time%0A%20%20%20%20%20%20%20%20mo.output.append(mo.md(f%22Reconstruction%20time%3A%20%7Breconstruction_time%3A%20.1f%7D%20s%22))%0A%20%20%20%20else%3A%0A%20%20%20%20%20%20%20%20result%20%3D%20None%0A%20%20%20%20return%20result%2C%20result_gate%0A%0A%0A%40app.cell%0Adef%20_(%0A%20%20%20%20aw%2C%0A%20%20%20%20display_download_link_from_file%2C%0A%20%20%20%20file_base%2C%0A%20%20%20%20is_in_web_notebook%2C%0A%20%20%20%20mo%2C%0A%20%20%20%20mode_selector%2C%0A%20%20%20%20result%2C%0A%20%20%20%20result_gate%2C%0A)%3A%0A%20%20%20%20if%20result%20is%20not%20None%3A%0A%20%20%20%20%20%20%20%20plot%20%3D%20result.plot_all(figsize%3D(9.6%2C%206)%2C%20wavelength_autoscale%3D1e-3)%0A%20%20%20%20%20%20%20%20aw.plot.showmo()%0A%20%20%20%20%20%20%20%20if%20mode_selector.value%20%3D%3D%20%22BlindFROG%22%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20mo.output.append(mo.md(%22%23%23%23%20Gate%22))%0A%20%20%20%20%20%20%20%20%20%20%20%20plot_gate%20%3D%20result_gate.plot_all(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20figsize%3D(9.6%2C%206)%2C%20wavelength_autoscale%3D1e-3%0A%20%20%20%20%20%20%20%20%20%20%20%20)%0A%20%20%20%20%20%20%20%20%20%20%20%20aw.plot.showmo()%0A%0A%20%20%20%20%20%20%20%20if%20is_in_web_notebook%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20plot.savefig(%22temp.svg%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20display_download_link_from_file(%0A%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%20%22temp.svg%22%2C%20output_name%3Df%22%7Bfile_base.value%7D.svg%22%0A%20%20%20%20%20%20%20%20%20%20%20%20)%0A%20%20%20%20return%20(plot%2C)%0A%0A%0A%40app.cell%0Adef%20_(display_download_link_from_file%2C%20file_base%2C%20is_in_web_notebook%2C%20result)%3A%0A%20%20%20%20if%20(result%20is%20not%20None)%20and%20is_in_web_notebook%3A%0A%20%20%20%20%20%20%20%20result.save_yaml(f%22%7Bfile_base.value%7D.yml%22)%0A%20%20%20%20%20%20%20%20display_download_link_from_file(%0A%20%20%20%20%20%20%20%20%20%20%20%20f%22%7Bfile_base.value%7D.yml%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20output_name%3Df%22%7Bfile_base.value%7D.yml%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20mime_type%3D%22text%2Fyaml%22%2C%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(%0A%20%20%20%20display_download_link_from_file%2C%0A%20%20%20%20file_base%2C%0A%20%20%20%20is_in_web_notebook%2C%0A%20%20%20%20result%2C%0A%20%20%20%20zipfile%2C%0A)%3A%0A%20%20%20%20if%20(result%20is%20not%20None)%20and%20is_in_web_notebook%3A%0A%20%20%20%20%20%20%20%20result.save(file_base.value)%0A%20%20%20%20%20%20%20%20with%20zipfile.ZipFile(f%22%7Bfile_base.value%7D.zip%22%2C%20%22w%22)%20as%20zip%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20zip.write(f%22%7Bfile_base.value%7D.A.dat%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20zip.write(f%22%7Bfile_base.value%7D.Arecon.dat%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20zip.write(f%22%7Bfile_base.value%7D.Ek.dat%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20zip.write(f%22%7Bfile_base.value%7D.Speck.dat%22)%0A%20%20%20%20%20%20%20%20%20%20%20%20zip.write(f%22%7Bfile_base.value%7D.yml%22)%0A%20%20%20%20%20%20%20%20display_download_link_from_file(%0A%20%20%20%20%20%20%20%20%20%20%20%20f%22%7Bfile_base.value%7D.zip%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20output_name%3Df%22%7Bfile_base.value%7D.zip%22%2C%0A%20%20%20%20%20%20%20%20%20%20%20%20mime_type%3D%22application%2Fzip%22%2C%0A%20%20%20%20%20%20%20%20)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(filedialog%2C%20is_in_web_notebook%2C%20mo%2C%20result%2C%20save_button)%3A%0A%20%20%20%20mo.stop(not%20save_button.value)%0A%20%20%20%20if%20not%20is_in_web_notebook%3A%0A%20%20%20%20%20%20%20%20_file_path%20%3D%20filedialog.asksaveasfilename(%0A%20%20%20%20%20%20%20%20%20%20%20%20title%3D%22Save%20File%22%2C%20filetypes%3D%5B(%22All%20Files%22%2C%20%22*.*%22)%5D%0A%20%20%20%20%20%20%20%20)%0A%0A%20%20%20%20%20%20%20%20if%20(_file_path%20is%20not%20None)%20and%20(result%20is%20not%20None)%20and%20(_file_path%20!%3D%20%22%22)%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20result.save(_file_path)%0A%20%20%20%20%20%20%20%20%20%20%20%20result.save_yaml(_file_path%20%2B%20%22.yml%22)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(filedialog%2C%20is_in_web_notebook%2C%20mo%2C%20plot%2C%20result%2C%20save_plot_button)%3A%0A%20%20%20%20mo.stop(not%20save_plot_button.value)%0A%20%20%20%20if%20not%20is_in_web_notebook%3A%0A%20%20%20%20%20%20%20%20_file_path%20%3D%20filedialog.asksaveasfilename(%0A%20%20%20%20%20%20%20%20%20%20%20%20title%3D%22Save%20File%22%2C%20filetypes%3D%5B(%22SVG%20files%22%2C%20%22*.svg%22)%2C%20(%22PDF%20files%22%2C%20%22*.pdf%22)%5D%0A%20%20%20%20%20%20%20%20)%0A%0A%20%20%20%20%20%20%20%20if%20_file_path%20is%20not%20None%20and%20result%20is%20not%20None%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20plot.savefig(_file_path)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_(bin_save_button%2C%20bin_settings%2C%20filedialog%2C%20is_in_web_notebook%2C%20mo)%3A%0A%20%20%20%20if%20not%20is_in_web_notebook%3A%0A%20%20%20%20%20%20%20%20mo.stop(not%20bin_save_button.value)%0A%20%20%20%20%20%20%20%20_file_path%20%3D%20filedialog.asksaveasfilename(%0A%20%20%20%20%20%20%20%20%20%20%20%20title%3D%22Save%20File%22%2C%20filetypes%3D%5B(%22YAML%20files%22%2C%20%22*.yml%22)%5D%0A%20%20%20%20%20%20%20%20)%0A%0A%20%20%20%20%20%20%20%20if%20_file_path%20is%20not%20None%20and%20bin_settings%20is%20not%20None%3A%0A%20%20%20%20%20%20%20%20%20%20%20%20bin_settings.save_yaml(_file_path)%0A%20%20%20%20return%0A%0A%0A%40app.cell%0Adef%20_()%3A%0A%20%20%20%20return%0A%0A%0Aif%20__name__%20%3D%3D%20%22__main__%22%3A%0A%20%20%20%20app.run()%0A</marimo-code></head>
+  <body>
+    <div id="root"></div>
+    <!-- This is a portal for the data editor to render in -->
+    <div id="portal" data-testid="glide-portal" style="position: fixed; left: 0; top: 0; z-index: 9999"></div>
+    <script data-marimo="true">
+      window.__MARIMO_MOUNT_CONFIG__ = {
+            "filename": "notebook.py",
+            "mode": "read",
+            "version": "0.17.8",
+            "serverToken": "unused",
+            "config": {"ai": {"models": {"custom_models": [], "displayed_models": []}}, "completion": {"activate_on_typing": true, "copilot": false}, "diagnostics": {"sql_linter": true}, "display": {"cell_output": "above", "code_editor_font_size": 14, "dataframes": "rich", "default_table_max_columns": 50, "default_table_page_size": 10, "default_width": "medium", "reference_highlighting": false, "theme": "dark"}, "formatting": {"line_length": 79}, "keymap": {"overrides": {}, "preset": "default"}, "language_servers": {"pylsp": {"enable_flake8": false, "enable_mypy": true, "enable_pydocstyle": false, "enable_pyflakes": false, "enable_pylint": false, "enable_ruff": true, "enabled": false}}, "mcp": {"mcpServers": {}, "presets": []}, "package_management": {"manager": "pip"}, "runtime": {"auto_instantiate": false, "auto_reload": "off", "default_sql_output": "auto", "on_cell_change": "autorun", "output_max_bytes": 8000000, "reactive_tests": true, "std_stream_max_bytes": 1000000, "watcher_on_save": "lazy"}, "save": {"autosave": "off", "autosave_delay": 1000, "format_on_save": false}, "server": {"browser": "default", "follow_symlink": false}, "snippets": {"custom_paths": [], "include_default_snippets": true}},
+            "configOverrides": {},
+            "appConfig": {"sql_output": "auto", "width": "medium"},
+            "view": {"showAppCode": false},
+            "notebook": null,
+            "session": null,
+            "runtimeConfig": null,
+        };
+    </script>
+  </body>
+</html>
