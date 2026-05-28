@@ -14,7 +14,7 @@
 
 import marimo
 
-__generated_with = "0.23.6"
+__generated_with = "0.23.8"
 app = marimo.App(width="medium")
 
 
@@ -218,12 +218,12 @@ def _(mo):
 def _(mo):
     sellmeier_input = mo.ui.text_area(
         label="Sellmeier coefficients:",
-        value="1 0 0.6961663 -0.00467914825849 0 0.4079426 -0.013512063074 0 0.8974794 -97.9340025379 0 0 1 0 0 0 0 0 0 0 0 0",
+        value="1.68695 2.64e+28 2.05225e+32 2.52328e+11 1.4e+24 4.83611e+28 2.51327e+11 7e+24 4.04259e+28 2.51327e+11 9e+23 2.27396e+28 2.51327e+11 0 0 0 0 0 0 0 0 0",
         full_width=True,
         rows=1,
     )
     mo.output.append(sellmeier_input)
-    eqn_type_input = mo.ui.number(start=0, stop=2, value=0, label="Equation type:")
+    eqn_type_input = mo.ui.number(start=0, stop=2, value=1, label="Equation type:")
     mo.output.append(eqn_type_input)
     return eqn_type_input, sellmeier_input
 
