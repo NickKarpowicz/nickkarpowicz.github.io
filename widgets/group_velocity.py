@@ -102,6 +102,7 @@ def _(
     aw,
     bandwidth_slider,
     constants,
+    eqn_type_input,
     frequency_slider,
     gauss_check,
     lwe,
@@ -127,13 +128,13 @@ def _(
 
         central_freq = np.mean(freqs)
         lams = 1e6 * constants.speed_of_light / freqs
-        ns = np.real(lwe.sellmeier(lams, sellmeier_coefficients, 0))
+        ns = np.real(lwe.sellmeier(lams, sellmeier_coefficients, eqn_type_input.value))
         if moving_reference_frame_checkbox.value:
             n0 = np.real(
                 lwe.sellmeier(
                     np.array([1e6 * constants.speed_of_light / central_freq]),
                     sellmeier_coefficients,
-                    0,
+                    eqn_type_input.value,
                 )
             )
         else:
